@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<!-- 
+		* DTD(Document Type Definition 문서 타입 정의) 
+		  XML문서의 구조 및 해당 문서에서 사용할 수 있는 적법한 요소(태그)와 속성을 정의 (이 문서가 유효한지 유효성 검사도 실시)
+	-->
+	
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	
+	<!-- vo 클래스 별칭(typeAliases) 등록 -->
+	<typeAliases>
+		<typeAlias type="com.kh.magicpot.member.model.vo.Member" alias="Member" />
+		<typeAlias type="com.kh.magicpot.notice.model.vo.Notice" alias="Notice" />
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="/mappers/member-mapper.xml" />
+		<mapper resource="/mappers/notice-mapper.xml" />
+	</mappers>
+	
+</configuration>
