@@ -16,13 +16,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/dd18300701.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
+    <!-- 로고 영역 -->
     <div id="header">
         <div id="header_1">
-            <a href="${ pageContext.servletContext.contextPath }"><img src="resources/images/common/mainLogo.png" alt=""></a>
+            <a href=""><img src="../../../resources/images/common/logo2.png" alt=""></a>
         </div>
+
+        <!-- 카테고리 영역-->
         <div id="header_2">
             <ul>
                 <li><a href="">펀딩하기</a></li>
@@ -31,13 +35,21 @@
                 <li><a href="">커뮤니티</a></li>
             </ul>
         </div>
+
+        <!-- 검색 영역 -->
         <div id="header_3">
-            <form action="" id="search_form" >
-                <div id="search_text" >
-                    <input type="search" name="keyword">
+            <form action="" id="search_form">
+                <div class="input-group mb-3" id="search_text">
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                      <button class="btn btn-success" type="submit" ><i class="fas fa-search fa-sm" style="padding:2px;"></i>
+                      </button>
+                    </div>
                 </div>
             </form>
         </div>
+
+        <!-- 로그인전/후 영역-->
         <div id="header_4">
             <!-- 로그인 전 -->
             <a href="">로그인</a> <h style="color:rgb(116, 152, 107)"> &nbsp |</h> 

@@ -1,5 +1,5 @@
-div{box-sizing: border-box;}
-
+/* div{border : 1px solid red;} */
+div{box-sizing: border-box; }
 #header{
     width:1000px;
     height:100px;
@@ -11,16 +11,15 @@ div{box-sizing: border-box;}
     height:100%;
     float:left;
 }
-
 #header_1{width:10%;position:relative;}
-#header_2{width:45%;}
-#header_3{width:25%;}
+#header_2{width:43%;}
+#header_3{width:27%;}
 #header_4{width:20%;}
 
 #header_1>a{line-height:70px;}
 
 #header_2>ul{list-style-type: none; margin-top: 25px; margin-left: 10px;}
-#header_2>ul>li{float:left; margin-right:15px; text-align:center;}
+#header_2>ul>li{float:left; margin-right:14px; text-align:center;}
 #header_2>ul>li a{
     font-family: 'Noto Sans KR', sans-serif;
     text-decoration: none;
@@ -33,15 +32,20 @@ div{box-sizing: border-box;}
 
 #header_3>form{margin-top: 20px;}
 #header_3>form>div{float: left;}
+#search_text{width:255px}
 #search_text>input{
-    width:235px;
-    border-radius:20px;
+    border-radius:20px 0px 0px 20px;
     padding:5px;
     padding-left:20px;
-    border:none;
     background-color: rgba(116, 152, 107, 0.562);
-    color:rgb(57, 73, 53);
+    color:white;
+    border:none;
     }
+#search_text button{
+    background-color: rgba(116, 152, 107, 0.562);
+    border-radius:0px 20px 20px 0px;
+    border:none;
+}
 
 #header_4{line-height:75px; font-size: 15px; }
 #header_4 a{
