@@ -15,13 +15,32 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<!-- vo 클래스 별칭(typeAliases) 등록 -->
 	<typeAliases>
+		<!-- 각자 맡은 vo클래스 별칭 등록하기 -->
+		<!-- 깃 배포 전 Member/Notice는 미리 생성해두었어요! -->
 		<typeAlias type="com.kh.magicpot.member.model.vo.Member" alias="Member" />
 		<typeAlias type="com.kh.magicpot.notice.model.vo.Notice" alias="Notice" />
+		
+		<!-- 휘경 -->
+		<typeAlias type="com.kh.magicpot.community.model.vo.Community" alias="Community" />
+		<typeAlias type="com.kh.magicpot.community.model.vo.CommunityComment" alias="CommunityComment" />
+		<typeAlias type="com.kh.magicpot.community.model.vo.CommunityFile" alias="CommunityFile" />
+		<typeAlias type="com.kh.magicpot.community.model.vo.CommunityNotice" alias="CommunityNotice" />
+		<typeAlias type="com.kh.magicpot.like.model.vo.Like" alias="Like" />
+		<typeAlias type="com.kh.magicpot.chat.model.vo.ChatMessage" alias="ChatMessage" />
+		<typeAlias type="com.kh.magicpot.chat.model.vo.ChatRoom" alias="ChatRoom" />
 	</typeAliases>
 	
+	<!-- mapper 등록 -->
 	<mappers>
+		<!-- 각자 맡은 mapper 등록하기 -->
+		<!-- 깃 배포 전 Member/Notice는 미리 생성해두었어요! -->
 		<mapper resource="/mappers/member-mapper.xml" />
 		<mapper resource="/mappers/notice-mapper.xml" />
+		
+		<!-- 휘경 -->
+		<mapper resource="/mappers/chat-mapper.xml" />
+		<mapper resource="/mappers/community-mapper.xml" />
+		<mapper resource="/mappers/like-mapper.xml" />
 	</mappers>
 	
 </configuration>
