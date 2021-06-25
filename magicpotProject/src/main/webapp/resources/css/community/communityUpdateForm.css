@@ -1,0 +1,136 @@
+/* div, div *{border:1px solid red;} */
+div{box-sizing: border-box; }
+#outer{
+    width:1000px;
+    margin:auto;
+}
+
+/* 커뮤니티 타이틀 영역 */
+#cm_titleArea{
+    width:100%;
+    height: 220px;
+    background-color: rgba(225, 212, 169, 0.233);
+    }
+#cm_titleArea1 div{float: left;}
+#cm_titleArea1{
+    height:100%;
+    padding:55px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size:1.5em;
+}
+#cm_titleArea1 img{padding:15px;}
+#cm_titleArea1 p{font-size:17px;}
+
+/* 커뮤니티 등록 문구 영역 */
+#cm_enrollFormTitle{
+   height: 35px;
+   width: 140px;
+   /* margin-top:10px; */
+   margin:50px;
+   /* text-align:center; */
+   border-bottom: 3px solid rgb(116, 152, 107);
+   font-family: 'Noto Sans KR', sans-serif;
+   color: rgb(116, 152, 107);
+   font-size: 17px;
+   font-weight:bold
+   }
+
+/* 글 작성 폼 영역 */
+/* #cm_listArea{
+    width:100%;
+} */
+
+/* 카테고리 선택 */
+/* #cm_category>option:first {
+color: black;
+} */
+select:required:invalid {
+color: gray;
+}
+option[value=""][disabled] {
+display: none;
+}
+option {
+color: black;
+}
+
+/* 커뮤니티 테이블 영역 */
+#cm_listArea2{
+    border:1px solid lightgray;
+    /* border-radius: 4px; */
+    width:95%;
+    height: 745px;
+    padding:20px;
+    padding-top: 25px;
+}
+/* #cm_listArea2>table{
+    width:98%; 
+    border:1px solid lightgray;
+} */
+
+#cm_enrollTable select, #cm_title{
+    margin-bottom:5px;
+    /* border-radius: 4px; */
+    border:1px solid lightgray;
+    padding:7px;
+}
+
+#cm_title{width:100%}
+
+#thumbnailUpfile{
+    margin-bottom: 5px;
+    /* border-radius: 4px; */
+    border:1px solid lightgray;
+    padding:4px;
+    color:gray;
+}
+
+.note-editor.note-airframe, .note-editor.note-frame {
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 0;
+}
+
+/* 글 버튼 등록 영역 */
+#cm_enrollBtn{width:95%;}
+#cm_enrollBtn a{
+    /* height: 400px; */
+    border:none;
+    width:80px;
+    margin-top: 15px;
+    padding:7px;
+    margin-left: 10px;
+    background-color: rgb(116, 152, 107);
+}
+#cm_enrollBtn a:hover{
+    background-color: rgb(225, 212, 169);
+}
+
+
+/* 공지사항 등록 모달 */
+.modal-content{width:400px;}
+#cmModalFooter{margin-top: 4px; margin-bottom: 25px;}
+#cmOkBtn{width:150px; margin-right:10px; padding:8px; background-color: rgb(116, 152, 107); border:none;}
+#cmOkBtn, #cmCancleBtn{
+    color:white;
+    width:150px;
+    margin-right:10px;
+    padding:8px;
+}
+#cmOkBtn:hover{background-color: rgb(225, 212, 169);}
+
+
+/* 파일 리스트  */
+/* #file_list{
+    -webkit-text-size-adjust: none;
+    font-weight: 400;
+    color: #333333;
+    font-family: "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", 돋움, dotum, sans-serif;
+    font-size: 13px;
+    list-style: none;
+    padding: 0;
+    list-style-type: none;
+    position: relative;
+    width: 100%;
+    margin: 0 0 21px 0;
+    display: block;
+} */

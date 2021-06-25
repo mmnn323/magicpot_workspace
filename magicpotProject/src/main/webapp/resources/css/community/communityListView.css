@@ -1,0 +1,146 @@
+/* div, div *{border:1px solid red;} */
+div{box-sizing: border-box; }
+#outer{
+    width:1000px;
+    margin:auto;
+}
+#cm_titleArea{
+    width:100%;
+    height: 220px;
+    background-color: rgba(225, 212, 169, 0.233);
+    }
+#cm_titleArea1 div{float: left;}
+#cm_titleArea1{
+    height:100%;
+    padding:55px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size:1.5em;
+}
+#cm_titleArea1 img{padding:15px;}
+#cm_titleArea1 p{font-size:17px;}
+
+/* 커뮤니티 공지사항 영역 */
+#cm_noticeArea{
+    margin:20px;
+    margin-top: 50px;
+    /* width:95%; */
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size:14px;
+}
+#cm_noticeArea1{
+    margin-bottom: 5px;
+}
+/* #cm_noticeArea2>table>tbody>tr:hover{cursor:pointer;} */
+.cm_noticeTitle:hover{cursor:pointer;}
+#noticeLine{
+    border-bottom: 1px solid lightgray;
+}
+.noticeBtn{
+   background-color: rgb(116, 152, 107);
+   color: white;
+   border-radius: 4px;
+   padding: 7px 11px 7px 11px; 
+   font-size: 14px;
+}
+#cm_noticeTitle{font-weight: bold;}
+
+/* 커뮤니티 카테고리 영역  */
+#cm_categoryArea{height: 80px; margin-top:70px;}
+#cm_categoryArea1{width:500px; height: 100%;}
+#cm_categoryArea1>ul{list-style-type: none; }
+#cm_categoryArea1>ul>li{float:left;  text-align:center; padding-bottom: 5px;}
+#cm_categoryArea1>ul>li a{
+   
+    padding:7px 30px 7px 30px; 
+    font-family: 'Noto Sans KR', sans-serif;
+    text-decoration: none;
+    color:  rgb(138, 180, 127);
+    font-size: 17px;
+    font-weight: 900;}
+#cm_categoryArea1 li a:hover{
+    /* border-bottom: 3px solid rgb(116, 152, 107); */
+    transition: .3s;
+    color: rgb(116, 152, 107);
+}
+
+/* 커뮤니티 검색 영역 */
+#cm_SearchCtg, #cm_keyword{padding:5px; border:1px solid lightgray; border-radius: 10px; margin-bottom: 40px;}
+#cm_SearchCtg{width:120px;}
+#cm_keyword{width:350px; padding-left: 15px;}
+#cm_searchArea select{
+    text-align-last: center;
+    text-align: center;
+    -ms-text-align-last: center;
+    -moz-text-align-last: center;
+}
+
+/* 글 버튼 등록 영역 */
+#cm_btnArea{height: 40px;}
+#cm_btnArea>div{float: left;}
+#cm_enrollBtn{margin-left: 850px;}
+#cm_enrollBtn a{
+    border:none;
+    width:80px;
+    padding:7px;
+    margin-right: 40px;
+
+    background-color: rgb(116, 152, 107);
+}
+#cm_enrollBtn a:hover{
+    background-color: rgb(225, 212, 169);
+}
+#listStyle{margin-left: 720px;}
+#listStyle a{margin-left: 5px; color:rgb(116, 152, 107);}
+#listStyle a:hover{
+    color: rgb(225, 212, 169);
+    transition: .3s;
+}
+/* 커뮤니티 글 리스트 영역 */
+#cm_listArea{width:100%; padding:10px;}
+
+.cm_thumbnail{
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: white;
+    width:200px;
+    display:inline-block;
+    margin: 20px;
+    text-align: left;
+    /* border:1px solid rgba(211, 211, 211, 0.733); */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.10);
+}
+.cm_thumbnail img{
+    width: 100%;
+    height:150px;
+}
+#cm_Ctg{color:rgb(116, 152, 107); font-weight: bold;}
+.cm_thumbnail b, small{
+    margin:10px;
+}
+.cm_thumbnail b{font-size: 14px;}
+#progress_status small{color:gray;}
+
+.cm_thumbnail:hover{
+    cursor: pointer;
+    opacity:0.7;
+    transition: .6s;
+    /* transform: scale( 1.03 ) */
+}
+
+/* 페이징 영역 */
+#cm_pagingArea{padding:30px;}
+/* #cm_paging{width:330px;} */
+.pagination>li>a{color:rgb(116, 152, 107);}
+.pagination>li>a:hover{color:rgb(225, 212, 169);}
+#cm_paging{
+    width: fit-content;
+    /* margin: auto; */
+}
+
+
+
+
+
+
+
+

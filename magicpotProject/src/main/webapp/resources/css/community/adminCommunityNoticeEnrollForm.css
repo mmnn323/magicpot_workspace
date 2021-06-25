@@ -1,0 +1,53 @@
+/* div{border:1px solid red;} */
+    
+/* .outer 스타일 통일 */
+.outer{
+    /* height: 700px; */
+    /* border: 1px solid red; */
+    width: 900px;
+    margin: 30px;
+    float: left;
+}
+
+/* 컨텐트 카테고리 타이틀 영역 */
+#contentTitleArea{
+    font-family: 'Noto Sans KR', sans-serif;
+    width:900px;
+    border-bottom: 2px solid lightgray;
+    padding:10px;
+    margin:20px;
+    margin-top: 0;
+}
+#title1{font-size:25px; font-weight: bold;}
+#title2{
+    font-size:16px;
+    background-color: gray;
+    color:white;
+    margin-left: 10px;
+    border:1px solid gray;
+    border-radius: 5px;
+    padding:3px;
+}
+
+#enrollTable div{
+    padding:20px 10px 5px 5px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+#enrollTable input, #enrollTable textarea{padding:10px;}
+
+/* 버튼 영역 */
+#cm_btnArea{margin: 30px 350px 30px 350px;}
+#cm_btnArea a{
+    border:none;
+    width:80px;
+    padding:7px;
+    margin-right: 10px;
+}
+#cm_btn a{
+    background-color: rgb(116, 152, 107);
+}
+#cm_btn a:hover{
+    background-color: rgb(93, 121, 86);
+}
