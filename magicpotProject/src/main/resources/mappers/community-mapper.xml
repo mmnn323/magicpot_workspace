@@ -4,6 +4,68 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="communityMapper">
 
-
+	<!-- CommunityNotice ResultMap -->
+	<resultMap id="communityNotice" type="CommunityNotice">
+		<id column="cmno_no" property="cmNoticeNo" />
+		<result column="cmno_title" property="cmNoticeTitle" />
+		<result column="cmno_content" property="cmNoticeContent" />
+		<result column="enroll_date" property="enrollDate" />
+		<result column="modify_date" property="modifyDate" />
+		<result column="count" property="count" />
+		<result column="status" property="status" />
+		
+	</resultMap>
+	
+	<!-- Community ResultMap -->
+	<resultMap id="community" type="Community">
+		<id column="cm_no" property="cmNo" />
+		<result column="mem_no" property="memNo" />
+		<result column="mem_id" property="memId" />
+		<result column="cm_category" property="cmCategory" />
+		<result column="cm_title" property="cmTitle" />
+		<result column="cm_content" property="cmContent" />
+		<result column="cm_image" property="cmImage" />
+		<result column="enroll_date" property="enrollDate" />
+		<result column="modify_date" property="modifyDate" />
+		<result column="count" property="count" />
+		<result column="status" property="status" />
+	</resultMap>
+	
+	<!-- 커뮤니티 공지사항 리스트 조회 -->
+	<select id="selectCmNoticeList" resultMap="communityNotice">
+		select
+		       cmno_no
+		     , cmno_title
+		     , to_char(enroll_date, 'YYYY.MM.DD')enroll_date
+		  from cm_notice
+		 where status = 'Y'
+		 order
+		    by cmno_no desc
+		 
+	</select>
+	
+	<!-- 커뮤니티 글 총 갯수 조회 -->
+	<select id="selectCmListCount" resultType="_int">
+		select
+		       count(*)
+		  from community
+		 where status = 'Y'
+	</select>
+	
+	<!-- 커뮤니티 글 리스트 조회  -->
+	<select id="selectCmList" resultMap="community">
+		select
+		       cm_no
+		     , cm_image
+		     , cm_category
+		     , cm_title
+		     , mem_id
+		     , to_char(enroll_date, 'YYYY.MM.DD') enroll_date
+		     , count
+		  from community
+		 where status = 'Y'
+		 order
+		    by cm_no desc
+	</select>
 
 </mapper>

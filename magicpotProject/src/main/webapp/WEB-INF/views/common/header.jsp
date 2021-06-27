@@ -23,7 +23,7 @@
     <!-- 로고 영역 -->
     <div id="header">
         <div id="header_1">
-            <a href=""><img src="../../../resources/images/common/logo2.png" alt=""></a>
+            <a href="${ pageContext.servletContext.contextPath }"><img src="resources/images/common/mainLogo.png" alt=""></a>
         </div>
 
         <!-- 카테고리 영역-->
@@ -32,7 +32,7 @@
                 <li><a href="">펀딩하기</a></li>
                 <li><a href="">프로젝트 올리기</a></li>
                 <li><a href="">이용가이드</a></li>
-                <li><a href="">커뮤니티</a></li>
+                <li><a href="list.cm">커뮤니티</a></li>
             </ul>
         </div>
 
