@@ -1,0 +1,217 @@
+div{box-sizing: border-box;}
+.wrap{
+    width: 1000px;
+    height: 800px;
+    margin: auto;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.wrap>div{width: 100%;}
+#header{
+    background-color: white;
+    height: 46px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;  
+    z-index: 1;
+    border-bottom: 1px solid #a5a3a3;
+}
+#menu{
+    position: fixed;
+    left: 0;
+    top: 44px}
+#content{
+    position: absolute;
+    left: 200px;
+    right: 0;}
+body{padding-top: 59px}
+#menuContent{height: 100%;}
+
+#header>div, #menuContent>div{
+    float: left;
+    height: 100%;
+}
+#menu{
+    width: 200px;
+    border:1px solid #f0f0f0}
+#content{width: 100%;}
+#content1{
+    width: 70%;
+    margin-top: 30px;
+    float: left;}
+
+/* header 스타일*/
+#header>div{height: 100%;}
+#logo{width: 11%;}
+#creatorName{width: 81%;}
+#outPage{width: 8%;}
+#creatorName, #outPage{
+    font-size: 17px;
+    font-weight: 600;
+    color: rgb(116, 152, 107);
+    line-height: 45px;
+    text-align: center
+}
+
+/* menu 스타일 */
+#menu>div{width: 100%;}
+#creProfile{height: 160px;}
+
+/* creProfile */
+#creProfile{
+    padding-top :15px;
+    border: 1px solid #f0f0f0;
+    background: rgba(81, 171, 59, 0.51);
+    font-size: 16px;
+}
+#p1,#p2,#p3{
+    margin-left: 15px;
+    color: white; 
+    font-weight: 600;
+}
+#p2{font-size: 15px}
+
+/* menubar */
+#accordian{text-align: center;}
+#accordian>ul{margin-top: 0px;}
+#accordian>ul>li{
+    border: 1px solid #f0f0f0;
+    margin-left: -40px;
+}
+#accordian li>h1{ cursor: pointer;}
+#accordian li>ul{ display: none;}
+#accordian p{font-size: 16px}
+#accordian h4{
+    line-height: 40px;
+    font-weight: 600;
+}
+#abled{font-size: 16px;}
+#accordian a{
+    list-style: none;
+    text-decoration: none;
+    color: black;	
+}
+#subMenu a{
+    display: block;
+    position: relative;
+    width: 196px;
+    padding: 15px 20px;
+    margin-left: -40px;
+    background: #f8f8f8;
+    border-bottom: 1px solid #eaeaea;
+    color: #222;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+   }
+#subMenu a:hover{
+    border-bottom: 1px solid #bdbdbd;
+    color: #222;
+    background: #ebeaea;
+    transition: all .8s;
+}
+a:after{
+    content: '';
+    opacity: 0;
+    transition: opacity .3s;
+  }
+#ready:hover, #ready p:hover{color: rgb(116, 152, 107)}
+#abled:hover{color: rgb(116, 152, 107)}
+#lock{
+    display: inline;
+    cursor: default; 
+}
+
+/* content */
+#content1{padding-left:50px}
+#summary{
+    margin-top: -3px;
+    color: #757575;
+    font-size: 17px;
+}
+button{cursor: pointer;}
+#p5{
+    margin-top: -8px;
+    color: #a1a0a0;
+    font-size: 14px;
+}
+#counter{
+    margin-top: 2px;
+    color: #a1a0a0;
+    font-size: 12px;
+}
+#content1 h4, #content1 span{font-weight:600;}
+#submit_btn{
+    width: 130px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(116, 152, 107);
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+}
+#p6{
+    width: 80%;
+    margin-top:5px;
+    font-size: 13px;
+    color:#7a7a7a;
+}
+#p7{
+    width: 80%;
+    margin-left: 17px;
+    margin-top: -1px;
+    font-size: 13px;
+    color: #7a7a7a
+}
+#story{width: 70%;}
+#proImage{
+    padding: 6px 25px;
+    background-color: #FF6600;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+#imageUpfile{
+    width: 140px;
+    height: 40px;
+    padding: 6px 25px;
+    background-color:rgb(116, 152, 107);
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    cursor: pointer;
+}
+#agreeBtn1, #agreeBtn2, #agreeBtn3{
+    height: 40px;
+    padding-left: 3px;
+    padding-bottom: 2px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(116, 152, 107);
+    font-size: 17px;
+    font-weight: 400;
+    color: white;
+    cursor: pointer;
+}
+
+/* modal 쪽 css */
+fieldset{
+    padding: 15px 20px 0px 20px;
+    border: 2px solid #d8d8d8;
+    border-radius: 5px;
+}
+#checkSummary{
+    font-size: 15px;
+    color: #919191;
+}
+#count{
+    float: left;
+    font-weight: 600;
+    color: #4b4b4b;
+}
+#agreeContent{
+    margin-left: 30px;
+    color: #4b4b4b;
+}
