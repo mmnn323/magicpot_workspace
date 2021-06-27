@@ -1,0 +1,189 @@
+div{box-sizing: border-box;}
+.wrap{
+    width: 1000px;
+    /* height: 800px; */
+    margin: auto;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.wrap>div{width: 100%;}
+#header{
+    background-color:#d3d3d3;
+    height: 50px;
+    position:fixed;
+    top:0px;
+    left: 0;
+    right: 0;  
+    z-index: 1;
+}
+#menu{position:fixed;left:0;background-color:#d3d3d3;}
+#content{position:absolute;left:200px;right:0;}
+body{padding-top:45px}
+#menu_content{height: 95%;}
+
+#header>div, #menu_content>div{
+    height: 100%;
+    float: left;
+}
+#menu{width: 200px; border:1px solid #f0f0f0}
+#content{width: 100%;margin-top:20px}
+
+/* header 스타일*/
+#header>div{height: 100%;}
+#logo{width: 11%;}
+#adminId{width: 72%;}
+#logout{width: 8%;}
+#bar{width: 1%;}
+#outPage{width: 8%;}
+#adminId, #logout, #bar, #outPage{
+    font-size: 17px;
+    font-weight:600;
+    color:rgb(116, 152, 107);
+    line-height:45px;
+    text-align:center;
+}
+#adminId{text-align:right;}
+
+/* menu 스타일 */
+#menu>div{width: 100%;}
+
+/* menubar */
+#accordian{text-align:center;}
+#accordian>ul{margin-top:0px;}
+#accordian>ul>li{border:1px solid #f0f0f0;margin-left:-40px;}
+#accordian li>h1{ cursor:pointer;}
+#accordian li>ul{ display:none;}
+#accordian p{font-size:16px}
+#accordian h4{line-height:42px;font-weight:600;}
+#abled{font-size:16px;}
+#accordian a{
+    list-style:none;
+    text-decoration:none;
+    color:black;	
+}
+#subMenu a{
+    width: 196px;
+    background:#f8f8f8;
+    display:block;
+    padding:15px 20px;
+    margin-left:-40px;
+    color:#222;
+    font-weight:600;
+    text-align:center;
+    border-bottom:1px solid #eaeaea;
+    position:relative;
+   }
+#subMenu a:hover{
+    color:#222;
+    background:#ebeaea;
+    transition:all 0.8s;
+    border-bottom:1px solid #bdbdbd;
+}
+   a:after{
+       content:'';
+      opacity:0;
+      transition:opacity 0.3s;
+  }
+#ready:hover, #ready p:hover{color:rgb(116, 152, 107)}
+#abled:hover{color:rgb(116, 152, 107)}
+
+/* content */
+#content1{padding-left:50px}
+
+/* .outer 스타일 통일 */
+.outer{
+    /* height: 700px; */
+    /* border: 1px solid red; */
+    width: 900px;
+    margin: 30px;
+    float: left;
+}
+
+/* 컨텐트 카테고리 타이틀 영역 */
+#contentTitleArea{
+    width: 1000px;
+    padding: 10px;
+    margin: 20px;
+    margin-top: 0;
+    border-bottom: 2px solid lightgray;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+#title1{
+    font-size: 25px; 
+    font-weight: bold;
+}
+#title2{
+    margin-left: 10px;
+    padding: 3px;
+    font-size: 16px;
+    background-color: gray;
+    border: 1px solid gray;
+    border-radius: 5px;
+    color: white;
+}
+
+/* 커뮤니티 검색+버튼 영역 */
+#searchBtnArea div{float: left;}
+
+/* 커뮤니티 검색 영역 */
+#searchCtg, #keyword{
+    padding: 5px;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+#searchCtg{
+    width: 120px;
+    margin-left: 85px; 
+}
+#keyword{
+    width: 350px; 
+    padding-left: 15px; 
+    margin-left: 3px;
+}
+#searchArea select{
+    text-align-last: center;
+    text-align: center;
+    -ms-text-align-last: center;
+    -moz-text-align-last: center;
+}
+
+/* 버튼 영역 */
+#btnArea a{
+    width: 80px;
+    margin-right: 10px;
+    padding: 7px;
+}
+#enrollBtn{
+    margin-left: 150px;
+    background-color: rgb(116, 152, 107);
+}
+#enrollBtn:hover{
+    background-color: rgb(93, 121, 86);
+}
+#deleteBtn{
+    background-color: rgb(252, 99, 99);
+}
+#deleteBtn:hover{
+    background-color: rgb(216, 66, 66);
+}
+
+/* 리스트 영역  */
+#fundingList{ 
+    margin-top: 50px;
+    margin-left: 45px; 
+    text-align: center;
+}
+#fundingListTable{width: 910px;}
+#fundingListTable>tbody a{
+    color: black;
+    text-decoration: none;
+}
+#fundingListTable>tbody>tr:hover{background-color: rgb(215, 231, 212);}
+    
+/* 페이징 영역 */
+#pagingArea{padding: 30px;}
+.pagination>li>a{color: rgb(116, 152, 107);}
+.pagination>li>a:hover{color: rgb(225, 212, 169);}
+#paging{
+    width: fit-content;
+    margin-left: 60px;
+}
