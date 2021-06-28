@@ -28,6 +28,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.magicpot.like.model.vo.Like" alias="Like" />
 		<typeAlias type="com.kh.magicpot.chat.model.vo.ChatMessage" alias="ChatMessage" />
 		<typeAlias type="com.kh.magicpot.chat.model.vo.ChatRoom" alias="ChatRoom" />
+		
+		<!-- 시은 -->
+		<typeAlias type="com.kh.magicpot.project.model.vo.Creator" alias="Creator" />
+		<typeAlias type="com.kh.magicpot.project.model.vo.Project" alias="Project" />
+		<typeAlias type="com.kh.magicpot.project.model.vo.ProjectRequire" alias="ProjectRequire" />
+		<typeAlias type="com.kh.magicpot.project.model.vo.ProjectReward" alias="ProjectReward" />
+		<typeAlias type="com.kh.magicpot.project.model.vo.ProjectFile" alias="ProjectFile" />
+		
 	</typeAliases>
 	
 	<!-- mapper 등록 -->
@@ -41,6 +49,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="/mappers/chat-mapper.xml" />
 		<mapper resource="/mappers/community-mapper.xml" />
 		<mapper resource="/mappers/like-mapper.xml" />
+		
+		<!-- 시은 -->
+		<mapper resource="/mappers/project-mapper.xml" />
 	</mappers>
 	
 </configuration>
