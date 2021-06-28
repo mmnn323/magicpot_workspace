@@ -117,7 +117,7 @@
             <div id="adminId">admin1</div>
             <div id="logout" style="cursor:pointer;padding-right:0px;">로그아웃</div>
             <div id="bar" style="cursor:pointer;padding-right:0px;">|</div>
-            <div id="outPage" style="cursor:pointer;padding-left:0px;">홈페이지</div>
+            <div id="outPage" style="cursor:pointer; padding-left:0px;" onclick="location.href='${ pageContext.servletContext.contextPath}';">홈페이지</div>
         </div>
         <div id="menu_content">
             <div id="menu">
