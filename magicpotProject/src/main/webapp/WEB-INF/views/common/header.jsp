@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/dd18300701.js" crossorigin="anonymous"></script>
+<!-- sweetalert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 
   .wrap {
@@ -55,6 +57,14 @@
 </style>
 </head>
 <body>
+
+	<!-- alertMsg출력 구문 (일회성 메시지) -->
+	<c:if test="${ !empty alertMsg }">
+		<script>
+			swal("Success!", "${alertMsg}", "success");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
+	</c:if>
 
     <!-- 로고 영역 -->
     <div id="header">
