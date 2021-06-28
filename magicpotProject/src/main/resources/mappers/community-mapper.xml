@@ -41,8 +41,24 @@
 		 where status = 'Y'
 		 order
 		    by cmno_no desc
-		 
 	</select>
+	
+	<!-- 커뮤니티 공지사항 작성 -->
+	<insert id="insertCmNotice" parameterType="CommunityNotice">
+		insert
+		  into cm_notice
+		  (
+		    cmno_no
+		  , cmno_title
+		  , cmno_content
+		  )
+		  values
+		  (
+		    seq_cnno.nextval
+		  , #{cmNoticeTitle}
+		  , #{cmNoticeContent}
+		  )
+	</insert>
 	
 	<!-- 커뮤니티 글 총 갯수 조회 -->
 	<select id="selectCmListCount" resultType="_int">

@@ -22,6 +22,15 @@ public class CommunityDao {
 		return (ArrayList)sqlSession.selectList("communityMapper.selectCmNoticeList");
 	}
 	
+	/**
+	 * 커뮤니티 공지사항 작성
+	 * @param sqlSession
+	 * @param cn
+	 * @return
+	 */
+	public int insertCmNotice(SqlSessionTemplate sqlSession, CommunityNotice cn) {
+		return sqlSession.insert("communityMapper.insertCmNotice", cn);
+	}
 	
 	/**
 	 * 커뮤니티 글 총 갯수 조회

@@ -1,0 +1,86 @@
+/* div, div *{border:1px solid red;} */
+div{box-sizing: border-box; }
+#outer{
+    width:1000px;
+    margin:auto;
+}
+
+/* 커뮤니티 타이틀 영역 */
+#cm_titleArea{
+    width:100%;
+    height: 220px;
+    background-color: rgba(225, 212, 169, 0.233);
+    }
+#cm_titleArea1 div{float: left;}
+#cm_titleArea1{
+    height:100%;
+    padding:55px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size:1.5em;
+}
+#cm_titleArea1 img{padding:15px;}
+#cm_titleArea1 p{font-size:17px;}
+
+/* 커뮤니티 등록 문구 영역 */
+#cm_enrollFormTitle{
+    height: 35px;
+    width: 190px;
+    margin:50px;
+    border-bottom: 3px solid rgb(116, 152, 107);
+    font-family: 'Noto Sans KR', sans-serif;
+    color: rgb(116, 152, 107);
+    font-size: 17px;
+    font-weight:bold
+    }
+
+/* 커뮤니티 테이블 영역 */
+#cm_listArea2{
+    border:1px solid lightgray;
+    width:95%;
+    height: 745px;
+    padding:20px;
+    padding-top: 25px;
+}
+#cm_enrollTable div{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 17px;
+    font-weight:bold;
+    margin:0px 0px 5px 5px;
+}
+#cm_enrollTable select, #cm_title, #cm_content{
+    margin-bottom:10px;
+    border:1px solid lightgray;
+    padding:7px;
+    width:100%;
+}
+
+
+
+/* 글 버튼 등록 영역 */
+#cm_btnArea{width:95%;}
+#cm_btn a{
+    border:none;
+    width:80px;
+    margin-top: 15px;
+    padding:7px;
+    margin-left: 10px;
+    background-color: rgb(116, 152, 107);
+}
+#cm_btn a:hover{
+    background-color: rgb(225, 212, 169);
+}
+
+
+/* 공지사항 등록 모달 */
+#cmEnrollBtn>div{width:400px;}
+#cmModalFooter{margin-top: 4px; margin-bottom: 25px;}
+#cmOkBtn{width:150px; margin-right:10px; padding:8px; background-color: rgb(116, 152, 107); border:none;}
+#cmOkBtn, #cmCancleBtn{
+    color:white;
+    width:150px;
+    margin-right:10px;
+    padding:8px;
+}
+#cmOkBtn:hover{background-color: rgb(225, 212, 169);}
+
+

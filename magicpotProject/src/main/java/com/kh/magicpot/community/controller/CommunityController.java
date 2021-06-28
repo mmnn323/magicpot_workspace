@@ -2,6 +2,8 @@ package com.kh.magicpot.community.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,9 +39,24 @@ public class CommunityController {
 		model.addAttribute("cList", cList);
 		
 		return "community/communityListView";
-		
-		
-		
-		
 	}
+	
+	@RequestMapping("enrollForm.cn")
+	public String cnEnrollForm() {
+		return "community/communityNoticeEnrollForm";
+	}
+	
+	@RequestMapping("insert.cn")
+	public String insertCmNotice(CommunityNotice cn, HttpSession session, Model model) {
+		int result = cService.insertCmNotice(cn);
+		
+		if(result > 0) { // 공지사항 등록 성공 => communityListView.jsp 재요청
+			session.setAttribute("alertMsg", "공지사항이 등록되었습니다.");
+			return "redirect:list.cm";
+		}else { // 공지사항 등록 실패
+//			model.addAttribute("errorMsg", "게시글 삭제 실패");
+			return "common/errorPage";
+		}
+	}
+	
 }
