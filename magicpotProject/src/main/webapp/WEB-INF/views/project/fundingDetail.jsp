@@ -20,7 +20,7 @@
 <style>
     *{font-family:'Noto Sans KR', sans-serif;}
     div{border:1px solid white;}
-    #outer{width:1000px; height:2500px; text-align:center; margin:auto;}
+    #outer{width:1000px; height:px; text-align:center; margin:auto;}
     
     #category{
         width:100px; 
@@ -150,9 +150,9 @@
         <hr>
         <div id="content2">
                 <ul>
-                    <li><a href="#">스토리</a></li>
-                    <li><a href="#">작가의 말</a></li>
-                    <li><a href="#">체험리뷰</a></li>
+                    <li><a href="story.fd">스토리</a></li>
+                    <li><a href="author.fd">작가의 말</a></li>
+                    <li><a href="review.fd">체험리뷰</a></li>
                 </ul>
         </div>
         <hr>
