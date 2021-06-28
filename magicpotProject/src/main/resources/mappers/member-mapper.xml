@@ -2,13 +2,45 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="memberMapper">
+ 
+  <mapper namespace="memberMapper">
+
+	<resultMap id="memberResultSet" type="Member">
+	
+		<result column="mem_no" property="memNo"/>
+		<result column="mem_id" property="memId"/>
+		<result column="mem_pwd" property="memPwd"/>
+		<result column="mem_name" property="memName"/>
+		<result column="phone" property="phone"/>
+		<result column="email" property="email"/>
+		<result column="email_yn" property="emailYn"/>
+		<result column="enroll_route" property="enrollRoute"/>
+		<result column="enroll_date" property="enrollDate"/>
+		<result column="status" property="status"/>
+		<result column="mem_post" property="memPost"/>
+		<result column="mem_road" property="memRoad"/>
+		<result column="mem_detail" property="memDetail"/>
+	</resultMap>
+	  
+  	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
+  		select
+  			   mem_no
+  		     , mem_id
+  		     , mem_pwd
+  		     , mem_name
+  		     , phone
+  		     , email
+  		     , email_yn
+  		     , enroll_route
+  		     , enroll_date
+  		     , status
+  		     , mem_post
+  		     , mem_road
+  		     , mem_detail
+  		  from member
+  		 where status not in ('B','N')
+  		   and mem_id = #{memId}
+  	</select>
+  	
   
-  
-  
-  
-  
-  
-  
-  
-</mapper>
+  </mapper>

@@ -18,11 +18,11 @@
 <script src="https://kit.fontawesome.com/dd18300701.js" crossorigin="anonymous"></script>
 <style>
 
-          .wrap {
-                border: 1px solid lightgray;
-              width: 300px;
-                
-                }
+  .wrap {
+            border: px solid lightgray;
+            width: 300px;
+              
+              }
 
         #font{ color:rgb(116, 152, 107);
         font-size: 30px;}
@@ -39,7 +39,7 @@
                 }
         
       /* 로그인 버튼 */
-        #btn1 {width: 250px;
+        #loginbtn1 {width: 250px;
                 height: 35px;
                 color:white; 
                 background-color: rgb(116, 152, 107);
@@ -50,7 +50,8 @@
 
         /* 회원가입 a태그*/
         .join {font-size: 13px;}
-        a { font-size: 13px; color: rgb(116, 152, 107);}
+        #member{ font-size: 13px; color: rgb(116, 152, 107);}
+
 </style>
 </head>
 <body>
@@ -58,7 +59,7 @@
     <!-- 로고 영역 -->
     <div id="header">
         <div id="header_1">
-            <a href=""><img src="../../../resources/images/common/logo2.png" alt=""></a>
+            <a href="${ pageContext.servletContext.contextPath }"><img src="resources/images/common/mainLogo.png" alt=""></a>
         </div>
 
         <!-- 카테고리 영역-->
@@ -67,7 +68,7 @@
                 <li><a href="">펀딩하기</a></li>
                 <li><a href="">프로젝트 올리기</a></li>
                 <li><a href="">이용가이드</a></li>
-                <li><a href="">커뮤니티</a></li>
+                <li><a href="list.cm">커뮤니티</a></li>
             </ul>
         </div>
 
@@ -83,32 +84,33 @@
                 </div>
             </form>
         </div>
+
 	
-	
-		<div id="header_4">
-			
-			<c:choose>
-	        	 <c:when test="${ empty loginUser }"> 
-	                  <a data-toggle="modal" data-target="#loginModal">로그인</a> <h style="color:rgb(116, 152, 107)"> &nbsp;</h> 
-	                  <a href="">회원가입</a>
-	        	  </c:when>
-		          <c:when test="${ !empty loginUser and loginUser.memId eq 'admin' }">
-			          	 <b>${ loginUser.memName }</b> <h style="color:rgb(116, 152, 107)">님</h>
-			          	<abbr title="관리자페이지"><a href="" class="afterLogin"><i class="fas fa-cog fa-2x"></i></a></abbr>
-			          	<a href="logout.me">로그아웃</a>
-		          </c:when>
+        <!-- 로그인전/후 영역-->
+        <div id="header_4">
+		    <c:choose>
+		    	<c:when test="${ empty loginUser }">
+		            <!-- 로그인 전 -->
+		            <a href="" data-toggle="modal" data-target="#loginModal">로그인</a> <h style="color:rgb(116, 152, 107)"> &nbsp |</h> 
+		            <a href="">회원가입</a>
+				</c:when>
+				<c:when test="${ !empty loginUser and loginUser.memId ne 'admin'}">
+		            <!-- 로그인 후 -->
+		            <b>${ loginUser.memName }</b> <h style="color:rgb(116, 152, 107)">님</h>
+		            <abbr title="마이페이지"><a href="" class="afterLogin"><i class="fas fa-user fa-2x " style="margin-top: 20px;"></i></a></abbr>
+		            <abbr title="좋아하는 프로젝트"><a href="" class="afterLogin"><i class="fas fa-heart fa-2x"></i></a></abbr>
 		          <c:otherwise>
-	                   <b>${ loginUser.memName }</b> <h style="color:rgb(116, 152, 107)">님</h>
-		               <abbr title="마이페이지"><a href="" class="afterLogin"><i class="fas fa-user fa-2x " style="margin-top: 20px;"></i></a></abbr>
-		               <abbr title="좋아하는 프로젝트"><a href="" class="afterLogin"><i class="fas fa-heart fa-2x"></i></a></abbr>
-		          </c:otherwise>
-	      	</c:choose>   
-       </div> 
+		            <!-- 로그인한 사용자가 관리자일 경우 관리자 페이지로 이동하는 버튼 노출-->
+		             <abbr title="관리자페이지"><a href="" class="afterLogin"><i class="fas fa-cog fa-2x"></i></i></a></abbr>
+		            <abbr title="로그아웃"><a href="logout.me" class="afterLogin"><i class="fas fa-sign-out-alt fa-2x"></i></a></abbr>
+		   	   	  </c:otherwise>
+		   	   </c:when>
+		   </c:choose>
+        </div>
     </div>
 
-    
-    <!--  로그인 모달 - 홍희나  -->
-<div class="modal fade" align="center" id="loginModal">
+    <!-- 로그인 모달 -->
+    <div class="modal fade" align="center" id="loginModal">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
         <!-- Modal Header -->
@@ -136,18 +138,19 @@
 
             <div class="join">
                <br><br> 또는 <br><br>
-                아직 MagicPot 계정이 없으신가요? &nbsp;&nbsp; <a href=""><b>회원가입</b></a>
+                아직 MagicPot 계정이 없으신가요? &nbsp;&nbsp; <a id="member" href=""><b>회원가입</b></a>
     
             </div>  
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="submit" id="btn1" class="btn btn-primary">로그인</button>
+                <button type="submit" id="loginbtn1" class="btn btn-primary">로그인</button>
             </div>
         </form>
         </div>
     </div>
 </div>
+    
     
 </body>
 </html>

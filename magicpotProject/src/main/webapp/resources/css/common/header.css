@@ -1,5 +1,5 @@
-/* div{border : 1px solid red;} */
 div{box-sizing: border-box; }
+/* div{border : 1px solid red;} */
 #header{
     width:1000px;
     height:100px;
@@ -12,19 +12,19 @@ div{box-sizing: border-box; }
     float:left;
 }
 #header_1{width:10%;position:relative;}
-#header_2{width:43%;}
-#header_3{width:27%;}
-#header_4{width:20%;}
+#header_2{width:42%;}
+#header_3{width:25%;}
+#header_4{width:23%;}
 
 #header_1>a{line-height:70px;}
 
-#header_2>ul{list-style-type: none; margin-top: 25px; margin-left: 10px;}
+#header_2>ul{list-style-type: none; margin-top: 26px; margin-left: 10px;}
 #header_2>ul>li{float:left; margin-right:14px; text-align:center;}
 #header_2>ul>li a{
     font-family: 'Noto Sans KR', sans-serif;
     text-decoration: none;
     color: rgb(116, 152, 107);
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 900;}
 #header_2 a:hover{
     transition: .6s; color:  rgb(225, 212, 169);
@@ -32,7 +32,7 @@ div{box-sizing: border-box; }
 
 #header_3>form{margin-top: 20px;}
 #header_3>form>div{float: left;}
-#search_text{width:255px}
+#search_text{width:240px}
 #search_text>input{
     border-radius:20px 0px 0px 20px;
     padding:5px;
@@ -47,7 +47,7 @@ div{box-sizing: border-box; }
     border:none;
 }
 
-#header_4{line-height:75px; font-size: 15px; }
+#header_4{line-height:75px; font-size: 14px; }
 #header_4 a{
     font-family: 'Noto Sans KR', sans-serif;
     text-decoration: none;
