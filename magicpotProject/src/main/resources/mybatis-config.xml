@@ -36,6 +36,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.magicpot.project.model.vo.ProjectReward" alias="ProjectReward" />
 		<typeAlias type="com.kh.magicpot.project.model.vo.ProjectFile" alias="ProjectFile" />
 		
+		<!-- 다인 -->
+		<typeAlias type="com.kh.magicpot.guide.model.vo.Guide" alias="Guide"/>
+		
 	</typeAliases>
 	
 	<!-- mapper 등록 -->
@@ -52,6 +55,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<!-- 시은 -->
 		<mapper resource="/mappers/project-mapper.xml" />
+		
+		<!-- 다인 -->
+		<mapper resource="/mappers/guide-mapper.xml"/>
 	</mappers>
 	
 </configuration>
