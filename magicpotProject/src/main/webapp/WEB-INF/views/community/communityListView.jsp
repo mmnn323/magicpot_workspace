@@ -59,6 +59,14 @@
                     </tbody>
                   </table>
             </div>
+            
+            <!-- 로그인&&관리자일 경우 노출되는 공지 작성하기 버튼 -->
+            <c:if test="${ !empty loginUser and loginUser.status eq 'A' }">
+	            <div id="cm_enrollBtn2" >
+	                <a href="enrollForm.cn" class="btn btn-success">공지사항 작성하기</a>
+	            </div>
+            </c:if>
+            
         </div>
 
         <script>

@@ -28,11 +28,14 @@ div{box-sizing: border-box; }
     font-family: 'Noto Sans KR', sans-serif;
     font-size:14px;
 }
-#cm_noticeArea1{
-    margin-bottom: 5px;
-}
+#cm_noticeArea1, #cm_noticeArea2{margin-bottom: 5px;}
+#cm_noticeArea2{margin-bottom: 5px;}
 /* #cm_noticeArea2>table>tbody>tr:hover{cursor:pointer;} */
-.cm_noticeTitle:hover{cursor:pointer;}
+.cm_noticeTitle:hover{
+    cursor:pointer;
+    transition: .3s;
+    color:rgb(116, 152, 107);
+}
 #noticeLine{
     border-bottom: 1px solid lightgray;
 }
@@ -79,23 +82,26 @@ div{box-sizing: border-box; }
 /* #cm_btnArea{height: 40px;} */
 #cm_btnArea1>div{float: left;}
 #cm_enrollBtn{margin-left: 850px;}
-#cm_enrollBtn a{
+#cm_enrollBtn2{margin-left: 815px; margin-top: 10px;}
+#cm_enrollBtn a, #cm_enrollBtn2 a{
     border:none;
-    width:80px;
     padding:7px;
-    margin-right: 40px;
-
     background-color: rgb(116, 152, 107);
 }
-#cm_enrollBtn a:hover{
+#cm_enrollBtn a{width:80px;}
+#cm_enrollBtn2 a{width:150px;}
+#cm_enrollBtn a:hover, #cm_enrollBtn2 a:hover{
     background-color: rgb(225, 212, 169);
 }
+
+/* 리스트 보기 스타일 영역 */
 #listStyle{margin-left: 850px;}
 #listStyle a{margin-left: 5px; color:rgb(116, 152, 107);}
 #listStyle a:hover{
     color: rgb(225, 212, 169);
     transition: .3s;
 }
+
 /* 커뮤니티 글 리스트 영역 */
 #cm_listArea{width:100%; padding:10px;}
 
@@ -146,5 +152,11 @@ div{box-sizing: border-box; }
     width: fit-content;
     /* margin: auto; */
 }
+
+
+
+
+
+
 
 
