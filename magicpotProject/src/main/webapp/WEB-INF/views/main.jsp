@@ -2,313 +2,624 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mainPage</title>
+    <!-- 글씨체 -->
 <link rel="preconnect" href="https://fonts.gstatic.com/%22%3E">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-<!-- include libraries(jQuery, bootstrap) -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<!-- jQuery library -->
+
+<!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
+<!-- 부트스트랩에서 제공하고 있는 스타일 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- 부트스트랩에서 제공하고 있는 스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/dd18300701.js" crossorigin="anonymous"></script>
 <style>
-    div{box-sizing: border-box;}
+    div, form, input{ box-sizing: border-box;}
+    div, p, form, a {font-family: 'Noto Sans KR', sans-serif;}
+    div{box-sizing: border-box;  }
     .wrap{
-        width: 1000px;
-        height: 800px;
+        background-color: white;
         margin: auto;
-        font-family: 'Noto Sans KR', sans-serif;
+        width: 1000px;
+        height: 2080px;
     }
-    .wrap>div{width: 100%;}
-    #header{
-        background-color:#d3d3d3;
-        height: 50px;
-        position: fixed;
-        top: 0px;
-        left: 0;
-        right: 0;  
-        z-index: 1;
-    }
-    #menu{position:fixed;left:0;background-color:#d3d3d3;}
-    #content{position:absolute;left:200px;right:0;}
-    body{padding-top:45px}
-    #menu_content{height:100%;}
 
-    #header>div, #menu_content>div{
+    .wrap>div{width:100%}
+    #content_1{height: 350px;}
+    #content_2{height: 420px;}
+    #content_3{height: 960px; margin: auto; border-top: 1px solid lightgray;}
+    #content_4{height: 350px; border-top: 1px solid lightgray;}
+
+    #content_1>div,  #content_2>div{height: 100%; float: left; font-family: 'Noto Sans KR', sans-serif;}
+    #mainImg{width: 65%;}
+    #imgDetail{
+        width: 35%;
+        background-color: rgb(225, 212, 169);
+        color: white;
+        text-align: center;
+     }
+   
+    #content_1{position: relative;}
+    #img{width: 100%;
         height: 100%;
-        float: left;
     }
-    #menu{width:200px; border:1px solid #f0f0f0}
-    #content{width:100%;margin-top:20px}
-
-    /* header 스타일*/
-    #header>div{height: 100%;}
-    #logo{width: 11%;}
-    #adminId{width: 72%;}
-    #logout{width: 8%;}
-    #bar{width: 1%;}
-    #outPage{width: 8%;}
-    #adminId, #logout, #bar, #outPage{
-        font-size: 17px;
-        font-weight: 600;
-        color:rgb(116, 152, 107);
-        line-height: 45px;
+    #textTitle{
+        margin-top: 80px;
+    }
+    #text{
+        width: 250px;
+        margin-left: 50px;
         text-align: center;
     }
-    #adminId{text-align: right;}
-
-    /* menu 스타일 */
-    #menu>div{width: 100%;}
-
-    /* menubar */
-    #accordian{text-align:center;}
-    #accordian>ul{margin-top:0px;}
-    #accordian>ul>li{border:1px solid #f0f0f0;margin-left:-40px;}
-	#accordian li>h1{ cursor:pointer;}
-	#accordian li>ul{ display:none;}
-    #accordian p{font-size:16px}
-    #accordian h4{line-height:42px;font-weight:600;}
-    #abled{font-size:16px;}
-	#accordian a{
-		list-style:none;
-		text-decoration:none;
-		color:black;	
-	}
-	#subMenu a{
-		width:196px;
-        background:#f8f8f8;
-		display:block;
-		padding:15px 20px;
-		margin-left:-40px;
-		color:#222;
-		font-weight:600;
-        text-align:center;
-		border-bottom:1px solid #eaeaea;
-		position:relative;
-   	}
-	#subMenu a:hover{
-		color:#222;
-		background:#ebeaea;
-		transition:all 0.8s;
-		border-bottom:1px solid #bdbdbd;
-    }
-   	a:after{
-   		content:'';
-  		opacity:0;
-  		transition:opacity 0.3s;
-  	}
-	#ready:hover, #ready p:hover{color:rgb(116, 152, 107)}
-    #abled:hover{color:rgb(116, 152, 107)}
-    
-    /* content */
-   
-    .outer{
-            /* height: 700px; */
-            /* border: 1px solid red; */
-            width: 900px;
-            margin: 30px;
-            float: left;
+    #sign a{
+        float: left;
+        color: white;  
         }
-    #title{font-size: 25px; font-weight: bold;}
-
-    #title2{
-            font-size:16px;
-            background-color: gray;
-            color:white;
-            margin-left: 10px;
-            border:1px solid gray;
-            border-radius: 5px;
-            padding:3px;
-        }
-
-        /* 컨텐트 카테고리 타이틀 영역 */
-    .guideTitle{
-        font-family: 'Noto Sans KR', sans-serif;
-        width:900px;
-        border-bottom: 2px solid lightgray;
-        padding:10px;
-        margin:20px;
-        margin-top: 0;
-        
-    }
-
-    .explainContent{
-        width: 700px;
-        height: 500px;
-        border: 2px solid lightgray;
+    #direction_1{
         margin-left: 50px;
-        border-radius: 10px;
+    }
+    #direction_2{
+        margin-left: 30px;
     }
 
-    .btnArea{
-        margin-top: 20px;
-        margin-left: 300px;
+    #recommend{width: 60%;}
+    #ranking{width: 40%; border-left: 1px solid lightgray; }
+    .reImg{
+        width: 180px;
+        height: 120px;
+
     }
 
-    #editBtn{
-        background-color: rgb(116, 152, 107);
+
+
+
+    .thumbnail{
+        float: left;
+        width: 180px;
+        height: 100px;
+        padding-left: 5px;
+        margin: 10px;
+       
+    }
+
+    .thumbnail:hover{
+        cursor: pointer;
+        opacity:0.7;
+        transition: .6s;
+        transform: scale( 1.03 )
+    }
+    .projectCtg{
+        color: lightgray;
+    }
+    .percent{
+        color: rgb(116, 152, 107);
+    }
+
+    .raContent>div{
+        float: left;
         
-        width: 95px;
-        height: 45px;
-        border: none;
+
+       
     }
-    #editBtn:hover{
-         background-color: rgb(93, 121, 86);
-    }
-    #cancelBtn{
-        background-color: gray;
-        width: 95px;
-        height: 45px;
-        border: none;
+    .raContent{
+        height: 65px;
+        width: 100%; 
         margin-left: 15px;
-     }
-     #cancelBtn:hover{
-         background-color: rgb(105, 104, 104);
+        
+}
+    .raContent_1{
+         width: 200px;
+         height: 85px;
+         margin-left: 30px;
+    }
+    .raImg{
+        width: 150px;
+        height: 85px;
     }
 
+    .newThumbnail{
+        font-family: 'Noto Sans KR', sans-serif;
+        background-color: white;
+        width:250px;
+        display:inline-block;
+        margin: 40px;
+        text-align: left;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+    }
 
+    .newThumbnail img{
+        width: 100%;
+        height:200px;
+    }
+
+    #background{
+       
+        width: 800px;
+        height: 250px;
+        margin: auto;
+        
+    }
+
+    #baContent{
+        
+        margin-left: 170px;
+    }
+
+    #baTitle{
+        
+        color: white;
+    }
+
+    a{
+        text-decoration: none;
+        color: black;
+    }
+
+    #raTitle{margin-left: 10px;}
+    #reTitle, #raTitle, #newTitle{
+        color:  rgb(116, 152, 107);
+    }
+
+    .newThumbnail p,.progress,small{
+        margin:10px;
+    }
+    .newThumbnail:hover{
+        cursor: pointer;
+        opacity:0.7;
+        transition: .6s;
+        transform: scale( 1.03 )
+    }
+    .progress{height:10px; margin-bottom: 0;}
+    .progress-bar{background-color: rgb(116, 152, 107); }
+    .progress_status{color: rgb(116, 152, 107);}
 
     
+    #btnArea a{
+            border:none;
+            width:150px;
+            height: 35px;
+            margin-top: 15px;
+            margin-left: 850px;
+            background-color: rgb(116, 152, 107);
+        }
+    #btnArea a:hover{
+            background-color: rgb(225, 212, 169);
+        }
+
+    #backBtn a{
+            border:none;
+            width:300px;
+            height: 50px;
+            margin-top: 15px;
+            margin-left: 90px;
+            background-color: rgb(116, 152, 107);
+        }
+    #backBtn a:hover{
+            background-color: rgb(225, 212, 169);
+        }
+
+    #customerBtn a{
+        margin-left: 950px;
+    }
+
+
+
+
+   
+
 </style>
 </head>
 <body>
-	<jsp:include page="common/header.jsp"/>
-	
+    <jsp:include page="common/header.jsp"/>
+
     <div class="wrap">
-        <div id="header">
-            <!-- 나가기 클릭시 메인페이지로 이동 -->
-            <div id="logo"><img src="../resources/images/logo1.png" width="120px" height="45px;"></div>
-            <div id="adminId">admin1</div>
-            <div id="logout" style="cursor:pointer;padding-right:0px;">로그아웃</div>
-            <div id="bar" style="cursor:pointer;padding-right:0px;">|</div>
-            <div id="outPage" style="cursor:pointer;padding-left:0px;">홈페이지</div>
+        <div id="content_1">
+
+            <div id="mainImg">
+                <a class="mainDetailUrl" href="">
+                    <img id="img" src="resources/image/mainImg.png" >
+                </a>
+            </div>
+
+            <div id="imgDetail">
+                <h4 id="textTitle"><b> 햄프코튼 다용도 타월</b></h4>
+                <br>
+                <p id="text">
+                미세플라스틱을 발생시키는 화학섬유
+                에서 벗어나 건강하고 지속 가능한
+                라이프를 시작해 보세요.
+                </p>
+                
+                <div id="sign">
+                    <a id="direction_1" href=""> <h2><</h4></a>
+                    <a id="direction_2" href=""> <h2>></h2></a>
+                </div>
+                
+            </div>
         </div>
-        <div id="menu_content">
-            <div id="menu">
-                <div id="menubar">
-                    <div id="accordian">
-                        <ul>
-                            <li>
-                                <h4 id="user" style="cursor:pointer;">
-                                    <p id="p4" style="display:inline;">회원관리</p>
-                                    <i id="btn1" class="fas fa-angle-down" style="margin-left:93px"></i>
-                                </h4>
-                                <ul id="subMenu">
-                                    <li><a href="">일반회원 관리</a></li>
-                                    <li><a href="">크리에이터 관리</a></li>
-                                    <li><a href="">크리에이터 전환 관리</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <h4>
-                                    <a href="" id="abled">결제관리</a><span style="margin-left:110px"></span></h4>
-                                </h4>
-                            </li>
-                            <li>
-                                <h4>
-                                    <a href="" id="abled">쿠폰관리</a><span style="margin-left:110px"></span></h4>
-                                </h4>
-                            </li>
-                            <li>
-                                <h4>
-                                    <a href="" id="abled">펀딩관리</a><span style="margin-left:110px"></span></h4>
-                                </h4>
-                            </li>
-                            <li>
-                                <h4>
-                                    <a href="" id="abled">&nbsp; 이용가이드 관리</a><span style="margin-left:80px"></span></h4>
-                                </h4>
-                            </li>
-                            <li>
-                                <h4 id="comm" style="cursor:pointer;">
-                                    <p id="abled" style="display:inline;">커뮤니티 관리</p>
-                                    <i id="btn2" class="fas fa-angle-down" style="margin-left:53px"></i>
-                                </h4>
-                                <ul id="subMenu">
-                                    <li><a href="">커뮤니티 공지사항<br>관리</a></li>
-                                    <li><a href="">커뮤니티 글 관리</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <h4 id="support" style="cursor:pointer;">
-                                    <p id="abled" style="display:inline;">고객센터 관리</p>
-                                    <i id="btn3" class="fas fa-angle-down" style="margin-left:53px"></i>
-                                </h4>
-                                <ul id="subMenu">
-                                    <li><a href="">공지사항 관리</a></li>
-                                    <li><a href="">FAQ 관리</a></li>
-                                    <li><a href="">1:1 상담관리</a></li>
-                                    <li><a href="">신고 관리</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>	
-                    <script>            
-                        $(function(){
-                            $("#accordian h4").click(function(){
-                                $("#accordian ul ul").slideUp();
-                                $(this).css("color", "")
-                                $(this).children("i").removeClass("fas fa-angle-up");
-                                $(this).children("i").addClass("fas fa-angle-down");
-                                if(!$(this).next().is(":visible"))
-                                {
-                                    $(this).next().slideDown();
-                                    $(this).css("color", "rgb(116, 152, 107)")
-                                    $(this).children("i").removeClass("fas fa-angle-down");
-                                    $(this).children("i").addClass("fas fa-angle-up");
-                                }
-                            })
-                        })
-                    </script>
+
+        <div id="content_2">
+
+            <div id="recommend">
+                <br>
+                <h3 id="reTitle"><b>추천 프로젝트</b></h3>
+
+                <br>
+                <div class="thumbnail" >
+                    <a class="detailUrl" href="">
+                         <img class="reImg" src="">
+                    </a>
+                
+                    <br>
+                    <br>
+    
+                    <small class="projectCtg">리빙</small>
+    
+                    <p style="margin-top: 0;">
+                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    </p>
+
+                    <p class="percent">
+                        150% 달성
+                    </p>
+                
+                
                 </div>
-            </div>
-            <div id="content">
-                <div class="outer">
-                    <div class="guideTitle">
-                        <span id="title">이용가이드 관리</span>
-                        <span id="title2">프로젝트 심사</span>
-                    </div>
-                    <div class="explainArea" >
-                        <br>
-                        <form action="" id="evaluateContent">  
-                            <div class="explainContent">
-                                <br>
-                                <p>
-                                    1) 프로젝트 심사 내용<br><br>
-                                    크라우드펀딩은 단순 자금 조달을 넘어 대중과 소통하며 대중의 공감을 얻는 과정입니다. 심사 가이드는 개설자님의 펀딩 프로젝트가 더 많은 사람들의 공감과 후원을 받을 수 있도록 도와드리기 위한 것이니 조금 시간이 걸리더라도 심사 가이드를 꼼꼼히 확인해보시고 프로젝트를 준비해주세요.
-                                    <br><br>
-                                    2) 프로젝트 심사 기간
-                                    프로젝트 신청 후 프로젝트 검토는 영업일 기준 3~5일이 소요됩니다. 접수된 프로젝트는 프로젝트 매니저가 검토 후 진행이 가능한지 확인합니다. 피드백은 회원가입 및 프로젝트 신청 시 기입한 이메일로 발송됩니다
-                                    프로젝트 심사와 피드백 반영을 고려한 통상적으로 프로젝트 신청 후 오픈까지는 1~2주가 소요됩니다. 희망하시는 프로젝트 오픈 시점을 고려하여 프로젝트를 미리 준비해주세요.
-                                </p>
-                            </div>
 
-                            <div class="btnArea">
-                                <button type="submit" class="btn btn-success" id="editBtn">수정</button>
-                                <button type="button" class="btn btn-success" id="cancelBtn">취소</button>
-                            </div>
+                <div class="thumbnail" >
+                    <a class="detailUrl" href="">
+                         <img class="reImg" src="">
+                    </a>
+                
+                    <br>
+                    <br>
+    
+                    <small class="projectCtg">리빙</small>
+    
+                    <p style="margin-top: 0;">
+                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    </p>
 
-                        </form>
-                    </div>
-
-
+                    <p class="percent">
+                        150% 달성
+                    </p>
+                
+                
                 </div>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            </div>
 
                 
+                    <div class="thumbnail" >
+                        <a class="detailUrl" href="">
+                            <img class="reImg" src="">
+                        </a>
+                    
+                        <br>
+                        <br>
+        
+                        <small class="projectCtg">리빙</small>
+        
+                        <p style="margin-top: 0;">
+                            유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                        </p>
+
+                        <p class="percent">
+                            150% 달성
+                        </p>
+                    
+                    
+                    </div>
+                
+                
+            </div>
+
+            <div id="ranking">
+
+                <br>
+                <h3 id="raTitle"><b>실시간 랭킹</b></h3>
+                
+                <br>
+                <a class="raUrl" href="">
+                    <div class="raContent">
+                        <div class="raNo">
+                            <h3><b>1</b></h3>
+                        </div>
+
+                        <div class="raContent_1">
+                            <p>
+                                자연 친화적인 대나무 면봉
+                                (200pcs)
+                            </p>
+                            <p class="percent">
+                                <small>150% 달성</small>
+                            </p>
+
+                        </div>
+
+                        <div class="raContent_2">
+                            <img class="raImg" src="">
+                        </div>
+                    </div>
+                </a>
+                <br><br>
+                <a class="raUrl" href="">
+                    <div class="raContent">
+                        <div class="raNo">
+                            <h3><b>2</b></h3>
+                        </div>
+
+                        <div class="raContent_1">
+                            <p>
+                                자연 친화적인 대나무 면봉
+                                (200pcs)
+                            </p>
+                            <p class="percent">
+                                <small>150% 달성</small>
+                            </p>
+
+                        </div>
+
+                        <div class="raContent_2">
+                            <img class="raImg" src="">
+                            
+                        </div>
+                    </div>
+                </a>
+                <br><br>
+                <a class="raUrl" href="">
+                    <div class="raContent">
+                        <div class="raNo">
+                            <h3><b>3</b></h3>
+                        </div>
+
+                        <div class="raContent_1">
+                            <p>
+                                자연 친화적인 대나무 면봉
+                                (200pcs)
+                            </p>
+                            <p class="percent">
+                                <small>150% 달성</small>
+                            </p>
+
+                        </div>
+
+                        <div class="raContent_2">
+                            <img class="raImg" src="">
+                        </div>
+                    </div>
+                </a>
+
+
+
+            </div>
+            
+
+        </div>
+
+        <div id="content_3">
+
+            <br><br>
+            <h2 id="newTitle"><b>신규 펀딩</b></h2>
+
+            <a id="newUrl" href="">
+                <div class="newThumbnail" >
+                    
+                    <img src="">
+
+
+                    <br><br>
+                    <small class="projectCtg">리빙</small>
+
+                    <p style="margin-top: 0;">
+                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    </p>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:80%;"></div>
+                    </div>
+
+                    <div class="progress_status" style="margin-bottom: 5px;">
+                        <small style="margin-right: 105px;">80% 달성</small>
+                        <small >23일 남음</small>
+                    </div>
+                
+                </div>
+             </a>
+             <a id="newUrl" href="">
+                <div class="newThumbnail" >
+                    
+                    <img src="">
+
+
+                    <br><br>
+                    <small class="projectCtg">리빙</small>
+
+                    <p style="margin-top: 0;">
+                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    </p>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:80%;"></div>
+                    </div>
+
+                    <div class="progress_status" style="margin-bottom: 5px;">
+                        <small style="margin-right: 105px;">80% 달성</small>
+                        <small >23일 남음</small>
+                    </div>
+                
+                </div>
+             </a>
+
+             <a id="newUrl" href="">
+                <div class="newThumbnail" >
+                    
+                    <img src="">
+
+
+                    <br><br>
+                    <small class="projectCtg">리빙</small>
+
+                    <p style="margin-top: 0;">
+                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    </p>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:80%;"></div>
+                    </div>
+
+                    <div class="progress_status" style="margin-bottom: 5px;">
+                        <small style="margin-right: 105px;">80% 달성</small>
+                        <small >23일 남음</small>
+                    </div>
+                
+                </div>
+             </a>
+
+             <a id="newUrl" href="">
+                <div class="newThumbnail" >
+                    
+                    <img src="">
+
+
+                    <br><br>
+                    <small class="projectCtg">리빙</small>
+
+                    <p style="margin-top: 0;">
+                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    </p>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:80%;"></div>
+                    </div>
+
+                    <div class="progress_status" style="margin-bottom: 5px;">
+                        <small style="margin-right: 105px;">80% 달성</small>
+                        <small >23일 남음</small>
+                    </div>
+                
+                </div>
+             </a>
+
+             <a id="newUrl" href="">
+                <div class="newThumbnail" >
+                    
+                    <img src="">
+
+
+                    <br><br>
+                    <small class="projectCtg">리빙</small>
+
+                    <p style="margin-top: 0;">
+                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    </p>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:80%;"></div>
+                    </div>
+
+                    <div class="progress_status" style="margin-bottom: 5px;">
+                        <small style="margin-right: 105px;">80% 달성</small>
+                        <small >23일 남음</small>
+                    </div>
+                
+                </div>
+             </a>
+
+             <a id="newUrl" href="">
+                <div class="newThumbnail" >
+                    
+                    <img src="">
+
+
+                    <br><br>
+                    <small class="projectCtg">리빙</small>
+
+                    <p style="margin-top: 0;">
+                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    </p>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:80%;"></div>
+                    </div>
+
+                    <div class="progress_status" style="margin-bottom: 5px;">
+                        <small style="margin-right: 105px;">80% 달성</small>
+                        <small >23일 남음</small>
+                    </div>
+                
+                </div>
+             </a>
+
+            <div id="btnArea"> 
+                <a href="" class="btn btn-success">신규 펀딩 더보기</a>
+            </div>
+        </div>
+        <br><br>
+        
+
+        
+
+        <div id="content_4">
+            <br>
+            <div id="background">
+                <div id="baContent">
+                    <p>
+                        <br>
+                        <h1 id="baTitle"><b>매직팟에서 펀딩을 오픈하세요</b></h1>
+                        
+                    </p>
+                    <div id="backBtn"> 
+                        <a href="" class="btn btn-success"><h3>펀딩 올리기</h3></a>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div id="customerBtn">
+                
+                
+                <a id="upBtn" href="">
+                    <img src="resources/image/upBtn.png" >
+                </a>
+                <br>
+                <a id="requestBtn" href="">
+                    <img src="resources/image/requestBtn.png" >
+                </a>
+            </div>
             
         </div>
+
+        <jsp:include page=""/>
+
+
+
+        <script>
+            window.onload = function(){
+            //반복제거
+            document.getElementById("background").style.backgroundRepeat = "no-repeat";
+            //이미지 등록
+            document.getElementById("background").style.backgroundImage = "url('resources/image/baImg.png')";
+            //이미지 사이즈
+            document.getElementById("background").style.backgroundSize = "100%";
+            }
+        </script>
+
+        
+        
+        
+        
+        
+      
+
     </div>
+	<jsp:include page="common/footer.jsp"/>
+
     
-    <jsp:include page="common/footer.jsp"/>
 </body>
 </html>
