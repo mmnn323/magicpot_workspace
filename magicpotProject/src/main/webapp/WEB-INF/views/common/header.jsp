@@ -99,12 +99,13 @@
 		            <b>${ loginUser.memName }</b> <h style="color:rgb(116, 152, 107)">님</h>
 		            <abbr title="마이페이지"><a href="" class="afterLogin"><i class="fas fa-user fa-2x " style="margin-top: 20px;"></i></a></abbr>
 		            <abbr title="좋아하는 프로젝트"><a href="" class="afterLogin"><i class="fas fa-heart fa-2x"></i></a></abbr>
+		         </c:when> 
 		          <c:otherwise>
 		            <!-- 로그인한 사용자가 관리자일 경우 관리자 페이지로 이동하는 버튼 노출-->
 		             <abbr title="관리자페이지"><a href="" class="afterLogin"><i class="fas fa-cog fa-2x"></i></i></a></abbr>
 		            <abbr title="로그아웃"><a href="logout.me" class="afterLogin"><i class="fas fa-sign-out-alt fa-2x"></i></a></abbr>
 		   	   	  </c:otherwise>
-		   	   </c:when>
+		   	   
 		   </c:choose>
         </div>
     </div>
