@@ -20,7 +20,7 @@
 
   .wrap {
             border: px solid lightgray;
-            width: 300px;
+            width: 1000px;
               
               }
 

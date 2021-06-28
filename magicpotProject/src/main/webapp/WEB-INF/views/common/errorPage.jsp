@@ -72,14 +72,12 @@
                     <!-- /.container-fluid -->
                 </div>
                 <!-- End of Main Content -->
-                
-         	<fmt:formatDate value="${ year }" pattern="yyyy" var="year"/>
 
                 <!-- 푸터 시작 -->
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; MagicPot <c:out value="${ year }"/></span>
+                            <span>Copyright &copy; MagicPot <fmt:formatDate value="${ year }" pattern="yyyy"/></span>
                         </div>
                     </div>
                 </footer>
