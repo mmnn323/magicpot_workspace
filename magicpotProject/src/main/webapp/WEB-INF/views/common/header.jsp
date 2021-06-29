@@ -114,6 +114,7 @@
 		          <c:when test="${loginUser.memId eq 'admin'}">
 		            <!-- 로그인한 사용자가 관리자일 경우 관리자 페이지로 이동하는 버튼 노출-->
 		             <abbr title="관리자페이지"><a href="" class="afterLogin"><i class="fas fa-cog fa-2x"></i></i></a></abbr>
+		   	   	  	 <abbr title="로그아웃"><a href="logout.me" class="afterLogin"><i class="fas fa-sign-out-alt fa-2x"></i></a></abbr>
 		   	   	  </c:when>
 		   	   
 		   </c:choose>
