@@ -39,6 +39,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- 다인 -->
 		<typeAlias type="com.kh.magicpot.guide.model.vo.Guide" alias="Guide"/>
 		<typeAlias type="com.kh.magicpot.report.model.vo.Report" alias="Report"/>
+		<typeAlias type="com.kh.magicpot.message.model.vo.Message" alias="Message"/>
 		
 	</typeAliases>
 	
@@ -60,6 +61,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- 다인 -->
 		<mapper resource="/mappers/guide-mapper.xml"/>
 		<mapper resource="/mappers/report-mapper.xml"/>
+		<mapper resource="/mappers/message-mapper.xml"/>
 	</mappers>
 	
 </configuration>
