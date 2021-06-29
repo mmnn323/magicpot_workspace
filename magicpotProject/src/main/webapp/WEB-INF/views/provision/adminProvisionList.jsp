@@ -9,12 +9,12 @@
 <style>
 	 /* .outer 스타일 통일 */
     .outer{
-            /* height: 700px; */
-            /* border: 1px solid red; */
-            width: 900px;
-            margin: 30px;
-            float: left;
-        }
+         /* height: 700px; */
+         /* border: 1px solid red; */
+         width: 900px;
+         margin: 30px;
+         float:left;
+     }
 
     /* 카테고리 타이틀 영역 */
     #contentTitleArea{
@@ -110,6 +110,7 @@
 
 	<jsp:include page="../common/adminPageTemplate.jsp"/>
 	
+	<div id="content">
 	    <div class="outer" >
     
            <div id="contentTitleArea">
@@ -120,7 +121,7 @@
            
            <!-- 이용약관 리스트 영역 -->
            <div id="provisionListArea" >
-                   <table class="table" id="provisionList" align="center">
+                <table class="table" id="provisionList" align="center">
                    <thead class="thead-light" >
                        <tr>                       
                        <th width="700">글제목</th>
@@ -143,10 +144,10 @@
                        </tr>
                    
                    </tbody>
-                   </table>
+                </table>
            </div>
 
-       </div>
+
        
          <!-- 이용약관 삭제 모달 -->
          <div class="modal fade" id="proDeleteBtn" align="center">
@@ -168,6 +169,10 @@
                  </div>
              </div>
          </div>
+         
+     </div>
+     
+     </div>
        
 
 </body>
