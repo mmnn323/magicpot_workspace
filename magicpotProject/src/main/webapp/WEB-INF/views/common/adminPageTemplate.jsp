@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +26,7 @@
         height: 800px;
         margin: auto;
         font-family: 'Noto Sans KR', sans-serif;
+        float: left;
     }
     .wrap>div{width: 100%;}
     #header{
@@ -105,8 +109,9 @@
 	#ready:hover, #ready p:hover{color:rgb(116, 152, 107)}
     #abled:hover{color:rgb(116, 152, 107)}
     
-    /* content */
+     /* content */
     #content1{padding-left:50px}
+
 </style>
 </head>
 <body>
@@ -152,7 +157,7 @@
                             </li>
                             <li>
                                 <h4>
-                                    <a href="" id="abled">이용약관 관리</a><span style="margin-left:80px"></span></h4>
+                                    <a href="adminProList.gu" id="abled">이용약관 관리</a><span style="margin-left:80px"></span>
                                 </h4>
                             </li>
                             <li>
@@ -199,12 +204,7 @@
                     </script>
                 </div>
             </div>
-            <div id="content">
-                <div id="content1">
-                    dfsdfsdfsdfsddafadfadf
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                </div>
-            </div>
+         
         </div>
     </div>
 </body>
