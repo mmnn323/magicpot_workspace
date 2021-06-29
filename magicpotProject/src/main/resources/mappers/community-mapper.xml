@@ -60,6 +60,45 @@
 		  )
 	</insert>
 	
+	<!-- 커뮤니티 공지사항 조회수 증가 -->
+	<update id="increaseCmNoticeCount" parameterType="_int">
+		update
+		       cm_notice
+		   set count = count + 1
+		 where cmno_no = #{cmNoticeNo}
+		   and status = 'Y'
+	</update>
+	
+	<!-- 커뮤니티 공지사항 상세조회 -->
+	<select id="selectCmNotice" resultMap="communityNotice" parameterType="_int">
+		select
+		       cmno_no
+		     , cmno_title
+		     , to_char(enroll_date, 'YYYY-MM-DD HH24:MI:SS') enroll_date
+		     , cmno_content
+		  from cm_notice
+		 where cmno_no = #{cmNoticeNo}
+		   and status = 'Y'
+	</select>
+	
+	<!-- 커뮤니티 공지사항 수정 -->
+	<update id="updateCmNotice" parameterType="CommunityNotice">
+		update
+		       cm_notice
+		   set cmno_title = #{cmNoticeTitle}
+		     , cmno_content = #{cmNoticeContent}
+		     , modify_date = sysdate
+		 where cmno_no = #{cmNoticeNo}
+	</update>
+	
+	<!-- 커뮤니티 공지사항 삭제 -->
+	<update id="deleteCmNotice" parameterType="_int">
+		update
+		       cm_notice
+		   set status = 'N'
+		 where cmno_no = #{cmNoticeNo}
+	</update>
+	
 	<!-- 커뮤니티 글 총 갯수 조회 -->
 	<select id="selectCmListCount" resultType="_int">
 		select

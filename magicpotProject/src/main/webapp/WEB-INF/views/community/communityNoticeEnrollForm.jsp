@@ -21,7 +21,7 @@
         <div id="cm_titleArea">
             <div id="cm_titleArea1">
                 <div>
-                    <img src="../../../resources/images/community/growth (1).png" alt="">
+                    <img src="resources/images/community/cmLogo.png" alt="">
                 </div>
                 <div>
                     <b>커뮤니티</b>
@@ -67,7 +67,7 @@
                 <div id="cm_btnArea">
                     <div id="cm_btn">
                         <a href="#" class="btn btn-success" id="cm_enrollBtn" data-toggle="modal" data-target="#cmEnrollBtn">등록</a>
-                        <a href="" class="btn btn-danger" id="cm_backBtn">목록으로</a>
+                        <a href="list.cm" class="btn btn-danger" id="cm_backBtn">목록으로</a>
                     </div>
                 </div>
                 <br><br>

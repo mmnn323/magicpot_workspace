@@ -50,6 +50,7 @@
                     <tbody>
                     	<c:forEach var="cn" items="${ cnList }">
 	                      <tr>
+	                      	<input class="cmNoticeNo" type="hidden" value="${ cn.cmNoticeNo }">
 	                        <td><span class="noticeBtn">공지</span></td>
 	                        <td class="cm_noticeTitle">${ cn.cmNoticeTitle }</td>
 	                        <td>매직팟</td>
@@ -59,6 +60,14 @@
                     </tbody>
                   </table>
             </div>
+            <script>
+            	$(function(){
+            		$(".cm_noticeTitle").click(function(){
+            			//console.log($(this).siblings(".cmNoticeNo").val());
+            			location.href="detail.cn?cnno=" + $(this).siblings(".cmNoticeNo").val();
+            		})
+            	})
+            </script>
             
             <!-- 로그인&&관리자일 경우 노출되는 공지 작성하기 버튼 -->
             <c:if test="${ !empty loginUser and loginUser.status eq 'A' }">
