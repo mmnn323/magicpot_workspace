@@ -3,5 +3,53 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="projectMapper">
+
+	<resultMap id="project" type="Project">
+		<id column="pro_no" property="proNo"/>
+		<result column="cre_no" property="creNo"/>
+		<result column="ca_no" property="caNo"/>
+		<result column="pro_title" property="proTitle"/>
+		<result column="pro_price" property="proPrice"/>
+		<result column="pro_image" property="proImage"/>
+		<result column="pro_summary" property="proSummary"/>
+		<result column="pro_story" property="proStory"/>
+		<result column="pro_fundprice" property="proFundPrice"/>
+		<result column="pro_status" property="proStatus"/>
+		<result column="create_word" property="createWord"/>
+		<result column="pro_shippirce" property="proShipPrice"/>
+		<result column="open_date" property="openDate"/>
+		<result column="close_date" property="closeDate"/>
+		<result column="pro_step" property="proStep"/>
+		<result column="pro_ad" property="proAd"/>
+	</resultMap>
+	
+	<select id="rankList" resultMap="project" >
+		select *
+		  from 
+		       (select
+		              pro_no
+		            , cre_no
+		            , ca_no
+		            , pro_title
+		            , pro_price
+		            , pro_image
+		            , pro_summary
+		            , pro_story
+		            , pro_fundprice
+		            , pro_status
+		            , create_word
+		            , pro_shippirce
+		            , open_date
+		            , close_date
+		            , pro_step
+		            , pro_ad
+		         from project
+		        order
+		           by pro_fundprice desc)
+		       where rownum between 1 and 3
+	
+		
+	
+	</select>
   
 </mapper>

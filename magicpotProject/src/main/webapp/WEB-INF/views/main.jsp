@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <!-- jQuery 라이브러리 -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- 부트스트랩에서 제공하고 있는 스타일 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -32,7 +33,7 @@
 
     .wrap>div{width:100%}
     #content_1{height: 350px;}
-    #content_2{height: 420px;}
+    #content_2{height: 450px;}
     #content_3{height: 960px; margin: auto; border-top: 1px solid lightgray;}
     #content_4{height: 350px; border-top: 1px solid lightgray;}
 
@@ -99,6 +100,7 @@
     }
     .percent{
         color: rgb(116, 152, 107);
+        margin-top: -10px;
     }
 
     .raContent>div{
@@ -116,12 +118,10 @@
     .raContent_1{
          width: 200px;
          height: 85px;
-         margin-left: 30px;
+         margin-left: 10px;
+         margin-right: 10px;
     }
-    .raImg{
-        width: 150px;
-        height: 85px;
-    }
+    
 
     .newThumbnail{
         font-family: 'Noto Sans KR', sans-serif;
@@ -207,6 +207,9 @@
 
     #customerBtn a{
         margin-left: 950px;
+    }
+   .rankTitle{
+    	font-size: x-small;
     }
 
 
@@ -322,32 +325,67 @@
             <div id="ranking">
 
                 <br>
-                <h3 id="raTitle"><b>실시간 랭킹</b></h3>
+                <h3 id="raTitle" ><b>실시간 랭킹</b></h3>
                 
                 <br>
-                <a class="raUrl" href="">
-                    <div class="raContent">
-                        <div class="raNo">
-                            <h3><b>1</b></h3>
-                        </div>
-
-                        <div class="raContent_1">
-                            <p>
-                                자연 친화적인 대나무 면봉
-                                (200pcs)
-                            </p>
-                            <p class="percent">
-                                <small>150% 달성</small>
-                            </p>
-
-                        </div>
-
-                        <div class="raContent_2">
-                            <img class="raImg" src="">
-                        </div>
-                    </div>
-                </a>
+                <c:forEach var="i" begin="1" end="3">
+	                <a class="raUrl" href="" style="text-decoration: none; color: black;">
+	                    <div class="raContent">
+	                        <div class="raNo">
+	                            <h3 ><b>${i }</b></h3>
+	                        </div>
+	
+	                        <div class="raContent_1">
+	                            <p class="rankTitle${i }">
+	                                
+	                            </p>
+	                            <p class="percent">
+	                                <small >150% 달성</small>
+	                            </p>
+	
+	                        </div>
+	
+	                        <div class="raContent_2">
+	                            <img class="raImg${i }" src="" width="150" height="85">
+	                        </div>
+	                    </div>
+	                </a>
                 <br><br>
+                </c:forEach>
+                
+                <script>
+	                $(function(){
+	            		rankList();
+	            	})
+	            	
+	            	function rankList(){
+						$.ajax({
+							url:"rankAjax.pj",
+							success:function(list){
+								var i="i";
+								for(var i=1; i<=5; i++){
+									$(".rankTitle" + i).text(list[i-1].proTitle);
+									$(".raImg" + i).attr("src",list[i-1].proImage);
+								}
+								
+								
+								
+								
+								
+								
+							},error:function(){
+								console.log("ajax통신 실패")
+							}
+						})
+					}
+	            	
+	            	
+                </script>
+                
+                
+                
+                
+                <!--  
                 <a class="raUrl" href="">
                     <div class="raContent">
                         <div class="raNo">
@@ -394,7 +432,7 @@
                         </div>
                     </div>
                 </a>
-
+				-->
 
 
             </div>
@@ -585,17 +623,17 @@
                 
                 
                 <a id="upBtn" href="">
-                    <img src="resources/image/upBtn.png" >
+                    <img src="resources/images/common/upBtn.png" >
                 </a>
                 <br>
                 <a id="requestBtn" href="">
-                    <img src="resources/image/requestBtn.png" >
+                    <img src="resources/images/common/requestBtn.png" >
                 </a>
             </div>
             
         </div>
 
-        <jsp:include page=""/>
+        
 
 
 
@@ -604,7 +642,7 @@
             //반복제거
             document.getElementById("background").style.backgroundRepeat = "no-repeat";
             //이미지 등록
-            document.getElementById("background").style.backgroundImage = "url('resources/image/baImg.png')";
+            document.getElementById("background").style.backgroundImage = "url('resources/images/common/baImg.png')";
             //이미지 사이즈
             document.getElementById("background").style.backgroundSize = "100%";
             }

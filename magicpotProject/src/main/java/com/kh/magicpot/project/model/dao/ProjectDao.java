@@ -1,5 +1,17 @@
 package com.kh.magicpot.project.model.dao;
 
+import java.util.ArrayList;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.kh.magicpot.project.model.vo.Project;
+
+@Repository
 public class ProjectDao {
+	
+	public ArrayList<Project> rankList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("projectMapper.rankList");
+	}
 
 }
