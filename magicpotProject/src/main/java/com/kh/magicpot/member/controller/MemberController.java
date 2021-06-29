@@ -41,5 +41,11 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	/*관리자메인(일반회원관리)*/
+	@RequestMapping("admin.me")
+	public String adminMember() {
+
+		return "member/adminMember";
+	}
 	
 }
