@@ -38,28 +38,36 @@ public class CommunityServiceImpl implements CommunityService {
 		return cDao.insertCmNotice(sqlSession, cn);
 	}
 
+	/**
+	 * 커뮤니티 공지사항 조회수 증가
+	 */
 	@Override
 	public int increaseCmNoticeCount(int cmNoticeNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cDao.increaseCmNoticeCount(sqlSession, cmNoticeNo);
 	}
 
+	/**
+	 * 커뮤니티 공지사항 상세조회
+	 */
 	@Override
 	public CommunityNotice selectCmNotice(int cmNoticeNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return cDao.selectCmNotice(sqlSession, cmNoticeNo);
 	}
 
+	/**
+	 * 커뮤니티 공지사항 수정
+	 */
 	@Override
 	public int updateCmNotice(CommunityNotice cn) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cDao.updateCmNotice(sqlSession, cn);
 	}
 
+	/**
+	 * 커뮤니티 공지사항 삭제
+	 */
 	@Override
 	public int deleteCmNotice(int cmNoticeNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cDao.deleteCmNotice(sqlSession, cmNoticeNo);
 	}
 
 	@Override

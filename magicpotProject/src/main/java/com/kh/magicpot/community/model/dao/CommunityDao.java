@@ -33,6 +33,46 @@ public class CommunityDao {
 	}
 	
 	/**
+	 * 커뮤니티 공지사항 조회수 증가
+	 * @param sqlSession
+	 * @param cmNoticeNo
+	 * @return
+	 */
+	public int increaseCmNoticeCount(SqlSessionTemplate sqlSession, int cmNoticeNo) {
+		return sqlSession.update("communityMapper.increaseCmNoticeCount", cmNoticeNo);
+	}
+	
+	/**
+	 * 커뮤니티 공지사항 상세조회
+	 * @param sqlSession
+	 * @param cmNoticeNo
+	 * @return
+	 */
+	public CommunityNotice selectCmNotice(SqlSessionTemplate sqlSession, int cmNoticeNo) {
+		return sqlSession.selectOne("communityMapper.selectCmNotice", cmNoticeNo);
+	}
+	
+	/**
+	 * 커뮤니티 공지사항 수정
+	 * @param sqlSession
+	 * @param cn
+	 * @return
+	 */
+	public int updateCmNotice(SqlSessionTemplate sqlSession, CommunityNotice cn) {
+		return sqlSession.update("communityMapper.updateCmNotice", cn);
+	}
+	
+	/**
+	 * 커뮤니티 공지사항 삭제
+	 * @param sqlSession
+	 * @param cmNoticeNo
+	 * @return
+	 */
+	public int deleteCmNotice(SqlSessionTemplate sqlSession, int cmNoticeNo) {
+		return sqlSession.update("communityMapper.deleteCmNotice", cmNoticeNo);
+	}
+	
+	/**
 	 * 커뮤니티 글 총 갯수 조회
 	 * @param sqlSession
 	 * @return
@@ -55,5 +95,5 @@ public class CommunityDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("communityMapper.selectCmList", null, rowBounds);
 	}
-	
+
 }
