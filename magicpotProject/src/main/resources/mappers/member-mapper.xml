@@ -40,6 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		  from member
   		 where status not in ('B','N')
   		   and mem_id = #{memId}
+  		   and mem_pwd = #{memPwd}
   	</select>
   	
   
