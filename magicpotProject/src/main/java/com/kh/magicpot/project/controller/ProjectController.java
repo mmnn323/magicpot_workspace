@@ -20,6 +20,12 @@ public class ProjectController {
 	@Autowired
 	private ProjectService pService;
 	
+	@RequestMapping("detail.fd")
+	public String fundingDetail() {
+		
+		return "project/fundingDetail";
+	}
+	
 	@RequestMapping("story.fd")
 	public String fundingDetailStory() {
 		
