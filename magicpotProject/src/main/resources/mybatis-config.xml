@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<!-- 다인 -->
 		<mapper resource="/mappers/guide-mapper.xml"/>
-		<mapper resource="/mapper/reportMapper.xml"/>
+		<mapper resource="/mappers/report-mapper.xml"/>
 	</mappers>
 	
 </configuration>
