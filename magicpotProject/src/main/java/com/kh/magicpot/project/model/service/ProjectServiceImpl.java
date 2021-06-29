@@ -24,4 +24,12 @@ public class ProjectServiceImpl implements ProjectService{
 		return pDao.rankList(sqlSession);
 	}
 
+	@Override
+	public ArrayList<Project> reList() {
+		
+		return pDao.reList(sqlSession);
+	}
+
+	
+
 }

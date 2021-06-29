@@ -51,6 +51,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	
 	</select>
+
+	<select id="reList" resultMap="project" >
+
+		select
+		      pro_no
+		    , cre_no
+		    , ca_no
+		    , pro_title
+		    , pro_price
+		    , pro_image
+		    , pro_summary
+		    , pro_story
+		    , pro_fundprice
+		    , pro_status
+		    , create_word
+		    , pro_shippirce
+		    , open_date
+		    , close_date
+		    , pro_step
+		    , pro_ad
+		 from project
+		
+	
+		
+	
+	</select>
+	
+	
+	
+	
   
 </mapper>
 

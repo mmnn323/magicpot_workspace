@@ -11,6 +11,10 @@ public interface ProjectService {
 	// 랭킹 ajax
 	ArrayList<Project> rankList();
 	
+	// 추천 프로젝트 ajax
+	
+	ArrayList<Project> reList();
+	
 	
 
 }

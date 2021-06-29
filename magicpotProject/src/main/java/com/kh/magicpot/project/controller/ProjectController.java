@@ -1,6 +1,7 @@
 package com.kh.magicpot.project.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ public class ProjectController {
 		return "project/fundingDetail";
 	}
 	
+	
+	// 실시간 랭킹
 	@ResponseBody
 	@RequestMapping(value="rankAjax.pj", produces="application/json; charset=utf-8")
 	public String AjaxMethod1() {
@@ -35,6 +38,25 @@ public class ProjectController {
 		
 		return new Gson().toJson(list);
 	}
+	
+	// 추천 프로젝트
+	
+	@ResponseBody
+	@RequestMapping(value="reAjax.pj", produces="application/json; charset=utf-8")
+	public String AjaxMethod2() {
+		
+		
+			
+		
+	
+		
+		ArrayList<Project> list2 = pService.reList();
+		
+		Collections.shuffle(list2);
+		
+		return new Gson().toJson(list2);
+	}
+	
 	
 	
 }

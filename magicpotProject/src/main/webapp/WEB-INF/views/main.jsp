@@ -71,7 +71,7 @@
 
     #recommend{width: 60%;}
     #ranking{width: 40%; border-left: 1px solid lightgray; }
-    .reImg{
+    .reImg1, .reImg2, .reImg3{
         width: 180px;
         height: 120px;
 
@@ -80,7 +80,7 @@
 
 
 
-    .thumbnail{
+    .thumbnail1, .thumbnail2, .thumbnail3{
         float: left;
         width: 180px;
         height: 100px;
@@ -89,16 +89,20 @@
        
     }
 
-    .thumbnail:hover{
+    .thumbnail1:hover, .thumbnail2:hover, .thumbnail3:hover{
         cursor: pointer;
         opacity:0.7;
         transition: .6s;
         transform: scale( 1.03 )
     }
-    .projectCtg{
+    .projectCtg1, .projectCtg2, .projectCtg3{
         color: lightgray;
     }
-    .percent{
+    
+    .reTitle1, .reTitle2, .reTitle3{
+    	height:70px
+    }
+    .percent1, .percent2, .percent3{
         color: rgb(116, 152, 107);
         margin-top: -10px;
     }
@@ -133,6 +137,7 @@
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         
     }
+    
 
     .newThumbnail img{
         width: 100%;
@@ -255,72 +260,108 @@
                 <h3 id="reTitle"><b>추천 프로젝트</b></h3>
 
                 <br>
-                <div class="thumbnail" >
-                    <a class="detailUrl" href="">
-                         <img class="reImg" src="">
+                
+                
+	                <div class="thumbnail1" >
+	                    <a class="detailUrl1" href="">
+	                         <img class="reImg1" src="">
+	                    </a>
+	                
+	                    <br>
+	                    <br>
+	    
+	                    <small class="projectCtg1">리빙</small>
+	    
+	                    <p class="reTitle1"  style="margin-top: 0;">
+	                        
+	                    </p>
+	
+	                    <p class="percent1">
+	                        150% 달성
+	                    </p>
+	                
+	                
+	                </div>
+                
+
+				  
+                <div class="thumbnail2" >
+                    <a class="detailUrl2" href="">
+                         <img class="reImg2" src="">
                     </a>
                 
                     <br>
                     <br>
     
-                    <small class="projectCtg">리빙</small>
+                    <small class="projectCtg2">리빙</small>
     
-                    <p style="margin-top: 0;">
-                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    <p class="reTitle2" style="margin-top: 0;">
+                       
                     </p>
 
-                    <p class="percent">
+                    <p class="percent2">
                         150% 달성
                     </p>
                 
                 
                 </div>
 
-                <div class="thumbnail" >
-                    <a class="detailUrl" href="">
-                         <img class="reImg" src="">
-                    </a>
                 
-                    <br>
-                    <br>
-    
-                    <small class="projectCtg">리빙</small>
-    
-                    <p style="margin-top: 0;">
-                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
-                    </p>
-
-                    <p class="percent">
-                        150% 달성
-                    </p>
-                
-                
-                </div>
-
-                
-                    <div class="thumbnail" >
-                        <a class="detailUrl" href="">
-                            <img class="reImg" src="">
+                    <div class="thumbnail3" >
+                        <a class="detailUrl3" href="">
+                            <img class="reImg3" src="">
                         </a>
                     
                         <br>
                         <br>
         
-                        <small class="projectCtg">리빙</small>
+                        <small class="projectCtg3">리빙</small>
         
-                        <p style="margin-top: 0;">
-                            유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                        <p class="reTitle3" style="margin-top: 0;">
+                            
                         </p>
 
-                        <p class="percent">
+                        <p class="percent3">
                             150% 달성
                         </p>
                     
                     
                     </div>
-                
+                	
                 
             </div>
+            
+            <script>
+	            $(function(){
+	        		reList();
+	        	})
+	        	
+	        	function reList(){
+					$.ajax({
+						url:"reAjax.pj",
+						success:function(list){
+							console.log(list);
+							var i="i";
+							for(var i=1; i<=3; i++){
+								$(".reTitle" + i).text(list[i-1].proTitle);
+								$(".reImg" + i).attr("src",list[i-1].proImage);
+							}
+							
+							
+							
+							
+							
+							
+						},error:function(){
+							console.log("ajax통신 실패")
+						}
+					})
+				}
+	            	
+	            	
+            </script>
+                
+                
 
             <div id="ranking">
 
@@ -339,8 +380,8 @@
 	                            <p class="rankTitle${i }">
 	                                
 	                            </p>
-	                            <p class="percent">
-	                                <small >150% 달성</small>
+	                            <p class="percent${i }">
+	                                <small >누적 후원 : <span class="rankPrice${i }"></span>원</small>
 	                            </p>
 	
 	                        </div>
@@ -362,9 +403,11 @@
 						$.ajax({
 							url:"rankAjax.pj",
 							success:function(list){
+								
 								var i="i";
-								for(var i=1; i<=5; i++){
+								for(var i=1; i<=3; i++){
 									$(".rankTitle" + i).text(list[i-1].proTitle);
+									$(".rankPrice" + i).text(list[i-1].proFundPrice);
 									$(".raImg" + i).attr("src",list[i-1].proImage);
 								}
 								
@@ -384,56 +427,7 @@
                 
                 
                 
-                
-                <!--  
-                <a class="raUrl" href="">
-                    <div class="raContent">
-                        <div class="raNo">
-                            <h3><b>2</b></h3>
-                        </div>
-
-                        <div class="raContent_1">
-                            <p>
-                                자연 친화적인 대나무 면봉
-                                (200pcs)
-                            </p>
-                            <p class="percent">
-                                <small>150% 달성</small>
-                            </p>
-
-                        </div>
-
-                        <div class="raContent_2">
-                            <img class="raImg" src="">
-                            
-                        </div>
-                    </div>
-                </a>
-                <br><br>
-                <a class="raUrl" href="">
-                    <div class="raContent">
-                        <div class="raNo">
-                            <h3><b>3</b></h3>
-                        </div>
-
-                        <div class="raContent_1">
-                            <p>
-                                자연 친화적인 대나무 면봉
-                                (200pcs)
-                            </p>
-                            <p class="percent">
-                                <small>150% 달성</small>
-                            </p>
-
-                        </div>
-
-                        <div class="raContent_2">
-                            <img class="raImg" src="">
-                        </div>
-                    </div>
-                </a>
-				-->
-
+               
 
             </div>
             

@@ -12,7 +12,17 @@ public class ProjectDao {
 	
 	public ArrayList<Project> rankList(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("projectMapper.rankList");
+		
 	}
+	
+	
+	public ArrayList<Project> reList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("projectMapper.reList");
+		
+	}
+	
+	
+	
 
 }
 
