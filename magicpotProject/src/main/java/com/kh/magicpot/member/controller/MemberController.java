@@ -31,7 +31,6 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 	
-
 	@Autowired
 	private JavaMailSender mailSender;
 	
@@ -41,18 +40,22 @@ public class MemberController {
 	
 	@RequestMapping("login.me")
 	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
-		
+
+		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
 		
 		Member loginUser = mService.loginMember(m);
-		if(loginUser == null) { // 로그인 실패
-			mv.addObject("errorMsg", "로그인실패");
-			mv.setViewName("common/errorPage");
-		}else { // 로그인 성공
+		
+		
+		if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginUser.getMemPwd())) {
 			session.setAttribute("loginUser", loginUser);
 			mv.setViewName("redirect:/");
+		}else {
+			mv.addObject("errorMsg", "로그인실패");
+			mv.setViewName("common/errorPage");
 		}
 		
 		return mv;
+		
 	
 }
 	
