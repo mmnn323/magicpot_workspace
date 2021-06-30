@@ -19,6 +19,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- summernote -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 <style>
     div{box-sizing: border-box;}
     .wrap{
@@ -36,9 +43,14 @@
         top: 0px;
         left: 0;
         right: 0;  
-        z-index: 1;
+        z-index: 2;
     }
-    #menu{position:fixed;left:0;background-color:#d3d3d3;}
+    #menu{
+    	position: fixed;
+    	left: 0;
+    	z-index: 1;
+    	background-color: #d3d3d3;
+    }
     #content{position:absolute;left:200px;right:0;}
     body{padding-top:45px}
     #menu_content{height:100%;}
@@ -115,7 +127,7 @@
 </style>
 </head>
 <body>
-    <div class="wrap">
+	<div class="wrap">
         <div id="header">
             <!-- 나가기 클릭시 메인페이지로 이동 -->
             <div id="logo"><img src="resources/images/common/mainLogo.png" width="120px" height="45px;"></div>
@@ -209,7 +221,6 @@
                     </script>
                 </div>
             </div>
-         
         </div>
     </div>
 </body>

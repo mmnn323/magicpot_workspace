@@ -55,7 +55,9 @@
     }
     #menu{
         width: 200px;
-        border:1px solid #f0f0f0}
+        height: 100%;
+        border-right:1px solid #f0f0f0;
+    }
     #content{width: 100%;}
     #content1{
         width: 70%;
@@ -128,7 +130,6 @@
         text-align: center;
     }
     #subMenu a:hover{
-        border-bottom: 1px solid #bdbdbd;
         color: #222;
         background: #ebeaea;
         transition: all .8s;
@@ -146,10 +147,9 @@
 </style>
 </head>
 <body>
-    <div class="wrap">
         <div id="header">
             <!-- 나가기 클릭시 메인페이지로 이동 -->
-            <div id="logo"><img src="resources/images/logo1.png" width="120px" height="45px;"></div>
+            <div id="logo"><img src="resources/images/common/mainLogo.png" width="120px" height="45px;"></div>
             <div id="creatorName">돈조 매직팟 님</div>
             <div id="outPage" style="cursor:pointer;">나가기</div>
         </div>
@@ -214,13 +214,6 @@
                     </script>
                 </div>
             </div>
-            <div id="content">
-                <div id="content1">
-                    dfsdfsdfsdfsd
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                </div>
-            </div>
         </div>
-    </div>
 </body>
 </html>
