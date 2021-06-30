@@ -21,5 +21,20 @@ public class MemberServiceImpl implements MemberService {
 	public Member loginMember(Member m) {
 		return mDao.loginMember(sqlSession, m);
 	}
+
+	
+	// 아이디 중복체크
+	@Override
+	public int idCheck(String userId) {
+		return mDao.idCheck(sqlSession, userId);
+	}
+
+
+	@Override
+	public int insertMember(Member m) {
+		return mDao.insertMember(sqlSession, m);
+	}
+	
+	
 	
 }

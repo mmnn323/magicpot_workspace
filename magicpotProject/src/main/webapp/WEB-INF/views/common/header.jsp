@@ -121,7 +121,7 @@
 					<!-- 로그인 전 -->
 					<a href="" data-toggle="modal" data-target="#loginModal">로그인</a>
 					<h style="color:rgb(116, 152, 107)"> &nbsp |</h>
-					<a href="">회원가입</a>
+					<a href="enrollForm.me">회원가입</a>
 				</c:when>
 				<c:when test="${ !empty loginUser and loginUser.memId ne 'admin'}">
 					<!-- 로그인 후 -->

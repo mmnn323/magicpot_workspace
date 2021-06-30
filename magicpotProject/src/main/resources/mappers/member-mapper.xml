@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<resultMap id="memberResultSet" type="Member">
 	
-		<result column="mem_no" property="memNo"/>
+		<id column="mem_no" property="memNo"/>
 		<result column="mem_id" property="memId"/>
 		<result column="mem_pwd" property="memPwd"/>
 		<result column="mem_name" property="memName"/>
@@ -42,6 +42,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		   and mem_id = #{memId}
   		   and mem_pwd = #{memPwd}
   	</select>
+  	
+  	<select id="idCheck" resultType="_int" parameterType="string">
+	  	select
+	  		   count(*)
+	  	  from member
+	  	 where mem_id = #{userId}
+	  	 
+  </select>
+  
+   <insert id="insertMember" parameterType="Member">
+  	insert
+  	  into member
+  	  (
+  	  	mem_no
+  	  , mem_id
+  	  , mem_pwd
+  	  , mem_name
+  	  , phone
+  	  , email
+  	  
+  	  )
+  	  values
+  	  (
+  	    seq_mno.nextval
+  	  , #{memId}
+  	  , #{memPwd}
+  	  , #{memName}
+  	  , #{phone}
+  	  , #{email}
+
+  	  )
+  </insert>
   	
   
   </mapper>
