@@ -15,6 +15,10 @@ public interface ProjectService {
 	
 	ArrayList<Project> reList();
 	
+	// 메인 슬라이드 ajax
+	
+	ArrayList<Project> slide();
+	
 	
 
 }

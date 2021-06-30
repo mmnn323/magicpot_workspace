@@ -38,22 +38,48 @@
     #content_4{height: 350px; border-top: 1px solid lightgray;}
 
     #content_1>div,  #content_2>div{height: 100%; float: left; font-family: 'Noto Sans KR', sans-serif;}
-    #mainImg{width: 65%;}
-    #imgDetail{
-        width: 35%;
+     #mainImg1, #mainImg2, #mainImg3{width: 650px; height: 350px;}
+    .textArea1 {
+        width: 350px;
+        height: 350px;
         background-color: rgb(225, 212, 169);
         color: white;
         text-align: center;
      }
+     
+     .textArea2{
+        width: 350px;
+        height: 350px;
+        background-color: rgb(175, 159, 146);
+        color: white;
+        text-align: center;
+     }
+     
+     .textArea3{
+        width: 350px;
+        height: 350px;
+        background-color: rgb(170, 175, 146);
+        color: white;
+        text-align: center;
+     }
+     
+     .carousel-item>div {
+        float: left;
+    }
    
     #content_1{position: relative;}
     #img{width: 100%;
         height: 100%;
     }
-    #textTitle{
+    #textTitle1,  #textTitle3{
         margin-top: 80px;
     }
-    #text{
+    
+    #textTitle2{
+    	margin-top: 80px;
+	    
+	}
+    #text1, #text2, #text3{
         width: 250px;
         margin-left: 50px;
         text-align: center;
@@ -230,28 +256,100 @@
     <div class="wrap">
         <div id="content_1">
 
-            <div id="mainImg">
-                <a class="mainDetailUrl" href="">
-                    <img id="img" src="resources/image/mainImg.png" >
-                </a>
-            </div>
+            <div id="demo" class="carousel slide" data-ride="carousel" >
+                <ul class="carousel-indicators">
+                  <li data-target="#demo" data-slide-to="0" class="active"></li>
+                  <li data-target="#demo" data-slide-to="1"></li>
+                  <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+                <div class="carousel-inner" >
+                 
+                  <div class="carousel-item active">
+                     <div class="imgArea">
+                         <a href="" id="imgUrl1">
+                            <img src=""  id="mainImg1">
+                        </a>
+                     </div> 
+                    
+                    <div class="textArea1" >
+                       <h4 id="textTitle1"><b> </b></h4>
+                        <br>
+                        <p id="text1">
+                       
+                        </p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="imgArea">
 
-            <div id="imgDetail">
-                <h4 id="textTitle"><b> 햄프코튼 다용도 타월</b></h4>
-                <br>
-                <p id="text">
-                미세플라스틱을 발생시키는 화학섬유
-                에서 벗어나 건강하고 지속 가능한
-                라이프를 시작해 보세요.
-                </p>
-                
-                <div id="sign">
-                    <a id="direction_1" href=""> <h2><</h4></a>
-                    <a id="direction_2" href=""> <h2>></h2></a>
+                        <a href="" id="imgUrl2">
+                            <img src=""  id="mainImg2">
+                        </a>
+                    </div> 
+                   
+                   <div class="textArea2" >
+                      <h4 id="textTitle2"><b> </b></h4>
+                       <br>
+                       <p id="text2">
+                       
+                       </p>
+                   </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="imgArea">
+
+                        <a href="" id="imgUrl3">
+                            <img src=""  id="mainImg3">
+                        </a>
+                    </div> 
+                   
+                   <div class="textArea3" >
+                      <h4 id="textTitle3"><b> </b></h4>
+                       <br>
+                       <p id="text3">
+                       
+                       </p>
+                   </div>
+                    
+                  </div>
                 </div>
                 
             </div>
         </div>
+        
+        <script>
+	            $(function(){
+	        		slide();
+	        	})
+	        	
+	        	function slide(){
+					$.ajax({
+						url:"slideAjax.pj",
+						success:function(list){
+							console.log(list);
+							var i="i";
+							for(var i=1; i<=3; i++){
+								$("#textTitle" + i).text(list[i-1].proTitle);
+								$("#text" + i).text(list[i-1].proSummary);
+								$("#mainImg" + i).attr("src",list[i-1].proImage);
+							}
+							
+							
+							
+							
+							
+							
+						},error:function(){
+							console.log("ajax통신 실패")
+						}
+					})
+				}
+	            	
+	            	
+            </script>
+        
+        
+        
 
         <div id="content_2">
 
@@ -340,7 +438,7 @@
 					$.ajax({
 						url:"reAjax.pj",
 						success:function(list){
-							console.log(list);
+							
 							var i="i";
 							for(var i=1; i<=3; i++){
 								$(".reTitle" + i).text(list[i-1].proTitle);

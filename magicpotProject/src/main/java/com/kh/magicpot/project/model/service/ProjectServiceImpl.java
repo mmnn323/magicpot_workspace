@@ -30,6 +30,11 @@ public class ProjectServiceImpl implements ProjectService{
 		return pDao.reList(sqlSession);
 	}
 
+	@Override
+	public ArrayList<Project> slide() {
+		return pDao.slide(sqlSession);
+	}
+
 	
 
 }

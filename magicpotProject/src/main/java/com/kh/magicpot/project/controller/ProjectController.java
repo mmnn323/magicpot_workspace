@@ -38,10 +38,7 @@ public class ProjectController {
 	@RequestMapping(value="rankAjax.pj", produces="application/json; charset=utf-8")
 	public String AjaxMethod1() {
 		ArrayList<Project> list = pService.rankList();
-		
 
-		
-		
 		return new Gson().toJson(list);
 	}
 	
@@ -52,16 +49,26 @@ public class ProjectController {
 	public String AjaxMethod2() {
 		
 		
-			
-		
-	
-		
 		ArrayList<Project> list2 = pService.reList();
 		
 		Collections.shuffle(list2);
 		
 		return new Gson().toJson(list2);
 	}
+	
+	
+	// 메인 슬라이드
+	
+	@ResponseBody
+	@RequestMapping(value="slideAjax.pj", produces="application/json; charset=utf-8")
+	public String AjaxMethod3() {
+		
+		ArrayList<Project> list3 = pService.slide();
+		
+		return new Gson().toJson(list3);
+	}
+	
+	
 	
 	
 	

@@ -21,6 +21,11 @@ public class ProjectDao {
 		
 	}
 	
+	public ArrayList<Project> slide(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("projectMapper.slide");
+		
+	}
+	
 	
 	
 
