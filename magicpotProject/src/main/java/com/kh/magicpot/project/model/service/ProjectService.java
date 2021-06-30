@@ -12,12 +12,13 @@ public interface ProjectService {
 	ArrayList<Project> rankList();
 	
 	// 추천 프로젝트 ajax
-	
 	ArrayList<Project> reList();
 	
 	// 메인 슬라이드 ajax
-	
 	ArrayList<Project> slide();
+	
+	// 신규 프로젝트 ajax
+	ArrayList<Project> newList();
 	
 	
 

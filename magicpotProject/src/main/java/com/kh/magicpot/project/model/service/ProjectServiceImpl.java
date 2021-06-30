@@ -35,6 +35,11 @@ public class ProjectServiceImpl implements ProjectService{
 		return pDao.slide(sqlSession);
 	}
 
+	@Override
+	public ArrayList<Project> newList() {
+		return pDao.newList(sqlSession);
+	}
+
 	
 
 }

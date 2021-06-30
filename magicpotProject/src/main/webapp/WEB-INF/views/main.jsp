@@ -71,14 +71,12 @@
     #img{width: 100%;
         height: 100%;
     }
-    #textTitle1,  #textTitle3{
+    #textTitle1, #textTitle2, #textTitle3{
         margin-top: 80px;
+        margin-left:10px
     }
     
-    #textTitle2{
-    	margin-top: 80px;
-	    
-	}
+    
     #text1, #text2, #text3{
         width: 250px;
         margin-left: 50px;
@@ -121,7 +119,7 @@
         transition: .6s;
         transform: scale( 1.03 )
     }
-    .projectCtg1, .projectCtg2, .projectCtg3{
+    .projectCtg1, .projectCtg2, .projectCtg3, .projectCtg4, .projectCtg5, .projectCtg6{
         color: lightgray;
     }
     
@@ -207,10 +205,7 @@
         transition: .6s;
         transform: scale( 1.03 )
     }
-    .progress{height:10px; margin-bottom: 0;}
-    .progress-bar{background-color: rgb(116, 152, 107); }
-    .progress_status{color: rgb(116, 152, 107);}
-
+    
     
     #btnArea a{
             border:none;
@@ -326,7 +321,6 @@
 					$.ajax({
 						url:"slideAjax.pj",
 						success:function(list){
-							console.log(list);
 							var i="i";
 							for(var i=1; i<=3; i++){
 								$("#textTitle" + i).text(list[i-1].proTitle);
@@ -537,150 +531,150 @@
             <br><br>
             <h2 id="newTitle"><b>신규 펀딩</b></h2>
 
-            <a id="newUrl" href="">
+            <a id="newUrl1" href="" style="text-decoration: none; color: black;">
                 <div class="newThumbnail" >
                     
-                    <img src="">
+                    <img src="" id="new1">
 
 
                     <br><br>
-                    <small class="projectCtg">리빙</small>
+                    <small class="projectCtg1">리빙</small>
 
-                    <p style="margin-top: 0;">
-                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    <p style="margin-top: 0;" id="newText1">
+                        
                     </p>
 
-                    <div class="progress">
-                        <div class="progress-bar" style="width:80%;"></div>
+                    <div class="progress" style="height:10px; margin-bottom: 0;">
+                        <div class="progress-bar" id="proBar1" style="width:80%; background-color: rgb(116, 152, 107);"></div>
                     </div>
 
-                    <div class="progress_status" style="margin-bottom: 5px;">
-                        <small style="margin-right: 105px;">80% 달성</small>
-                        <small >23일 남음</small>
+                    <div class="progress_status" style="margin-bottom: 5px; color: rgb(116, 152, 107);">
+                        <small id="ach1" style="margin-right: 105px;">80% 달성</small>
+                        <small id="limit1" >23일 남음</small>
                     </div>
                 
                 </div>
              </a>
-             <a id="newUrl" href="">
+             <a id="newUrl2" href="" style="text-decoration: none; color: black;">
                 <div class="newThumbnail" >
                     
-                    <img src="">
+                    <img src="" id="new2">
 
 
                     <br><br>
-                    <small class="projectCtg">리빙</small>
+                    <small class="projectCtg2">리빙</small>
 
-                    <p style="margin-top: 0;">
-                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    <p style="margin-top: 0;" id="newText2">
+                       
                     </p>
 
-                    <div class="progress">
-                        <div class="progress-bar" style="width:80%;"></div>
+                    <div class="progress" style="height:10px; margin-bottom: 0;">
+                        <div class="progress-bar" id="proBar2" style="width:80%; background-color: rgb(116, 152, 107);"></div>
                     </div>
 
-                    <div class="progress_status" style="margin-bottom: 5px;">
-                        <small style="margin-right: 105px;">80% 달성</small>
-                        <small >23일 남음</small>
-                    </div>
-                
-                </div>
-             </a>
-
-             <a id="newUrl" href="">
-                <div class="newThumbnail" >
-                    
-                    <img src="">
-
-
-                    <br><br>
-                    <small class="projectCtg">리빙</small>
-
-                    <p style="margin-top: 0;">
-                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
-                    </p>
-
-                    <div class="progress">
-                        <div class="progress-bar" style="width:80%;"></div>
-                    </div>
-
-                    <div class="progress_status" style="margin-bottom: 5px;">
-                        <small style="margin-right: 105px;">80% 달성</small>
-                        <small >23일 남음</small>
+                    <div class="progress_status" style="margin-bottom: 5px; color: rgb(116, 152, 107);">
+                        <small id="ach2" style="margin-right: 105px;">80% 달성</small>
+                        <small id="limit2" >23일 남음</small>
                     </div>
                 
                 </div>
              </a>
 
-             <a id="newUrl" href="">
+             <a id="newUrl3" href="" style="text-decoration: none; color: black;">
                 <div class="newThumbnail" >
                     
-                    <img src="">
+                    <img src="" id="new3">
 
 
                     <br><br>
-                    <small class="projectCtg">리빙</small>
+                    <small class="projectCtg3">리빙</small>
 
-                    <p style="margin-top: 0;">
-                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    <p style="margin-top: 0;" id="newText3">
+                        
                     </p>
 
-                    <div class="progress">
-                        <div class="progress-bar" style="width:80%;"></div>
+                    <div class="progress" style="height:10px; margin-bottom: 0;">
+                        <div class="progress-bar" id="proBar3" style="width:80%; background-color: rgb(116, 152, 107);"></div>
                     </div>
 
-                    <div class="progress_status" style="margin-bottom: 5px;">
-                        <small style="margin-right: 105px;">80% 달성</small>
-                        <small >23일 남음</small>
+                    <div class="progress_status" style="margin-bottom: 5px; color: rgb(116, 152, 107);">
+                        <small id="ach3" style="margin-right: 105px;">80% 달성</small>
+                        <small id="limit3" >23일 남음</small>
                     </div>
                 
                 </div>
              </a>
 
-             <a id="newUrl" href="">
+             <a id="newUrl4" href="" style="text-decoration: none; color: black;">
                 <div class="newThumbnail" >
                     
-                    <img src="">
+                    <img src="" id="new4">
 
 
                     <br><br>
-                    <small class="projectCtg">리빙</small>
+                    <small class="projectCtg4">리빙</small>
 
-                    <p style="margin-top: 0;">
-                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    <p style="margin-top: 0;" id="newText4">
+                       
                     </p>
 
-                    <div class="progress">
-                        <div class="progress-bar" style="width:80%;"></div>
+                    <div class="progress" style="height:10px; margin-bottom: 0;">
+                        <div class="progress-bar" id="proBar4" style="width:80%; background-color: rgb(116, 152, 107);"></div>
                     </div>
 
-                    <div class="progress_status" style="margin-bottom: 5px;">
-                        <small style="margin-right: 105px;">80% 달성</small>
-                        <small >23일 남음</small>
+                    <div class="progress_status" style="margin-bottom: 5px; color: rgb(116, 152, 107);">
+                        <small id="ach4" style="margin-right: 105px;">80% 달성</small>
+                        <small id="limit4" >23일 남음</small>
                     </div>
                 
                 </div>
              </a>
 
-             <a id="newUrl" href="">
+             <a id="newUrl5" href="" style="text-decoration: none; color: black;">
                 <div class="newThumbnail" >
                     
-                    <img src="">
+                    <img src="" id="new5">
 
 
                     <br><br>
-                    <small class="projectCtg">리빙</small>
+                    <small class="projectCtg5">리빙</small>
 
-                    <p style="margin-top: 0;">
-                        유기농 면으로 만든 끈조절 가능한 다회용 마스크
+                    <p style="margin-top: 0;" id="newText5">
+                        
                     </p>
 
-                    <div class="progress">
-                        <div class="progress-bar" style="width:80%;"></div>
+                    <div class="progress" style="height:10px; margin-bottom: 0;">
+                        <div class="progress-bar" id="proBar5" style="width:80%; background-color: rgb(116, 152, 107);"></div>
                     </div>
 
-                    <div class="progress_status" style="margin-bottom: 5px;">
-                        <small style="margin-right: 105px;">80% 달성</small>
-                        <small >23일 남음</small>
+                    <div class="progress_status" style="margin-bottom: 5px; color: rgb(116, 152, 107);">
+                        <small id="ach5" style="margin-right: 105px;">80% 달성</small>
+                        <small id="limit5" >23일 남음</small>
+                    </div>
+                
+                </div>
+             </a>
+
+             <a id="newUrl6" href="" style="text-decoration: none; color: black;">
+                <div class="newThumbnail" >
+                    
+                    <img src="" id="new6">
+
+
+                    <br><br>
+                    <small class="projectCtg6">리빙</small>
+
+                    <p style="margin-top: 0;" id="newText6">
+                        
+                    </p>
+
+                    <div class="progress" style="height:10px; margin-bottom: 0;">
+                        <div class="progress-bar" id="proBar6" style="width:80%; background-color: rgb(116, 152, 107);"></div>
+                    </div>
+
+                    <div class="progress_status" style="margin-bottom: 5px; color: rgb(116, 152, 107);">
+                        <small id="ach6" style="margin-right: 105px;">80% 달성</small>
+                        <small id="limit6" >23일 남음</small>
                     </div>
                 
                 </div>
@@ -691,6 +685,38 @@
             </div>
         </div>
         <br><br>
+        
+        
+        <script>
+	                $(function(){
+	            		newList();
+	            	})
+	            	
+	            	function newList(){
+						$.ajax({
+							url:"newAjax.pj",
+							success:function(list){
+								
+								var i="i";
+								for(var i=1; i<=6; i++){
+									$("#newText" + i).text(list[i-1].proTitle);
+									
+									$("#new" + i).attr("src",list[i-1].proImage);
+								}
+								
+								
+								
+								
+								
+								
+							},error:function(){
+								console.log("ajax통신 실패")
+							}
+						})
+					}
+	            	
+	            	
+         </script>
         
 
         

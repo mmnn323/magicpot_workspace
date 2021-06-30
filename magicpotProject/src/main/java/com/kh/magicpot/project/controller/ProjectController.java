@@ -68,6 +68,16 @@ public class ProjectController {
 		return new Gson().toJson(list3);
 	}
 	
+	// 신규 프로젝트
+	@ResponseBody
+	@RequestMapping(value="newAjax.pj", produces="application/json; charset=utf-8")
+	public String AjaxMethod4() {
+		ArrayList<Project> list4 = pService.newList();
+
+		return new Gson().toJson(list4);
+	}
+	
+	
 	
 	
 	

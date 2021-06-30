@@ -26,6 +26,11 @@ public class ProjectDao {
 		
 	}
 	
+	public ArrayList<Project> newList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("projectMapper.newList");
+		
+	}
+	
 	
 	
 
