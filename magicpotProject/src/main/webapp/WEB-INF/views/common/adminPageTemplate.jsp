@@ -161,11 +161,6 @@
                                 </h4>
                             </li>
                             <li>
-                                <h4>
-                                    <a href="adminProList.gu" id="abled">이용약관 관리</a><span style="margin-left:80px"></span>
-                                </h4>
-                            </li>
-                            <li>
                                 <h4 id="comm" style="cursor:pointer;">
                                     <p id="abled" style="display:inline;">커뮤니티 관리</p>
                                     <i id="btn2" class="fas fa-angle-down" style="margin-left:53px"></i>
