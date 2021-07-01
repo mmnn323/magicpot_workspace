@@ -1,9 +1,12 @@
 package com.kh.magicpot.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.member.model.dao.MemberDao;
 import com.kh.magicpot.member.model.vo.Member;
 
@@ -33,6 +36,25 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int insertMember(Member m) {
 		return mDao.insertMember(sqlSession, m);
+	}
+
+
+	@Override
+	public int selectListCount() {
+		return mDao.selectListCount(sqlSession);
+	}
+
+
+	@Override
+	public ArrayList<Member> selectList(PageInfo pi) {
+		return mDao.selectList(sqlSession, pi);
+	}
+
+
+	@Override
+	public Member selectMember(int memNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

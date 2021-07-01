@@ -1,5 +1,6 @@
 package com.kh.magicpot.member.controller;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -14,9 +15,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
+import com.kh.magicpot.common.template.Pagination;
 import com.kh.magicpot.member.model.service.MemberService;
 import com.kh.magicpot.member.model.vo.Member;
 
@@ -73,8 +77,14 @@ public class MemberController {
 	
 	/*관리자메인(일반회원관리)*/
 	@RequestMapping("admin.me")
-	public String adminMember() {
+	public String adminMember(@RequestParam(value="currentPage", defaultValue="1") int currentPage) {
 
+		int listCount = mService.selectListCount(); // 현재 회원 총 수 
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		
+		ArrayList<Member> list = mService.selectList(pi);
+		
+		
 		return "member/adminMember";
 	}
 	

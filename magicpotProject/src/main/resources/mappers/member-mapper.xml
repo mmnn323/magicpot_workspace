@@ -74,5 +74,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	  )
   </insert>
   	
+  	<!-- 관리자 일반회원관리 총 회원 수  -->
+	<select id="selectListCount" resultType="_int">
+		select
+			   count(*)
+		  from member
+		 where status = 'Y'
+	</select>
+  	
   
   </mapper>
