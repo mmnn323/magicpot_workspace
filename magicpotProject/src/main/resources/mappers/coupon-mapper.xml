@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="couponMapper">
+	
+	<resultMap id="couponResultSet" type="Coupon">
+	
+		<id column="cp_no" property="cpNo"/>
+		<result column="cp_name" property="cpName"/>
+		<result column="cp_price" property="cpPrice"/>
+		<result column="cp_lower" property="cpLower"/>
+		<result column="cp_limit" property="cpLimit"/>
+		<result column="cp_condition" property="cpCondition"/>	
+	</resultMap>
 
-<mapper namespace="adminCoupon">
+
+
+	<insert id="insertCoupon" parameterType="Coupon">
+	  	insert
+	  	  into coupon
+	  	  (
+	  	  	cp_no
+	  	  , cp_name
+	  	  , cp_price
+	  	  , cp_lower
+	  	  , cp_limit
+	  	  , cp_condition
+	  	  
+	  	  )
+	  	  values
+	  	  (
+	  	    seq_cpco.nextval
+	  	  , #{cpName}
+	  	  , #{cpPrice}
+	  	  , #{cpLower}
+	  	  , #{cpLimit}
+	  	  , #{cpCondition}
+	
+	  	  )
+	  </insert>
+	  
+	  <select id="selectCoupon" resultMap="couponResultSet" parameterType="Coupon">
+		select
+		     cp_no
+		   , cp_name
+		   , cp_price
+		   , cp_lower
+		   , cp_limit
+		   , cp_condition
+		from coupon;
+	  
+	  </select>
+
 
 </mapper>
