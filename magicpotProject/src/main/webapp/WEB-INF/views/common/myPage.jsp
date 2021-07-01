@@ -106,7 +106,7 @@
 
             <th><i class="fas fa-user-plus fa-2x"></i></th>
             <td>
-                <a href=""><p>정보변경</p></a>
+                <a href="profile.me"><p>정보변경</p></a>
             </td>
         </tr>
 
