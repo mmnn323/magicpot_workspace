@@ -9,12 +9,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <!--폰트-->
 <link rel="preconnect" href="https://fonts.gstatic.com/%22%3E">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js%22%3E"></script>
-<script src="https://kit.fontawesome.com/dd18300701.js" crossorigin="anonymous"></script>    
+<script src="https://kit.fontawesome.com/dd18300701.js" crossorigin="anonymous"></script>
+
+<!-- 다인 추가 - 카카오 공유용 js파일 -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>    
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -97,6 +102,22 @@
 		text-decoration:none;
 		color:black;	
     }
+    
+    /* 다인 추가 - 공유하기 */
+     .linkFacebook {
+    	background-image: url("resources/images/project/icon-facebook.png"); 
+    	background-repeat: no-repeat;
+    }
+    .linkTwitter {
+    	background-image: url("resources/images/project/icon-twitter.png"); 
+    	background-repeat: no-repeat;
+    }
+     .linkKakao {
+    	background-image: url("resources/images/project/icon-kakao.png"); 
+    	background-repeat: no-repeat;
+    }
+    
+    
 </style>
 </head>
 <body>
@@ -143,9 +164,54 @@
                 
                 <button type="button" class="btn btn-outline-secondary"><img src="../common/문의.png"><p>문의</p></button>&nbsp;&nbsp;&nbsp;
                 <button type="button" class="btn btn-outline-secondary"><i class="far fa-heart fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>238</p></button>&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn btn-outline-secondary"><img src="../common/공유.png"><p>공유</p></button>
+                <button type="button" id="share" class="btn btn-outline-secondary"><img src="resources/images/project/icon-kakao.png"><p>공유</p></button>
             </div>
         </div>
+        
+        <!-- 다인 추가 - 공유하기 기능 -->
+        <div id="shareListButton" style="display:none;">
+        	
+        	<a id="btnFacebook" class="linkFacebook" href="javascript:shareFacebook();"></a>
+        	<a id="btnTwitter" class="linkTwitter" href="javascript:shareTwitter();">트위터</a>
+        	<a id="btnKakao" class="linkKakao" href="javascript:shareKakao();">카카오</a>
+        </div>
+        
+        <script>
+        	// 공유 버튼 클릭시 공유 가능한 sns띄워주기
+        	$(function(){
+        		
+        		$("#share").on("click", function(){
+        			$("#shareListButton").toggle();
+        		});
+        	});
+        	
+    		function shareFacebook(){	// 페이스북 공유
+        		var sendUrl ="http://localhost:8883/magicpot/detail.fd"; // 공유할 url 주소
+        		window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
+        	}
+        	function shareTwitter(){	// 트위터 공유
+        		var sendText ="magicpot"; 	// 공유시 전달할 text
+        		var sendUrl ="http://localhost:8883/magicpot/detail.fd"; // 공유할 url 주소
+        		window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
+        	}
+        	function shareKakao(){	// 카카오 공유
+        		
+        		kakao.init('727f2dc1bc85980ca9ab5f26bd2b0c02');
+        		
+        		Kakao.Link.createDefaultButton({
+        			
+        			container:'#btnKakao',
+        			objectType: 'feed',
+        			content: {
+        				title: "magicpot",
+        				imageUrl: "http://localhost:8883/magicpot/detail.fd",
+        				link: {
+        					webUrl:"http://localhost:8883/magicpot/detail.fd"
+        				}	
+        			}
+        		});
+        	}
+        </script>
 
         <hr>
         <div id="content2">
