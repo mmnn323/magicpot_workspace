@@ -65,6 +65,12 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping("myPage.me")
+	public String myPage() {
+		return "common/myPage";
+	}
+	
+	
 	/*관리자메인(일반회원관리)*/
 	@RequestMapping("admin.me")
 	public String adminMember() {

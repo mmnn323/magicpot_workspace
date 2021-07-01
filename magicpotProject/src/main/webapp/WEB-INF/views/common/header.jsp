@@ -127,7 +127,7 @@
 					<!-- 로그인 후 -->
 					<b>${ loginUser.memName }</b>
 					<h style="color:rgb(116, 152, 107)">님</h>
-					<abbr title="마이페이지"><a href="" class="afterLogin"><i
+					<abbr title="마이페이지"><a href="myPage.me" class="afterLogin"><i
 							class="fas fa-user fa-2x " style="margin-top: 20px;"></i></a></abbr>
 					<abbr title="좋아하는 프로젝트"><a href="" class="afterLogin"><i
 							class="fas fa-heart fa-2x"></i></a></abbr>
@@ -137,7 +137,7 @@
 				<c:when test="${loginUser.memId eq 'admin'}">
 					<b>${ loginUser.memName }</b>
 					<h style="color:rgb(116, 152, 107)">님</h>
-					<abbr title="마이페이지"><a href="" class="afterLogin"><i
+					<abbr title="마이페이지"><a href="myPage.me" class="afterLogin"><i
 							class="fas fa-user fa-2x " style="margin-top: 20px;"></i></a></abbr>
 					<abbr title="좋아하는 프로젝트"><a href="" class="afterLogin"><i
 							class="fas fa-heart fa-2x"></i></a></abbr>
