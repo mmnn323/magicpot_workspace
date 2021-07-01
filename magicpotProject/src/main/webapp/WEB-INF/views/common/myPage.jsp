@@ -94,7 +94,7 @@
             <td><a href=""><p>좋아하는 프로젝트</p></a></td>
 
         </tr>
-        
+         
 
         <!-- 문의 내역, 정보변경 -->
         <tr>
@@ -109,6 +109,19 @@
                 <a href="profile.me"><p>정보변경</p></a>
             </td>
         </tr>
+        
+         <tr>
+            <th><i class="fas fa-map-marker-alt fa-2x"></i> </th>
+            <td colspan="2"><a href="address.me"><p>배송지 관리</p></a></td>
+            
+			<th></th> <!-- 공간유지용-->
+
+            <th></th>
+            <td>
+                
+            </td>
+        </tr>
+        
 
         
 
@@ -138,6 +151,8 @@
             </td>
        
         </tr>
+        
+        
 
     </form>
 

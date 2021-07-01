@@ -1,5 +1,7 @@
 package com.kh.magicpot.member.model.dao;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +30,10 @@ public class MemberDao {
 	
 	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateMember", m);
+	}
+	
+	public int insertAddress(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.insert("memberMapper.insertAddress", map);
 	}
 	
 	

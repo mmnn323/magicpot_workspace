@@ -1,12 +1,11 @@
 package com.kh.magicpot.member.controller;
 
+import java.util.HashMap;
 import java.util.Random;
-import java.util.logging.Logger;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -168,15 +167,11 @@ public class MemberController {
 	public String profileForm(HttpSession session, Model model) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		/*
-		int memNo = loginUser.getMemNo();
-		Address a = mService.selectMember(memNo);
 		
-		model.addAttribute("a", a);
-		*/
 		return "member/myPageProfile";
 	}
 	
+	// 회원정보수정
 	@RequestMapping("update.me")
 	public String updateMember(Member m, HttpSession session, Model model) {
 		
@@ -198,6 +193,58 @@ public class MemberController {
 			model.addAttribute("errorMsg", "정보 수정 실패");
 			return "common/errorPage";
 		}
+	}
+	
+	@RequestMapping("address.me")
+	public String addressForm(HttpSession session, Model model) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		
+		int memNo = loginUser.getMemNo();
+		Address a = mService.selectMember(memNo);
+		
+		model.addAttribute("a", a);
+		
+		return "member/myPageAddress";
+	}
+	
+	// 배송지 추가
+	
+	@RequestMapping("insert.ad")
+	public String insertAddress(Address ad, HttpSession session, Model model) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		
+		int memNo = loginUser.getMemNo();
+		
+		String adName = ad.getAdName();
+		String adPhone = ad.getAdPhone();
+		String adPost = ad.getAdPost();
+		String adRoad = ad.getAdRoad();
+		String adDetail = ad.getAdDetail();
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memNo", memNo);
+		map.put("adName", adName);
+		map.put("adPhone", adPhone);
+		map.put("adPost", adPost);
+		map.put("adRoad", adRoad);
+		map.put("adDetail", adDetail);
+		
+		
+		
+	
+		int result = mService.insertAddress(map);
+		
+		if(result>0) { // 성공 => 알람창 출력할 문고 담아서 => 메인페이지 (url재요청)
+			session.setAttribute("alertMsg", "배송지가 추가되었습니다");
+			return "member/myPageAddress";
+		}else { 
+			return "common/errorPage";
+		}
+		
+		
 	}
 	
 	
