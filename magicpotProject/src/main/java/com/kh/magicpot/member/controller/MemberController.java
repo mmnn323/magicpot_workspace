@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.magicpot.member.model.service.MemberService;
+import com.kh.magicpot.member.model.vo.Address;
 import com.kh.magicpot.member.model.vo.Member;
 
 
@@ -67,7 +68,7 @@ public class MemberController {
 	
 	@RequestMapping("myPage.me")
 	public String myPage() {
-		return "member/myPage";
+		return "common/myPage";
 	}
 	
 	
@@ -161,6 +162,44 @@ public class MemberController {
 		
 		
 	}
+	
+	// 마이페이지 프로필 폼 이동
+	@RequestMapping("profile.me")
+	public String profileForm(HttpSession session, Model model) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		/*
+		int memNo = loginUser.getMemNo();
+		Address a = mService.selectMember(memNo);
+		
+		model.addAttribute("a", a);
+		*/
+		return "member/myPageProfile";
+	}
+	
+	@RequestMapping("update.me")
+	public String updateMember(Member m, HttpSession session, Model model) {
+		
+		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
+		m.setMemPwd(encPwd); // 암호문으로  변경하기
+		
+		
+		int result = mService.updateMember(m);
+		
+		
+		if(result>0) {
+		
+			session.setAttribute("loginUser", mService.loginMember(m));
+			session.setAttribute("alertMsg", "성공적으로 수정되었습니다");
+			return "redirect:profile.me";
+					
+		} else {
+		
+			model.addAttribute("errorMsg", "정보 수정 실패");
+			return "common/errorPage";
+		}
+	}
+	
 	
 
 	

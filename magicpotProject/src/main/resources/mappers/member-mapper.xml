@@ -21,6 +21,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="mem_road" property="memRoad"/>
 		<result column="mem_detail" property="memDetail"/>
 	</resultMap>
+	
+	<resultMap type="Address" id="Address">
+	
+		<id column="ad_no" property="adNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="ad_location" property="adLocation"/>
+		<result column="ad_name" property="adName"/>
+		<result column="ad_phone" property="adPhone"/>
+		<result column="ad_post" property="adPost"/>
+		<result column="ad_road" property="adRoad"/>
+		<result column="ad_detail" property="adDetail"/>
+		<result column="ad_default" property="adDefault"/>
+	</resultMap>
 	  
   	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
   		select
@@ -46,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	select
 	  		   count(*)
 	  	  from member
-	  	 where mem_id = #{userId}
+	  	 where mem_id = #{memId}
 	  	 
   </select>
   
@@ -74,5 +87,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	  )
   </insert>
   	
-  
+	<select id="selectMember" resultMap="Address">
+		select
+		      ad_no
+		    , mem_no
+		    , ad_location
+		    , ad_name
+		    , ad_phone
+		    , ad_post
+		    , ad_road
+		    , ad_detail
+		    , ad_default
+		 from address_list
+		 where mem_no = #{memNo}
+		   and ad_default = 'Y'
+
+		 
+	</select>  
+	
+	
+	<update id="updateMember" parameterType="Member">
+	  	update
+	  		   member
+	  	   set mem_pwd = #{memPwd}
+	  	     , mem_name = #{memName}
+	  	     , phone = #{phone}
+	  	     , email = #{email}
+	  	     , mem_post = #{memPost}
+	  	     , mem_Road = #{memRoad}
+	  	     , mem_Detail = #{memDetail}
+	  	 where mem_id = #{memId}
+  </update>
+	
+	
+	
+
   </mapper>

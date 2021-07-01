@@ -18,6 +18,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- 각자 맡은 vo클래스 별칭 등록하기 -->
 		<!-- 깃 배포 전 Member/Notice는 미리 생성해두었어요! -->
 		<typeAlias type="com.kh.magicpot.member.model.vo.Member" alias="Member" />
+		<typeAlias type="com.kh.magicpot.member.model.vo.Address" alias="Address" />
 		<typeAlias type="com.kh.magicpot.notice.model.vo.Notice" alias="Notice" />
 		
 		<!-- 휘경 -->

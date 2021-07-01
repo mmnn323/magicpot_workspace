@@ -3,6 +3,8 @@ package com.kh.magicpot.member.model.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.magicpot.member.model.vo.Address;
+
 import com.kh.magicpot.member.model.vo.Member;
 
 @Repository
@@ -19,4 +21,14 @@ public class MemberDao {
 	public int insertMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.insert("memberMapper.insertMember", m);
 	}
+	
+	public Address selectMember(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("memberMapper.selectMember", memNo);
+	}
+	
+	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMember", m);
+	}
+	
+	
 }
