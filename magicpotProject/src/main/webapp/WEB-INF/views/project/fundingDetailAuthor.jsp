@@ -14,13 +14,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js%22%3E"></script>
-<script src="https://kit.fontawesome.com/dd18300701.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/dd18300701.js" crossorigin="anonymous"></script>    
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
     *{font-family:'Noto Sans KR', sans-serif;}
-    div{border:1px solid white;}
-    #outer{width:1000px; height:3000px; text-align:center; margin:auto;}
+    div{border:px solid white;}
+    #outer{width:1000px; height:1000px; text-align:center; margin:auto;}
     
     #category{
         width:100px; 
@@ -31,48 +31,59 @@
     #category>p{font-weight:500; color:white; margin-top:5px;}
 
     #content1{height:410px;}
-    #content1_1>img{float:left; width:480px; height:330px; margin-left:50px;}
+    #content1_1>img{
+        float:left; 
+        width:480px; 
+        height:330px; 
+        margin-left:50px;
+    }
     
     /*content1_2*/
     #content1_2{float:left; margin-left:40px;}
     #content1_2_1,#content1_2_2,#content1_2_3,#content1_2_4{float:left;}
-
-    .progress{
+    
+    #progress{
         height:10px; 
         margin-bottom: 0;
     }
-    .progress-bar{
+    #progress-bar{
         background-color: rgb(116, 152, 107); 
         border-radius:5px;
     }
-
-    .btn-success{
+    
+    #btn-success1{
         width:360px;
         height:45px;
         background-color:rgb(116, 152, 107);
         font-size:19px;
     }
-    .btn-outline-secondary{
+    
+    #btn-outline-secondary{
         width:110px;
         height:50px;
         border-color:lightgray;
-        
     }
+    
+	.btn-outline-secondary:hover{
+		background-color:#fff!important;
+    	color:#000!important;	
+	}
     .btn-outline-secondary>img{
         width:35px; 
         height:35px; 
         margin-top:-2px; 
         float:left;
     }
+    
     .btn-outline-secondary>p{margin-top:5px;}
-
+    
     /*content2*/
     #content2>ul{list-style-type:none;}
-    #content2>ul>li{float:left; margin-left:50px; margin-top:-5px;}
+    #content2>ul>li{float:left; margin-left:50px;}
     #content2>ul>li>a{text-decoration:none; color:lightslategray;}
     
     /*content3*/
-    #content3_1,#content3_2{float:left;}
+    #content3,#content3_1,#content3_2{float:left;}
     #content3_1{width:480px; margin-left:50px; text-align:left;}
     #content3_1>img{width:480px; height:330px;}
 
@@ -95,60 +106,86 @@
 </style>
 </head>
 <body>
-    <div id="outer">
-        <div id="category">
-            <p>LIVING</p>
-        </div>
 
-        <div id="content1">
-            <h2><b>유기농 면으로 만든 끈조절 가능한 다회용 마스크</b></h2>
-            <br>
+	<!-- header --> 
+	<jsp:include page="../common/header.jsp"/>
 
-            <div id="content1_1">
-                <img src="../common/img/마스크.png">
-            </div>
-            
-            <div id="content1_2">
-                <div id="content1_2_1">
-                    <span style="font-size:25px;">11</span>일 남음
-                </div>
-                <br><br>
-                <div class="progress">
-                    <div class="progress-bar" style="width:80%;"></div>
-                </div>
+	<div id="outer">
+		<div id="category">
+			<p>LIVING</p>
+		</div>
 
-                <div id="content1_2_2">
-                    <span style="font-size:25px;">82</span>%달성
-                </div><br><br>
+		<div id="content1">
+			<h2>
+				<b>유기농 면으로 만든 끈조절 가능한 다회용 마스크</b>
+			</h2>
+			<br>
 
-                <div id="content1_2_3">
-                    <span style="font-size:25px;">2,029,000</span>원 펀딩
-                </div><br><br>
+			<div id="content1_1">
+				<img src="../common/img/마스크.png">
+			</div>
 
-                <div id="content1_2_4">
-                    <span style="font-size:25px;">102</span>명의 서포터
-                </div><br><br>
+			<div id="content1_2">
+				<div id="content1_2_1">
+					<span style="font-size: 25px;">11</span>일 남음
+				</div>
+				<br>
+				<br>
+				<div class="progress" id="progress">
+					<div class="progress-bar" id="progress-bar" style="width: 80%;"></div>
+				</div>
 
-                <button type="button" class="btn btn-success">펀딩하기</button>
-                <br><br>
+				<div id="content1_2_2">
+					<span style="font-size: 25px;">82</span>%달성
+				</div>
+				<br>
+				<br>
 
-                <button type="button" class="btn btn-outline-secondary"><img src="../common/문의.png"><p>문의</p></button>&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn btn-outline-secondary"><i class="far fa-heart fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>238</p></button>&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn btn-outline-secondary"><img src="../common/공유.png"><p>공유</p></button>
-            </div>
-        </div>
+				<div id="content1_2_3">
+					<span style="font-size: 25px;">2,029,000</span>원 펀딩
+				</div>
+				<br>
+				<br>
 
-        <hr>
-        <div id="content2">
-                <ul>
-                    <li><a href="story.fd">스토리</a></li>
-                    <li><a href="author.fd">작가의 말</a></li>
-                    <li><a href="review.fd">체험리뷰</a></li>
-                </ul>
-        </div>
-        <hr>
-          
-        <div id="content3">
+				<div id="content1_2_4">
+					<span style="font-size: 25px;">102</span>명의 서포터
+				</div>
+				<br>
+				<br>
+
+				<button type="button" class="btn btn-success" id="btn-success1">펀딩하기</button>
+				<br>
+				<br>
+
+				<button type="button" class="btn btn-outline-secondary" id="btn-outline-secondary">
+					<img src="../common/문의.png">
+					<p>문의</p>
+				</button>
+				&nbsp;&nbsp;&nbsp;
+				<button type="button" class="btn btn-outline-secondary" id="btn-outline-secondary">
+					<i class="far fa-heart fa-2x"
+						style="float: left; margin-left: 7px; margin-top: 2px;"></i>
+					<p>238</p>
+				</button>
+				&nbsp;&nbsp;&nbsp;
+				<button type="button" class="btn btn-outline-secondary" id="btn-outline-secondary">
+					<img src="../common/공유.png">
+					<p>공유</p>
+				</button>
+			</div>
+		</div>
+
+		<hr>
+		<div id="content2">
+			<ul>
+				<li><a href="story.fd">스토리</a></li>
+				<li><a href="author.fd">작가의 말</a></li>
+				<li><a href="review.fd">체험리뷰</a></li>
+			</ul>
+		</div><br>
+		<hr>
+
+		<div id="content3">
             <div id="content3_1">
                 <h5><b>안녕하세요, 건강한 지구를 위한 아름다운 습관, 컨티뉴어스! 입니다.</b></h5>
                 <p>제가 아이 둘 엄마가 되면서부터, 그 전에는 생각해 본 적 없던 환경문제가 신경쓰이기 시작했습니다. '앞으로 우리 아이들이 커서 어떤 직업을 갖고 어떤 모습으로 살아가게 될까?' 가 아니라, '우리 아이들이 깨끗한 공기, 안전한 물을 마시기나 할 수 있을까? 장래희망을 꿈꾸기보다, 생존을 더 걱정하는 삶을 살게 되진 않을까?' 라는 생각이 들었습니다.
@@ -156,37 +193,35 @@
                 </p>
 
             </div>
+            
+			<div id="reward">
+				<div id="reward_1">
+					<a href="#"> <b>1000원 펀딩</b><br> <span>선물을 선택하지 않고
+							밀어만 줍니다.</span>
+					</a>
+				</div>
+				<br>
 
-            <div id="reward">
-                <div id="reward_1">
-                    <a href="#">
-                        <b>1000원 펀딩</b><br>
-                        <span>선물을 선택하지 않고 밀어만 줍니다.</span>
-                    </a>
-                </div><br>
+				<div id="reward_2">
+					<a href="#"> <b>12000원 펀딩</b><br> <span>제로웨이스트 유기농
+							마스크 1개<br>배송비 포함
+					</span>
+					</a>
+				</div>
+				<br>
 
-                <div id="reward_2">
-                    <a href="#">
-                        <b>12000원 펀딩</b><br>
-                        <span>제로웨이스트 유기농 마스크 1개<br>배송비 포함</span>
-                    </a>
-                </div><br>
-
-                <div id="reward_3">
-                    <a href="#">
-                        <b>25000원 펀딩</b><br> 
-                        <span>제로웨이스트 유기농 마스크 2개<br>
-					                       환경지키미 배지 1개<br>
-					                       배송비포함
-                        </span>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-
-
-    </div>
+				<div id="reward_3">
+					<a href="#"> <b>25000원 펀딩</b><br> <span>제로웨이스트 유기농
+							마스크 2개<br> 환경지키미 배지 1개<br> 배송비포함
+					</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- footer --> 
+	<jsp:include page="../common/footer.jsp"/>
+	
 </body>
 </html>

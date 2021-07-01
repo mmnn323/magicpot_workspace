@@ -14,29 +14,6 @@ public interface MemberService {
 	int insertMember(Member m);
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// 회원 상세조회
 	Address selectMember(int memNo);
 	
