@@ -13,7 +13,6 @@ public interface MemberService {
 	//  회원 가입
 	int insertMember(Member m);
 	
-	
 	// 회원 상세조회
 	Address selectMember(int memNo);
 	
