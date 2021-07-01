@@ -18,7 +18,7 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <!-- css -->
-<link rel="stylesheet" href="resources/css/creatorEnrollForm.css">
+<link rel="stylesheet" href="resources/css/funding/creatorEnrollForm.css">
 <style>
     /* 체크박스 이미지 변경 */
     input[type="checkbox"] {
@@ -29,10 +29,10 @@
     padding-left:30px;
     width: 200px;
     height: 20px;
-    background: url('resources/images/check-mark.png') no-repeat 0 0px / contain;
+    background: url('resources/images/common/check-mark.png') no-repeat 0 0px / contain;
     }
     input[type='checkbox']:checked+label {
-        background: url('resources/images/checked.png') no-repeat 0 1px / contain;
+        background: url('resources/images/common/checked.png') no-repeat 0 1px / contain;
     }
 
     #submitBtn{
@@ -51,19 +51,17 @@
     <div class="wrap">
         <div id="logo" align="center">
             <!-- 이미지 클릭시 메인화면으로 이동 -->
-            <img src="resources/images/logo1.png" width="200px" height="80px">
+            <img src="resources/images/common/mainLogo.png" width="200px" height="80px">
         </div>
+        <br><br>
         <div id="content">
             <div id="content_1">
                 <h2 style="font-weight:600;">크리에이터 정보</h2>
                 <p id="p1">
-                    크리에이터님, 본격적인 프로젝트 제작을 시작하기 전에 간단한 정보를 입력한 뒤 <br>
-                    크리에이트 승인을 받아주세요.
+                                     크리에이터님, 본격적인 프로젝트 제작을 시작하기 전에 간단한 정보를 입력한 뒤  크리에이터 승인을 받아주세요.
                 </p>
             </div>
-
             <br>
-
             <div id="content_2">
                 <form action="" id="creatorInput">
                     <p id="category">크리에이터(기업)명</p>

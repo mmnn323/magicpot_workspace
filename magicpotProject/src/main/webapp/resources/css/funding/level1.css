@@ -1,0 +1,22 @@
+.wrap{
+    width: 1000px;
+    height: 800px;
+    margin: auto;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+	
+
+    /* content */
+    #content1{padding-left: 50px}
+    h5{color: #757575}
+    #content #btn{
+        width: 100px;
+        height: 35px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgb(116, 152, 107);
+        font-size: 15px;
+        font-weight: 600;
+        color: white;
+    }
+    button{cursor:pointer;}
