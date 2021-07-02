@@ -58,6 +58,7 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.insertAddress(sqlSession, map);
 	}
 
+
 	
 	// 아영ㅇㅇㅇㅇㅇ
 	@Override
@@ -69,4 +70,5 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<Member> selectList(PageInfo pi) {
 		return null;
 	}
+
 }

@@ -26,6 +26,7 @@ public interface MemberService {
 	// 배송지 추가
 	int insertAddress(HashMap<String, Object> map);
 
+
 	
 	// 아영ㅇㅇㅇㅇㅇ
 	int selectListCount();
@@ -33,8 +34,7 @@ public interface MemberService {
 	// 아영ㅇㅇㅇ
 	ArrayList<Member> selectList(PageInfo pi);
 	
-	
-	
+
 	
 	
 }

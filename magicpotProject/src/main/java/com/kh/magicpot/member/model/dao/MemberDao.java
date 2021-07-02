@@ -35,6 +35,7 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updateMember", m);
 	}
 	
+
 	public ArrayList<Member> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
@@ -51,5 +52,6 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper.insertAddress", map);
 	}
 	
+
 
 }
