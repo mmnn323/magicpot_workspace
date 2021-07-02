@@ -20,6 +20,14 @@
 <!-- 다인 추가 - 카카오 공유용 js파일 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>    
 
+
+<!-- 다인 추가 - 페이스북 공유용 코드 -->
+<meta property="og:type"          content="website" />
+<meta property="og:url"           content="http://172.30.1.48:8883/magicpot/detail.fd" />
+<meta property="og:title"         content="Magicpot 제로웨이스트" />
+<meta property="og:description"   content="제로웨이스트의 시작, Magicpot과 환경을 지켜나가요." />
+<meta property="og:image"         content="resources/images/common/shareImage.jpg" />
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -104,18 +112,7 @@
     }
     
     /* 다인 추가 - 공유하기 */
-     .linkFacebook {
-    	background-image: url("resources/images/project/icon-facebook.png"); 
-    	background-repeat: no-repeat;
-    }
-    .linkTwitter {
-    	background-image: url("resources/images/project/icon-twitter.png"); 
-    	background-repeat: no-repeat;
-    }
-     .linkKakao {
-    	background-image: url("resources/images/project/icon-kakao.png"); 
-    	background-repeat: no-repeat;
-    }
+    #shareListButton{width:95%;}
     
     
 </style>
@@ -162,18 +159,46 @@
                 <button type="button" class="btn btn-success">펀딩하기</button>
                 <br><br>
                 
-                <button type="button" class="btn btn-outline-secondary"><img src="../common/문의.png"><p>문의</p></button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#messageModal"><i class="far fa-envelope fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>문의</p></button>&nbsp;&nbsp;&nbsp;
                 <button type="button" class="btn btn-outline-secondary"><i class="far fa-heart fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>238</p></button>&nbsp;&nbsp;&nbsp;
-                <button type="button" id="share" class="btn btn-outline-secondary"><img src="resources/images/project/icon-kakao.png"><p>공유</p></button>
+                <button type="button" id="share" class="btn btn-outline-secondary"><i class="fas fa-share-alt fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>공유</p></button>
+            </div>
+        </div>
+        
+        <!-- 다인 추가 - 문의용 모달 -->
+        <div class="modal" id="messageModal">
+            <div class="modal-dialog">
+            <div class="modal-content">
+        
+                <!-- Modal Header -->
+                <div class="modal-header" style="background-color: rgb(116, 152, 107); color:white;">
+                    <h4 class="modal-title">창작자에게 문의하기</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+        
+                <!-- Modal body -->
+                <div class="modal-body">
+                      <div class="form-group">
+                        <label for="comment">문의 내용</label>
+                        <textarea class="form-control" rows="10" id="comment" name="reportContent" placeholder="크리에이터에게 문의하고 싶은 내용을 입력해주세요." style="resize:none"></textarea>
+                      </div>
+                </div>
+        
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-success">메세지 보내기</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">취소</button>
+                </div>
+        
+            </div>
             </div>
         </div>
         
         <!-- 다인 추가 - 공유하기 기능 -->
-        <div id="shareListButton" style="display:none;">
-        	
-        	<a id="btnFacebook" class="linkFacebook" href="javascript:shareFacebook();"></a>
-        	<a id="btnTwitter" class="linkTwitter" href="javascript:shareTwitter();">트위터</a>
-        	<a id="btnKakao" class="linkKakao" href="javascript:shareKakao();">카카오</a>
+        <div id="shareListButton" align="right" style="display:none">        
+        	<a href="javascript:shareFacebook();"><img src="resources/images/project/icon-facebook.png"></a>
+        	<a href="javascript:shareTwitter();"><img src="resources/images/project/icon-twitter.png"></a>
+        	<a id="btnKakao" href="javascript:shareKakao();"><img src="resources/images/project/icon-kakao.png"></a>
         </div>
         
         <script>
@@ -185,32 +210,69 @@
         		});
         	});
         	
-    		function shareFacebook(){	// 페이스북 공유
-        		var sendUrl ="http://localhost:8883/magicpot/detail.fd"; // 공유할 url 주소
-        		window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
+        	
+        	function shareFacebook(){	// 페이스북 공유
+        		var url = 'http://172.30.1.48:8883/magicpot/detail.fd';
+        		var encodeUrl = encodeURIComponent(url);
+        		var facebook = 'http://www.facebook.com/sharer/sharer.php?u=';
+        		var link = facebook + encodeUrl;
+        		window.open(link);
         	}
+
+			/*
+        	function shareFacebook(){
+        		window.open("http://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.locaion.href), "_blank", "width=600, height=400" );
+        	}
+			*/
+   
         	function shareTwitter(){	// 트위터 공유
-        		var sendText ="magicpot"; 	// 공유시 전달할 text
+        		var sendText ="magicpot 제로웨이스트"; 	// 공유시 전달할 text
         		var sendUrl ="http://localhost:8883/magicpot/detail.fd"; // 공유할 url 주소
         		window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
         	}
-        	function shareKakao(){	// 카카오 공유
-        		
-        		kakao.init('727f2dc1bc85980ca9ab5f26bd2b0c02');
-        		
-        		Kakao.Link.createDefaultButton({
-        			
-        			container:'#btnKakao',
-        			objectType: 'feed',
-        			content: {
-        				title: "magicpot",
-        				imageUrl: "http://localhost:8883/magicpot/detail.fd",
-        				link: {
-        					webUrl:"http://localhost:8883/magicpot/detail.fd"
-        				}	
-        			}
-        		});
-        	}
+        	
+        	
+        	function shareKakao() { // 카카오 공유
+                Kakao.init('727f2dc1bc85980ca9ab5f26bd2b0c02');
+                Kakao.Link.sendCustom({
+                    templateId: [56192]
+                });
+            }
+        	
+       		try {
+    			  function shareKakao() { // 카카오 공유
+    			    Kakao.init('727f2dc1bc85980ca9ab5f26bd2b0c02')
+    			    Kakao.Link.sendDefault({
+    			      objectType: 'feed',
+    			      content: {
+    			        title: 'Magicpot',
+    			        imageUrl:
+    			          'http://k.kakaocdn.net/dn/TcTlF/btq8ytBsVeI/UfCtLRGF9NqYZk6WSHhfPK/kakaolink40_original.jpg',
+    			        link: {
+    			          mobileWebUrl: 'http://localhost:8883/magicpot/detail.fd',
+    			          webUrl: 'http://localhost:8883/magicpot/detail.fd',
+    			        },
+    			      },
+    			      buttons: [
+    			        {
+    			          title: '웹으로 보기',
+    			          link: {
+    			            mobileWebUrl: 'http://localhost:8883/magicpot/detail.fd',
+    			            webUrl: 'http://localhost:8883/magicpot/detail.fd',
+    			          },
+    			        },
+    			        {
+    			          title: '앱으로 보기',
+    			          link: {
+    			            mobileWebUrl: 'http://localhost:8883/magicpot/detail.fd',
+    			            webUrl: 'http://localhost:8883/magicpot/detail.fd',
+    			          },
+    			        },
+    			      ],
+    			    })
+    			  }
+    			; window.kakaoDemoCallback && window.kakaoDemoCallback() }
+    			catch(e) { window.kakaoDemoException && window.kakaoDemoException(e) }
         </script>
 
         <hr>
