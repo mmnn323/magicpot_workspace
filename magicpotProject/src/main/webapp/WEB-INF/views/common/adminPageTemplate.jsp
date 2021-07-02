@@ -73,40 +73,40 @@
     #accordian{text-align:center;}
     #accordian>ul{margin-top:0px;}
     #accordian>ul>li{border:1px solid #f0f0f0;margin-left:-40px;}
-	#accordian li>h1{ cursor:pointer;}
-	#accordian li>ul{ display:none;}
+   #accordian li>h1{ cursor:pointer;}
+   #accordian li>ul{ display:none;}
     #accordian p{font-size:16px}
     #accordian h4{line-height:42px;font-weight:600;}
     #abled{font-size:16px;}
-	#accordian a{
-		list-style:none;
-		text-decoration:none;
-		color:black;	
-	}
-	#subMenu a{
-		width:196px;
+   #accordian a{
+      list-style:none;
+      text-decoration:none;
+      color:black;   
+   }
+   #subMenu a{
+      width:196px;
         background:#f8f8f8;
-		display:block;
-		padding:15px 20px;
-		margin-left:-40px;
-		color:#222;
-		font-weight:600;
+      display:block;
+      padding:15px 20px;
+      margin-left:-40px;
+      color:#222;
+      font-weight:600;
         text-align:center;
-		border-bottom:1px solid #eaeaea;
-		position:relative;
-   	}
-	#subMenu a:hover{
-		color:#222;
-		background:#ebeaea;
-		transition:all 0.8s;
-		border-bottom:1px solid #bdbdbd;
+      border-bottom:1px solid #eaeaea;
+      position:relative;
+      }
+   #subMenu a:hover{
+      color:#222;
+      background:#ebeaea;
+      transition:all 0.8s;
+      border-bottom:1px solid #bdbdbd;
     }
-   	a:after{
-   		content:'';
-  		opacity:0;
-  		transition:opacity 0.3s;
-  	}
-	#ready:hover, #ready p:hover{color:rgb(116, 152, 107)}
+      a:after{
+         content:'';
+        opacity:0;
+        transition:opacity 0.3s;
+     }
+   #ready:hover, #ready p:hover{color:rgb(116, 152, 107)}
     #abled:hover{color:rgb(116, 152, 107)}
     
      /* content */
@@ -161,11 +161,6 @@
                                 </h4>
                             </li>
                             <li>
-                                <h4>
-                                    <a href="adminProList.gu" id="abled">이용약관 관리</a><span style="margin-left:80px"></span>
-                                </h4>
-                            </li>
-                            <li>
                                 <h4 id="comm" style="cursor:pointer;">
                                     <p id="abled" style="display:inline;">커뮤니티 관리</p>
                                     <i id="btn2" class="fas fa-angle-down" style="margin-left:53px"></i>
@@ -189,7 +184,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </div>	
+                    </div>   
                     <script>            
                         $(function(){
                             $("#accordian h4").click(function(){

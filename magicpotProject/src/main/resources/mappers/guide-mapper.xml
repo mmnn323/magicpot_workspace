@@ -3,4 +3,23 @@
 
 <mapper namespace="guideMapper">
 
+
+
+	<!-- 이용약관 세부 / 수정용 페이지에 띄울 기본 이용약관 조회 -->
+	<select id="proModifyForm" resultType="string">
+		select
+				gu_provision
+		  from  guide	 
+	</select>
+
+	<!-- 이용약관 수정 -->
+	<update id="updateProvision" parameterType="guide">
+		update
+				guide
+		   set	gu_provision = #{gu_provision}
+	</update>
+
+
+
+
 </mapper>

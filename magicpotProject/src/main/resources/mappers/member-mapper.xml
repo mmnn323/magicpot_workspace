@@ -21,6 +21,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="mem_road" property="memRoad"/>
 		<result column="mem_detail" property="memDetail"/>
 	</resultMap>
+	
+	<resultMap type="Address" id="Address">
+	
+		<id column="ad_no" property="adNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="ad_location" property="adLocation"/>
+		<result column="ad_name" property="adName"/>
+		<result column="ad_phone" property="adPhone"/>
+		<result column="ad_post" property="adPost"/>
+		<result column="ad_road" property="adRoad"/>
+		<result column="ad_detail" property="adDetail"/>
+		<result column="ad_default" property="adDefault"/>
+	</resultMap>
 	  
   	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
   		select
@@ -46,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	select
 	  		   count(*)
 	  	  from member
-	  	 where mem_id = #{userId}
+	  	 where mem_id = #{memId}
 	  	 
   </select>
   
@@ -74,8 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	  )
   </insert>
   	
-  	<!-- 관리자 일반회원관리 총 회원 수  -->
-	<select id="selectListCount" resultType="_int">
+	<select id="selectMember" resultMap="Address">
 		select
 			   count(*)
 		  from member

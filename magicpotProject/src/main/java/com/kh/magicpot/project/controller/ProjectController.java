@@ -20,26 +20,18 @@ public class ProjectController {
 	@Autowired
 	private ProjectService pService;
 	
-	/*펀딩상세페이지*/
 	@RequestMapping("detail.fd")
 	public String fundingDetail() {
 		
 		return "project/fundingDetail";
 	}
 	
-	/*펀딩상세페이지(스토리)*/
 	@RequestMapping("story.fd")
 	public String fundingDetailStory() {
 		
 		return "project/fundingDetail";
 	}
 	
-	/*펀딩상세페이지(작가의 말)*/
-	@RequestMapping("author.fd")
-	public String fundingDetailAuthor() {
-		
-		return "project/fundingDetailAuthor";
-	}
 	
 	// 실시간 랭킹
 	@ResponseBody

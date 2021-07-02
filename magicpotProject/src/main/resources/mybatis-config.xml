@@ -18,6 +18,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- 각자 맡은 vo클래스 별칭 등록하기 -->
 		<!-- 깃 배포 전 Member/Notice는 미리 생성해두었어요! -->
 		<typeAlias type="com.kh.magicpot.member.model.vo.Member" alias="Member" />
+		<typeAlias type="com.kh.magicpot.member.model.vo.Address" alias="Address" />
 		<typeAlias type="com.kh.magicpot.notice.model.vo.Notice" alias="Notice" />
 		
 		<!-- 휘경 -->
@@ -41,6 +42,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.magicpot.report.model.vo.Report" alias="Report"/>
 		<typeAlias type="com.kh.magicpot.message.model.vo.Message" alias="Message"/>
 		
+		<!-- 희나 -->
+		<typeAlias type="com.kh.magicpot.coupon.model.vo.Coupon" alias="Coupon"/>
+		
 	</typeAliases>
 	
 	<!-- mapper 등록 -->
@@ -62,6 +66,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="/mappers/guide-mapper.xml"/>
 		<mapper resource="/mappers/report-mapper.xml"/>
 		<mapper resource="/mappers/message-mapper.xml"/>
+		
+		<!-- 희나 -->
+		<mapper resource="/mappers/coupon-mapper.xml"/>
 	</mappers>
 	
 </configuration>
