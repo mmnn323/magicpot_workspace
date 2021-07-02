@@ -2,6 +2,7 @@ package com.kh.magicpot.member.model.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -30,5 +31,15 @@ public class MemberDao {
 	
 	public ArrayList<Member> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+	    int limit = pi.getBoardLimit();
+	    
+	    RowBounds rowBounds = new RowBounds(offset, limit);
+	    
+	    return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
+	
 	}
+	
+	
+	
 }

@@ -77,13 +77,15 @@ public class MemberController {
 	
 	/*관리자메인(일반회원관리)*/
 	@RequestMapping("admin.me")
-	public String adminMember(@RequestParam(value="currentPage", defaultValue="1") int currentPage) {
+	public String adminMemberList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model) {
 
 		int listCount = mService.selectListCount(); // 현재 회원 총 수 
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
 		
 		ArrayList<Member> list = mService.selectList(pi);
 		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
 		
 		return "member/adminMember";
 	}

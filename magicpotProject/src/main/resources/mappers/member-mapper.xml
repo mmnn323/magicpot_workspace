@@ -82,5 +82,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where status = 'Y'
 	</select>
   	
-  
+  	<select id="selectList" resultMap="memberResultSet">
+  		select
+  		       mem_no
+  		     , mem_id
+  		     , mem_name
+  		     , phone
+  		     , email
+  		     , to_char(enroll_date, 'YYYY-MM-DD') enroll_date
+  		from member
+  	   where status= 'Y'
+  	   order
+  	      by enroll_date desc
+  	</select>
+  	
   </mapper>
