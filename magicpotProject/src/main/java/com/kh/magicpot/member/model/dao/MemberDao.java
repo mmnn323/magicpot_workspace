@@ -1,5 +1,6 @@
 package com.kh.magicpot.member.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
@@ -32,18 +33,6 @@ public class MemberDao {
 	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateMember", m);
 	}
-	
-	public ArrayList<Member> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
-		
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-	    int limit = pi.getBoardLimit();
-	    
-	    RowBounds rowBounds = new RowBounds(offset, limit);
-	    
-	    return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
-	
-	}
-	
 	
 
 }

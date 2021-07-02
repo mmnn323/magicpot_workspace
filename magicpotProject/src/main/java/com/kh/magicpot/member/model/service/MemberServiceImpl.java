@@ -56,3 +56,5 @@ public class MemberServiceImpl implements MemberService {
 	public int insertAddress(HashMap<String, Object> map) {
 		return mDao.insertAddress(sqlSession, map);
 	}
+	
+}
