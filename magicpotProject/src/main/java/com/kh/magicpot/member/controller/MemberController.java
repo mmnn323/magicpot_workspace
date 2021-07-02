@@ -1,5 +1,6 @@
 package com.kh.magicpot.member.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -13,9 +14,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
+import com.kh.magicpot.common.template.Pagination;
 import com.kh.magicpot.member.model.service.MemberService;
 import com.kh.magicpot.member.model.vo.Address;
 import com.kh.magicpot.member.model.vo.Member;

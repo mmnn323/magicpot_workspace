@@ -1,7 +1,9 @@
 package com.kh.magicpot.member.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.member.model.vo.Address;
 import com.kh.magicpot.member.model.vo.Member;
 
@@ -23,6 +25,13 @@ public interface MemberService {
 	
 	// 배송지 추가
 	int insertAddress(HashMap<String, Object> map);
+
+	
+	// 아영ㅇㅇㅇㅇㅇ
+	int selectListCount();
+
+	// 아영ㅇㅇㅇ
+	ArrayList<Member> selectList(PageInfo pi);
 	
 	
 	

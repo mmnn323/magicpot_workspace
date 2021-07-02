@@ -1,11 +1,13 @@
 package com.kh.magicpot.member.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.member.model.dao.MemberDao;
 import com.kh.magicpot.member.model.vo.Address;
 import com.kh.magicpot.member.model.vo.Member;
@@ -50,9 +52,21 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.updateMember(sqlSession, m);
 	}
 
-	// 배송지추가
-	
+	// 배송지추가	
 	@Override
 	public int insertAddress(HashMap<String, Object> map) {
 		return mDao.insertAddress(sqlSession, map);
 	}
+
+	
+	// 아영ㅇㅇㅇㅇㅇ
+	@Override
+	public int selectListCount() {
+		return 0;
+	}
+
+	@Override
+	public ArrayList<Member> selectList(PageInfo pi) {
+		return null;
+	}
+}

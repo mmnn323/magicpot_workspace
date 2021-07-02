@@ -1,11 +1,13 @@
 package com.kh.magicpot.member.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.member.model.vo.Address;
 
 import com.kh.magicpot.member.model.vo.Member;
@@ -43,7 +45,11 @@ public class MemberDao {
 	    return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
 	
 	}
-	
+
+	// 배송지 추가
+	public int insertAddress(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.insert("memberMapper.insertAddress", map);
+	}
 	
 
 }
