@@ -28,13 +28,14 @@ public interface MemberService {
 
 
 	
-	// 아영ㅇㅇㅇㅇㅇ
+	// 일반회원관리 리스트 조회 (페이징 처리 회원 총 갯수)
 	int selectListCount();
 
-	// 아영ㅇㅇㅇ
+	// 요청한 페이지에 보여질 회원 리스트
 	ArrayList<Member> selectList(PageInfo pi);
 	
-
+	// 회원 상세조회
+	Member selectAdminMember(int memNo);
 	
 	
 }

@@ -36,22 +36,26 @@ public class MemberDao {
 	}
 	
 
-	public ArrayList<Member> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
-		
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-	    int limit = pi.getBoardLimit();
-	    
-	    RowBounds rowBounds = new RowBounds(offset, limit);
-	    
-	    return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
-	
-	}
-
 	// 배송지 추가
 	public int insertAddress(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
 		return sqlSession.insert("memberMapper.insertAddress", map);
 	}
 	
+	/*관리자 일반회원관리*/
+	public int selectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("memberMapper.selectListCount");
+	}
+	
+	public ArrayList<Member> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
+		
+	}
 
 
 }

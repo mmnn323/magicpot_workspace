@@ -58,16 +58,23 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.insertAddress(sqlSession, map);
 	}
 
-
 	
-	// 아영ㅇㅇㅇㅇㅇ
+	// 일반회원관리 리스트 조회 (페이징 처리 회원 총 갯수)
 	@Override
 	public int selectListCount() {
-		return 0;
+		return mDao.selectListCount(sqlSession);
 	}
 
+	// 요청한 페이지에 보여질 회원 리스트
 	@Override
 	public ArrayList<Member> selectList(PageInfo pi) {
+		return mDao.selectList(sqlSession, pi);
+	}
+
+	// 회원 상세조회
+	@Override
+	public Member selectAdminMember(int memNo) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
