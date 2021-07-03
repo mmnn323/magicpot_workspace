@@ -23,6 +23,8 @@ import com.kh.magicpot.common.template.Pagination;
 import com.kh.magicpot.member.model.service.MemberService;
 import com.kh.magicpot.member.model.vo.Address;
 import com.kh.magicpot.member.model.vo.Member;
+import com.kh.magicpot.project.model.vo.Creator;
+import com.kh.magicpot.project.model.vo.Project;
 
 
 
@@ -148,7 +150,6 @@ public class MemberController {
 	}
 	
 	// 회원가입
-	
 	@RequestMapping("insert.me")
 	public String insertMember(Member m, HttpSession session, Model model) {
 		
@@ -160,6 +161,8 @@ public class MemberController {
 		
 		
 		m.setMemPwd(encPwd); // 암호문으로  변경하기
+		
+		System.out.println(encPwd);
 		
 		int result = mService.insertMember(m);
 		
@@ -221,7 +224,7 @@ public class MemberController {
 		
 		model.addAttribute("a", a);
 		model.addAttribute("add", add);
-		
+		System.out.println(a);
 		return "member/myPageAddress";
 	}
 	
@@ -293,10 +296,6 @@ public class MemberController {
 		}
 			
 		
-		
-		
-		
-		
 		if(result>0 || result3>0) {
 		
 			session.setAttribute("alertMsg", "성공적으로 수정되었습니다");
@@ -325,6 +324,26 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
+	
+	// 내가만든프로젝트 폼 이동
+		@RequestMapping("made.pr")
+		public String madeProject(HttpSession session, Model model) {
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			int memNo = loginUser.getMemNo();
+			
+			Creator cre = mService.creatSearch(memNo);
+			
+			int creNo = cre.getCreNo();
+			System.out.println(creNo);
+			
+			ArrayList<Project> pr = mService.madeProject(creNo);
+			
+			System.out.println(pr);
+			model.addAttribute("pr", pr);
+			
+			return "member/myPageMadeProject";
+		}
+		
 	
 	
 }

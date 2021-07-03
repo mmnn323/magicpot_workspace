@@ -243,7 +243,8 @@
             <div class="addContent">
             
 	            <c:choose>
-		            <c:when test='${ "empty a.adPost" }'>
+	            
+		            <c:when test='${empty a[0].adNo and empty add.adNo}'>
 			                <!-- 등록된 배송지가 없을경우 -->
 			                <div class="mainContent">
 			
@@ -258,6 +259,7 @@
 			                  
 			
 					</c:when>
+
 					<c:otherwise>
 			                <!-- 배송지목록에 배송지가 있을경우-->
 			                <div class="mainContent_2">

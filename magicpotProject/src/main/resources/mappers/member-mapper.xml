@@ -34,6 +34,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ad_detail" property="adDetail"/>
 		<result column="ad_default" property="adDefault"/>
 	</resultMap>
+	
+	<resultMap id="project" type="Project">
+		<id column="pro_no" property="proNo"/>
+		<result column="cre_no" property="creNo"/>
+		<result column="ca_no" property="caNo"/>
+		<result column="pro_title" property="proTitle"/>
+		<result column="pro_price" property="proPrice"/>
+		<result column="pro_image" property="proImage"/>
+		<result column="pro_summary" property="proSummary"/>
+		<result column="pro_story" property="proStory"/>
+		<result column="pro_fundprice" property="proFundPrice"/>
+		<result column="pro_status" property="proStatus"/>
+		<result column="create_word" property="createWord"/>
+		<result column="pro_shippirce" property="proShipPrice"/>
+		<result column="open_date" property="openDate"/>
+		<result column="close_date" property="closeDate"/>
+		<result column="pro_step" property="proStep"/>
+		<result column="pro_ad" property="proAd"/>
+	</resultMap>	
+	
+	<resultMap id="Creator" type="Creator" >
+		<id column="cre_no" property="creNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="cre_business" property="creBusiness"/>
+		<result column="cre_phone" property="crePhone"/>
+		<result column="cre_privacy" property="crePrivacy"/>
+		<result column="cre_name" property="creName"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
 	  
   	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
   		select
@@ -240,6 +270,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   set ad_location = 'N'
 		 where ad_no = #{adNo}
 	</update>
+	
+	<!-- 크리에이터조회 -->
+	<select id="creatSearch" resultMap="Creator" >
+
+		select
+		      cre_no
+		    , mem_no
+		    , cre_business
+		    , cre_phone
+		    , cre_privacy
+		    , cre_name
+		    , status
+		 from creator
+		where mem_no = #{memNo}
+	
+	</select>
+	
+	<!-- 프로젝트조회 -->
+	<select id="madeProject" resultMap="project" >
+
+		select
+		      pro_no
+		    , cre_no
+		    , ca_no
+		    , pro_title
+		    , pro_price
+		    , pro_image
+		    , pro_summary
+		    , pro_story
+		    , pro_fundprice
+		    , pro_status
+		    , create_word
+		    , pro_shippirce
+		    , open_date
+		    , close_date
+		    , pro_step
+		    , pro_ad
+		 from project
+	    where cre_no = #{creNo}
+	
+	</select>
 	
 
 

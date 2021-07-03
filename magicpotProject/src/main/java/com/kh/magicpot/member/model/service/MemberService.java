@@ -6,6 +6,8 @@ import java.util.HashMap;
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.member.model.vo.Address;
 import com.kh.magicpot.member.model.vo.Member;
+import com.kh.magicpot.project.model.vo.Creator;
+import com.kh.magicpot.project.model.vo.Project;
 
 public interface MemberService {
 
@@ -28,9 +30,6 @@ public interface MemberService {
 	// 배송지 추가
 	int insertAddress(HashMap<String, Object> map);
 
-
-	
-
 	// 배송지 수정상세보기
 	Address selectAddress(int adNo);
 	
@@ -41,6 +40,9 @@ public interface MemberService {
 	int fixAddress2(Address a);
 	int fixAddress3(Address a);
 
+	// 배송지 삭제하기
+	int deleteAddress(int adNo);
+	
 	// 일반회원관리 리스트 조회 (페이징 처리 회원 총 갯수)
 	int selectListCount();
 
@@ -49,9 +51,14 @@ public interface MemberService {
 	
 	// 회원 상세조회
 	Member selectAdminMember(int memNo);
+	
+	// 크리에이터 조회
+	Creator creatSearch(int memNo);
+	
+	// 내가 만든 프로젝트 조회
+	
+	ArrayList<Project> madeProject(int creNo);
 
 	
-	// 배송지 삭제하기
-	int deleteAddress(int adNo);
 	
 }

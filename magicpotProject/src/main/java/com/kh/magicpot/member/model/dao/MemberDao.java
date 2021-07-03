@@ -11,6 +11,8 @@ import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.member.model.vo.Address;
 
 import com.kh.magicpot.member.model.vo.Member;
+import com.kh.magicpot.project.model.vo.Creator;
+import com.kh.magicpot.project.model.vo.Project;
 
 @Repository
 public class MemberDao {
@@ -81,6 +83,16 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
 		
 	}
+	
+	// 크리에이터 조회
+	public Creator creatSearch(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("memberMapper.creatSearch", memNo);
+	}
+	
+	// 내가만든 프로젝트조회
+	
+	public ArrayList<Project> madeProject(SqlSessionTemplate sqlSession, int creNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.madeProject", creNo);
 
-
+	}
 }
