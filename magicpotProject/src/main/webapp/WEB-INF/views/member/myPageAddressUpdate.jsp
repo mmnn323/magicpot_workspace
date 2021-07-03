@@ -221,7 +221,6 @@
                     <td >
                         <label for="post"> 주소 </label>
                         <input type="text" class="form-control" id="post" name="adPost" value="${a.adPost }" required readonly><br><br>
-                        
                     </td>
                     <td >
                         <button type="button" id="addInput" class="btn btn-success" onclick="execution_daum_address()">우편번호</button>
@@ -245,6 +244,7 @@
                         <input type="tel" class="form-control" id="phone" name="adPhone" value="${a.adPhone }"  required><br>    
                     </td>
                 </tr>
+                
                 <c:choose>
 					<c:when test="${ a.adDefault ne 'Y' }">    
 		                <tr>
@@ -255,6 +255,11 @@
 		                    </td>
 		                </tr>
               		</c:when>
+              		<c:otherwise>
+              			<input type="hidden" name="adDefault" value="Y">
+              		
+              		</c:otherwise>
+              		
               	</c:choose>  
             </table>
       

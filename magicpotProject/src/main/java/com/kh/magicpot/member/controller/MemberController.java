@@ -224,7 +224,7 @@ public class MemberController {
 		
 		model.addAttribute("a", a);
 		model.addAttribute("add", add);
-		System.out.println(a);
+		
 		return "member/myPageAddress";
 	}
 	
