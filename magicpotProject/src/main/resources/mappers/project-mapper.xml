@@ -127,6 +127,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        where rownum between 1 and 6
 	</select>
 	
+	<insert id="insertCre" parameterType="Creator">
+		insert
+		  into creator
+		  (
+		    cre_no
+		  , mem_no
+		  , cre_business
+		  , cre_privacy
+		  , cre_name
+		  )
+		  values
+		  (
+		    seq_ctco.nextval
+		  , #{memNo}
+		  , #{creBusiness}
+		  , #{crePrivacy}
+		  , #{creName}
+		  )
+	</insert>
   
 </mapper>
 

@@ -2,6 +2,7 @@ package com.kh.magicpot.project.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.Project;
 
 public interface ProjectService {
@@ -20,6 +21,8 @@ public interface ProjectService {
 	// 신규 프로젝트 ajax
 	ArrayList<Project> newList();
 	
+	// 크리에이터 추가
+	int insertCre(Creator c);
 	
 
 }

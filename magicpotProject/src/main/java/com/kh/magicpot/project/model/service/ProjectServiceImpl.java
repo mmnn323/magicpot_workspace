@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.magicpot.project.model.dao.ProjectDao;
+import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.Project;
 
 @Service
@@ -40,6 +41,10 @@ public class ProjectServiceImpl implements ProjectService{
 		return pDao.newList(sqlSession);
 	}
 
+	@Override
+	public int insertCre(Creator c) {
+		return pDao.insertCre(sqlSession, c);
+	}
 	
 
 }

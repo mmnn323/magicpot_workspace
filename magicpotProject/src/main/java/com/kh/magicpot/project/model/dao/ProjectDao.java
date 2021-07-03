@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.Project;
 
 @Repository
@@ -29,6 +30,11 @@ public class ProjectDao {
 	public ArrayList<Project> newList(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("projectMapper.newList");
 		
+	}
+
+
+	public int insertCre(SqlSessionTemplate sqlSession, Creator c) {
+		return sqlSession.insert("insertCre", c);
 	}
 	
 	
