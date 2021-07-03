@@ -1,5 +1,7 @@
 package com.kh.magicpot.coupon.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +14,7 @@ public class AdminCouponDao {
 		return sqlSession.insert("couponMapper.insertCoupon", c);
 	}
 
+	public ArrayList<Coupon> selectCoupon(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("couponMapper.selectCoupon");
+	}
 }

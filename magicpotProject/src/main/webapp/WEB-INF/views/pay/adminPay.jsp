@@ -6,7 +6,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- jQuery 라이브러리 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- 부트스트랩에서 제공하고 있는 스타일 -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- 부트스트랩에서 제공하고 있는 스크립트 -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/dd18300701.js"
+	crossorigin="anonymous"></script>
+
+
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
+
 <style>
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+table, tr, th, td {
+	border: 1px solid lightgray;
+	border-collapse: collapse;
+}
 
 /* content */
 #content1 {
@@ -21,11 +47,6 @@
 	width: 900px;
 	margin: 30px;
 	float: left;
-}
-
-.empty {
-	height: 300px;
-	width: 400px
 }
 
 /* 컨텐트 카테고리 타이틀 영역 */
@@ -143,30 +164,15 @@
 #cm_paging {
 	width: fit-content;
 }
-
-#couponBtn1 {
-	background-color: rgb(116, 152, 107);
-	color: white;
-	border: none;
-	border-radius: 3px;
-}
-
-#coupontitle {
-	color: rgb(116, 152, 107);
-	font-size: 30px;
-}
 </style>
 </head>
 <body>
-
 	<jsp:include page="../common/adminPageTemplate2.jsp" />
-
 
 	<div id="content">
 		<div class="outer">
-
 			<div id="contentTitleArea">
-				<span id="title1">쿠폰 관리</span> <span id="title2">쿠폰 등록/삭제</span>
+				<span id="title1">결제 관리</span> <span id="title2">결제 관리</span>
 			</div>
 
 			<br> <br> <br> <br> <br>
@@ -176,7 +182,7 @@
 				<!-- 커뮤니티 검색바 -->
 				<div id="cm_searchArea">
 					<select name="" id="cm_SearchCtg">
-						<option value="">쿠폰명</option>
+						<option value="">회원ID</option>
 						<option value="">이름</option>
 						<option value="">이메일</option>
 					</select> <input id="cm_keyword" type="text" placeholder=" Search">
@@ -184,8 +190,7 @@
 
 				<!-- 버튼 영역 -->
 				<div id="cm_btnArea">
-					<a href="" class="btn btn-success" id="cm_enrollBtn"
-						data-toggle="modal" data-target="#myModal">쿠폰등록</a>
+					<a href="" class="btn btn-success" id="cm_enrollBtn">결제취소</a>
 				</div>
 			</div>
 
@@ -195,96 +200,60 @@
                         이 부분은 기능구현 부분이니 tr 클릭 시 요청하고 싶으신 분들은 그렇게 수정해주셔도 될 것 같아요~!
                         -->
 			<div id="cmNoticeListArea">
-				<form action="adminInsert.me">
-					<table class="table" id="cmNoticeList" align="center">
-						<thead class="thead-light">
-							<tr>
-								<th width="1400">쿠폰명</th>
-								<th width="500">할인금액</th>
-								<th width="600">최소구매금액</th>
-								<th width="800">사용기간</th>
-								<th width="1200">특이사항</th>
-								<th></th>
-								<th width=""></th>
-							</tr>
-						</thead>
+				<table class="table" id="cmNoticeList" align="center">
+					<thead class="thead-light">
+						<tr>
+							<th width="40"><input type="checkbox"></th>
+							<th width="150">회원 번호</th>
+							<th width="100">아이디</th>
+							<th width="90">이름</th>
+							<th width="100">카테고리</th>
+							<th width="200">프로젝트</th>
+							<th width="150">결제금액</th>
+							<th width="150">달성현황</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>41</td>
+							<td><a href="">user10</a></td>
+							<td>132</td>
+							<td>리빙</td>
+							<td>소창수건</td>
+							<td>23000</td>
+							<td>y</td>
+						</tr>
 
-						<c:forEach var="c" items="${ list }">
-							<tr class="font">
-								<th>${ c.cpName }</th>
-								<th>${ c.cpPrice }</th>
-								<th>${ c.cpLower }</th>
-								<th>${ c.cpLimit }</th>
-								<th>${ c.cpCondition }</th>
-								<th width="600"><button id="couponBtn1" type="submit">삭제</button></th>
-							</tr>
-						</c:forEach>
-					</table>
-				</form>
+
+
+
+					</tbody>
+				</table>
 			</div>
-		</div>
-	</div>
 
+			<!-- 페이징 영역 -->
 
-	<!-- The Modal -->
-	<div class="modal" id="myModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
+			<div id="cm_pagingArea" align="center">
 
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title" align="center">쿠폰 등록</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body">
-					<form action="coupon.me" method="post" id="adminCoupon">
-						<table align="center" class="empty">
-							<tr>
-								<th>쿠폰명</th>
-								<th><input type="text" name="cpName" placeholder="30자 이내 "></th>
-							</tr>
-							<tr>
-								<th>할인금액</th>
-								<th><input type="text" name="cpPrice"></th>
-							</tr>
-							<tr>
-								<th>최소 구매금액</th>
-								<th><input type="text" name="cpLower"></th>
-							</tr>
-							<tr>
-								<th>쿠폰 사용기간</th>
-								<th><input type="date" name="cpLimit"></th>
-							</tr>
-							<tr>
-								<th>쿠폰 특이사항</th>
-								<th><input type="text" name="cpCondition"
-									placeholder="30자 이내"></th>
-
-							</tr>
-							<tr align="center">
-								<th colspan="2">
-									<button style="width: 90px;" id="couponBtn1" type="submit">등록</button>
-								</th>
-							</tr>
-						</table>
-					</form>
-				</div>
-
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<button type="button" id="couponBtn1" class="btn btn-danger"
-						data-dismiss="modal">Close</button>
+				<div id="cm_paging">
+					<ul class="pagination pagination">
+						<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+						<li class="page-item"><a class="page-link" href="#">&lt;</a></li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+						<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+					</ul>
 				</div>
 
 			</div>
+
 		</div>
 	</div>
-
 	</div>
-
-	</div>
-
 </body>
 </html>

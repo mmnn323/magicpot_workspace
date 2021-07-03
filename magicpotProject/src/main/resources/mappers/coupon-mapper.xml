@@ -3,7 +3,6 @@
 <mapper namespace="couponMapper">
 	
 	<resultMap id="couponResultSet" type="Coupon">
-	
 		<id column="cp_no" property="cpNo"/>
 		<result column="cp_name" property="cpName"/>
 		<result column="cp_price" property="cpPrice"/>
@@ -15,7 +14,7 @@
 
 
 	<insert id="insertCoupon" parameterType="Coupon">
-	  	insert
+	  insert
 	  	  into coupon
 	  	  (
 	  	  	cp_no
@@ -24,7 +23,6 @@
 	  	  , cp_lower
 	  	  , cp_limit
 	  	  , cp_condition
-	  	  
 	  	  )
 	  	  values
 	  	  (
@@ -34,11 +32,10 @@
 	  	  , #{cpLower}
 	  	  , #{cpLimit}
 	  	  , #{cpCondition}
-	
 	  	  )
 	  </insert>
 	  
-	  <select id="selectCoupon" resultMap="couponResultSet" parameterType="Coupon">
+	  <select id="selectCoupon" resultMap="couponResultSet" parameterType="_int">
 		select
 		     cp_no
 		   , cp_name
@@ -46,9 +43,14 @@
 		   , cp_lower
 		   , cp_limit
 		   , cp_condition
-		from coupon;
-	  
+		from coupon
 	  </select>
+	  
+	  <delete id="deleteCoupon" parameterType="Coupon">
+	  	delete
+	  	from coupon
+	  	where cp_no = #{ cpNo }
+	  </delete>
 
 
 </mapper>

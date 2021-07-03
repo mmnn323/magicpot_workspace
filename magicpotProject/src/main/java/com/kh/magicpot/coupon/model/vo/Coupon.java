@@ -23,7 +23,7 @@ public class Coupon {
 	private Date cpLimit;
 	private String cpCondition;
 	
-	
+
 	
 	
 	
