@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 public class Address {
 	
-	private int adNo;
+	private String adNo;
 	private int memNo;
 	private String adLocation;
 	private String adName;

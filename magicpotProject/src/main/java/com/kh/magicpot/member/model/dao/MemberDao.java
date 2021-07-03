@@ -1,5 +1,6 @@
 package com.kh.magicpot.member.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -24,8 +25,8 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper.insertMember", m);
 	}
 	
-	public Address selectMember(SqlSessionTemplate sqlSession, int memNo) {
-		return sqlSession.selectOne("memberMapper.selectMember", memNo);
+	public ArrayList<Address> selectMember(SqlSessionTemplate sqlSession, int memNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMember", memNo);
 	}
 	
 	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
@@ -36,5 +37,28 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper.insertAddress", map);
 	}
 	
+	public Address selectAddress(SqlSessionTemplate sqlSession, int adNo) {
+		return sqlSession.selectOne("memberMapper.selectAddress", adNo);
+	}
+	
+	public int fixAddress(SqlSessionTemplate sqlSession, Address a) {
+		return sqlSession.update("memberMapper.fixAddress", a);
+	}
+	
+	public int deleteAddress(SqlSessionTemplate sqlSession, int adNo) {
+		return sqlSession.insert("memberMapper.deleteAddress", adNo);
+	}
+	
+	public int fixAddress2(SqlSessionTemplate sqlSession, Address a) {
+		return sqlSession.update("memberMapper.fixAddress2", a);
+	}
+	
+	public int fixAddress3(SqlSessionTemplate sqlSession, Address a) {
+		return sqlSession.update("memberMapper.fixAddress3", a);
+	}
+	
+	public Address selectDefault(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("memberMapper.selectDefault", memNo);
+	}
 	
 }

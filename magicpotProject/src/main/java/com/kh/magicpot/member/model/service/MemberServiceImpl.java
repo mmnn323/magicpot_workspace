@@ -1,5 +1,6 @@
 package com.kh.magicpot.member.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -40,7 +41,7 @@ public class MemberServiceImpl implements MemberService {
 
 	// 배송지조회
 	@Override
-	public Address selectMember(int memNo) {
+	public ArrayList<Address> selectMember(int memNo) {
 		return mDao.selectMember(sqlSession, memNo);
 	}
 	
@@ -51,11 +52,48 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 배송지추가
-	
 	@Override
 	public int insertAddress(HashMap<String, Object> map) {
 		return mDao.insertAddress(sqlSession, map);
 	}
+
+	@Override
+	public Address selectDefault(int memNo) {
+		return mDao.selectDefault(sqlSession, memNo);
+	}
+
+	@Override
+	public Address selectAddress(int adNo) {
+		return mDao.selectAddress(sqlSession, adNo);
+	}
+
+
+	@Override
+	public int fixAddress(Address a) {
+		return mDao.fixAddress(sqlSession, a);
+	}
+
+
+	@Override
+	public int deleteAddress(int adNo) {
+		return mDao.deleteAddress(sqlSession, adNo);
+	}
+
+
+	@Override
+	public int fixAddress2(Address a) {
+		return mDao.fixAddress2(sqlSession, a);
+	}
+	
+	@Override
+	public int fixAddress3(Address a) {
+		return mDao.fixAddress3(sqlSession, a);
+	}
+
+
+
+
+	
 	
 
 

@@ -100,6 +100,38 @@
     #check{
         background-color: rgb(225, 212, 169);
     }
+    
+    .modal-content_2{
+        height: 150px;
+        width: 350px;
+        background-color: white;
+        margin: auto;
+
+    }
+
+    .modal-content_2>h5{
+        margin-left: 30px;
+        
+    }
+
+    .deleteBtn{
+        margin-left: 130px;
+        margin-top: 50px;
+    }
+
+    .deleteBtn> a{
+        background-color: rgb(225, 212, 169);
+        border: none;
+        width: 90px;
+        height: 40px;
+    }
+
+    .deleteBtn> button{
+        background-color: rgb(94, 94, 94);
+        border: none;
+        width: 90px;
+        height: 40px;
+    }
 
     
 </style>
@@ -162,21 +194,21 @@
                         <tr id="postLine">
                             <td >
                                 <label for="post"> <b>주소</b> </label>
-                                <input type="text" class="form-control" id="address_input_1"  name="memPost" value="${loginUser.memPost }" readonly ><br>
+                                <input type="text" class="form-control" id="address_input_1"  name="memPost" value="${add.adPost }" readonly ><br>
 
                             </td>
                             <td >
-                                <button type="button" id="addInput" class="btn btn-success" onclick="execution_daum_address()" >우편번호</button>
+                                <button type="button" id="addInput" class="btn btn-success" data-toggle="modal" data-target="#deleteModal" onclick="" >우편번호</button>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <input type="text" class="form-control" id="address_input_2" name="memRoad" value="${loginUser.memRoad }" readonly>
+                                <input type="text" class="form-control" id="address_input_2" name="memRoad" value="${add.adRoad }" readonly>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <input type="text" class="form-control" id="address_input_3" name="memDetail" value="${loginUser.memDetail }"  readonly><br>
+                                <input type="text" class="form-control" id="address_input_3" name="memDetail" value="${add.adDetail }"  readonly><br>
                             </td>
                         </tr>
                     </table>
@@ -195,6 +227,27 @@
     
     <jsp:include page="../common/footer.jsp"/>
     
+	<!-- The Modal -->
+	<div class="modal" id="deleteModal">
+		<div class="modal-dialog2">
+			<div class="modal-content_2">
+			<br>
+				<h5><b>배송지 목록으로 이동하시겠습니까?</b></h5>
+									                   
+									                    
+									                   
+				<div class="deleteBtn">
+					<a href="address.me" class="btn btn-success">이동</a>
+					<button type="reset" class="btn btn-success" data-dismiss="modal">취소</button>
+				</div>
+									                    
+									                   
+									                    
+			 </div>
+		</div>
+	</div>
+				
+				                       
     
     <script>
     

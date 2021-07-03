@@ -1,5 +1,6 @@
 package com.kh.magicpot.member.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -166,7 +167,9 @@ public class MemberController {
 	@RequestMapping("profile.me")
 	public String profileForm(HttpSession session, Model model) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		
+		int memNo = loginUser.getMemNo();
+		Address add = mService.selectDefault(memNo);
+		model.addAttribute("add", add);
 		
 		return "member/myPageProfile";
 	}
@@ -195,27 +198,29 @@ public class MemberController {
 		}
 	}
 	
+	// 배송지관리 폼
 	@RequestMapping("address.me")
 	public String addressForm(HttpSession session, Model model) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
 		
 		int memNo = loginUser.getMemNo();
-		Address a = mService.selectMember(memNo);
+		ArrayList<Address> a = mService.selectMember(memNo);
+		Address add = mService.selectDefault(memNo);
 		
 		model.addAttribute("a", a);
+		model.addAttribute("add", add);
 		
 		return "member/myPageAddress";
 	}
 	
 	// 배송지 추가
-	
 	@RequestMapping("insert.ad")
 	public String insertAddress(Address ad, HttpSession session, Model model) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		
+		System.out.println(ad);
 		int memNo = loginUser.getMemNo();
 		
 		String adName = ad.getAdName();
@@ -223,6 +228,7 @@ public class MemberController {
 		String adPost = ad.getAdPost();
 		String adRoad = ad.getAdRoad();
 		String adDetail = ad.getAdDetail();
+		String adDefault = ad.getAdDefault();
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("memNo", memNo);
@@ -231,15 +237,14 @@ public class MemberController {
 		map.put("adPost", adPost);
 		map.put("adRoad", adRoad);
 		map.put("adDetail", adDetail);
+		map.put("adDefault", adDefault);
 		
 		
+		int result3 = mService.insertAddress(map);
 		
-	
-		int result = mService.insertAddress(map);
-		
-		if(result>0) { // 성공 => 알람창 출력할 문고 담아서 => 메인페이지 (url재요청)
+		if(result3>0) { // 성공 => 알람창 출력할 문고 담아서 => 메인페이지 (url재요청)
 			session.setAttribute("alertMsg", "배송지가 추가되었습니다");
-			return "member/myPageAddress";
+			return "redirect:address.me";
 		}else { 
 			return "common/errorPage";
 		}
@@ -247,8 +252,68 @@ public class MemberController {
 		
 	}
 	
+	// 배송지 수정상세보기
+	@RequestMapping("address.up")
+	public String selectAddress(int adNo, Model model) {
+		
+		Address a = mService.selectAddress(adNo); 
+			
+		model.addAttribute("a", a);
+		return "member/myPageAddressUpdate";
+			
+		
+	}
 	
-
+	// 배송지 수정하기
+	@RequestMapping("address.fi")
+	public String fixAddress(Address a, HttpSession session, Model model) {
+		System.out.println(a);
+	
+		String adDefault = a.getAdDefault();
+		
+		
+		int	result = mService.fixAddress(a);
+		
+		int result3 = 0;
+		
+		if(adDefault.equals("Y")) {
+			int result2 = mService.fixAddress2(a);
+			 result3 = mService.fixAddress3(a);
+		}
+			
+		
+		
+		
+		
+		
+		if(result>0 || result3>0) {
+		
+			session.setAttribute("alertMsg", "성공적으로 수정되었습니다");
+			return "redirect:address.me";
+					
+		} else {
+		
+			model.addAttribute("errorMsg", "정보 수정 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	// 배송지 삭제
+	@RequestMapping("delete.ad")
+	public String deleteAddress(int adNo, HttpSession session, Model model) {
+		System.out.println(adNo);
+		int result = mService.deleteAddress(adNo);
+		
+		if(result > 0) { 
+			
+			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+			return "redirect:address.me";
+			
+		}else {
+			model.addAttribute("errorMsg", "게시글 삭제 실패");
+			return "common/errorPage";
+		}
+	}
 	
 	
 }

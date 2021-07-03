@@ -100,9 +100,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    , ad_default
 		 from address_list
 		 where mem_no = #{memNo}
-		   and ad_default = 'Y'
-
-		 
+		   and ad_location = 'Y'
+		   and ad_default= 'N'
+ 
+	</select>  
+	
+	<select id="selectDefault" resultMap="Address">
+		select
+		      ad_no
+		    , mem_no
+		    , ad_location
+		    , ad_name
+		    , ad_phone
+		    , ad_post
+		    , ad_road
+		    , ad_detail
+		    , ad_default
+		 from address_list
+		 where mem_no = #{memNo}
+		   and ad_location = 'Y'
+		   and ad_default= 'Y'
+ 
 	</select>  
 	
 	
@@ -117,7 +135,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	     , mem_Road = #{memRoad}
 	  	     , mem_Detail = #{memDetail}
 	  	 where mem_id = #{memId}
-  </update>
+   </update>
 	
  <insert id="insertAddress" parameterType="Address">
   	insert
@@ -144,6 +162,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
   	  )
   </insert>
+  
+  <select id="selectAddress" resultMap="Address">
+		select
+		      ad_no
+		    , mem_no
+		    , ad_location
+		    , ad_name
+		    , ad_phone
+		    , ad_post
+		    , ad_road
+		    , ad_detail
+		    , ad_default
+		 from address_list
+		 where ad_no = #{adNo}
+		   
+ 
+	</select>  
+	
+	<update id="fixAddress" parameterType="Address">
+	  	update
+	  		   address_list
+	  	   set ad_name = #{adName}
+	  	     , ad_phone = #{adPhone}
+	  	     , ad_post = #{adPost}
+	  	     , ad_road = #{adRoad}
+	  	     , ad_detail = #{adDetail}
+	  	    
+	  	 where ad_no = #{adNo}
+   </update>
+   
+   <update id="fixAddress2" parameterType="Address">
+	  	update
+	  		   address_list
+	  	   set ad_default = 'N'  	     
+	  	 where ad_no != #{adNo}
+   </update>
+   
+   <update id="fixAddress3" parameterType="Address">
+	  	update
+	  		   address_list
+	  	   set ad_name = #{adName}
+	  	     , ad_phone = #{adPhone}
+	  	     , ad_post = #{adPost}
+	  	     , ad_road = #{adRoad}
+	  	     , ad_detail = #{adDetail}
+	  	     , ad_default = #{adDefault}
+	  	 where ad_no = #{adNo}
+   </update>
+   
+   <update id="deleteAddress" parameterType="_int">
+		update
+		       address_list
+		   set ad_location = 'N'
+		 where ad_no = #{adNo}
+	</update>
 	
 
   </mapper>
