@@ -34,6 +34,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ad_detail" property="adDetail"/>
 		<result column="ad_default" property="adDefault"/>
 	</resultMap>
+	
+	<resultMap id="project" type="Project">
+		<id column="pro_no" property="proNo"/>
+		<result column="cre_no" property="creNo"/>
+		<result column="ca_no" property="caNo"/>
+		<result column="pro_title" property="proTitle"/>
+		<result column="pro_price" property="proPrice"/>
+		<result column="pro_image" property="proImage"/>
+		<result column="pro_summary" property="proSummary"/>
+		<result column="pro_story" property="proStory"/>
+		<result column="pro_fundprice" property="proFundPrice"/>
+		<result column="pro_status" property="proStatus"/>
+		<result column="create_word" property="createWord"/>
+		<result column="pro_shippirce" property="proShipPrice"/>
+		<result column="open_date" property="openDate"/>
+		<result column="close_date" property="closeDate"/>
+		<result column="pro_step" property="proStep"/>
+		<result column="pro_ad" property="proAd"/>
+	</resultMap>	
+	
+	<resultMap id="Creator" type="Creator" >
+		<id column="cre_no" property="creNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="cre_business" property="creBusiness"/>
+		<result column="cre_phone" property="crePhone"/>
+		<result column="cre_privacy" property="crePrivacy"/>
+		<result column="cre_name" property="creName"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
 	  
   	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
   		select
@@ -100,9 +130,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    , ad_default
 		 from address_list
 		 where mem_no = #{memNo}
-		   and ad_default = 'Y'
-
-		 
+		   and ad_location = 'Y'
+		   and ad_default= 'N'
+ 
+	</select>  
+	
+	<select id="selectDefault" resultMap="Address">
+		select
+		      ad_no
+		    , mem_no
+		    , ad_location
+		    , ad_name
+		    , ad_phone
+		    , ad_post
+		    , ad_road
+		    , ad_detail
+		    , ad_default
+		 from address_list
+		 where mem_no = #{memNo}
+		   and ad_location = 'Y'
+		   and ad_default= 'Y'
+ 
 	</select>  
 	
 	
@@ -117,33 +165,153 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	     , mem_Road = #{memRoad}
 	  	     , mem_Detail = #{memDetail}
 	  	 where mem_id = #{memId}
-  </update>
+   </update>
 	
- <insert id="insertAddress" parameterType="Address">
+  	
+  	<!-- 일반회원관리 -->
+  	<select id="selectListCount" resultType="_int">
+  		select
+  		       count(*)
+  		  from member
+  		 where status = 'Y'
+  	</select>
+  	
+  	<select id="selectList" resultMap="memberResultSet">
+  		select
+  		       mem_no
+  		     , mem_id
+  		     , mem_name
+  		     , phone
+  		     , email
+  		     , to_char(enroll_date, 'YYYY-MM-DD') enroll_date
+  		from member
+  	   where status= 'Y'
+  	   order
+  	      by enroll_date desc
+  	</select>
+  	
+  	<insert id="insertAddress" parameterType="Address">
   	insert
-  	  into address_list
-  	  (
-  	  	ad_no
-  	  , mem_no
-  	  , ad_name
-  	  , ad_phone
-  	  , ad_post
-  	  , ad_road
-  	  , ad_detail
-  	  
-  	  )
-  	  values
-  	  (
-  	    seq_adno.nextval
-  	  , #{memNo}
-  	  , #{adName}
-  	  , #{adPhone}
-  	  , #{adPost}
-  	  , #{adRoad}
-  	  , #{adDetail}
-
-  	  )
+	  	  into address_list
+	  	  (
+	  	  	ad_no
+	  	  , mem_no
+	  	  , ad_name
+	  	  , ad_phone
+	  	  , ad_post
+	  	  , ad_road
+	  	  , ad_detail
+	  	  
+	  	  )
+	  	  values
+	  	  (
+	  	    seq_adno.nextval
+	  	  , #{memNo}
+	  	  , #{adName}
+	  	  , #{adPhone}
+	  	  , #{adPost}
+	  	  , #{adRoad}
+	  	  , #{adDetail}
+	  	  )
   </insert>
+
+  
+  <select id="selectAddress" resultMap="Address">
+		select
+		      ad_no
+		    , mem_no
+		    , ad_location
+		    , ad_name
+		    , ad_phone
+		    , ad_post
+		    , ad_road
+		    , ad_detail
+		    , ad_default
+		 from address_list
+		 where ad_no = #{adNo}
+		   
+ 
+	</select>  
 	
+	<update id="fixAddress" parameterType="Address">
+	  	update
+	  		   address_list
+	  	   set ad_name = #{adName}
+	  	     , ad_phone = #{adPhone}
+	  	     , ad_post = #{adPost}
+	  	     , ad_road = #{adRoad}
+	  	     , ad_detail = #{adDetail}
+	  	    
+	  	 where ad_no = #{adNo}
+   </update>
+   
+   <update id="fixAddress2" parameterType="Address">
+	  	update
+	  		   address_list
+	  	   set ad_default = 'N'  	     
+	  	 where ad_no != #{adNo}
+   </update>
+   
+   <update id="fixAddress3" parameterType="Address">
+	  	update
+	  		   address_list
+	  	   set ad_name = #{adName}
+	  	     , ad_phone = #{adPhone}
+	  	     , ad_post = #{adPost}
+	  	     , ad_road = #{adRoad}
+	  	     , ad_detail = #{adDetail}
+	  	     , ad_default = #{adDefault}
+	  	 where ad_no = #{adNo}
+   </update>
+   
+   <update id="deleteAddress" parameterType="_int">
+		update
+		       address_list
+		   set ad_location = 'N'
+		 where ad_no = #{adNo}
+	</update>
+	
+	<!-- 크리에이터조회 -->
+	<select id="creatSearch" resultMap="Creator" >
+
+		select
+		      cre_no
+		    , mem_no
+		    , cre_business
+		    , cre_phone
+		    , cre_privacy
+		    , cre_name
+		    , status
+		 from creator
+		where mem_no = #{memNo}
+	
+	</select>
+	
+	<!-- 프로젝트조회 -->
+	<select id="madeProject" resultMap="project" >
+
+		select
+		      pro_no
+		    , cre_no
+		    , ca_no
+		    , pro_title
+		    , pro_price
+		    , pro_image
+		    , pro_summary
+		    , pro_story
+		    , pro_fundprice
+		    , pro_status
+		    , create_word
+		    , pro_shippirce
+		    , open_date
+		    , close_date
+		    , pro_step
+		    , pro_ad
+		 from project
+	    where cre_no = #{creNo}
+	
+	</select>
+	
+
 
   </mapper>

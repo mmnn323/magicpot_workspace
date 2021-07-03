@@ -1,14 +1,18 @@
 package com.kh.magicpot.member.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.member.model.dao.MemberDao;
 import com.kh.magicpot.member.model.vo.Address;
 import com.kh.magicpot.member.model.vo.Member;
+import com.kh.magicpot.project.model.vo.Creator;
+import com.kh.magicpot.project.model.vo.Project;
 
 @Service 
 public class MemberServiceImpl implements MemberService {
@@ -40,7 +44,7 @@ public class MemberServiceImpl implements MemberService {
 
 	// 배송지조회
 	@Override
-	public Address selectMember(int memNo) {
+	public ArrayList<Address> selectMember(int memNo) {
 		return mDao.selectMember(sqlSession, memNo);
 	}
 	
@@ -50,19 +54,81 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.updateMember(sqlSession, m);
 	}
 
+
 	// 배송지추가
-	
 	@Override
 	public int insertAddress(HashMap<String, Object> map) {
 		return mDao.insertAddress(sqlSession, map);
 	}
-	
 
 
+	@Override
+	public Address selectDefault(int memNo) {
+		return mDao.selectDefault(sqlSession, memNo);
+	}
+
+	@Override
+	public Address selectAddress(int adNo) {
+		return mDao.selectAddress(sqlSession, adNo);
+	}
+
+
+	@Override
+	public int fixAddress(Address a) {
+		return mDao.fixAddress(sqlSession, a);
+	}
+
+
+	@Override
+	public int deleteAddress(int adNo) {
+		return mDao.deleteAddress(sqlSession, adNo);
+	}
+
+
+	@Override
+	public int fixAddress2(Address a) {
+		return mDao.fixAddress2(sqlSession, a);
+	}
 	
+	@Override
+	public int fixAddress3(Address a) {
+		return mDao.fixAddress3(sqlSession, a);
+	}
+
+	// 일반회원관리 리스트 조회 (페이징 처리 회원 총 갯수)
+	@Override
+	public int selectListCount() {
+		return mDao.selectListCount(sqlSession);
+	}
+
+	// 요청한 페이지에 보여질 회원 리스트
+	@Override
+	public ArrayList<Member> selectList(PageInfo pi) {
+		return mDao.selectList(sqlSession, pi);
+	}
+
+	// 회원 상세조회
+	@Override
+	public Member selectAdminMember(int memNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	// 크리에이터 조회
+	@Override
+	public Creator creatSearch(int memNo) {
+		return mDao.creatSearch(sqlSession, memNo);
+	}
 	
 
-	
-	
-	
+	// 내가 만든 프로젝트조회
+	@Override
+	public ArrayList<Project> madeProject(int creNo) {
+		return mDao.madeProject(sqlSession, creNo);
+	}
+
+
+
+
+
 }

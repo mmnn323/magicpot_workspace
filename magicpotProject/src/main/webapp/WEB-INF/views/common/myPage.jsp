@@ -85,7 +85,7 @@
         <tr>
             <th><i class="far fa-edit fa-2x"></i> </th>
             <td colspan="2">
-                <a href=""><p>내가 만든 프로젝트</p></a> 
+                <a href="made.pr"><p>내가 만든 프로젝트</p></a> 
             </td>
 
             <th></th> <!--그냥 가운데 공간주는 용도-->

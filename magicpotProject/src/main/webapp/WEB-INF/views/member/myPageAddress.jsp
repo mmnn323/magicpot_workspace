@@ -34,7 +34,7 @@
     }
 
     .wrap>div{width:100%}
-    .content_1{height: 240px; border-bottom: 1px solid gray;}
+    .content_1{height: 240px; border-bottom: 1px solid gray; margin-top:-40px;}
     .content_2{
         height: 650px;
         padding: 50px 30px;
@@ -129,7 +129,7 @@
 
     .modal-content{
         margin: auto;
-        width: 450px;
+        width: 425px;
         height: 650px;
         padding: 50px 40px;
     }
@@ -205,7 +205,10 @@
 
     #editBtn:hover, #deleteBtn:hover{
         color: black;
-    }    
+    }   
+    .textArea>div{
+    	float:left;
+    } 
     
 
 
@@ -240,7 +243,8 @@
             <div class="addContent">
             
 	            <c:choose>
-		            <c:when test="${empty loginUser.memPost and empty a.adPost }">
+	            
+		            <c:when test='${empty a[0].adNo and empty add.adNo}'>
 			                <!-- 등록된 배송지가 없을경우 -->
 			                <div class="mainContent">
 			
@@ -255,53 +259,85 @@
 			                  
 			
 					</c:when>
+
 					<c:otherwise>
 			                <!-- 배송지목록에 배송지가 있을경우-->
 			                <div class="mainContent_2">
-			                        <div class="list" >
-			                            <div class="listcontent">
-			                                <div id="adName">
-			                                    <b>류길상</b> &nbsp;
-			                                    <img src="resources/images/common/adBtn.png">
-			                                 
-			                                </div>
-			                            </div>
-			
-			                            <div class="listBtn" >
-			                                <i class="far fa-edit" data-toggle="modal" data-target="#editModal" id="editBtn"></i> &nbsp;
-			                                <i class="fas fa-times" data-toggle="modal" data-target="#deleteModal" id="deleteBtn"></i>
-			
-			                            </div>
-				                        <br><br>
-				                        <div class="textArea">
-					                    	<span>[ ${loginUser.memPost } ] ${loginUser.memRoad }</span> <br>
-					                    	<span>&nbsp; ${loginUser.memDetail }</span>
-				                    	</div> 
-			                        </div>
+			                	 <c:choose>
+				                	 <c:when test="${ add.adDefault eq 'Y' }">
+				                        <div class="list" >
+				                            <div class="listcontent">
+				                                <div id="adName">
+				                                    <b>${add.adName }</b> &nbsp;
+				                                    <img src="resources/images/common/adBtn.png">
+				                                 
+				                                </div>
+				                            </div>
+				
+				                            <div class="listBtn" >
+				                                <a style="text-decoration: none; color:gray;" href="address.up?adNo=${add.adNo}"><i class="far fa-edit" id="editBtn" ></i></a> &nbsp;
+					                            <a style="text-decoration: none; color:gray;" href="delete.ad?adNo=${add.adNo}"><i class="fas fa-times" data-toggle="modal" data-target="#deleteModal1" id="deleteBtn"></i></a>
+				
+				                            </div>
+					                        <br><br>
+					                        <div class="textArea">
+						                    	<span>[ ${add.adPost } ] ${add.adRoad }</span> <br>
+						                    	<div id="detail" style="width:150px" >&nbsp; ${add.adDetail }</div>  &nbsp;&nbsp; <div id="phone"><small>|&nbsp;  ${add.adPhone }</small></div>
+					                    	</div> 
+				                        </div>
+				                    </c:when>
+			                    </c:choose>
 			                    <br>
 			                    
 			                    
-			                    <div class="list">
-			                        <div class="listcontent" data-toggle="modal" data-target="#editModal">
-			                            <p id="adName">
-			                                <b>류길상</b> &nbsp;
-			                            </p>
-			                            
-			                        </div>
-									
-			                        <div class="listBtn2" >
-			                            <i class="far fa-edit" data-toggle="modal" data-target="#editModal" id="editBtn"></i> &nbsp;
-			                            <i class="fas fa-times" data-toggle="modal" data-target="#deleteModal" id="deleteBtn"></i>
-			
-			                        </div>
-			                        <br><br>
-			                       
-			                        <div class="textArea">
-					                    	<span>[ ${loginUser.memPost } ] ${loginUser.memRoad }</span> <br>
-					                    	<span>&nbsp; ${loginUser.memDetail }</span>
-				                    </div> 
-			                        
-			                    </div>
+			                    
+			                    <c:forEach var="ad" items="${a }">
+				                    <div class="list">
+				                        <div class="listcontent" data-toggle="modal" data-target="#editModal">
+				                            <p id="adName">
+				                                <b>${ad.adName}</b> &nbsp;
+				                            </p>
+				                            <input type="hidden" name="adNo" id="adNo" value="${ad.adNo }">
+				                            
+				                        </div>
+										
+				                        <div class="listBtn2" >
+				                            <a style="text-decoration: none; color:gray;" href="address.up?adNo=${ad.adNo}"><i class="far fa-edit" id="editBtn" ></i></a> &nbsp;
+				                            <a style="text-decoration: none; color:gray;" href="delete.ad?adNo=${ad.adNo}"><i class="fas fa-times" data-toggle="modal" data-target="#deleteModal1" id="deleteBtn"></i></a>
+				                            
+				                             <!-- The Modal -->
+									        <div class="modal" id="deleteModal">
+									            <div class="modal-dialog2">
+									                <div class="modal-content_2">
+									                    <br>
+									                    <h5><b>정말로 삭제하시겠습니까?</b></h5>
+									                   
+									                    
+									                   
+									                        <div class="deleteBtn">
+									                            <a href="" class="btn btn-success">삭제</a>
+									                            <button type="reset" class="btn btn-success" data-dismiss="modal">취소</button>
+									                        </div>
+									                    
+									                   
+									                    
+									                </div>
+									            </div>
+									        </div>
+				
+				                        </div>
+				                        <br><br>
+				                       
+				                        <div class="textArea">
+						                    	<span id="post">[ ${ad.adPost } ]</span> <span id="road">${ad.adRoad }</span> <br>
+						                    	<div id="detail" style="width:150px" >&nbsp; ${ad.adDetail }</div> &nbsp;&nbsp; <div id="phone" ><small>|&nbsp;  ${ad.adPhone }</small></div>
+					                    </div> 
+				                        
+				                    </div>
+				                    <br>
+				                    
+							           
+								</c:forEach>
 			
 			                </div>
 			
@@ -327,12 +363,14 @@
         <!-- 배송지 추가 Modal -->
         <div class="modal" id="myModal">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content" style="width:425px;">
                 
                     
                     <h4><b>배송지 추가</b></h4>
                     <br><br>
                     <form action="insert.ad" method="post" id="adList">
+                    	
+                    	
                         <table class="form-content">
                             <tr>
                                 <td colspan="2">     
@@ -343,7 +381,7 @@
                             <tr id="postLine">
                                 <td >
                                     <label for="post"> 주소 </label>
-                                    <input type="text" class="form-control" id="post" name="adPost" value="" placeholder="우편번호" readonly required><br><br>
+                                    <input type="text" class="form-control" id="adPost" name="adPost" value="" placeholder="우편번호" readonly required><br><br>
                                     
                                 </td>
                                 <td >
@@ -371,11 +409,14 @@
                             <!-- 
                             <tr>
                                 <td colspan="2">
-                                    <input type="checkbox" name="" value=""> 기본배송지 등록
+                                    <input type="checkbox" name="adDefault" value=""> 기본배송지 등록
                                 </td>
                             </tr>
-                             -->
+                             --> 
                         </table>
+                        
+                       
+                        
                         <br>
                         <button type="submit" class="btn btn-success" id="enrollBtn">등록 완료</button>
 
@@ -428,7 +469,7 @@
 			                }
 			 
 			                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-			                $("#post").val(data.zonecode);
+			                $("#adPost").val(data.zonecode);
 			                $("#address").val(addr);
 			                // 커서를 상세주소 필드로 이동한다.
 			                $("#address_input_3").attr("readonly",false);
@@ -438,90 +479,14 @@
 			    }).open();    
 		 
 			}
+	    	
+	    	
     	</script>
 
-        <!-- 배송지 수정 Modal -->
-        <div class="modal" id="editModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                
-                    
-                    <h4><b>배송지 수정</b></h4>
-                    <br><br>
-                    <form action="" method="post" id="adList">
-                        <table class="form-content">
-                            <tr>
-                                <td colspan="2">     
-                                    <label for="name">받는 사람 </label>
-                                    <input type="text" class="form-control" id="name" name="name" value="류길상"  required ><br>
-                                </td>
-                            </tr>
-                            <tr id="postLine">
-                                <td >
-                                    <label for="post"> 주소 </label>
-                                    <input type="text" class="form-control" id="post" name="post" value="08123" required><br><br>
-                                    
-                                </td>
-                                <td >
-                                    <button type="button" id="addInput" class="btn btn-success" >우편번호</button>
-                                </td>
-                            </tr>
-                            <tr id="adDetail">
-                                <td colspan="2">
-                                    
-                                    <input type="text" class="form-control" id="address" name="address"  value="서울 특별시 관악구 봉천동 112-1" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    
-                                    <input type="text" class="form-control" id="adDetail" name="adDetail" value="102호"  required><br>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <label for="phone"> 전화번호</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" value="010-1111-2222" required><br>    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <input type="checkbox" name="" value=""> 기본배송지 등록
-                                </td>
-                            </tr>
-                            
-                        </table>
-                        <br>
-                        <button type="submit" class="btn btn-success" id="enrollBtn">수정 하기</button>
+		
+        
 
-                    </form>
-                   
-                
-                
-                
-                </div>
-            </div>
-        </div>
-
-        <!-- The Modal -->
-        <div class="modal" id="deleteModal">
-            <div class="modal-dialog2">
-                <div class="modal-content_2">
-                    <br>
-                    <h5><b>정말로 삭제하시겠습니까?</b></h5>
-                   
-                    
-                   
-                        <div class="deleteBtn">
-                            <a href="" class="btn btn-success">삭제</a>
-                            <button type="reset" class="btn btn-success" data-dismiss="modal">취소</button>
-                        </div>
-                    
-                   
-                    
-                </div>
-            </div>
-        </div>
+      
                 
     
 
