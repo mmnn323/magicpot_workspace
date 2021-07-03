@@ -53,7 +53,7 @@ public class MemberDao {
 	}
 	
 	public int deleteAddress(SqlSessionTemplate sqlSession, int adNo) {
-		return sqlSession.insert("memberMapper.deleteAddress", adNo);
+		return sqlSession.update("memberMapper.deleteAddress", adNo);
 	}
 	
 	public int fixAddress2(SqlSessionTemplate sqlSession, Address a) {
@@ -90,9 +90,13 @@ public class MemberDao {
 	}
 	
 	// 내가만든 프로젝트조회
-	
 	public ArrayList<Project> madeProject(SqlSessionTemplate sqlSession, int creNo) {
 		return (ArrayList)sqlSession.selectList("memberMapper.madeProject", creNo);
-
 	}
+	
+	// 내가 만든 프로젝트 삭제
+	public int deleteMyProject(SqlSessionTemplate sqlSession, int proNo) {
+		return sqlSession.update("memberMapper.deleteMyProject", proNo);
+	}
+	
 }
