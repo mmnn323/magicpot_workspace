@@ -137,31 +137,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	 where mem_id = #{memId}
    </update>
 	
- <insert id="insertAddress" parameterType="Address">
+  	
+  	<!-- 일반회원관리 -->
+  	<select id="selectListCount" resultType="_int">
+  		select
+  		       count(*)
+  		  from member
+  		 where status = 'Y'
+  	</select>
+  	
+  	<select id="selectList" resultMap="memberResultSet">
+  		select
+  		       mem_no
+  		     , mem_id
+  		     , mem_name
+  		     , phone
+  		     , email
+  		     , to_char(enroll_date, 'YYYY-MM-DD') enroll_date
+  		from member
+  	   where status= 'Y'
+  	   order
+  	      by enroll_date desc
+  	</select>
+  	
+  	<insert id="insertAddress" parameterType="Address">
   	insert
-  	  into address_list
-  	  (
-  	  	ad_no
-  	  , mem_no
-  	  , ad_name
-  	  , ad_phone
-  	  , ad_post
-  	  , ad_road
-  	  , ad_detail
-  	  
-  	  )
-  	  values
-  	  (
-  	    seq_adno.nextval
-  	  , #{memNo}
-  	  , #{adName}
-  	  , #{adPhone}
-  	  , #{adPost}
-  	  , #{adRoad}
-  	  , #{adDetail}
-
-  	  )
+	  	  into address_list
+	  	  (
+	  	  	ad_no
+	  	  , mem_no
+	  	  , ad_name
+	  	  , ad_phone
+	  	  , ad_post
+	  	  , ad_road
+	  	  , ad_detail
+	  	  
+	  	  )
+	  	  values
+	  	  (
+	  	    seq_adno.nextval
+	  	  , #{memNo}
+	  	  , #{adName}
+	  	  , #{adPhone}
+	  	  , #{adPost}
+	  	  , #{adRoad}
+	  	  , #{adDetail}
+	  	  )
   </insert>
+
   
   <select id="selectAddress" resultMap="Address">
 		select
@@ -218,5 +241,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where ad_no = #{adNo}
 	</update>
 	
+
 
   </mapper>

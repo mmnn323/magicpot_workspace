@@ -207,96 +207,17 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach var="m" items="${ list }">
 						<tr>
 							<td><input type="checkbox"></td>
-							<td>50</td>
-							<td><a href="">user01</a></td>
-							<td>김개똥</td>
-							<td>010-1234-5678</td>
-							<td>user01@gmail.com</td>
-							<td>2021-02-14</td>
+							<td>${ m.memNo }</td>
+							<td>${ m.memId }</a></td>
+							<td>${ m.memName }</td>
+							<td>${ m.phone }</td>
+							<td>${ m.email }</td>
+							<td>${ m.enrollDate }</td>
 						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>49</td>
-							<td><a href="">user01</a></td>
-							<td>김개똥</td>
-							<td>010-1234-5678</td>
-							<td>user01@gmail.com</td>
-							<td>2021-02-14</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>48</td>
-							<td><a href="">user01</a></td>
-							<td>김개똥</td>
-							<td>010-1234-5678</td>
-							<td>user01@gmail.com</td>
-							<td>2021-02-14</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>47</td>
-							<td><a href="">user01</a></td>
-							<td>김개똥</td>
-							<td>010-1234-5678</td>
-							<td>user01@gmail.com</td>
-							<td>2021-02-14</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>46</td>
-							<td><a href="">user01</a></td>
-							<td>김개똥</td>
-							<td>010-1234-5678</td>
-							<td>user01@gmail.com</td>
-							<td>2021-02-14</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>45</td>
-							<td><a href="">user01</a></td>
-							<td>김개똥</td>
-							<td>010-1234-5678</td>
-							<td>user01@gmail.com</td>
-							<td>2021-02-14</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>43</td>
-							<td><a href="">user01</a></td>
-							<td>김개똥</td>
-							<td>010-1234-5678</td>
-							<td>user01@gmail.com</td>
-							<td>2021-02-14</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>43</td>
-							<td><a href="">user01</a></td>
-							<td>김개똥</td>
-							<td>010-1234-5678</td>
-							<td>user01@gmail.com</td>
-							<td>2021-02-14</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>42</td>
-							<td><a href="">user01</a></td>
-							<td>김개똥</td>
-							<td>010-1234-5678</td>
-							<td>user01@gmail.com</td>
-							<td>2021-02-14</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>41</td>
-							<td><a href="">user01</a></td>
-							<td>김개똥</td>
-							<td>010-1234-5678</td>
-							<td>user01@gmail.com</td>
-							<td>2021-02-14</td>
-						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -307,15 +228,50 @@
 
 				<div id="cm_paging">
 					<ul class="pagination pagination">
-						<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-						<li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">&gt;</a></li>
-						<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+					
+						<c:choose>
+							<c:when test="${ pi.currentPage eq 1}">
+								<li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
+							</c:when>
+							<c:otherwise>						
+								<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ pi.currentPage-1 }">&laquo;</a></li>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when test="${ pi.currentPage eq 1}">
+						<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+							</c:when>
+							<c:otherwise>						
+						<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ pi.currentPage-1 }">&lt;</a></li>
+							</c:otherwise>
+						</c:choose>
+						
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						
+							<li class="page-item"><a class="page-link" href="admin.mec?currentPage=${ p }">${ p }</a></li>
+							
+						</c:forEach>
+						
+						<c:choose>
+							<c:when test="${ pi.currentPage eq pi.maxPage }">
+								<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ pi.currentPage+1 }">&gt;</a></li>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when test="${ pi.currentPage eq pi.maxPage }">
+								<li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+							</c:otherwise>
+						</c:choose>
+						
 					</ul>
 				</div>
 

@@ -3,9 +3,11 @@ package com.kh.magicpot.member.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.member.model.vo.Address;
 
 import com.kh.magicpot.member.model.vo.Member;
@@ -33,10 +35,13 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updateMember", m);
 	}
 	
+
+	// 배송지 추가
 	public int insertAddress(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
 		return sqlSession.insert("memberMapper.insertAddress", map);
 	}
 	
+
 	public Address selectAddress(SqlSessionTemplate sqlSession, int adNo) {
 		return sqlSession.selectOne("memberMapper.selectAddress", adNo);
 	}
@@ -60,5 +65,22 @@ public class MemberDao {
 	public Address selectDefault(SqlSessionTemplate sqlSession, int memNo) {
 		return sqlSession.selectOne("memberMapper.selectDefault", memNo);
 	}
+	/*관리자 일반회원관리*/
+	public int selectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("memberMapper.selectListCount");
+
+	}
 	
+	public ArrayList<Member> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
+		
+	}
+
+
 }

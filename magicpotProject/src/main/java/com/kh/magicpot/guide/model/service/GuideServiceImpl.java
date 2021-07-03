@@ -14,6 +14,21 @@ public class GuideServiceImpl implements GuideService {
 	
 	@Autowired
 	private GuideDao gDao;
+
+	
+	/* 다인 추가 - 이용약관 */
+	// 이용약관 세부 / 수정용 페이지에 띄울 기본 이용약관
+	@Override
+	public String proModifyForm() {
+		return gDao.proModifyForm(sqlSession);
+	}
+
+	// 이용약관 수정
+	@Override
+	public int proModify() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	
