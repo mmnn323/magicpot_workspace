@@ -13,7 +13,7 @@
 	</select>
 
 	<!-- 이용약관 수정 -->
-	<update id="updateProvision" parameterType="guide">
+	<update id="proModify" parameterType="Guide">
 		update
 				guide
 		   set	gu_provision = #{gu_provision}

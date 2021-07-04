@@ -25,10 +25,12 @@ public class GuideServiceImpl implements GuideService {
 
 	// 이용약관 수정
 	@Override
-	public int proModify() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int proModify(String gu_provision) {
+		return gDao.proModify(sqlSession, gu_provision);		
 	}
+	
+	
+	
 	
 	
 	
