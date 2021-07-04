@@ -28,7 +28,7 @@
     <div id="footer">
         <div id="footer_1">
             <ul>
-                <li><a href="">이용약관</a></li>
+                <li><a href="provision.gu">이용약관</a></li>
                 <li><a href="detail.fd">공지사항</a></li>
                 <li><a href="">FAQ</a></li>
                 <li style="margin-right: 0;"><a href="">펀딩설명</a></li>

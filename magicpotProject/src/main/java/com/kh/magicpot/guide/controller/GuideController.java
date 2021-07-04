@@ -40,7 +40,6 @@ public class GuideController {
 		
 		if(result >0) {	// 이용약관 수정 성공	
 			
-			session.setAttribute("gu_provision", gService.proModify(gu_provision));
 			session.setAttribute("alertMsg", "이용약관이 성공적으로 수정되었습니다.");
 			return "redirect:/provision.gu";
 			
