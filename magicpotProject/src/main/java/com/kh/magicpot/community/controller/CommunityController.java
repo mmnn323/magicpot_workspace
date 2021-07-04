@@ -1,6 +1,7 @@
 package com.kh.magicpot.community.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,22 +33,78 @@ public class CommunityController {
 	 * @return
 	 */
 	@RequestMapping("list.cm")
-	public String selectCommunityList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model) {
+	public String selectCommunityList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+									  @RequestParam(value="ctg", defaultValue="0") int ctg,
+									  Model model) {
+		
+		// 카테고리 값 잘 넘어오는지 확인
+		// System.out.println(ctg); 잘 넘어옴
+		
 		
 		// 커뮤니티 공지사항 리스트 조회
 		ArrayList<CommunityNotice> cnList = cService.selectCmNoticeList();
 		
 		// 커뮤니티 글 리스트 조회(페이징)
-		int listCount = cService.selectCmListCount();
+		int listCount = cService.selectCmListCount(ctg);
+		// 카테고리별 글 카운트 잘 넘어오는지 확인
+		//System.out.println(listCount); 잘 넘어옴
+		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 12);
 		
-		ArrayList<Community> cList = cService.selectCmList(pi);
+		ArrayList<Community> cList = cService.selectCmList(pi, ctg);
 		
 		model.addAttribute("cnList", cnList);
 		model.addAttribute("pi", pi);
 		model.addAttribute("cList", cList);
+		model.addAttribute("ctg", ctg);
 		
 		return "community/communityListView";
+				
+	}
+	
+	/**
+	 * 커뮤니티 검색
+	 * @param currentPage
+	 * @param ctg
+	 * @param condition
+	 * @param cmKeyword
+	 * @param model
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("search.cm")
+	public String searchCommunity(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+			  					  @RequestParam(value="ctg", defaultValue="0") int ctg,
+			  					  String condition,
+			  					  String cmKeyword,
+			  					  Model model,
+			  					  HashMap<String, Object> map
+			  					  ) {
+		// HashMap에 담아서 요청
+		map.put("currentPage",currentPage);
+		map.put("ctg", ctg);
+		map.put("condition", condition);
+		map.put("cmKeyword", cmKeyword);
+		
+		// 커뮤니티 공지사항 리스트 조회
+		ArrayList<CommunityNotice> cnList = cService.selectCmNoticeList();
+		
+		// 검색 조건에 만족하는 게시글 총 갯수 조회 , 검색 조건에 만족하는 페이징 처리
+		int searchCount = cService.selectSearchListCount(map);
+		
+		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, 5, 12);
+		ArrayList<Community> cList = cService.selectSearchList(pi, map);
+		
+		// Model 객체에 응답데이터 담기
+		model.addAttribute("cnList", cnList);
+		model.addAttribute("pi", pi);
+		model.addAttribute("cList", cList);
+		model.addAttribute("ctg", ctg);
+		model.addAttribute("condition", condition);
+		model.addAttribute("cmKeyword", cmKeyword);
+
+		return "community/communityListView";
+		
 	}
 	
 	/**

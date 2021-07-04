@@ -1,6 +1,7 @@
 package com.kh.magicpot.community.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.community.model.vo.Community;
@@ -28,8 +29,12 @@ public interface CommunityService {
 	
 	// 커뮤니티 (페이징o, 첨부파일o) - 써머노트 api 적용 : 필요한 메소드 수정 예정
 	// 커뮤니티 글 리스트 조회
-	int selectCmListCount();
-	ArrayList<Community> selectCmList(PageInfo pi);
+	int selectCmListCount(int ctg);
+	ArrayList<Community> selectCmList(PageInfo pi, int ctg);
+	
+	// 커뮤니티 검색 리스트 조회
+	int selectSearchListCount(HashMap<String, Object> map);
+	ArrayList<Community> selectSearchList(PageInfo pi, HashMap<String, Object> map);
 	
 	// 커뮤니티 글 작성
 	int insertCommunity(Community c);

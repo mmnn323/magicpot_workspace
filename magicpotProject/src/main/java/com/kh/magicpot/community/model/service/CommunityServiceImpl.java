@@ -1,6 +1,7 @@
 package com.kh.magicpot.community.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,14 +71,38 @@ public class CommunityServiceImpl implements CommunityService {
 		return cDao.deleteCmNotice(sqlSession, cmNoticeNo);
 	}
 
+	/**
+	 * 커뮤니티 리스트 총 수(카테고리별)
+	 */
 	@Override
-	public int selectCmListCount() {
-		return cDao.selectCmListCount(sqlSession);
+	public int selectCmListCount(int ctg) {
+		return cDao.selectCmListCount(sqlSession, ctg);
 	}
 
+	/**
+	 * 커뮤니티 리스트 (카테고리별)
+	 * @param pi
+	 * @return
+	 */
 	@Override
-	public ArrayList<Community> selectCmList(PageInfo pi) {
-		return cDao.selectCmList(sqlSession, pi);
+	public ArrayList<Community> selectCmList(PageInfo pi, int ctg) {
+		return cDao.selectCmList(sqlSession, pi, ctg);
+	}
+	
+	/**
+	 * 검색_1 : 검색된 커뮤니티 리스트 총 수
+	 */
+	@Override
+	public int selectSearchListCount(HashMap<String, Object> map) {
+		return cDao.selectSearchListCount(sqlSession, map);
+	}
+
+	/**
+	 * 검색_2 : 검색된 커뮤니티 리스트 조회
+	 */
+	@Override
+	public ArrayList<Community> selectSearchList(PageInfo pi, HashMap<String, Object> map) {
+		return cDao.selectSearchList(sqlSession, pi, map);
 	}
 
 	@Override
@@ -109,5 +134,7 @@ public class CommunityServiceImpl implements CommunityService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
 
 }

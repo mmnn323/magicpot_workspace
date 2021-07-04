@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>MagicPot 매직팟 커뮤니티</title>
 <!-- css -->
-<link rel="stylesheet" type="text/css" href="resources/css/community/communityListView.css">  
+<link rel="stylesheet" type="text/css" href="resources/css/community/communityListView.css">
 </head>
 <body>
 	
@@ -37,11 +37,108 @@
             <div id="cm_noticeArea1" align="right">
                 <form>
                     <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="customCheck" name="example1" onclick="showAndHide();">
+                      <!-- <input type="checkbox" class="custom-control-input" id="customCheck" onclick="showAndHide();"> -->
+                      <input type="checkbox" class="custom-control-input" id="customCheck" onclick="showAndHide();">
                       <label class="custom-control-label" for="customCheck">공지 숨기기</label>
                     </div>
-                  </form>
+                </form>
             </div>
+            
+            <!-- * 스크립트 : 공지사항 숨기기, 보완 필요(다른 페이지로 넘어가도 체크속성 유지) -->
+            
+            <script>
+	            function showAndHide(){
+	                if($("#cm_noticeArea2").is(':visible')){
+	                    $("#cm_noticeArea2").hide(100);
+	                } else{
+	                    $("#cm_noticeArea2").show(100);
+	                }
+	            }
+        	</script>
+        	
+        	<!-- 
+        	<script>
+				function showAndHide(){
+				
+					if($("#cm_noticeArea2").is(':visible')){
+	                    $("#cm_noticeArea2").hide(100);
+				        $.cookie('noticeoff', 'ok', { expires: 7, path: '/' });
+				
+				    } else {
+				    	$("#cm_noticeArea2").show(100);
+				        $.cookie('noticeoff', 'ok', { expires: 0, path: '/' });
+				
+				    }
+				
+				}
+				
+				function noticeLoad()
+				{
+				
+				    if (!$.cookie('noticeoff')) {
+				
+				        noticeOff(false);
+				        $('#customCheck').attr('checked', false);
+				
+				    }
+				
+				}
+				
+				noticeLoad();
+			</script>
+			 -->
+        	
+        	<!-- requestScope의 hideNotice의 키값으로 존재하는 값이 있을 경우에 실행할 script (공지숨기기 체크했을 경우)-->
+	       <!--  
+        	<script>
+        	$(document).ready(function(){
+        		// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
+        	    var userInputId = getCookie("userInputId");
+        	    $("input[id='my_id']").val(userInputId); 
+        	     
+        	    if($("input[name='id']").val() != ""){ // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
+        	        $("#idSaveCheck").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
+        	    }
+        	     
+        	    $("#customCheck").change(function(){ // 체크박스에 변화가 있다면,
+        	        if($("#customCheck").is(":checked")){ // ID 저장하기 체크했을 때,
+        	            var userInputId = $("input[name='id']").val();
+        	            setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
+        	        }else{ // ID 저장하기 체크 해제 시,
+        	            deleteCookie("userInputId");
+        	        }
+        	    });
+        	     
+        	});
+        	 
+        	function setCookie(cookieName, value, exdays){
+        	    var exdate = new Date();
+        	    exdate.setDate(exdate.getDate() + exdays);
+        	    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+        	    document.cookie = cookieName + "=" + cookieValue;
+        	}
+        	 
+        	function deleteCookie(cookieName){
+        	    var expireDate = new Date();
+        	    expireDate.setDate(expireDate.getDate() - 1);
+        	    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+        	}
+        	 
+        	function getCookie(cookieName) {
+        	    cookieName = cookieName + '=';
+        	    var cookieData = document.cookie;
+        	    var start = cookieData.indexOf(cookieName);
+        	    var cookieValue = '';
+        	    if(start != -1){
+        	        start += cookieName.length;
+        	        var end = cookieData.indexOf(';', start);
+        	        if(end == -1)end = cookieData.length;
+        	        cookieValue = cookieData.substring(start, end);
+        	    }
+        	    return unescape(cookieValue);
+        	}
+        	</script>
+        	-->
 
             <div id="noticeLine"></div>
 
@@ -58,12 +155,13 @@
 	                      </tr>
                       	</c:forEach>
                     </tbody>
-                  </table>
+                </table>
             </div>
+            
+            <!-- 스크립트 :  커뮤니티 공지사항 상세보기 -->
             <script>
             	$(function(){
             		$(".cm_noticeTitle").click(function(){
-            			//console.log($(this).siblings(".cmNoticeNo").val());
             			location.href="detail.cn?cnno=" + $(this).siblings(".cmNoticeNo").val();
             		})
             	})
@@ -77,41 +175,93 @@
             </c:if>
             
         </div>
-
-        <script>
-            // 공지사항 숨기기 클릭 시 공지사항 테이블 숨기기
-            function showAndHide(){
-                if($("#cm_noticeArea2").is(':visible')){
-                    $("#cm_noticeArea2").hide(100);
-                } else{
-                    $("#cm_noticeArea2").show(100);
-                }
-            }
-        </script>
-
+        
+        
         <!-- 커뮤니티 카테고리 영역 -->
-        <div id="cm_categoryArea" align="center">
-            <div id="cm_categoryArea1" >
-                <ul >
-                    <li><a href="" style="border-bottom: 3px solid rgb(116, 152, 107); color: rgb(116, 152, 107);">전체</a></li>
-                    <li><a href="" >자유수다</a></li>
-                    <li><a href="" >정보나눔</a></li>
-                    <li><a href="" >#용기내</a></li>
-                </ul>
-            </div>
-        </div>
+        	 
+	        <div id="cm_categoryArea" align="center">
+	            <div id="cm_categoryArea1" >
+	                <ul>
+	                    <li><a href="list.cm" id="ctgAll">전체</a></li>
+	                    <li><a href="list.cm?ctg=1" id="ctgFree">자유수다</a></li>
+	                    <li><a href="list.cm?ctg=2" id="ctgInfo">정보나눔</a></li>
+	                    <li><a href="list.cm?ctg=3" id="ctgChall">#용기내</a></li>
+	                </ul>
+	            </div>
+	        </div>
+	        
+	        
+	        <!-- 
+	        <div id="cm_categoryArea" align="center">
+	            <div id="cm_categoryArea1" >
+	                <ul>
+	                    <li><a id="ctgAll" onclick="postFormSubmit(0);">전체</a></li>
+	                    <li><a id="ctgFree" onclick="postFormSubmit(1);">자유수다</a></li>
+	                    <li><a id="ctgInfo" onclick="postFormSubmit(2);">정보나눔</a></li>
+	                    <li><a id="ctgChall" onclick="postFormSubmit(3);">#용기내</a></li>
+	                </ul>
+	            </div>
+	        </div>
+	    	 -->
+         
+       <script>
+       
+       	/*
+	       function postFormSubmit(num){
+	      		if(num == 0){ 
+	      			$("#categoryForm").attr("action", "list.cm").submit();
+	      		}else if(num == 1){
+	      			$("#categoryForm").attr("action", "list.cm?ctg=1").submit();
+	      		}else if(num == 2){
+	      			$("#categoryForm").attr("action", "list.cm?ctg=2").submit();
+	      		}else if(num == 3){
+	      			$("#categoryForm").attr("action", "list.cm?ctg=3").submit();
+	      		}
+	      	}
+	       */
+	       	$(function(){
+	       		switch(${ctg}){
+	       		case 0:
+	       			$("#ctgAll").css("border-bottom", "3px solid rgb(116, 152, 107)").css("rgb(116, 152, 107)");
+	       			break;
+	       		case 1:
+	       			$("#ctgFree").css("border-bottom", "3px solid rgb(116, 152, 107)").css("rgb(116, 152, 107)");
+	       			break;
+	       		case 2:
+	       			$("#ctgInfo").css("border-bottom", "3px solid rgb(116, 152, 107)").css("rgb(116, 152, 107)");
+	       			break;
+	       		case 3:
+	       			$("#ctgChall").css("border-bottom", "3px solid rgb(116, 152, 107)").css("rgb(116, 152, 107)");
+	       			break;
+	       		};
+	       	});
+       </script>
 
         <!-- 커뮤니티 검색바 -->
         <div id="cm_searchArea" align="center">
-            <select name="" id="cm_SearchCtg" >
-                <option value="" >제목</option>
-                <option value="">내용</option>
-                <option value="">제목+내용</option>
-            </select>
-            <input id="cm_keyword" type="text" onkeyup="enterkey();" placeholder=" Search">
+            <form action="search.cm">
+                <select name="condition" id="cm_SearchCtg" >
+                    <option value="title" >제목</option>
+                    <option value="content">내용</option>
+                    <option value="titleContent">제목+내용</option>
+                </select>
+                <input id="cm_keyword" type="text" name="cmKeyword" value="${ cmKeyword }" placeholder=" Search">
+                <input type="hidden" name="ctg" value="${ ctg }">
+                <button type="submit" class="btn btn-success"><i class="fas fa-search fa-sm" style="padding: 2px 7px 2px 7px;"></i></button>
+            </form>
         </div>
-
         
+        <!-- requestScope의 condition의 키값으로 존재하는 값이 있을 경우에 실행할 script (검색을 했을 경우)-->
+        <c:if test="${ !empty condition }">
+        	<script>
+        	$(function(){
+        		$("#cm_searchArea option[value=${condition}]").attr("selected", true);
+        	})
+        	</script>
+        </c:if>
+        
+
+        <!-- 커뮤니티 리스트 보기 스타일 영역 -->
         <div id="cm_btnArea" >
             <div id="listStyle">
                 <a href=""><i class="fas fa-bars fa-2x"></i></a> 
@@ -166,19 +316,28 @@
         </c:if>
 
         <!-- 페이징 영역 -->
-
+        <!-- 검색 후 페이징바 보완 : 검색 전, 후 페이징바 따로 만들어두고 조건 검색으로 해당 버튼 노출 -->
+        <!-- 검색 전 : list.cm 요청, currentPage, cgt값 넘기기 -->
+        <!-- 검색 후 : search.cm로 요청, currentPage, ctg, condition, cmKeyword 값 넘기기 -->
         <div id="cm_pagingArea" align="center">
-            
             <div id="cm_paging" >
-            
                 <ul class="pagination pagination">
-                	
-                	<c:choose>
+                
+                   
+                   
+                   <c:choose>
                 		<c:when test="${ pi.currentPage eq 1 }">
 	                    	<li class="page-item disabled" ><a class="page-link" href="#">&laquo;</a></li>
 	                    </c:when>
 	                    <c:otherwise>
-	                    	<li class="page-item" ><a class="page-link" href="list.cm?currentPage=1">&laquo;</a></li>
+	                    	<c:choose>
+	                    		<c:when test="${ empty condition }">
+	                    			<li class="page-item" ><a class="page-link" href="list.cm?currentPage=1&ctg=${ctg}">&laquo;</a></li>
+	                    		</c:when>
+	                    		<c:otherwise>
+	                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=1&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">&laquo;</a></li>
+	                    		</c:otherwise>
+	                    	</c:choose>
 	                    </c:otherwise>
                     </c:choose>
                     
@@ -187,17 +346,31 @@
 	                    	<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
 	                    </c:when>
 	                    <c:otherwise>
-	                    	<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.currentPage-1 }">&lt;</a></li>
+	                    	<c:choose>
+	                    		<c:when test="${ empty condition }">
+	                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.currentPage-1 }&ctg=${ctg}">&lt;</a></li>	                    			
+	                    		</c:when>
+	                    		<c:otherwise>
+	                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=${ pi.currentPage-1 }&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">&laquo;</a></li>
+	                    		</c:otherwise>
+	                    	</c:choose>
 	                    </c:otherwise>
                     </c:choose>
-                    
+
                     <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
                     	<c:choose>
                     		<c:when test="${pi.currentPage eq p }">
                     			<li class="page-item disabled"><a class="page-link" href="#" style="background-color: rgb(116, 152, 107); color:white;">${ p }</a></li>
                     		</c:when>
                     		<c:otherwise>
-                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ p }">${ p }</a></li>
+                    			<c:choose>
+		                    		<c:when test="${ empty condition }">
+		                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ p }&ctg=${ctg}">${ p }</a></li>
+		                    		</c:when>
+		                    		<c:otherwise>
+		                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=${ p }&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">${ p }</a></li>
+	                    			</c:otherwise>
+	                    		</c:choose>
                     		</c:otherwise>
                     	</c:choose>
                     </c:forEach>
@@ -207,7 +380,14 @@
 	                    	<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
 	                    </c:when>
 	                    <c:otherwise>
-	                    	<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.currentPage+1 }">&gt;</a></li>
+	                    	<c:choose>
+	                    		<c:when test="${ empty condition }">
+	                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.currentPage+1 }&ctg=${ctg}">&gt;</a></li>
+	                    		</c:when>
+	                    		<c:otherwise>
+	                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=${ pi.currentPage+1 }&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">&gt;</a></li>
+                    			</c:otherwise>
+                    		</c:choose>
 	                    </c:otherwise>
                     </c:choose>
                     
@@ -216,13 +396,71 @@
 	                    	<li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
 	                    </c:when>
 	                    <c:otherwise>
-	                    	<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.maxPage }">&raquo;</a></li>
+	                    	<c:choose>
+	                    		<c:when test="${ empty condition }">
+	                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.maxPage }&ctg=${ctg}">&raquo;</a></li>
+	                    		</c:when>
+	                    		<c:otherwise>
+	                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=${ pi.maxPage }&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">&raquo;</a></li>
+                    			</c:otherwise>
+                    		</c:choose>
 	                    </c:otherwise>
                     </c:choose>
+                   
+                   
+                   
+                	<!-- 
+                	<c:choose>
+                		<c:when test="${ pi.currentPage eq 1 }">
+	                    	<li class="page-item disabled" ><a class="page-link" href="#">&laquo;</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+                   			<li class="page-item" ><a class="page-link" href="list.cm?currentPage=1&ctg=${ctg}">&laquo;</a></li>
+	                    </c:otherwise>
+                    </c:choose>
+                    
+                    <c:choose>
+                    	<c:when test="${ pi.currentPage eq 1 }">
+	                    	<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.currentPage-1 }&ctg=${ctg}">&lt;</a></li>
+	                    </c:otherwise>
+                    </c:choose>
+
+                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    	<c:choose>
+                    		<c:when test="${pi.currentPage eq p }">
+                    			<li class="page-item disabled"><a class="page-link" href="#" style="background-color: rgb(116, 152, 107); color:white;">${ p }</a></li>
+                    		</c:when>
+                    		<c:otherwise>
+		                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ p }&ctg=${ctg}">${ p }</a></li>
+                    		</c:otherwise>
+                    	</c:choose>
+                    </c:forEach>
+                    
+                    <c:choose>
+                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                    	<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.currentPage+1 }&ctg=${ctg}">&gt;</a></li>
+	                    </c:otherwise>
+                    </c:choose>
+                    
+                    <c:choose>
+                    	<c:when test=" ${ pi.currentPage eq pi.maxPage }">
+	                    	<li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.maxPage }&ctg=${ctg}">&raquo;</a></li>
+	                    </c:otherwise>
+                    </c:choose>
+                    -->
                   </ul>
-                  
             </div>
         </div>
+        
     </div>
     
     <!-- 푸터 포함 -->
