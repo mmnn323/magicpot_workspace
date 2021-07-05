@@ -41,6 +41,7 @@ public class CommunityController {
 		// System.out.println(ctg); 잘 넘어옴
 		
 		
+		
 		// 커뮤니티 공지사항 리스트 조회
 		ArrayList<CommunityNotice> cnList = cService.selectCmNoticeList();
 		

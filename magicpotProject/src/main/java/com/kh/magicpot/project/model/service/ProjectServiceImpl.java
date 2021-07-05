@@ -1,6 +1,7 @@
 package com.kh.magicpot.project.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,24 @@ public class ProjectServiceImpl implements ProjectService{
 	public int insertCre(Creator c) {
 		return pDao.insertCre(sqlSession, c);
 	}
+
+	@Override
+	public ArrayList<Project> reList2(HashMap<String, Object> map) {
+		return pDao.reList2(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Project> searchList(HashMap<String, Object> map) {
+		return pDao.searchList(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Project> searchList2(HashMap<String, Object> map) {
+		return pDao.searchList2(sqlSession, map);
+	}
+
+	
+	
 	
 
 }

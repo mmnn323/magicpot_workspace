@@ -92,7 +92,7 @@
 		<!-- 카테고리 영역-->
 		<div id="header_2">
 			<ul>
-				<li><a href="">펀딩하기</a></li>
+				<li><a href="fund.li">펀딩하기</a></li>
 				<li><a href="">프로젝트 올리기</a></li>
 				<li><a href="">이용가이드</a></li>
 				<li><a href="list.cm">커뮤니티</a></li>
@@ -101,9 +101,9 @@
 
 		<!-- 검색 영역 -->
 		<div id="header_3">
-			<form action="" id="search_form">
+			<form action="search2.pr" id="search_form">
 				<div class="input-group mb-3" id="search_text">
-					<input type="text" class="form-control">
+					<input type="text" class="form-control" name="keyword">
 					<div class="input-group-append">
 						<button class="btn btn-success" type="submit">
 							<i class="fas fa-search fa-sm" style="padding: 2px;"></i>

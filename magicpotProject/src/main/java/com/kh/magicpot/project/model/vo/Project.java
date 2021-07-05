@@ -33,4 +33,5 @@ public class Project {
 	private String proStep; 		// 펀딩 단계
 	private String proAd;		    // 동의 여부
 	private Category category;
+	private Creator creator;
 }

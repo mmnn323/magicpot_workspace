@@ -340,7 +340,7 @@
 				}
 	            	
 	            	
-            </script>
+          </script>
         
         
         
@@ -807,6 +807,11 @@
             //이미지 사이즈
             document.getElementById("background").style.backgroundSize = "100%";
             }
+            
+            function alertFn() {
+
+   	    	 alert("클릭됨1");
+   	    }
         </script>
 
         

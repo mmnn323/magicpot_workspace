@@ -329,42 +329,42 @@ public class MemberController {
 	}
 	
 	// 내가만든프로젝트 폼 이동
-		@RequestMapping("made.pr")
-		public String madeProject(HttpSession session, Model model) {
-			Member loginUser = (Member)session.getAttribute("loginUser");
-			int memNo = loginUser.getMemNo();
+	@RequestMapping("made.pr")
+	public String madeProject(HttpSession session, Model model) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int memNo = loginUser.getMemNo();
 			
-			Creator cre = mService.creatSearch(memNo);
+		Creator cre = mService.creatSearch(memNo);
 			
-			int creNo = cre.getCreNo();
+		int creNo = cre.getCreNo();
 			
 			
-			ArrayList<Project> pr = mService.madeProject(creNo);
+		ArrayList<Project> pr = mService.madeProject(creNo);
 			
 			
 			// 남은 일 계산		
-			int[] arr = new int[pr.size()];
+		int[] arr = new int[pr.size()];
 			
-			for(int i=0; i<pr.size(); i++) {
-				Date date1=pr.get(i).getCloseDate();
-			    Date date2 = new Date(System.currentTimeMillis());
+		for(int i=0; i<pr.size(); i++) {
+			Date date1=pr.get(i).getCloseDate();
+			Date date2 = new Date(System.currentTimeMillis());
 			 
-			    long calDateDays = 0;
-			    SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
-				Date FirstDate = date1;
-				Date SecondDate = date2;
+			long calDateDays = 0;
+			SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+			Date FirstDate = date1;
+			Date SecondDate = date2;
 				
-				long calDate = SecondDate.getTime()-FirstDate.getTime(); 
+			long calDate = SecondDate.getTime()-FirstDate.getTime(); 
 				
-				// Date.getTime() 은 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지를 반환 
-				// 이제 24*60*60*1000(각 시간값에 따른 차이점) 을 나눠주면 일수 나옴
-				 calDateDays = calDate / ( 24*60*60*1000); 
+			// Date.getTime() 은 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지를 반환 
+			// 24*60*60*1000을 나눠주면 일수 나옴
+			calDateDays = calDate / ( 24*60*60*1000); 
 	 
-				calDateDays = Math.abs(calDateDays);
+			calDateDays = Math.abs(calDateDays);
 				
-				arr[i] = (int)calDateDays;
+			arr[i] = (int)calDateDays;
 				
-			}
+		}
 		    
 			
 			model.addAttribute("pr", pr);
