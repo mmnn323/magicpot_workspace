@@ -239,23 +239,23 @@
 
                 <!-- 이용약관 글 등록 영역 -->
                 <div id="pro_listArea" align="center">
-                    <form action="" id="enrollForm" method="post">
+                  <form action="proModify.gu" id="modifyForm" method="post">                  	
                         <div id="pro_listArea2" >
                             <table id="pro_enrollTable">
                                 <tr>
                                     <td colspan="2" >
-                                        <textarea id="summernote" name="editordata">${provision}</textarea>
+                                        <textarea id="summernote" name="gu_provision">${provision}</textarea>
                                     </td>
                                 </tr>
                             </table>
                         </div>
                         <!-- 버튼 영역 -->
                         <div id="pro_btnArea" align="center">
-                            <a href="#" id="pro_modifyBtn" class="btn btn-success" data-toggle="modal" data-target="#proModifyBtn">수정하기</a>
+                            <a href="" id="pro_modifyBtn" class="btn btn-success" data-toggle="modal" data-target="#proModifyBtn">수정하기</a>
                             <a href="#" id="pro_listBtn" class="btn btn-success" onClick="history.back();">뒤로가기</a>
                         </div>
                         <br><br>
-                    </form>
+                    
                 </div>
 
                 <script>
@@ -283,6 +283,30 @@
                             fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36']
                             });                   	
                     });
+                    
+                	// 모달 수정 버튼 클릭 => DB에 수정된 이용약관 넘겨주기
+                	$(function(){
+                		
+                		var summernotePro = $('#summernote').val();
+                		//console.log(summernotePro);
+                		$("#gu_provision").val(summernotePro);
+                    		
+                		var isChange = false;
+                		$("textarea").change(function(){
+                			isChange = true;
+                		});
+                		
+                		$(window).on("beforeunload", function(){
+                			if(isChange){
+                				return "";
+                			}
+                		});
+                		
+                		$("#proOkBtn").click(function(){
+                			isChange = false;
+                		});               		
+                	});
+               
                 </script>
             </div>
 
@@ -300,33 +324,15 @@
                         
                         <!-- Modal footer -->
                         <div id="proModalFooter">
-                            <button id="proOkBtn" class="btn btn-warning">수정</button>
+                            <button type="submit" id="proOkBtn" class="btn btn-warning">수정</button>
                             <button id="proCancleBtn" data-dismiss="modal" class="btn btn-secondary">취소</button>
                         </div>
                     </div>
                 </div>
             </div>  
             <!-- Modal 끝 -->
-            
-            <script>
-            	// 모달 수정 버튼 클릭 => DB에 수정된 이용약관 넘겨주기
-            	$(document).on('click', '#proOkBtn', function(){
-            		
-               		var summernotePro = $('#summernote').summernote('code');
-               		//console.log("summerPro" + summernotePro);
-               		
-               		$.ajax({
-               			url:"proModify.gu",
-               			data: {gu_provision:${"summernotePro"}},           			
-               			type: "post",
-               			success:function(data){
-               				$("#summernote").html(data);
-               			}, error: function(){
-               				console.log("ajax 통신 실패");
-               			}
-               		})              		
-            	});          	
-            </script>
+        </form>
+           
                            
         </div>
     </div>
