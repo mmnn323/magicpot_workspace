@@ -116,6 +116,18 @@
     a{
         color: black;
     }
+    
+    .dropdown{
+    	margin-left: 800px;
+    	margin-bottom:-30px;
+    }
+    .dropdown > button{
+    	border:1px solid lightgray;
+    	background-color : white;
+    	color:black;
+    	width:110px;
+    	
+    }
 
 
 
@@ -161,6 +173,8 @@
 
         <br><br>
         <div class="content_3">
+        		<br><br>
+        
             	<div class="dropdown" >
 	                <button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 	                       ${ empty ccc ? '인기순' : ccc }
@@ -168,21 +182,12 @@
 	                <div class="dropdown-menu">
 	                
 	                   <button id="popular" class="dropdown-item" onclick="location.href='search2.pr?&keyword=${keyword}&ctg=${ctg}'" >인기순</button>
-	                   <button id="popular" class="dropdown-item" onclick="location.href='search2.pr?&keyword=${keyword}&ctg=${ctg}&ctg2=1'" >마감순</button>
+	                   <button name="ctg" value="${ctg}" id="popular" class="dropdown-item" onclick="location.href='search2.pr?&keyword=${keyword}&ctg=${ctg}&ctg2=1'" >마감순</button>
 	                   <button id="recent" class="dropdown-item" onclick="location.href='search2.pr?&keyword=${keyword}&ctg=${ctg}&ctg2=2'">최신순</button>
 	                	 
-	          	    </div>
-            <div class="select">
-            
-	          	    
-	          	    
-	          	    
-                <select class="custom-select" name="condition">
-                    <option value="writer">최신순</option>
-                    <option value="title">마감 임박순</option>
-                    <option value="content">펀딩 금액순</option>
-                </select>
-            </div>
+	          	   </div>
+        		</div>
+          
             <br>
 
             <c:choose>
@@ -200,7 +205,7 @@
 			                <div class="newThumbnail" >
 			                   <img src="${pr[i].proImage }">
 			                   <br><br>
-			                   <small class="projectCtg" style="color:gray; font-weight:bold;">${pr[i].category.caName }</small>
+			                   <small class="projectCtg" style="color:gray; font-weight:bold;">${pr[i].category.caName } &nbsp; | &nbsp; ${pr[i].creator.creName }</small>
 			   
 			                   <p style="margin-top: 0;">
 			                           ${pr[i].proTitle }
@@ -225,10 +230,15 @@
            
 
             
-        </div>
-    </div>
+    	</div>
     
+    </div>
     <jsp:include page="../common/footer.jsp"/>
+    
+    
+    
+   
+    
     
 </body>
 </html>

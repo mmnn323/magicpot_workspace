@@ -261,11 +261,19 @@ public class ProjectController {
 				
 		}
 		
-		
+		String ccc = "";
+		if(ctg2 == 0) {
+			ccc = "인기순";
+		}else if(ctg2 == 1) {
+			ccc = "마감순";
+		}else {
+			ccc = "최신순";
+		}
+		model.addAttribute("ccc", ccc);
 		model.addAttribute("pr", pr);
 		model.addAttribute("arr", arr);
 		model.addAttribute("ctg", ctg);
-		model.addAttribute("ctg", ctg2);
+		model.addAttribute("ctg2", ctg2);
 		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
 
@@ -281,7 +289,7 @@ public class ProjectController {
 							  HttpSession session, Model model) {
 		
 		
-		
+		System.out.println("ctg값 :" + ctg);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("ctg", ctg);
 		map.put("ctg2", ctg2);
@@ -315,11 +323,21 @@ public class ProjectController {
 				
 		}
 		
-		System.out.println(keyword);
+		
+		
+		String ccc = "";
+		if(ctg2 == 0) {
+			ccc = "인기순";
+		}else if(ctg2 == 1) {
+			ccc = "마감순";
+		}else {
+			ccc = "최신순";
+		}
+		model.addAttribute("ccc", ccc);
 		model.addAttribute("pr", pr);
 		model.addAttribute("arr", arr);
 		model.addAttribute("ctg", ctg);
-		model.addAttribute("ctg", ctg2);
+		model.addAttribute("ctg2", ctg2);
 		model.addAttribute("keyword", keyword);
 
 		

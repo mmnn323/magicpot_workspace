@@ -268,48 +268,142 @@
 		<br>
         <div id="content_2">
             <div id="category">
-                <a id="all" href="fund.li" style="text-decoration: none; color: black;">
-                    <div class="box" style="background: #BDBDBD;">
-                        <img class="profile" src="resources/images/funding/all.jpg">
-                    
-                    </div>
-                    <div class="fundCate" style="margin-top: 10px; margin-left: 15px;">ALL</div>
-                </a>
-                <a  href="fund.li?ctg=5" style="text-decoration: none; color: black;">
-                    <div id="living" class="box" style="background: #BDBDBD;">
-                        <img class="profile" src="resources/images/funding/living.jpg">
-                    
-                    </div>
-                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">LIVING</div>
-                </a>
-                <a id="office" href="fund.li?ctg=1" style="text-decoration: none; color: black;">
-                    <div class="box" style="background: #BDBDBD;">
-                        <img class="profile" src="resources/images/funding/office.jpg">
-                    
-                    </div>
-                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">OFFICE</div>
-                </a>
-                <a id="kitchen" href="fund.li?ctg=2" style="text-decoration: none; color: black;">
-                    <div class="box" style="background: #BDBDBD;">
-                        <img class="profile" src="resources/images/funding/kitchen.jpg">
-                    
-                    </div>
-                    <div class="fundCate" style="margin-top: 10px; margin-left: -2px;">KITCHEN</div>
-                </a>
-                <a id="travel" href="fund.li?ctg=3" style="text-decoration: none; color: black;">
-                    <div class="box" style="background: #BDBDBD;">
-                        <img class="profile" src="resources/images/funding/travel.jpg">
-                    
-                    </div>
-                    <div class="fundCate" style="margin-top: 10px; margin-left: 2px;">TRAVEL</div>
-                </a>
-                <a id="bath" href="fund.li?ctg=4" style="text-decoration: none; color: black;">
-                    <div class="box" style="background: #BDBDBD;">
-                        <img class="profile" src="resources/images/funding/bath.jpg">
-                    
-                    </div>
-                    <div class="fundCate" style="margin-top: 10px; margin-left: 8px;">BATH</div>
-                </a>
+            	<c:choose>
+	            	<c:when test="${empty keyword }">
+		                <a id="all" href="fund.li" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/all.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 15px;">ALL</div>
+		                </a>
+		                <a  href="fund.li?ctg=5" style="text-decoration: none; color: black;">
+		                    <div id="living" class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/living.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">LIVING</div>
+		                </a>
+		                <a id="office" href="fund.li?ctg=1" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/office.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">OFFICE</div>
+		                </a>
+		                <a id="kitchen" href="fund.li?ctg=2" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/kitchen.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: -2px;">KITCHEN</div>
+		                </a>
+		                <a id="travel" href="fund.li?ctg=3" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/travel.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 2px;">TRAVEL</div>
+		                </a>
+		                <a id="bath" href="fund.li?ctg=4" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/bath.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 8px;">BATH</div>
+		                </a>
+                </c:when>
+                <c:when test="${condition == 'title' }">
+		                <a id="all" href="search.pr?condition=title&keyword=${keyword }&ctg=0&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/all.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 15px;">ALL</div>
+		                </a>
+		                <a  href="search.pr?condition=title&keyword=${keyword }&ctg=5&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
+		                    <div id="living" class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/living.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">LIVING</div>
+		                </a>
+		                <a id="office" href="search.pr?condition=title&keyword=${keyword }&ctg=1&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/office.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">OFFICE</div>
+		                </a>
+		                <a id="kitchen" href="search.pr?condition=title&keyword=${keyword }&ctg=2&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/kitchen.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: -2px;">KITCHEN</div>
+		                </a>
+		                <a id="travel" href="search.pr?condition=title&keyword=${keyword }&ctg=3&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/travel.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 2px;">TRAVEL</div>
+		                </a>
+		                <a id="bath" href="search.pr?condition=title&keyword=${keyword }&ctg=4&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/bath.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 8px;">BATH</div>
+		                </a>                
+                </c:when>
+                <c:when test="${condition == 'writer' }">
+		                <a id="all" href="search.pr?condition=writer&keyword=${keyword }&ctg=0&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/all.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 15px;">ALL</div>
+		                </a>
+		                <a  href="search.pr?condition=writer&keyword=${keyword }&ctg=5&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
+		                    <div id="living" class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/living.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">LIVING</div>
+		                </a>
+		                <a id="office" href="search.pr?condition=writer&keyword=${keyword }&ctg=1&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/office.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">OFFICE</div>
+		                </a>
+		                <a id="kitchen" href="search.pr?condition=writer&keyword=${keyword }&ctg=2&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/kitchen.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: -2px;">KITCHEN</div>
+		                </a>
+		                <a id="travel" href="search.pr?condition=writer&keyword=${keyword }&ctg=3&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/travel.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 2px;">TRAVEL</div>
+		                </a>
+		                <a id="bath" href="search.pr?condition=writer&keyword=${keyword }&ctg=4&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
+		                    <div class="box" style="background: #BDBDBD;">
+		                        <img class="profile" src="resources/images/funding/bath.jpg">
+		                    
+		                    </div>
+		                    <div class="fundCate" style="margin-top: 10px; margin-left: 8px;">BATH</div>
+		                </a>                
+                </c:when>
+                
+                
+                </c:choose>
             </div> 
             
 
@@ -328,10 +422,24 @@
 	                       ${ empty ccc ? '인기순' : ccc }
 	                </button>
 	                <div class="dropdown-menu">
-	                
-	                   <button id="popular" class="dropdown-item" onclick="location.href='fund.li?ctg=${ctg}'" >인기순</button>
-	                   <button id="popular" class="dropdown-item" onclick="location.href='fund.li?ctg=${ctg}&ctg2=1'" >마감순</button>
-	                   <button id="recent" class="dropdown-item" onclick="location.href='fund.li?ctg=${ctg}&ctg2=2'">최신순</button>
+	                	<c:choose>
+	                		<c:when test="${empty keyword }">
+			                   <button id="popular" class="dropdown-item" onclick="location.href='fund.li?ctg=${ctg}'" >인기순</button>
+			                   <button id="popular" class="dropdown-item" onclick="location.href='fund.li?ctg=${ctg}&ctg2=1'" >마감순</button>
+			                   <button id="recent" class="dropdown-item" onclick="location.href='fund.li?ctg=${ctg}&ctg2=2'">최신순</button>
+	                		
+	                		</c:when>
+	                		<c:when test="${condition == 'title' }">
+	                			<button id="popular" class="dropdown-item" onclick="location.href='search.pr?condition=title&keyword=${keyword }&ctg=${ctg}'" >인기순</button>
+			                   	<button id="popular" class="dropdown-item" onclick="location.href='search.pr?condition=title&keyword=${keyword }&ctg=${ctg}&ctg2=1'">마감순</button>
+			                   	<button id="recent" class="dropdown-item" onclick="location.href='search.pr?condition=title&keyword=${keyword }&ctg=${ctg}&ctg2=2'">최신순</button>
+	                		</c:when>
+	                		<c:when test="${condition == 'writer' }">
+	                			<button id="popular" class="dropdown-item" onclick="location.href='search.pr?condition=writer&keyword=${keyword }&ctg=${ctg}'" >인기순</button>
+			                   	<button id="popular" class="dropdown-item" onclick="location.href='search.pr?condition=writer&keyword=${keyword }&ctg=${ctg}&ctg2=1'">마감순</button>
+			                   	<button id="recent" class="dropdown-item"  onclick="location.href='search.pr?condition=writer&keyword=${keyword }&ctg=${ctg}&ctg2=2'">최신순</button>
+	                		</c:when>
+	                	</c:choose>
 	                	 
 	          	    </div>
 		                   
@@ -377,7 +485,7 @@
 			                <div class="newThumbnail" >
 			                   <img src="${pr[i].proImage }">
 			                   <br><br>
-			                   <small class="projectCtg" style="color:gray; font-weight:bold;">${pr[i].category.caName }</small>
+			                   <small class="projectCtg" style="color:gray; font-weight:bold;">${pr[i].category.caName } &nbsp; | &nbsp; ${pr[i].creator.creName }</small>
 			   
 			                   <p style="margin-top: 0;">
 			                           ${pr[i].proTitle }
