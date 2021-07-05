@@ -61,3 +61,22 @@ div{box-sizing: border-box; }
 }
 .progress{height: 10px; margin-bottom: 0;}
 .progress>div{background-color: rgb(116, 152, 107); }
+
+#noLikeProject{
+        margin:100px;
+        font-family: 'Noto Sans KR', sans-serif;
+}
+#noLikeProject>h5{padding:5px;}
+#noLikeProject>a{
+    background-color: rgb(116, 152, 107);
+    color:white;
+    margin:20px;
+    width:200px;
+    padding:15px;
+    text-decoration: none;
+    border-radius: 3px;
+}
+#noLikeProject>a:hover{
+    background-color: rgb(107, 139, 98);
+    transition: .6s;
+}

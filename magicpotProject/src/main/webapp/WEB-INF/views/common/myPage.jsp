@@ -91,7 +91,7 @@
             <th></th> <!--그냥 가운데 공간주는 용도-->
             
             <th><i class="fas fa-heart fa-2x"></i></th>
-            <td><a href=""><p>좋아하는 프로젝트</p></a></td>
+            <td><a href="like.pr"><p>좋아하는 프로젝트</p></a></td>
 
         </tr>
          
