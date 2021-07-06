@@ -366,7 +366,7 @@ public class MemberController {
 				
 		}
 		    
-			
+			System.out.println(pr);
 			model.addAttribute("pr", pr);
 			model.addAttribute("arr", arr);
 			

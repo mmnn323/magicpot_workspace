@@ -95,7 +95,18 @@
         <tr>
             <th><i class="far fa-edit fa-2x"></i> </th>
             <td colspan="2">
-                <a href="made.pr"><p>내가 만든 프로젝트</p></a> 
+            
+            	<c:choose>
+            		<c:when test="${loginUser.status eq 'C' }">
+               			 <a href="made.pr"><p>내가 만든 프로젝트</p></a> 
+            		</c:when>
+            		<c:otherwise>
+            			 <a href="" onclick="creatorYn();"><p>내가 만든 프로젝트</p></a> 
+            		</c:otherwise>
+            	</c:choose>
+                
+                
+                
             </td>
 
             <th></th> <!--그냥 가운데 공간주는 용도-->
@@ -165,8 +176,17 @@
         
 
     </form>
+    
 
     </table>
+    
+ 	
+    
+    <script>
+    	function creatorYn(){
+    		alert('크리에이터 등록이 되지 않았습니다.');
+    	}
+    </script>
 
 </body>
 </html>

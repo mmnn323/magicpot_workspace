@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,8 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyPage_like</title>
     <!-- 글씨체 -->
-    
-    
 <link rel="preconnect" href="https://fonts.gstatic.com/%22%3E">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -26,25 +23,25 @@
 
 <style>
     div, form, input{ box-sizing: border-box;}
-    div, p, form, a, input {font-family: 'Noto Sans KR', sans-serif;}
+    div, p, form, a, input, th, tr {font-family: 'Noto Sans KR', sans-serif;}
     div{box-sizing: border-box;  }
     .wrap{
         background-color: white;
         margin: auto;
         width: 1000px;
-       height:3900px
+        height: 1300px;
     }
 
     .wrap>div{width:100%}
     .content_1{height: 240px; background-color: rgb(225, 212, 169);}
     .content_2{
-       
+        height: 1000px;
         
        
     }
 
     #textArea{
-        margin-top: 50px;
+        margin-top: 50p;
     }
 
     #textArea_1>p{
@@ -75,7 +72,7 @@
     }
     .mainContent{
         border: 1px solid lightgray;
-        
+        height: 800px;
         width: 700px;
 
         margin-top: 20px;
@@ -86,7 +83,7 @@
 
     .sideContent{
         border: 1px solid lightgray;
-        height: 1000px;
+        height: 1100px;
         width: 260px;
 
         margin-top: 20px;
@@ -95,23 +92,23 @@
 
     }
 
-    #cloud, #enroll{
+    #faq{
         width: 650px;
         margin-left: 20px;
     }
 
-    .guide, #etc{
+    .guide, .etc{
         width: 220px;
         margin-left: 10px;
     }
 
-    #cloudTitle, #enrollTitle, .guideTitle{
+    #faTitle,  .guideTitle, .etc{
         padding: 30px 0px;
     }
 
 
 
-    #cloudContent, #enrollContent{
+    #faContent, #rewardContent{
         border-top: 3px solid lightgray;
         margin-top: -20px;
     }
@@ -127,7 +124,42 @@
         color: black;
         text-decoration: none;
     }
+
+
+    .tableOuter{
+        border: 1px solid gray;
+        width: 630px;
+        height: 260px;
+        background-color: rgb(225, 212, 169);
+    }
+
+    #updateForm{
+        margin-top: 13px;
+        margin-left: 20px;
+    }
     
+
+    #enrollBtn, #btn{
+        background-color: white;
+        border: 1px solid rgb(225, 212, 169);
+        color: gray;
+        border-radius: px;
+    }
+
+    #enrollBtn:hover, #btn:hover{
+        background-color: rgb(225, 212, 169);
+        border: 1px solid rgb(225, 212, 169);
+    }
+
+    .button{
+        text-align: center;
+    }
+
+    #title{
+        width: 530px;
+        
+    }
+
 
     
 
@@ -139,7 +171,7 @@
 </head>
 <body>
     
-    <jsp:include page="../common/header.jsp"/>
+	<jsp:include page="../common/header.jsp"/>
     <div class="wrap">
         <div class="content_1">
             <div id="textArea_1">
@@ -153,7 +185,7 @@
                 </p>
             </div>
 
-            <img src="resources/images/common/guideLogo.png" id="guideLogo">
+             <img src="resources/images/common/guideLogo.png" id="guideLogo">
                                        
                 
         </div>
@@ -161,43 +193,58 @@
         <div class="content_2">
             <div class="mainContent">
 
-                <div id="cloud">
-                    <div id="cloudTitle">
-                        <h6><b>${gu[0].guTitle }</b></h6>
+                <div id="faq">
+                    <div id="faTitle">
+                        <h5><b>FAQ</b></h5>
                     </div>
                     
 
-                    <div id="cloudContent">
+                    <div id="faContent">
+
                         <br>
-                        <p>
-                           ${gu[0].guContent }
-                        </p>
-                    </div>
-                </div>
+                        <div class="tableOuter"> 
+                            <form id="updateForm" action="insert.fa" method="POST">
+                                
+                                <table>
+                                    <tr>
+                                        <th width="50">제목</th>
+                                        <td colspan="3" >
+                                            <input type="text" name="faqTitle" required id="title">
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>내용</th>
+                                        <td colspan="3"></td>
+                                    </tr>
+                                        
+                                    <tr>
+                                        <td colspan="4">
+                                            <textarea name="faqContent" rows="7" cols="70" w style="resize: none;" required>
 
-                <br><br>
-                <div id="enroll">
-                    <div id="enrollTitle">
-                        <h6><b>${gu[1].guTitle }</b></h6>
-                    </div>
+                                            </textarea>
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                                <br><br>
+                                <div class="button">
+                                    <button id="enrollBtn" class="btn btn-success" type="submit">등록하기</button>
+                                    <button id="btn" class="btn btn-success" type="button" onclick="history.back();">뒤로가기</button>
+                                </div>
+                            </form>
+                        </div>
 
-                    
-
-                    <div id="enrollContent">
-                        <br>
-                        <p>
-                           ${gu[1].guContent }
-                        </p>
                     </div>
                 </div>
 
             </div>
 
-            <div class="sideContent">
+           <div class="sideContent">
 
-                <div class="guide">
+               <div class="guide">
                     <div class="guideTitle">
-                        <a href="guide.me" style="text-decorateion:none; color:black;"><h6>공통</h6></a>
+                        <a href="guide.me" style="text-decorateion:none; color:black;">공통</a>
                     </div>
                     <div class="gudieContent">
                         <br>
@@ -254,23 +301,23 @@
                 </div>
 
                 <br><br>
-                <div id="etc">
+                <div class="etc">
                     <a href="" style="text-decorateion:none; color:black;"><h6>공지사항</h6></a>
                     <br>
                     <a href="" style="text-decorateion:none; color:black;"><h6>이용약관</h6></a>
                     <br>
-                    <a href="faq.li" style="text-decorateion:none; color:black;"><h6>FAQ</h6></a>
+                    <h6><b>FAQ</b></h6>
 
                 </div>
                 
 
             </div>
         </div>
-		
-	
+
+
     </div>
+    <jsp:include page="../common/footer.jsp"/>
     
-    
-	<jsp:include page="../common/footer.jsp"/>
+
 </body>
 </html>
