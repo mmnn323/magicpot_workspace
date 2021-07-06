@@ -176,8 +176,9 @@
 					<div class="find">
 						<tr>
 							<td><input type="checkbox" id="remember_memId" name="remember_memId"> 아이디 저장</td>
-							&nbsp;&nbsp;
-							<th>아이디 / 비밀번호 찾기</th>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<th><a href="">아이디 찾기 </a> |
+							<a href=""> 비밀번호 </a></th>
 						</tr>
 					</div>
 

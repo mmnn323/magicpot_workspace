@@ -69,6 +69,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<!-- 희나 -->
 		<mapper resource="/mappers/coupon-mapper.xml"/>
+		<mapper resource="/mappers/adminPay-mapper.xml"/>		
 	</mappers>
 	
 </configuration>

@@ -17,4 +17,9 @@ public class AdminCouponDao {
 	public ArrayList<Coupon> selectCoupon(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("couponMapper.selectCoupon");
 	}
+	
+	
+	public int deleteCoupon(SqlSessionTemplate sqlSession, int cpNo) {
+		return sqlSession.update("couponMapper.deleteCoupon", cpNo);
+	}
 }

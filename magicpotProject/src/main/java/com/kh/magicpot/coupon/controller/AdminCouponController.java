@@ -21,20 +21,13 @@ public class AdminCouponController {
 	private AdminCouponService cService;
 	
 	
-	@RequestMapping("coupon.me")
-	public String couponView() {
-
-		return "coupon/adminCoupon";
-	}
-	
 	@RequestMapping("adminInsert.me")
 	public String adminCoupon(Coupon c, HttpSession session, Model model) {
 		
 		int result = cService.insertCoupon(c);
-			System.out.println(c);
 
 		if(result > 0) {
-			return "redirect:/";
+			return "redirect:adminCoupon.me";
 		}else { 
 			return "common/errorPage";
 		}
@@ -51,6 +44,26 @@ public class AdminCouponController {
 		  .setViewName("coupon/adminCoupon");
 		
 		return mv;
+		
+	}
+	
+	@RequestMapping("admindelete.me")
+	public String deleteCoupon(int cpNo, HttpSession session, Model model) {
+		
+		Coupon couponNo = (Coupon)session.getAttribute("couponNo");
+		
+		int result = cService.deleteCoupon(couponNo.getCpNo());
+		
+		if(result > 0) {
+			session.removeAttribute("cpNo");
+			session.setAttribute("alertMsg", "성공적으로 삭제 되었습니다.");
+		
+			return "redirect:adminCoupon.me";
+		}else {
+			return "common/errorPage";
+		}
+	
+		
 		
 	}
 	
