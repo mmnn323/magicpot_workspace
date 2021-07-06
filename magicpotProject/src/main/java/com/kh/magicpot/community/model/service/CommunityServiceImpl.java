@@ -106,9 +106,8 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public int insertCommunity(Community c) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertCommunity(Community cm) {
+		return cDao.insertCommunity(sqlSession, cm);
 	}
 
 	@Override
