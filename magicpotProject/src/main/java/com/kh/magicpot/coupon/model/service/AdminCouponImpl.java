@@ -29,4 +29,9 @@ public class AdminCouponImpl implements AdminCouponService {
 		return cDao.selectCoupon(sqlSession);
 	}
 
+	@Override
+	public int deleteCoupon(int cpNo) {
+		return cDao.deleteCoupon(sqlSession, cpNo);
+	}
+
 }

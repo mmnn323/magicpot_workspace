@@ -280,7 +280,7 @@
 	            			<img src="resources/images/community/cmNoImage.png">	
 	            		</c:when>
 	            		<c:otherwise>
-	                		<img src="${ empty c.cmImage }">
+	                		<img src="${ c.cmImage }">
 	                	</c:otherwise>
 					</c:choose>
 					
@@ -311,7 +311,7 @@
         <!-- 로그인한 회원일 경우 보여지는 글 등록 버튼 영역 -->
         <c:if test="${ !empty loginUser }">
             <div id="cm_enrollBtn" >
-                <a href="" class="btn btn-success">글쓰기</a>
+                <a href="enrollForm.cm" class="btn btn-success">글쓰기</a>
             </div>
         </c:if>
 

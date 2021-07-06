@@ -7,7 +7,7 @@ import com.kh.magicpot.like.model.vo.Like;
 public interface LikeService {
 
 	// 좋아요 리스트 조회
-	ArrayList<Like> selectLikeList();
+	ArrayList<Like> selectLikeList(int memNo);
 	
 	// 좋아요 등록
 	int insertLike(Like l);
