@@ -11,6 +11,11 @@ public class GuideDao {
 	public String proModifyForm(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("guideMapper.proModifyForm");
 	}
+
+	// 이용약관 수정
+	public int proModify(SqlSessionTemplate sqlSession, String gu_provision) {
+		return sqlSession.update("guideMapper.proModify", gu_provision);
+	}
 	
 	
 

@@ -1,5 +1,7 @@
 package com.kh.magicpot.guide.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,9 +34,19 @@ public class GuideController {
 	
 	// 이용약관 수정
 	@RequestMapping("proModify.gu")
-	public String proModify() {
+	public String proModify(String gu_provision, HttpSession session) {
 		
-		return "";
+		int result = gService.proModify(gu_provision);
+		
+		if(result >0) {	// 이용약관 수정 성공	
+			
+			session.setAttribute("alertMsg", "이용약관이 성공적으로 수정되었습니다.");
+			return "redirect:/provision.gu";
+			
+		} else {	// 이용약관 수정 실패
+			
+			return "common/errorPage";
+		}
 	}
 	
 	

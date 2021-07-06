@@ -20,6 +20,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.magicpot.member.model.vo.Member" alias="Member" />
 		<typeAlias type="com.kh.magicpot.member.model.vo.Address" alias="Address" />
 		<typeAlias type="com.kh.magicpot.notice.model.vo.Notice" alias="Notice" />
+		<typeAlias type="com.kh.magicpot.project.model.vo.Category" alias="Category" />
+		
 		
 		<!-- 휘경 -->
 		<typeAlias type="com.kh.magicpot.community.model.vo.Community" alias="Community" />

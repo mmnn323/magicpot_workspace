@@ -92,7 +92,7 @@
 		<!-- 카테고리 영역-->
 		<div id="header_2">
 			<ul>
-				<li><a href="">펀딩하기</a></li>
+				<li><a href="fund.li">펀딩하기</a></li>
 				<li><a href="">프로젝트 올리기</a></li>
 				<li><a href="">이용가이드</a></li>
 				<li><a href="list.cm">커뮤니티</a></li>
@@ -101,12 +101,12 @@
 
 		<!-- 검색 영역 -->
 		<div id="header_3">
-			<form action="" id="search_form">
+			<form action="search2.pr" id="search_form">
 				<div class="input-group mb-3" id="search_text">
-					<input type="text" class="form-control">
+					<input type="text" class="form-control" name="keyword" id="search">
 					<div class="input-group-append">
-						<button class="btn btn-success" type="submit">
-							<i class="fas fa-search fa-sm" style="padding: 2px;"></i>
+						<button class="btn btn-success" type="submit" id="searchBtn"  disabled>
+							<i class="fas fa-search fa-sm" style="padding: 2px;" style="color:white'"></i>
 						</button>
 					</div>
 				</div>
@@ -129,7 +129,7 @@
 					<h style="color:rgb(116, 152, 107)">님</h>
 					<abbr title="마이페이지"><a href="myPage.me" class="afterLogin"><i
 							class="fas fa-user fa-2x " style="margin-top: 20px;"></i></a></abbr>
-					<abbr title="좋아하는 프로젝트"><a href="" class="afterLogin"><i
+					<abbr title="좋아하는 프로젝트"><a href="like.pr" class="afterLogin"><i
 							class="fas fa-heart fa-2x"></i></a></abbr>
 					<abbr title="로그아웃"><a href="logout.me" class="afterLogin"><i
 							class="fas fa-sign-out-alt fa-2x"></i></a></abbr>
@@ -139,7 +139,7 @@
 					<h style="color:rgb(116, 152, 107)">님</h>
 					<abbr title="마이페이지"><a href="myPage.me" class="afterLogin"><i
 							class="fas fa-user fa-2x " style="margin-top: 20px;"></i></a></abbr>
-					<abbr title="좋아하는 프로젝트"><a href="" class="afterLogin"><i
+					<abbr title="좋아하는 프로젝트"><a href="like.pr" class="afterLogin"><i
 							class="fas fa-heart fa-2x"></i></a></abbr>
 					<!-- 로그인한 사용자가 관리자일 경우 관리자 페이지로 이동하는 버튼 노출-->
 					<abbr title="관리자페이지"><a href="admin.me" class="afterLogin"><i
@@ -198,6 +198,24 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<!-- 검색창에 텍스트 작성시 활성화 -->
+	<script >
+		
+		$(function(){
+			$("#search").on('input', function(){
+				if($("#search").val()==''){
+					$("#searchBtn").attr("disabled", true);
+					
+				}else{
+					$("#searchBtn").attr("disabled", false);
+				}
+			});
+		})
+		
+	</script>
+	
 
 
 </body>

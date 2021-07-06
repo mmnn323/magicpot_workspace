@@ -7,6 +7,7 @@ public interface GuideService {
 	public String proModifyForm();
 	
 	// 이용약관 수정
-	public int proModify();
+	public int proModify(String gu_provision);
+
 
 }

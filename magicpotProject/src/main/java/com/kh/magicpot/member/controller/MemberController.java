@@ -1,6 +1,9 @@
 package com.kh.magicpot.member.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -316,7 +319,7 @@ public class MemberController {
 		
 		if(result > 0) { 
 			
-			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+			session.setAttribute("alertMsg", "성공적으로 배송지가 삭제되었습니다.");
 			return "redirect:address.me";
 			
 		}else {
@@ -326,24 +329,67 @@ public class MemberController {
 	}
 	
 	// 내가만든프로젝트 폼 이동
-		@RequestMapping("made.pr")
-		public String madeProject(HttpSession session, Model model) {
-			Member loginUser = (Member)session.getAttribute("loginUser");
-			int memNo = loginUser.getMemNo();
+	@RequestMapping("made.pr")
+	public String madeProject(HttpSession session, Model model) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int memNo = loginUser.getMemNo();
 			
-			Creator cre = mService.creatSearch(memNo);
+		Creator cre = mService.creatSearch(memNo);
 			
-			int creNo = cre.getCreNo();
-			System.out.println(creNo);
+		int creNo = cre.getCreNo();
 			
-			ArrayList<Project> pr = mService.madeProject(creNo);
 			
-			System.out.println(pr);
+		ArrayList<Project> pr = mService.madeProject(creNo);
+			
+			
+			// 남은 일 계산		
+		int[] arr = new int[pr.size()];
+			
+		for(int i=0; i<pr.size(); i++) {
+			Date date1=pr.get(i).getCloseDate();
+			Date date2 = new Date(System.currentTimeMillis());
+			 
+			long calDateDays = 0;
+			SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+			Date FirstDate = date1;
+			Date SecondDate = date2;
+				
+			long calDate = SecondDate.getTime()-FirstDate.getTime(); 
+				
+			// Date.getTime() 은 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지를 반환 
+			// 24*60*60*1000을 나눠주면 일수 나옴
+			calDateDays = calDate / ( 24*60*60*1000); 
+	 
+			calDateDays = Math.abs(calDateDays);
+				
+			arr[i] = (int)calDateDays;
+				
+		}
+		    
+			
 			model.addAttribute("pr", pr);
+			model.addAttribute("arr", arr);
 			
 			return "member/myPageMadeProject";
 		}
 		
+		
+		// 내가 만든 프로젝트 삭제
+		@RequestMapping("delete.pr")
+		public String deleteMyProject(int proNo, HttpSession session, Model model) {
+			
+			int result = mService.deleteMyProject(proNo);
+			
+			if(result > 0) { 
+				
+				session.setAttribute("alertMsg", "성공적으로 내 프로젝트가 삭제되었습니다.");
+				return "redirect:made.pr";
+				
+			}else {
+				model.addAttribute("errorMsg", "게시글 삭제 실패");
+				return "common/errorPage";
+			}
+		}
 	
 	
 }

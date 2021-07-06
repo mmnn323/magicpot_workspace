@@ -44,13 +44,13 @@ div{box-sizing: border-box; }
 /* #cm_category>option:first {
 color: black;
 } */
-select:required:invalid {
+#cm_enrollTable select:required:invalid {
 color: gray;
 }
-option[value=""][disabled] {
+#cm_enrollTable option[value=""][disabled] {
 display: none;
 }
-option {
+#cm_enrollTable option {
 color: black;
 }
 
@@ -107,7 +107,14 @@ color: black;
 #imageUpfile:hover{
     transition: .5s; 
     color:rgb(116, 152, 107);
-
+}
+#cmImageTitle{
+    width:700px;
+    border:none;
+    font-size: small;
+    margin: 5px 5px 10px 10px;
+    padding:3px;
+    color:rgba(116, 152, 107, 0.719);
 }
 
 .note-editor.note-airframe, .note-editor.note-frame {
@@ -132,7 +139,7 @@ color: black;
 
 
 /* 공지사항 등록 모달 */
-.modal-content{width:400px;}
+#cmEnrollBtn>div{width:400px;}
 #cmModalFooter{margin-top: 4px; margin-bottom: 25px;}
 #cmOkBtn{width:150px; margin-right:10px; padding:8px; background-color: rgb(116, 152, 107); border:none;}
 #cmOkBtn, #cmCancleBtn{

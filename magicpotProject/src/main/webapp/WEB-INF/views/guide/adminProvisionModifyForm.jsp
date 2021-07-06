@@ -7,17 +7,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-	<!-- css -->
-    <link rel="stylesheet" type="text/css" href="resources/css/community/adminCommunityNoticeUpdateForm.css">  
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com/%22%3E">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="preconnect" href="https://fonts.gstatic.com/%22%3E">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+	<!-- include libraries(jQuery, bootstrap) -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     
    <!-- 써머노트 -->
 	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -237,35 +239,35 @@
 
                 <!-- 이용약관 글 등록 영역 -->
                 <div id="pro_listArea" align="center">
-                    <form action="" id="enrollForm" method="post" enctype="">
+                  <form action="proModify.gu" id="modifyForm" method="post">                  	
                         <div id="pro_listArea2" >
                             <table id="pro_enrollTable">
                                 <tr>
                                     <td colspan="2" >
-                                        <textarea id="summernote" name="editordata"></textarea>
+                                        <textarea id="summernote" name="gu_provision">${provision}</textarea>
                                     </td>
                                 </tr>
                             </table>
                         </div>
                         <!-- 버튼 영역 -->
                         <div id="pro_btnArea" align="center">
-                            <a href="#" id="pro_modifyBtn" class="btn btn-success" data-toggle="modal" data-target="#proModifyBtn">수정하기</a>
+                            <a href="" id="pro_modifyBtn" class="btn btn-success" data-toggle="modal" data-target="#proModifyBtn">수정하기</a>
                             <a href="#" id="pro_listBtn" class="btn btn-success" onClick="history.back();">뒤로가기</a>
                         </div>
                         <br><br>
-                    </form>
+                    
                 </div>
 
                 <script>
                     $(function() {
+                  
                         $('#summernote').summernote({
                             width:900,
                             height: 500,                 // 에디터 높이
-                            minHeight: 600,             // 최소 높이
-                            maxHeight: 500,             // 최대 높이
-                            focus: false,                  // 에디터 로딩후 포커스를 맞출지 여부
-                            lang: "ko-KR",					// 한글 설정
-                            placeholder: '내용을 입력해주세요',	//placeholder 설정
+                            minHeight: 600,              // 최소 높이
+                            maxHeight: 500,              // 최대 높이
+                            focus: false,                // 에디터 로딩후 포커스를 맞출지 여부
+                            lang: "ko-KR",			     // 한글 설정                  
                             toolbar: [
                                 ['fontname', ['fontname']],
                                 ['fontsize', ['fontsize']],
@@ -278,9 +280,33 @@
                                 ['view', ['fullscreen', 'help']]
                             ],
                             fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-                            fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-                            });                        
+                            fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36']
+                            });                   	
                     });
+                    
+                	// 모달 수정 버튼 클릭 => DB에 수정된 이용약관 넘겨주기
+                	$(function(){
+                		
+                		var summernotePro = $('#summernote').val();
+                		//console.log(summernotePro);
+                		$("#gu_provision").val(summernotePro);
+                    		
+                		var isChange = false;
+                		$("textarea").change(function(){
+                			isChange = true;
+                		});
+                		
+                		$(window).on("beforeunload", function(){
+                			if(isChange){
+                				return "";
+                			}
+                		});
+                		
+                		$("#proOkBtn").click(function(){
+                			isChange = false;
+                		});               		
+                	});
+               
                 </script>
             </div>
 
@@ -298,26 +324,15 @@
                         
                         <!-- Modal footer -->
                         <div id="proModalFooter">
-                            <button id="proOkBtn" class="btn btn-warning">수정</button>
+                            <button type="submit" id="proOkBtn" class="btn btn-warning">수정</button>
                             <button id="proCancleBtn" data-dismiss="modal" class="btn btn-secondary">취소</button>
                         </div>
                     </div>
                 </div>
             </div>  
             <!-- Modal 끝 -->
-            
-            <script>
-            	// 모달 수정 버튼 클릭
-            	$(document).on('click', '#proOkBtn', function(){
-            		saveProvision();	
-            	});
-            	
-            	function saveProvision(){
-            		var summernotePro = $('#summernote').summernote('code');
-            		console.log("summerPro" + summernotePro);
-            	}
-            
-            </script>
+        </form>
+           
                            
         </div>
     </div>

@@ -99,16 +99,27 @@
 		 where cmno_no = #{cmNoticeNo}
 	</update>
 	
-	<!-- 커뮤니티 글 총 갯수 조회 -->
-	<select id="selectCmListCount" resultType="_int">
+	<!-- 커뮤니티 게시글 게시글 총 갯수 (카테고리별) -->
+	<select id="selectCmListCount" resultType="_int" parameterType="_int">
 		select
 		       count(*)
 		  from community
 		 where status = 'Y'
+		 <choose>
+           		<when test="ctg == 1">
+           			and cm_category = 1
+           		</when>
+           		<when test="ctg == 2">
+           			and cm_category = 2
+           		</when>
+           		<when test="ctg == 3">
+           			and cm_category = 3
+           		</when>
+          </choose>
 	</select>
 	
 	<!-- 커뮤니티 글 리스트 조회  -->
-	<select id="selectCmList" resultMap="community">
+	<select id="selectCmList" resultMap="community" parameterType="_int">
 		select
 		       cm_no
 		     , cm_image
@@ -119,8 +130,110 @@
 		     , count
 		  from community
 		 where status = 'Y'
+		 <choose>
+           		<when test="ctg == 1">
+           			and cm_category = 1
+           		</when>
+           		<when test="ctg == 2">
+           			and cm_category = 2
+           		</when>
+           		<when test="ctg == 3">
+           			and cm_category = 3
+           		</when>
+          </choose>
 		 order
 		    by cm_no desc
 	</select>
-
+	
+	<!-- 검색_1 : 검색 조회에 맞는 게시글 총 갯수 -->
+	<select id="selectSearchListCount" resultType="_int" parameterType="hashmap">
+		 select
+		        count(*)
+		   from community
+		  where status = 'Y'
+		  <choose>
+           		<when test="ctg == 1">
+           			and cm_category = 1
+           		</when>
+           		<when test="ctg == 2">
+           			and cm_category = 2
+           		</when>
+           		<when test="ctg == 3">
+           			and cm_category = 3
+           		</when>
+          </choose>
+          <if test="condition == 'title'">
+		   		and cm_title
+		  </if>
+		  <if test="condition == 'content'">
+		   		and cm_content
+		  </if>
+		  <if test="condition == 'titleContent'">
+		   		and cm_title || cm_content 
+		  </if>
+		   		like '%' || #{cmKeyword} || '%'
+	</select>
+	
+	<!-- 검색_2 : 검색 조회에 맞는 게시글 리스트 조회 -->
+	<select id="selectSearchList" resultMap="community" parameterType="hashmap">
+		select
+		       cm_no
+		     , cm_image
+		     , cm_category
+		     , cm_title
+		     , mem_id
+		     , to_char(enroll_date, 'YYYY.MM.DD') enroll_date
+		     , count
+		  from community
+		 where status = 'Y'
+		 <choose>
+           		<when test="ctg == 1">
+           			and cm_category = 1
+           		</when>
+           		<when test="ctg == 2">
+           			and cm_category = 2
+           		</when>
+           		<when test="ctg == 3">
+           			and cm_category = 3
+           		</when>
+          </choose>
+           <if test="condition == 'title'">
+		   		and cm_title
+		  </if>
+		  <if test="condition == 'content'">
+		   		and cm_content
+		  </if>
+		  <if test="condition == 'titleContent'">
+		   		and cm_title || cm_content 
+		  </if>
+		   		like '%' || #{cmKeyword} || '%'
+         order
+            by cm_no desc
+ 	</select>
+ 	
+ 	<!-- 커뮤니티 등록 -->
+ 	<insert id="insertCommunity" parameterType="Community">
+ 		insert
+ 		  into community
+ 		  (
+ 		    cm_no
+ 		  , mem_no
+ 		  , mem_id
+ 		  , cm_category
+ 		  , cm_title
+ 		  , cm_content
+ 		  , cm_image
+ 		  )
+ 		  values
+ 		  (
+ 		    seq_cno.nextval
+ 		  , #{memNo}
+ 		  , #{memId}
+ 		  , #{cmCategory}
+ 		  , #{cmTitle}
+ 		  , #{cmContent}
+ 		  , #{cmImage}
+ 		  )
+ 	</insert>
+ 
 </mapper>
