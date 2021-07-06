@@ -162,7 +162,7 @@ public class ProjectController {
 											HttpSession session, Model model
 											) {
 		
-		//System.out.println(ctg);
+		
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("ctg", ctg);
@@ -233,8 +233,9 @@ public class ProjectController {
 		map.put("condition", condition);
 		map.put("keyword", keyword);
 		
-		
 		ArrayList<Project> pr = pService.searchList(map);
+		
+		
 		
 		
 		// 남은 일 계산		
@@ -289,7 +290,7 @@ public class ProjectController {
 							  HttpSession session, Model model) {
 		
 		
-		System.out.println("ctg값 :" + ctg);
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("ctg", ctg);
 		map.put("ctg2", ctg2);

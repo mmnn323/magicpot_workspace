@@ -12,13 +12,10 @@ import lombok.ToString;
 @ToString
 public class Guide {
 
-	private String guFunding;
-	private String guMember;
-	private String guPay;
-	private String guReward;
-	private String guRequest;
-	private String guEvaluation;
-	private String guCalculate;
-	private String guProvision;
+	private String guTitle;
+	private String guContent;
+	private String enrollDate;
+	private String modifyDate;
+	
 	
 }

@@ -205,9 +205,9 @@
 			                <div class="newThumbnail" >
 			                   <img src="${pr[i].proImage }">
 			                   <br><br>
-			                   <small class="projectCtg" style="color:gray; font-weight:bold;">${pr[i].category.caName } &nbsp; | &nbsp; ${pr[i].creator.creName }</small>
+			                   <small class="projectCtg" style="color:gray; font-weight:bold;">${pr[i].category.caName }&nbsp; | &nbsp; ${pr[i].creator.creName }</small>
 			   
-			                   <p style="margin-top: 0;">
+			                   <p style="margin-top: 0; height:60px;">
 			                           ${pr[i].proTitle }
 			                   </p>
 			   

@@ -1,13 +1,19 @@
 package com.kh.magicpot.guide.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.magicpot.guide.model.service.GuideService;
+import com.kh.magicpot.guide.model.vo.Guide;
+import com.kh.magicpot.member.model.vo.Address;
+import com.kh.magicpot.member.model.vo.Member;
 
 @Controller
 public class GuideController {
@@ -49,6 +55,16 @@ public class GuideController {
 		}
 	}
 	
+	// 이용가이드페이지
+	@RequestMapping("guide.me")
+	public String guideForm(@RequestParam(value="ctg", defaultValue="0") int ctg,
+							HttpSession session, Model model) {
+		
+		ArrayList<Guide> gu = gService.guideForm(ctg);
+		
+		model.addAttribute("gu",gu);
+		return "guide/guideMain";
+	}
 	
 	
 }

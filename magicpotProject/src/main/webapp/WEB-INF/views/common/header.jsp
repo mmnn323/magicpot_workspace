@@ -94,7 +94,7 @@
 			<ul>
 				<li><a href="fund.li">펀딩하기</a></li>
 				<li><a href="">프로젝트 올리기</a></li>
-				<li><a href="">이용가이드</a></li>
+				<li><a href="guide.me">이용가이드</a></li>
 				<li><a href="list.cm">커뮤니티</a></li>
 			</ul>
 		</div>
@@ -105,8 +105,8 @@
 				<div class="input-group mb-3" id="search_text">
 					<input type="text" class="form-control" name="keyword" id="search">
 					<div class="input-group-append">
-						<button class="btn btn-success" type="submit" id="searchBtn"  disabled>
-							<i class="fas fa-search fa-sm" style="padding: 2px;" style="color:white'"></i>
+						<button class="btn btn-success" type="submit" id="searchBtn1" style="background-color: rgb(116, 152, 107);"disabled>
+							<i class="fas fa-search fa-sm" style="padding: 2px;"></i>
 						</button>
 					</div>
 				</div>
@@ -205,10 +205,10 @@
 		$(function(){
 			$("#search").on('input', function(){
 				if($("#search").val()==''){
-					$("#searchBtn").attr("disabled", true);
+					$("#searchBtn1").attr("disabled", true);
 					
 				}else{
-					$("#searchBtn").attr("disabled", false);
+					$("#searchBtn1").attr("disabled", false);
 				}
 			});
 		})
