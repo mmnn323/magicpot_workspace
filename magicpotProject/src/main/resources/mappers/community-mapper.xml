@@ -210,5 +210,30 @@
          order
             by cm_no desc
  	</select>
+ 	
+ 	<!-- 커뮤니티 등록 -->
+ 	<insert id="insertCommunity" parameterType="Community">
+ 		insert
+ 		  into community
+ 		  (
+ 		    cm_no
+ 		  , mem_no
+ 		  , mem_id
+ 		  , cm_category
+ 		  , cm_title
+ 		  , cm_content
+ 		  , cm_image
+ 		  )
+ 		  values
+ 		  (
+ 		    seq_cno.nextval
+ 		  , #{memNo}
+ 		  , #{memId}
+ 		  , #{cmCategory}
+ 		  , #{cmTitle}
+ 		  , #{cmContent}
+ 		  , #{cmImage}
+ 		  )
+ 	</insert>
  
 </mapper>

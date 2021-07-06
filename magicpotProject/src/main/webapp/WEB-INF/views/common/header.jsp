@@ -129,7 +129,7 @@
 					<h style="color:rgb(116, 152, 107)">님</h>
 					<abbr title="마이페이지"><a href="myPage.me" class="afterLogin"><i
 							class="fas fa-user fa-2x " style="margin-top: 20px;"></i></a></abbr>
-					<abbr title="좋아하는 프로젝트"><a href="" class="afterLogin"><i
+					<abbr title="좋아하는 프로젝트"><a href="like.pr" class="afterLogin"><i
 							class="fas fa-heart fa-2x"></i></a></abbr>
 					<abbr title="로그아웃"><a href="logout.me" class="afterLogin"><i
 							class="fas fa-sign-out-alt fa-2x"></i></a></abbr>
@@ -139,7 +139,7 @@
 					<h style="color:rgb(116, 152, 107)">님</h>
 					<abbr title="마이페이지"><a href="myPage.me" class="afterLogin"><i
 							class="fas fa-user fa-2x " style="margin-top: 20px;"></i></a></abbr>
-					<abbr title="좋아하는 프로젝트"><a href="" class="afterLogin"><i
+					<abbr title="좋아하는 프로젝트"><a href="like.pr" class="afterLogin"><i
 							class="fas fa-heart fa-2x"></i></a></abbr>
 					<!-- 로그인한 사용자가 관리자일 경우 관리자 페이지로 이동하는 버튼 노출-->
 					<abbr title="관리자페이지"><a href="admin.me" class="afterLogin"><i
@@ -176,8 +176,9 @@
 					<div class="find">
 						<tr>
 							<td><input type="checkbox" id="remember_memId" name="remember_memId"> 아이디 저장</td>
-							&nbsp;&nbsp;
-							<th>아이디 / 비밀번호 찾기</th>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<th><a href="">아이디 찾기 </a> |
+							<a href=""> 비밀번호 </a></th>
 						</tr>
 					</div>
 

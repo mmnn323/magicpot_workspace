@@ -11,8 +11,6 @@
 		<result column="cp_condition" property="cpCondition"/>	
 	</resultMap>
 
-
-
 	<insert id="insertCoupon" parameterType="Coupon">
 	  insert
 	  	  into coupon

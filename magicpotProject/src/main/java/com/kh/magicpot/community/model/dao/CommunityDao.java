@@ -124,5 +124,15 @@ public class CommunityDao {
 		
 		return (ArrayList)sqlSession.selectList("communityMapper.selectSearchList", map, rowBounds);
 	}
+	
+	/**
+	 * 커뮤니티 등록
+	 * @param sqlSession
+	 * @param cm
+	 * @return
+	 */
+	public int insertCommunity(SqlSessionTemplate sqlSession, Community cm) {
+		return sqlSession.insert("communityMapper.insertCommunity", cm);
+	}
 
 }

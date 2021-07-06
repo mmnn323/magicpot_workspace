@@ -168,6 +168,7 @@ table, tr, th, td {
 </head>
 <body>
 	<jsp:include page="../common/adminPageTemplate2.jsp" />
+	
 
 	<div id="content">
 		<div class="outer">
@@ -200,36 +201,38 @@ table, tr, th, td {
                         이 부분은 기능구현 부분이니 tr 클릭 시 요청하고 싶으신 분들은 그렇게 수정해주셔도 될 것 같아요~!
                         -->
 			<div id="cmNoticeListArea">
-				<table class="table" id="cmNoticeList" align="center">
-					<thead class="thead-light">
-						<tr>
-							<th width="40"><input type="checkbox"></th>
-							<th width="150">회원 번호</th>
-							<th width="100">아이디</th>
-							<th width="90">이름</th>
-							<th width="100">카테고리</th>
-							<th width="200">프로젝트</th>
-							<th width="150">결제금액</th>
-							<th width="150">달성현황</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>41</td>
-							<td><a href="">user10</a></td>
-							<td>132</td>
-							<td>리빙</td>
-							<td>소창수건</td>
-							<td>23000</td>
-							<td>y</td>
-						</tr>
+				<form action="adminPay.me" method="post">
+					<table class="table" id="cmNoticeList" align="center">
+						<thead class="thead-light">
+							<tr>
+								<th width="40"><input type="checkbox"></th>
+								<th width="150">회원 번호</th>
+								<th width="100">아이디</th>
+								<th width="90">이름</th>
+								<th width="100">카테고리</th>
+								<th width="200">프로젝트</th>
+								<th width="150">결제금액</th>
+								<th width="150">달성현황</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><input type="checkbox"></td>
+								<td>41</td>
+								<td><a href="">user10</a></td>
+								<td>132</td>
+								<td>리빙</td>
+								<td>소창수건</td>
+								<td>23000</td>
+								<td>y</td>
+							</tr>
 
 
 
 
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				</form>
 			</div>
 
 			<!-- 페이징 영역 -->

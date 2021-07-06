@@ -19,173 +19,52 @@
 </head>
 <body>
 
+	<!-- 헤더 포함 -->
+	<jsp:include page="../common/header.jsp"/>
+
     <div id="outer">
        <div id="myPage_title">
            <div id="content_title"><i class="fas fa-heart fa-lg"></i> <b>좋아하는 프로젝트</b></div>
        </div>
        <div id="listArea">
-
-            <div class="thumbnail" >
-                
-                <img src="../../../resources/images/common/유기농마스크.png">
-
-                <span id="likeBtn"><i class="fas fa-heart fa-2x"></i></span>
-
-                <small id="projectCtg">리빙</small>
-
-                <p style="margin-top: 0;">
-                    유기농 면으로 만든 끈조절 가능한 다회용 마스크
-                </p>
-
-                <div class="progress" style="height: 10px;">
-                    <div class="progress-bar" style="width:80%;"></div>
-                </div>
-
-                <div id="progress_status" style="margin-bottom: 5px;">
-                    <small style="margin-right: 105px;">80% 달성</small>
-                    <small >23일 남음</small>
-                </div>
-            
-            </div>
-
-            <div class="thumbnail" >
-                
-                <img src="../../../resources/images/common/유기농마스크.png">
-
-                <span id="likeBtn"><i class="fas fa-heart fa-2x"></i></span>
-
-                <small id="projectCtg">리빙</small>
-
-                <p style="margin-top: 0;">
-                    유기농 면으로 만든 끈조절 가능한 다회용 마스크
-                </p>
-
-                <div class="progress" style="height: 10px;">
-                    <div class="progress-bar" style="width:80%;"></div>
-                </div>
-
-                <div id="progress_status" style="margin-bottom: 5px;">
-                    <small style="margin-right: 105px;">80% 달성</small>
-                    <small >23일 남음</small>
-                </div>
-            
-            </div>
-
-            <div class="thumbnail" >
-                
-                <img src="../../../resources/images/common/유기농마스크.png">
-
-                <span id="likeBtn"><i class="fas fa-heart fa-2x"></i></span>
-
-                <small id="projectCtg">리빙</small>
-
-                <p style="margin-top: 0;">
-                    유기농 면으로 만든 끈조절 가능한 다회용 마스크
-                </p>
-
-                <div class="progress" style="height: 10px;">
-                    <div class="progress-bar" style="width:80%;"></div>
-                </div>
-
-                <div id="progress_status" style="margin-bottom: 5px;">
-                    <small style="margin-right: 105px;">80% 달성</small>
-                    <small >23일 남음</small>
-                </div>
-            
-            </div>
-
-            <div class="thumbnail" >
-                
-                <img src="../../../resources/images/common/유기농마스크.png">
-
-                <span id="likeBtn"><i class="fas fa-heart fa-2x"></i></span>
-
-                <small id="projectCtg">리빙</small>
-
-                <p style="margin-top: 0;">
-                    유기농 면으로 만든 끈조절 가능한 다회용 마스크
-                </p>
-
-                <div class="progress" style="height: 10px;">
-                    <div class="progress-bar" style="width:80%;"></div>
-                </div>
-
-                <div id="progress_status" style="margin-bottom: 5px;">
-                    <small style="margin-right: 105px;">80% 달성</small>
-                    <small >23일 남음</small>
-                </div>
-            
-            </div>
-
-            <div class="thumbnail" >
-                
-                <img src="../../../resources/images/common/유기농마스크.png">
-
-                <span id="likeBtn"><i class="fas fa-heart fa-2x"></i></span>
-
-                <small id="projectCtg">리빙</small>
-
-                <p style="margin-top: 0;">
-                    유기농 면으로 만든 끈조절 가능한 다회용 마스크
-                </p>
-
-                <div class="progress" style="height: 10px;">
-                    <div class="progress-bar" style="width:80%;"></div>
-                </div>
-
-                <div id="progress_status" style="margin-bottom: 5px;">
-                    <small style="margin-right: 105px;">80% 달성</small>
-                    <small >23일 남음</small>
-                </div>
-            
-            </div>
-
-            <div class="thumbnail" >
-                
-                <img src="../../../resources/images/common/유기농마스크.png">
-
-                <span id="likeBtn"><i class="fas fa-heart fa-2x"></i></span>
-
-                <small id="projectCtg">리빙</small>
-
-                <p style="margin-top: 0;">
-                    유기농 면으로 만든 끈조절 가능한 다회용 마스크
-                </p>
-
-                <div class="progress" style="height: 10px;">
-                    <div class="progress-bar" style="width:80%;"></div>
-                </div>
-
-                <div id="progress_status" style="margin-bottom: 5px;">
-                    <small style="margin-right: 105px;">80% 달성</small>
-                    <small >23일 남음</small>
-                </div>
-            
-            </div>
-
-            <div class="thumbnail" onclick="test1();">
-                
-                <img src="../../../resources/images/common/유기농마스크.png">
-
-                <span id="likeBtn"><i class="fas fa-heart fa-2x"></i></span>
-
-                <small id="projectCtg">리빙</small>
-
-                <p style="margin-top: 0;">
-                    유기농 면으로 만든 끈조절 가능한 다회용 마스크
-                </p>
-
-                <div class="progress" style="height: 10px;">
-                    <div class="progress-bar" style="width:80%;"></div>
-                </div>
-
-                <div id="progress_status" style="margin-bottom: 5px;">
-                    <small style="margin-right: 105px;">80% 달성</small>
-                    <small >23일 남음</small>
-                </div>
-            
-            </div>
-
+       		
+       		<c:choose>
+       			<c:when test="${ !empty like }">
+		       		<c:forEach var="i" begin="0" end="${ like.size()-1 }">
+			            <div class="thumbnail" >
+			                
+			                <img src="${ like[i].proImage }">
+			
+			                <span id="likeBtn"><i class="fas fa-heart fa-2x"></i></span>
+			
+			                <small id="projectCtg">${ like[i].caName }</small>
+			
+			                <p style="margin-top: 0; height: 50px;">
+			                    ${ like[i].proTitle }
+			                </p>
+			
+			                <div class="progress" style="height: 10px;">
+			                    <div class="progress-bar" style="width:${Math.round(like[i].proFundPrice div like[i].proPrice  *100) }%;"></div>
+			                </div>
+			
+			                <div id="progress_status" style="margin-bottom: 5px;">
+			                    <small style="margin-right: 100px;">${Math.round(like[i].proFundPrice div like[i].proPrice  *100) }% 달성</small>
+			                    <small >${arr[i]}일 남음</small>
+			                </div>
+			      		</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div id="noLikeProject" align="center">
+		                <h5>좋아하는 프로젝트가 없습니다. <br></h5>
+		                <h6>프로젝트의 하트 이미지를 클릭하면 좋아하는 프로젝트에 저장됩니다!</h6>
+		                <br>
+		                    <a href="fund.li" > 프로젝트 찾아보기 </a>
+		           </div>
+				</c:otherwise>
+			</c:choose>
+			
+      </div>
             <script>
                 $(function(){
                     $(".thumbnail").click(function(){
@@ -199,13 +78,11 @@
                     })
                 })
             </script>
-
-
-
-
-
        </div> 
     </div>
+    
+    <!-- 푸터 포함 -->
+    <jsp:include page="../common/footer.jsp"/>
     
 </body>
 </html>

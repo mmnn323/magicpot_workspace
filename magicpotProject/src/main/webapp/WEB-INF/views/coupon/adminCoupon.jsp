@@ -185,7 +185,7 @@
 				<!-- 버튼 영역 -->
 				<div id="cm_btnArea">
 					<a href="" class="btn btn-success" id="cm_enrollBtn"
-						data-toggle="modal" data-target="#myModal">쿠폰등록</a>
+						data-toggle="modal" data-target="#couponModal">쿠폰등록</a>
 				</div>
 			</div>
 
@@ -199,10 +199,11 @@
 					<table class="table" id="cmNoticeList" align="center">
 						<thead class="thead-light">
 							<tr>
-								<th width="1400">쿠폰명</th>
+								<th width="600">쿠폰 번호</th>
+								<th width="2000">쿠폰명</th>
 								<th width="500">할인금액</th>
 								<th width="600">최소구매금액</th>
-								<th width="800">사용기간</th>
+								<th width="900">사용기간</th>
 								<th width="1200">특이사항</th>
 								<th></th>
 								<th width=""></th>
@@ -211,12 +212,17 @@
 
 						<c:forEach var="c" items="${ list }">
 							<tr class="font">
+								<th>${ c.cpNo } </th>	
 								<th>${ c.cpName }</th>
 								<th>${ c.cpPrice }</th>
 								<th>${ c.cpLower }</th>
 								<th>${ c.cpLimit }</th>
 								<th>${ c.cpCondition }</th>
-								<th width="600"><button id="couponBtn1" type="submit">삭제</button></th>
+
+								<th width="800"><a href="" style="color: white;" class="btn btn-success"
+									id="cm_enrollBtn" data-toggle="modal"
+									data-target="#deleteModal">삭제</a></th>
+
 							</tr>
 						</c:forEach>
 					</table>
@@ -226,8 +232,8 @@
 	</div>
 
 
-	<!-- The Modal -->
-	<div class="modal" id="myModal">
+	<!-- 쿠폰 등록 모달 -->
+	<div class="modal" id="couponModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
 
@@ -239,11 +245,11 @@
 
 				<!-- Modal body -->
 				<div class="modal-body">
-					<form action="coupon.me" method="post" id="adminCoupon">
+					<form action="adminInsert.me" method="post" id="adminCoupon">
 						<table align="center" class="empty">
 							<tr>
 								<th>쿠폰명</th>
-								<th><input type="text" name="cpName" placeholder="30자 이내 "></th>
+								<th><input type="text" name="cpName" maxlength="30" placeholder="30자 이내 "></th>
 							</tr>
 							<tr>
 								<th>할인금액</th>
@@ -260,7 +266,7 @@
 							<tr>
 								<th>쿠폰 특이사항</th>
 								<th><input type="text" name="cpCondition"
-									placeholder="30자 이내"></th>
+								maxlength="30" placeholder="30자 이내"></th>
 
 							</tr>
 							<tr align="center">
@@ -275,16 +281,42 @@
 				<!-- Modal footer -->
 				<div class="modal-footer">
 					<button type="button" id="couponBtn1" class="btn btn-danger"
-						data-dismiss="modal">Close</button>
+						data-dismiss="modal">닫기</button>
 				</div>
 
 			</div>
 		</div>
 	</div>
 
+	<div class="modal" id="deleteModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">쿠폰삭제</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body" align="center">
+					<form action="admindelete.me" method="post">
+						정말 삭제하시겠습니까? 
+						<br>
+						<br>
+						<br>
+
+						<button type="submit" id="couponBtn" class="btn btn-danger"
+							data-target="#deleteModal">삭제하기</button>
+					</form>
+				</div>
+
+			</div>
+		</div>
 	</div>
 
-	</div>
+
+
 
 </body>
 </html>
