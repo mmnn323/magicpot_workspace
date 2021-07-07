@@ -20,6 +20,8 @@
 <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/dd18300701.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style>
     div, form, input{ box-sizing: border-box;}
     div, p, form, a {font-family: 'Noto Sans KR', sans-serif;}
@@ -727,7 +729,7 @@
                 <div id="baContent">
                     <p>
                         <br>
-                        <h1 id="baTitle"><b>매직팟에서 펀딩을 오픈하세요</b></h1>
+                        <h1 id="baTitle"><b>매직팟에서 펀딩으로 오픈하세요  </b></h1>
                         
                     </p>
                     <div id="backBtn"> 
@@ -812,9 +814,11 @@
 
    	    	 alert("클릭됨1");
    	    }
+            
+            
         </script>
 
-        
+      
         
         
         
