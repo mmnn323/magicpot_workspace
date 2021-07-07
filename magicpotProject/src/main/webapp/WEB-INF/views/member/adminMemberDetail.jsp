@@ -152,14 +152,16 @@
 			</div>
 			<div class="content1">
 				<ul>
-					<li>12</li>
-					<li>2021-03-14</li>
-					<li>user01</li>
-					<li>김개똥</li>
-					<li>010-1111-2222</li>
-					<li>user01@gmail.com</li>
-					<li style="width: 100px; float: left;">06281</li>
-					<li style="float: left; margin-left: 5px;">서울시 강서구 양천로</li>
+					<li>${ m.memNo }</li>
+					<li>${ m.enrollDate }</li>
+					<li>${ m.memId }</li>
+					<li>${ m.memName }</li>
+					<li>${ m.phone }</li>
+					<li>${ m.email }</li>
+					<li style="width: 100px; float: left;">${ m.memPost }</li>
+					<li style="float: left; margin-left: 5px; width:auto">
+						&nbsp;&nbsp;&nbsp;&nbsp;${ m.memRoad } ${ m.memDetail }&nbsp;&nbsp;&nbsp;&nbsp;
+					</li>
 				</ul>
 				<br>
 				<br>

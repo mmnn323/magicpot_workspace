@@ -49,8 +49,15 @@ public interface MemberService {
 	// 요청한 페이지에 보여질 회원 리스트
 	ArrayList<Member> selectList(PageInfo pi);
 	
-	// 회원 상세조회
+	// 일반회원관리 검색 조회
+	int selectSearchListCount(HashMap<String, String> map);
+	ArrayList<Member> selectSearchList(HashMap<String, String> map, PageInfo pi);
+	
+	// 일반회원관리 회원 상세조회
 	Member selectAdminMember(int memNo);
+	
+	// 일반회원관리 회원 탈퇴
+	int deleteMember(int memNo);
 	
 	// 크리에이터 조회
 	Creator creatSearch(int memNo);

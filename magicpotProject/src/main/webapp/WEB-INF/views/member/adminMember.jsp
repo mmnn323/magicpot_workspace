@@ -129,6 +129,8 @@
 	#cm_paging {
 		width: fit-content;
 	}
+	
+	tr:hover{cursor: pointer;}
 </style>
 </head>
 <body>
@@ -148,11 +150,15 @@
 			<div id="searchBtnArea">
 				<!-- 커뮤니티 검색바 -->
 				<div id="cm_searchArea">
-					<select name="" id="cm_SearchCtg">
-						<option value="">회원 ID</option>
-						<option value="">이름</option>
-						<option value="">이메일</option>
-					</select> <input id="cm_keyword" type="text" placeholder=" Search">
+					<form action="">
+						<input type="hidden" name="currenPage"  value="1">
+							<select name="condition" id="cm_SearchCtg">
+								<option value="id">회원 ID</option>
+								<option value="name">이름</option>
+								<option value="email">이메일</option>
+							</select> 
+						<input name="kewword" id="cm_keyword" type="text" placeholder=" Search">
+					</form>
 				</div>
 
 				<!-- 버튼 영역 -->
@@ -209,9 +215,9 @@
 					<tbody>
 						<c:forEach var="m" items="${ list }">
 						<tr>
-							<td><input type="checkbox"></td>
-							<td>${ m.memNo }</td>
-							<td>${ m.memId }</a></td>
+							<th><input type="checkbox"></th>
+							<td class="mno">${ m.memNo }</td>
+							<td>${ m.memId }</td>
 							<td>${ m.memName }</td>
 							<td>${ m.phone }</td>
 							<td>${ m.email }</td>
@@ -220,6 +226,13 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<script>
+					$(function(){
+						$("#cmNoticeList tbody tr td").click(function(){
+							location.href="detail.me?mno=" + $(this).children(".mno").text();
+						})
+					})
+				</script>
 			</div>
 
 			<!-- 페이징 영역 -->
@@ -234,7 +247,7 @@
 								<li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
 							</c:when>
 							<c:otherwise>						
-								<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ pi.currentPage-1 }">&laquo;</a></li>
+								<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ pi.startPage }">&laquo;</a></li>
 							</c:otherwise>
 						</c:choose>
 						
@@ -249,9 +262,14 @@
 						
 						
 						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-						
-							<li class="page-item"><a class="page-link" href="admin.mec?currentPage=${ p }">${ p }</a></li>
-							
+							<c:choose>
+								<c:when test="${ pi.currentPage eq p }">
+									<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ p }">${ p }</a></li>	
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 						
 						<c:choose>
@@ -268,7 +286,7 @@
 								<li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+								<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ pi.maxPage }">&raquo;</a></li>
 							</c:otherwise>
 						</c:choose>
 						

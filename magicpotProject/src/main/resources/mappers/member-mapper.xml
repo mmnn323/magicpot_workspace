@@ -190,6 +190,76 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	      by enroll_date desc
   	</select>
   	
+  	<!-- 일반회원관리 회원 검색 -->
+  	<select id="selectSearchListCount" resultType="_int" parameterType="hashmap">
+		select
+		       count(*)
+		  from member 
+		 where status = 'Y'
+		 	<if test="condition == 'id'">
+		    	and mem_id
+		    </if>
+		    <if test="condition == 'name'">
+		    	and mem_name
+		    </if>
+		    <if test="condition == 'email'">
+		    	and email
+		    </if>
+		        like '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="selectSearchList" resultMap="memberResultSet" parameterType="hashmap">
+		select 
+               mem_no
+  		     , mem_id
+  		     , mem_name
+  		     , phone
+  		     , email
+  		     , to_char(enroll_date, 'YYYY-MM-DD') enroll_date
+         from member
+  	  	where status= 'Y'
+  	     order
+  	        by enroll_date desc
+           <choose>
+           		<when test="condition == 'id'">
+           			and mem_id
+           		</when>
+           		<when test="condition == 'name'">
+           			and mem_name
+           		</when>
+           		<otherwise>
+           			and email
+           		</otherwise>
+           </choose>
+           		like '%' || #{keyword} || '%'           	
+         order
+            by enroll_date desc
+	</select>
+  	
+  	<!-- 일반회원 상세 조회 -->
+  	<select id="selectAdminMember" resultMap="memberResultSet" parameterType="_int">
+  		select
+  		      mem_no
+  		    , to_char(enroll_date, 'YYYY-MM-DD') enroll_date
+  		    , mem_id
+  		    , mem_name
+  		    , phone
+  		    , email
+  		    , mem_post
+  		    , mem_road
+  		    , mem_detail
+  	    from member
+  	   where mem_no = #{memNo}
+  	</select>
+  	
+  	<!-- 일반회원 탈퇴 -->
+  	<update id="deleteMember" parameterType="_int">
+  		update
+  		      member
+  		  set status ='N'
+  	    where mem_no = #{memNo}
+  	</update>
+  	
   	<insert id="insertAddress" parameterType="Address">
   	insert
 	  	  into address_list
