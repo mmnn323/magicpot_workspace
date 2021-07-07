@@ -90,7 +90,7 @@
                 <!-- 버튼 영역 -->
                 <div id="cm_enrollBtn" align="right">
                     <a href="" id="cmEnrollBtn1" class="btn btn-success" data-toggle="modal" onclick="return checkValidation();" data-target="#cmEnrollBtn">등록</a>
-                    <a href="" class="btn btn-success">목록으로</a>
+                    <a href="list.cm" class="btn btn-success">목록으로</a>
                 </div>
                 <br><br>
                 

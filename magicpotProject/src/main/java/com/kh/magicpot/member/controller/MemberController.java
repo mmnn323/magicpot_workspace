@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -107,7 +108,16 @@ public class MemberController {
 		
 		return "member/adminMember";
 	}
-	
+
+	/* 일반회원 상세보기 */
+	@RequestMapping("detail.me")
+	public String selectAdminMember(int mno, Model model) {
+				
+		Member m = mService.selectAdminMember(mno);
+		model.addAttribute("m", m);
+		
+		return "member/adminMemberDetail";
+	}
 	
 	
 	// 회원가입폼 페이지

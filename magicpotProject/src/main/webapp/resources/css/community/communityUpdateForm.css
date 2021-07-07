@@ -77,17 +77,66 @@ color: black;
 
 #cm_title{width:100%}
 
+/*
 #thumbnailUpfile{
     margin-bottom: 5px;
-    /* border-radius: 4px; */
+    border-radius: 4px;
     border:1px solid lightgray;
     padding:4px;
     color:gray;
+}
+*/
+
+/* 대표이미지 */
+#imageUpfileArea{
+    width:163px;
+    height: 40px;
+    /* border:1px soild gray; */
+    border:lightgray;
+    margin-bottom: 4px;
+}
+#imageUpfile{
+    /* width: 140px; */
+    /* border:1px soild gray; */
+    /* border-radius: 3px; */
+    color: gray;
+    font-size: 16px;
+    /* font-weight:bold; */
+    cursor: pointer;
+}
+#imageUpfile *{
+    padding:10px;
+}
+#imageUpfile:hover{
+    transition: .5s; 
+    color:rgb(116, 152, 107);
+}
+#cmImageTitle{
+    width:700px;
+    border:none;
+    font-size: small;
+    margin: 5px 5px 10px 10px;
+    padding:3px;
+    color:rgba(116, 152, 107, 0.719);
 }
 
 .note-editor.note-airframe, .note-editor.note-frame {
     border: 1px solid rgba(0,0,0,.2);
     border-radius: 0;
+}
+
+#imageViewArea{
+    width:40px;
+    height: 40px;
+    border:1px solid lightgray;
+    margin-left: 165px;
+    padding:1px; 
+    overflow:hidden;   
+}
+#imageViewArea>img{
+	width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 /* 글 버튼 등록 영역 */
@@ -106,8 +155,8 @@ color: black;
 }
 
 
-/* 공지사항 등록 모달 */
-.modal-content{width:400px;}
+/* 커뮤니티 게시글 수정 모달 */
+#cmUpdateBtn>div{width:400px;}
 #cmModalFooter{margin-top: 4px; margin-bottom: 25px;}
 #cmOkBtn{width:150px; margin-right:10px; padding:8px; background-color: rgb(116, 152, 107); border:none;}
 #cmOkBtn, #cmCancleBtn{

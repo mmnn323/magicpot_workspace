@@ -109,29 +109,37 @@ public class CommunityServiceImpl implements CommunityService {
 	public int insertCommunity(Community cm) {
 		return cDao.insertCommunity(sqlSession, cm);
 	}
-
+	
+	/**
+	 * 커뮤니티 게시글 상세조회_1 : 조회수 증가
+	 */
 	@Override
 	public int increaseCmCount(int cmNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cDao.increaseCmCount(sqlSession, cmNo);
 	}
 
+	/**
+	 * 커뮤니티 게시글 상세조회_2 : 게시글 상세조회
+	 */
 	@Override
 	public Community selectCommunity(int cmNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return cDao.selectCommunity(sqlSession, cmNo);
 	}
 
+	/**
+	 * 커뮤니티 게시글 수정
+	 */
 	@Override
-	public int updateCommunity(Community c) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateCommunity(Community cm) {
+		return cDao.updateCommunity(sqlSession, cm);
 	}
 
+	/**
+	 * 커뮤니티 게시글 삭제
+	 */
 	@Override
 	public int deleteCommunity(int cmNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cDao.deleteCommunity(sqlSession, cmNo);
 	}
 
 

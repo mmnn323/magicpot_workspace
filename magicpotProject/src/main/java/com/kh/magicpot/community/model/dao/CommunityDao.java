@@ -134,5 +134,45 @@ public class CommunityDao {
 	public int insertCommunity(SqlSessionTemplate sqlSession, Community cm) {
 		return sqlSession.insert("communityMapper.insertCommunity", cm);
 	}
+	
+	/**
+	 * 커뮤니티 게시글 상세조회_1 : 조회수 증가
+	 * @param sqlSession
+	 * @param cmNo
+	 * @return
+	 */
+	public int increaseCmCount(SqlSessionTemplate sqlSession, int cmNo) {
+		return sqlSession.update("communityMapper.increaseCmCount", cmNo);
+	}
+	
+	/**
+	 * 커뮤니티 게시글 상세조회_2 : 게시글 상세조회
+	 * @param sqlSession
+	 * @param cmNo
+	 * @return
+	 */
+	public Community selectCommunity(SqlSessionTemplate sqlSession, int cmNo) {
+		return sqlSession.selectOne("communityMapper.selectCommunity", cmNo);
+	}
+	
+	/**
+	 * 커뮤니티 게시글 업데이트
+	 * @param sqlSession
+	 * @param cm
+	 * @return
+	 */
+	public int updateCommunity(SqlSessionTemplate sqlSession, Community cm) {
+		return sqlSession.update("communityMapper.updateCommunity", cm);
+	}
+	
+	/**
+	 * 커뮤니티 게시글 삭제
+	 * @param sqlSession
+	 * @param cmNo
+	 * @return
+	 */
+	public int deleteCommunity(SqlSessionTemplate sqlSession, int cmNo) {
+		return sqlSession.update("communityMapper.deleteCommunity", cmNo);
+	}
 
 }

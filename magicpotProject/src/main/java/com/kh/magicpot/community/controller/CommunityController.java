@@ -227,18 +227,17 @@ public class CommunityController {
 		return "community/communityEnrollForm";
 	}
 	
-	//
-	//사진 경로 변경 및 이름 가져오기
+	/**
+	 * 커뮤니티 게시글 등록 (써머노트 사진 경로 변경 및 첨부파일 수정명 반환)
+	 * @param multipartFile
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpSession session)  {
+		
 		JsonObject jsonObject = new JsonObject();
-		
-        /*
-		 * String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
-		 */
-		
-		
 		
 		// 내부경로로 저장
 		/*
@@ -276,8 +275,6 @@ public class CommunityController {
 		return a;
 	}
 	
-	//
-	
 	/**
 	 * 커뮤니티 게시글 등록
 	 * @param cm
@@ -301,7 +298,6 @@ public class CommunityController {
 		if(result > 0) { // 게시글 등록 성공
 			session.setAttribute("alertMsg", "게시글이 등록되었습니다.");
 			return "redirect:list.cm";
-			
 		}else {
 			return "common/errorPage";
 		}
@@ -329,8 +325,91 @@ public class CommunityController {
 			e.printStackTrace();
 		}
 		return changeName;
+	}
+	
+	/**
+	 * 커뮤니티 게시글 상세조회
+	 * @param cmNo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("detail.cm")
+	public String selectCommunity(int cmNo, Model model) {
 		
+		// 조회수 증가
+		int result = cService.increaseCmCount(cmNo);
 		
+		if(result > 0) { // 조회수 증가 성공 => 게시글 상세조회 요청
+			Community cm = cService.selectCommunity(cmNo);
+			model.addAttribute("cm", cm);
+			return "community/communityDetailView";
+		}else { // 에러페이지
+			return "common/errorPage";
+		}
+	}
+	
+	/**
+	 * 커뮤니티 게시글 수정 폼 요청
+	 * @param cmNo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("updateForm.cm")
+	public String communityUpdateForm(int cmNo, Model model) {
+		model.addAttribute("cm", cService.selectCommunity(cmNo));
+		return "community/communityUpdateForm";
+	}
+	
+	/**
+	 * 커뮤니티 게시글 수정
+	 * @param cm
+	 * @param session
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("update.cm")
+	public String communityUpdate(Community cm, MultipartFile reUpfile, HttpSession session, Model model) {
+		//System.out.println(cm);
+		
+		// 새로 넘어온 파일이 있을 경우
+		if(!reUpfile.getOriginalFilename().equals("")) {
+			// 1_1. 새로 넘어온 파일이 있는데 기존의 첨부파일이 있었을 경우 => 서버에 업로드 되어있는 기존 파일 찾아서 삭제
+			if(cm.getCmImage()!=null) {
+				new File(session.getServletContext().getRealPath(cm.getCmImage())).delete();
+			}
+			
+			// 1_2. 기존 첨부파일이 있든 없든 새로 넘어온 첨부파일 서버에 업로드
+			String changeName = saveFile(session, reUpfile);
+			cm.setCmImage("resources/community_uploadFiles/" + changeName);
+		}
+		
+		// 2. Community 객체에 담긴 정보를 가지고 update요청
+		//System.out.println(cm);
+		int result = cService.updateCommunity(cm);
+		System.out.println(result);
+		if(result > 0) {
+			session.setAttribute("alertMsg", "커뮤니티 글이 수정되었습니다.");
+			return "redirect:detail.cm?cmNo=" + cm.getCmNo();
+		}else { // 게시글 수정 실패
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping("delete.cm")
+	public String communityDelete(int cmNo, String filePath, HttpSession session, Model model) {
+		// 1_1. DB에서 해당 게시글 상태 N으로 변경
+		int result = cService.deleteCommunity(cmNo);
+		
+		if(result > 0) { // 삭제 성공
+			if(!filePath.equals("")) { // 첨부파일(대표이미지)가 있었을 경우 => 서버에 업로드된 첨부파일 삭제 
+				new File(session.getServletContext().getRealPath(filePath)).delete();
+			}
+			session.setAttribute("alertMsg", "커뮤니티 글이 삭제되었습니다.");
+			return "redirect:list.cm";
+			
+		}else { // 삭제 실패
+			return "common/errorPage";
+		}
 	}
 	
 }
