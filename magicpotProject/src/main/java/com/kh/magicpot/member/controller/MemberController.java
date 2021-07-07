@@ -288,14 +288,14 @@ public class MemberController {
 	
 		String adDefault = a.getAdDefault();
 		
-		
+		System.out.println(a.getMemNo());
 		int	result = mService.fixAddress(a);
 		
 		int result3 = 0;
 		
 		if(adDefault.equals("Y")) {
-			int result2 = mService.fixAddress2(a);
 			 result3 = mService.fixAddress3(a);
+			 int result2 = mService.fixAddress2(a);
 		}
 			
 		

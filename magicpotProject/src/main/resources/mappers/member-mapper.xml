@@ -237,6 +237,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    , ad_default
 		 from address_list
 		 where ad_no = #{adNo}
+		   and ad_location = 'Y'
+		   
 		   
  
 	</select>  
@@ -258,6 +260,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  		   address_list
 	  	   set ad_default = 'N'  	     
 	  	 where ad_no != #{adNo}
+	  	   and mem_no = #{memNo}
    </update>
    
    <update id="fixAddress3" parameterType="Address">

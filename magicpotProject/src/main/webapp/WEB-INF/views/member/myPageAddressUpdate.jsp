@@ -214,6 +214,7 @@
                         <label for="name">받는 사람 </label>
                         <input type="text" class="form-control" id="name" name="adName" value="${a.adName }"  required ><br>
                         <input type="hidden" name="adNo" value="${a.adNo }">
+                        <input type="hidden" name="memNo" value="${a.memNo }">
                        
                     </td>
                 </tr>
