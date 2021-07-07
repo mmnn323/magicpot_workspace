@@ -9,7 +9,8 @@ public interface AdminCouponService {
 	int insertCoupon(Coupon c);
 
 	ArrayList<Coupon> selectCoupon();
+
+	int deleteCoupon(int cpNo);
 	
-	//int deleteCoupon(int cpNo);
 	
 }

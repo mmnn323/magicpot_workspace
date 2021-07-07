@@ -68,14 +68,27 @@ div{box-sizing: border-box; }
 }
 
 /* 커뮤니티 검색 영역 */
-#cm_SearchCtg, #cm_keyword{padding:5px; border:1px solid lightgray; border-radius: 10px; margin-bottom: 40px;}
-#cm_SearchCtg{width:120px;}
+#cm_SearchCtg, #cm_keyword{padding:7px; border:1px solid lightgray;  margin-bottom: 40px;}
+#cm_keyword{border-radius: 7px 0px 0px 7px;}
+#cm_SearchCtg{width:120px; border-radius: 7px;}
 #cm_keyword{width:350px; padding-left: 15px;}
 #cm_searchArea select{
     text-align-last: center;
     text-align: center;
     -ms-text-align-last: center;
     -moz-text-align-last: center;
+}
+#cm_searchArea button{
+    background-color: rgb(165, 202, 156);
+    border-color: rgb(165, 202, 156);
+    border-radius: 0px 7px 7px 0px; 
+    margin-top: -5px;
+    margin-left: -5px;
+    padding:7px;
+}
+#cm_searchArea button:hover{
+    transition: .3s;
+    background-color: rgb(147, 187, 138);
 }
 
 /* 글 버튼 등록 영역 */
@@ -142,6 +155,20 @@ div{box-sizing: border-box; }
     transition: .6s;
     /* transform: scale( 1.03 ) */
 }
+
+/* 조회된 게시글이 없습니다 */
+#noSearchResult{
+    font-family: 'Noto Sans KR', sans-serif;
+    width:900px;
+    display:inline-block;
+    margin: 20px;
+    text-align: center;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    padding:100px;
+    margin-left: 60px;
+}
+
 
 /* 페이징 영역 */
 #cm_pagingArea{padding:30px;}

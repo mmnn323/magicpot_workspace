@@ -63,8 +63,10 @@ public interface MemberService {
 	Creator creatSearch(int memNo);
 	
 	// 내가 만든 프로젝트 조회
-	
 	ArrayList<Project> madeProject(int creNo);
+	
+	// 내가 만든 프로젝트 삭제
+	int deleteMyProject(int proNo);
 
 	
 	

@@ -143,6 +143,12 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.madeProject(sqlSession, creNo);
 	}
 
+	// 내가 만든 프로젝트삭제
+	@Override
+	public int deleteMyProject(int proNo) {
+		return mDao.deleteMyProject(sqlSession, proNo);
+	}
+
 
 
 

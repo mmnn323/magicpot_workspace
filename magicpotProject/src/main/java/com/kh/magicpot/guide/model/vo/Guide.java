@@ -21,4 +21,5 @@ public class Guide {
 	private String guCalculate;
 	private String guProvision;
 	
+	
 }

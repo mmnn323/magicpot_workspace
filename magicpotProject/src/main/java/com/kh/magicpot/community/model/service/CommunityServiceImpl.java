@@ -1,6 +1,7 @@
 package com.kh.magicpot.community.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,44 +71,77 @@ public class CommunityServiceImpl implements CommunityService {
 		return cDao.deleteCmNotice(sqlSession, cmNoticeNo);
 	}
 
+	/**
+	 * 커뮤니티 리스트 총 수(카테고리별)
+	 */
 	@Override
-	public int selectCmListCount() {
-		return cDao.selectCmListCount(sqlSession);
+	public int selectCmListCount(int ctg) {
+		return cDao.selectCmListCount(sqlSession, ctg);
+	}
+
+	/**
+	 * 커뮤니티 리스트 (카테고리별)
+	 * @param pi
+	 * @return
+	 */
+	@Override
+	public ArrayList<Community> selectCmList(PageInfo pi, int ctg) {
+		return cDao.selectCmList(sqlSession, pi, ctg);
+	}
+	
+	/**
+	 * 검색_1 : 검색된 커뮤니티 리스트 총 수
+	 */
+	@Override
+	public int selectSearchListCount(HashMap<String, Object> map) {
+		return cDao.selectSearchListCount(sqlSession, map);
+	}
+
+	/**
+	 * 검색_2 : 검색된 커뮤니티 리스트 조회
+	 */
+	@Override
+	public ArrayList<Community> selectSearchList(PageInfo pi, HashMap<String, Object> map) {
+		return cDao.selectSearchList(sqlSession, pi, map);
 	}
 
 	@Override
-	public ArrayList<Community> selectCmList(PageInfo pi) {
-		return cDao.selectCmList(sqlSession, pi);
+	public int insertCommunity(Community cm) {
+		return cDao.insertCommunity(sqlSession, cm);
 	}
-
-	@Override
-	public int insertCommunity(Community c) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
+	/**
+	 * 커뮤니티 게시글 상세조회_1 : 조회수 증가
+	 */
 	@Override
 	public int increaseCmCount(int cmNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cDao.increaseCmCount(sqlSession, cmNo);
 	}
 
+	/**
+	 * 커뮤니티 게시글 상세조회_2 : 게시글 상세조회
+	 */
 	@Override
 	public Community selectCommunity(int cmNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return cDao.selectCommunity(sqlSession, cmNo);
 	}
 
+	/**
+	 * 커뮤니티 게시글 수정
+	 */
 	@Override
-	public int updateCommunity(Community c) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateCommunity(Community cm) {
+		return cDao.updateCommunity(sqlSession, cm);
 	}
 
+	/**
+	 * 커뮤니티 게시글 삭제
+	 */
 	@Override
 	public int deleteCommunity(int cmNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cDao.deleteCommunity(sqlSession, cmNo);
 	}
+
+
 
 }

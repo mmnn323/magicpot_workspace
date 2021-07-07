@@ -340,7 +340,7 @@
 				}
 	            	
 	            	
-            </script>
+          </script>
         
         
         
@@ -731,7 +731,50 @@
                         
                     </p>
                     <div id="backBtn"> 
-                        <a href="" class="btn btn-success"><h3>펀딩 올리기</h3></a>
+	                    <c:choose>
+	                    	<c:when test="${ empty loginUser }">
+	                    		<a href="" id="fnBtn" class="btn btn-success" onclick="alertFn();"><h3>펀딩 올리기</h3></a>
+	                        	<script>
+									function alertFn(){
+										alert("로그인이 필요합니다.");
+										// sweetalert 창 바로 닫히는 에러(timer안먹힘 차후 수정할지)
+									}		  
+									/*
+									var alert = function(){
+	                        			swal({
+    		                        		title : "Sweet Alert",
+    		                        	    icon  : "error",
+    		                        	    timer : 2000,
+    		                        	    closeOnClickOutside : false
+    		                        	}).then(function(){
+    		                        		swal('', "로그인이 필요합니다.", "error");
+    		                        	});
+	                        		}
+									
+		                        	$(function(){
+	                        			$("#fnBtn").on("click", function(){
+	                        				swal({
+	    		                        		title : "Sweet Alert",
+	    		                        	    icon  : "error",
+	    		                        	    timer : 2000,
+	    		                        	    closeOnClickOutside : false
+	    		                        	}).then(function(){
+	    		                        		swal('', "로그인이 필요합니다.", "error");
+	    		                        	});
+											
+	                        			})
+	                        		});
+									*/
+	                  	        </script>
+	                        </c:when>
+	                        <c:when test="${ loginUser.status eq 'C' }">
+	                        	<!-- 내가 만든 프로젝트로 이동 추가 필요 -->
+	                        	<a href="" class="btn btn-success"><h3>펀딩 올리기</h3></a>
+	                        </c:when>
+	                        <c:otherwise>
+	                        	<a href="enrollPage.cre" class="btn btn-success"><h3>펀딩 올리기</h3></a>
+	                        </c:otherwise>
+	                    </c:choose>
                     </div>
                 </div>
             </div>
@@ -764,6 +807,11 @@
             //이미지 사이즈
             document.getElementById("background").style.backgroundSize = "100%";
             }
+            
+            function alertFn() {
+
+   	    	 alert("클릭됨1");
+   	    }
         </script>
 
         

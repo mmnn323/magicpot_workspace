@@ -1,10 +1,15 @@
 package com.kh.magicpot.guide.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.guide.model.dao.GuideDao;
+import com.kh.magicpot.guide.model.vo.Faq;
+import com.kh.magicpot.guide.model.vo.Guide;
 
 @Service
 public class GuideServiceImpl implements GuideService {
@@ -25,10 +30,62 @@ public class GuideServiceImpl implements GuideService {
 
 	// 이용약관 수정
 	@Override
-	public int proModify() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int proModify(String gu_provision) {
+		return gDao.proModify(sqlSession, gu_provision);		
 	}
+
+	// 이용가이드페이지
+	@Override
+	public ArrayList<Guide> guideForm(int ctg) {
+		return gDao.guideForm(sqlSession, ctg);	
+	}
+	
+	// faq갯수조회
+	@Override
+	public int selectListCount() {
+		return gDao.selectListCount(sqlSession);
+	}
+	
+	// faq리스트조회
+	@Override
+	public ArrayList<Faq> faqList(PageInfo pi) {
+		return gDao.faqList(sqlSession, pi);
+	}
+	
+	// faq 등록
+	@Override
+	public int insertForm(Faq fa) {
+		return gDao.insertForm(sqlSession, fa);
+	}
+
+	// faq 조회수 증가
+	@Override
+	public int increaseCount(int faqNo) {
+		return gDao.increaseCount(sqlSession, faqNo);
+	}
+
+	// faq 상세조회
+	@Override
+	public Faq selectFaq(int faqNo) {
+		return gDao.selectFaq(sqlSession, faqNo);
+	}
+	
+	// faq 수정
+	@Override
+	public int updateFa(Faq fa) {
+		return gDao.updateFa(sqlSession, fa);
+	}
+	
+	// faq 삭제
+	@Override
+	public int deleteFa(Faq fa) {
+		return gDao.deleteFa(sqlSession, fa);
+	}
+	
+	
+	
+	
+	
 	
 	
 	

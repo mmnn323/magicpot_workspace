@@ -75,7 +75,7 @@
     }
     #editBtn:hover, #deleteBtn:hover{
         color: black;
-        font-size: 22px;
+        
         font-weight:bold;
     }
 
@@ -146,34 +146,59 @@
        <div id="listArea">
        
        	
-       		
-       			<c:forEach var="p" items="${pr }">
-		            <a href="" id="detailUrl">
-		                <div class="thumbnail1" >
-		                    
-		                    <img src="${p.proImage }">
-		
-		                    <a href="" id="editBtn"><i class="far fa-edit"></i></a>
-		                    <span id="deleteBtn" ><i class="fas fa-times" data-toggle="modal" data-target="#deleteModal"></i> </span>
-		
-		                    <small id="projectCtg">리빙</small>
-		
-		                    <p style="margin-top: 0;">
-		                       ${p.proTitle }
-		                    </p>
-		
-		                    <div class="progress">
-		                        <div class="progress-bar" style="width:80%; background-color: rgb(116, 152, 107);"></div>
-		                    </div>
-		
-		                    <div id="progress_status"  style="margin-bottom: 5px; color: rgb(116, 152, 107);">
-		                        <small style="margin-right: 105px;">80% 달성</small>
-		                        <small >23일 남음</small>
-		                    </div>
-		                
-		                </div>
-		            </a>
-	            </c:forEach>
+       			<c:choose>
+       				<c:when test="${empty pr[0].proNo}">
+       					<div style="height:350px;"></div>
+       				</c:when>
+       				<c:otherwise>
+		       			<c:forEach var="i"  begin="0" end="${pr.size()-1 }" >
+				            <a href="" id="detailUrl">
+				                <div class="thumbnail1" >
+				                    
+				                    <img src="${pr[i].proImage }">
+				
+				                    <a href="" id="editBtn"><i class="far fa-edit"></i></a>
+				                    <a href="delete.pr?proNo=${pr[i].proNo}" style="text-decoration: none;"><span id="deleteBtn" ><i class="fas fa-times" data-toggle="modal" data-target="#deleteModal1"></i> </span></a>
+				
+				                    <small id="projectCtg" style="color:gray; font-weight:bold;">${pr[i].category.caName }</small>
+				
+				                    <p style="margin-top: 0; height:60px">
+				                       ${pr[i].proTitle }
+				                    </p>
+				
+				                    <div class="progress" style="height:10px; margin-bottom: 0;">
+				                        <div class="progress-bar" style="width:${Math.round(pr[i].proFundPrice div pr[i].proPrice  *100) }%; background-color: rgb(116, 152, 107);"></div>
+				                    </div>
+				
+				                    <div id="progress_status"  style="margin-bottom: 5px; color: rgb(116, 152, 107);">
+				                        <small style="margin-right: 103px;" >${Math.round(pr[i].proFundPrice div pr[i].proPrice  *100) }% 달성</small>
+				                        <small >${arr[i]}일 남음</small>
+				                    </div>
+				                
+				                </div>
+				            </a>
+						    <!-- The Modal -->
+						    <div class="modal" id="deleteModal">
+						        <div class="modal-dialog2">
+						            <div class="modal-content_2">
+						                <br>
+						                <h5><b>정말로 삭제하시겠습니까?</b></h5>
+						               
+						                
+						               
+						                    <div class="deleteBtn">
+						                        <a href=""  class="btn btn-success">삭제</a>
+						                        <button type="reset" class="btn btn-success" data-dismiss="modal">취소</button>
+						                    </div>
+						                
+						               
+						                
+						            </div>
+						        </div>
+						    </div>
+			            </c:forEach>
+			    	</c:otherwise>
+       			</c:choose>
            
            
 
@@ -181,25 +206,8 @@
     </div>
 	<jsp:include page="../common/footer.jsp"/>
 
-    <!-- The Modal -->
-    <div class="modal" id="deleteModal">
-        <div class="modal-dialog2">
-            <div class="modal-content_2">
-                <br>
-                <h5><b>정말로 삭제하시겠습니까?</b></h5>
-               
-                
-               
-                    <div class="deleteBtn">
-                        <a href="" class="btn btn-success">삭제</a>
-                        <button type="reset" class="btn btn-success" data-dismiss="modal">취소</button>
-                    </div>
-                
-               
-                
-            </div>
-        </div>
-    </div>
+    
+   
     
 </body>
 </html>

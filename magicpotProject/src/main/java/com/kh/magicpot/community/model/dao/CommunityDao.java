@@ -1,6 +1,7 @@
 package com.kh.magicpot.community.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -73,12 +74,13 @@ public class CommunityDao {
 	}
 	
 	/**
-	 * 커뮤니티 글 총 갯수 조회
+	 * 커뮤니티 글 수(카테고리별)
 	 * @param sqlSession
+	 * @param ctg
 	 * @return
 	 */
-	public int selectCmListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("communityMapper.selectCmListCount");
+	public int selectCmListCount(SqlSessionTemplate sqlSession, int ctg ) {
+		return sqlSession.selectOne("communityMapper.selectCmListCount", ctg);
 	}
 	
 	/**
@@ -87,13 +89,90 @@ public class CommunityDao {
 	 * @param pi
 	 * @return
 	 */
-	public ArrayList<Community> selectCmList(SqlSessionTemplate sqlSession, PageInfo pi){
+	public ArrayList<Community> selectCmList(SqlSessionTemplate sqlSession, PageInfo pi, int ctg){
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return (ArrayList)sqlSession.selectList("communityMapper.selectCmList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("communityMapper.selectCmList", ctg, rowBounds);
+	}
+	
+	/**
+	 * 검색 : 검색된 커뮤니티 리스트 총 수
+	 * @param sqlSession
+	 * @param map
+	 * @return
+	 */
+	public int selectSearchListCount(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.selectOne("communityMapper.selectSearchListCount", map);
+	}
+	
+	/**
+	 * 검색 : 검색된 커뮤니티 리스트 조회
+	 * @param sqlSession
+	 * @param pi
+	 * @param map
+	 * @return
+	 */
+	public ArrayList<Community> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi, HashMap<String, Object> map){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("communityMapper.selectSearchList", map, rowBounds);
+	}
+	
+	/**
+	 * 커뮤니티 등록
+	 * @param sqlSession
+	 * @param cm
+	 * @return
+	 */
+	public int insertCommunity(SqlSessionTemplate sqlSession, Community cm) {
+		return sqlSession.insert("communityMapper.insertCommunity", cm);
+	}
+	
+	/**
+	 * 커뮤니티 게시글 상세조회_1 : 조회수 증가
+	 * @param sqlSession
+	 * @param cmNo
+	 * @return
+	 */
+	public int increaseCmCount(SqlSessionTemplate sqlSession, int cmNo) {
+		return sqlSession.update("communityMapper.increaseCmCount", cmNo);
+	}
+	
+	/**
+	 * 커뮤니티 게시글 상세조회_2 : 게시글 상세조회
+	 * @param sqlSession
+	 * @param cmNo
+	 * @return
+	 */
+	public Community selectCommunity(SqlSessionTemplate sqlSession, int cmNo) {
+		return sqlSession.selectOne("communityMapper.selectCommunity", cmNo);
+	}
+	
+	/**
+	 * 커뮤니티 게시글 업데이트
+	 * @param sqlSession
+	 * @param cm
+	 * @return
+	 */
+	public int updateCommunity(SqlSessionTemplate sqlSession, Community cm) {
+		return sqlSession.update("communityMapper.updateCommunity", cm);
+	}
+	
+	/**
+	 * 커뮤니티 게시글 삭제
+	 * @param sqlSession
+	 * @param cmNo
+	 * @return
+	 */
+	public int deleteCommunity(SqlSessionTemplate sqlSession, int cmNo) {
+		return sqlSession.update("communityMapper.deleteCommunity", cmNo);
 	}
 
 }

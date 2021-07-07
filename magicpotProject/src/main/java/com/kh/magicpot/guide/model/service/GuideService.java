@@ -1,5 +1,11 @@
 package com.kh.magicpot.guide.model.service;
 
+import java.util.ArrayList;
+
+import com.kh.magicpot.common.model.vo.PageInfo;
+import com.kh.magicpot.guide.model.vo.Faq;
+import com.kh.magicpot.guide.model.vo.Guide;
+
 public interface GuideService {
 	
 	/* 다인 추가 - 이용약관 */
@@ -7,6 +13,29 @@ public interface GuideService {
 	public String proModifyForm();
 	
 	// 이용약관 수정
-	public int proModify();
+	public int proModify(String gu_provision);
 
+	// 이용가이드 페이지
+	public ArrayList<Guide> guideForm(int ctg);
+	
+	// faq 갯수조회
+	int selectListCount();
+	
+	// faq 리스트조회
+	ArrayList<Faq> faqList(PageInfo pi);
+	
+	// faq 등록
+	int insertForm(Faq fa);
+	
+	// faq 조회수 증가
+	int increaseCount(int faqNo);
+	
+	// faq 상세조회
+	Faq selectFaq(int faqNo);
+	
+	// faq 수정
+	int updateFa(Faq fa);
+	
+	// faq 삭제
+	int deleteFa(Faq fa);
 }

@@ -66,7 +66,17 @@
         <tr>
             <th><i class="far fa-envelope fa-2x"></i> </th>
             <td colspan="2">
-                <p> 메세지 <a id="a" href="">안 읽음 11개</a></p>                
+            	<!-- 다인 추가 - 로그인 한 회원 상태에 따라 다른 페이지 연결 -->
+            	<c:choose>
+	            	<c:when test="${ loginUser.status eq 'Y' }">
+	            		<input type="hidden" name="memNo" value="${ loginUser }">
+	                	<p> 메세지 <a id="myPage" href="myPageMsg.me">안 읽음 11개</a></p>  
+	                </c:when>   
+	                <c:when test="${ loginUser.status eq 'C' }">
+	                	<input type="hidden" name="memNo" value="${ loginUser }">
+	                	<p> 메세지 <a id="creator" href="creatorMsg.me">안 읽음 11개</a></p>  
+	                </c:when>   
+                </c:choose>           
             </td>
             
             <th id="center"></th> <!-- 공간유지용-->
@@ -85,13 +95,24 @@
         <tr>
             <th><i class="far fa-edit fa-2x"></i> </th>
             <td colspan="2">
-                <a href="made.pr"><p>내가 만든 프로젝트</p></a> 
+            
+            	<c:choose>
+            		<c:when test="${loginUser.status eq 'C' }">
+               			 <a href="made.pr"><p>내가 만든 프로젝트</p></a> 
+            		</c:when>
+            		<c:otherwise>
+            			 <a href="" onclick="creatorYn();"><p>내가 만든 프로젝트</p></a> 
+            		</c:otherwise>
+            	</c:choose>
+                
+                
+                
             </td>
 
             <th></th> <!--그냥 가운데 공간주는 용도-->
             
             <th><i class="fas fa-heart fa-2x"></i></th>
-            <td><a href=""><p>좋아하는 프로젝트</p></a></td>
+            <td><a href="like.pr"><p>좋아하는 프로젝트</p></a></td>
 
         </tr>
          
@@ -155,8 +176,17 @@
         
 
     </form>
+    
 
     </table>
+    
+ 	
+    
+    <script>
+    	function creatorYn(){
+    		alert('크리에이터 등록이 되지 않았습니다.');
+    	}
+    </script>
 
 </body>
 </html>

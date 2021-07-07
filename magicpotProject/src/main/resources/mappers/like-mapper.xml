@@ -4,6 +4,36 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="likeMapper">
 
+	<resultMap id="likeResultSet" type="Like">
+		<id column="mem_no" property="memNo"/>
+		<result column="pro_no" property="proNo"/>
+		<result column="pro_title" property="proTitle"/>
+		<result column="pro_price" property="proPrice"/>
+		<result column="pro_image" property="proImage"/>
+		<result column="pro_fundprice" property="proFundPrice"/>
+		<result column="open_date" property="openDate"/>
+		<result column="close_date" property="closeDate"/>
+		<result column="pro_step" property="proStep"/>
+		<result column="ca_name" property="caName"/>
+	</resultMap>
+	
 
+	<select id="selectLikeList" resultMap="likeResultSet" parameterType="_int">
+		select 
+		       mem_no
+		     , pro_no
+		     , pro_title
+		     , pro_price
+		     , pro_image
+		     , pro_fundprice
+		     , open_date
+		     , close_date
+		     , pro_step
+		     , ca_name
+		  from tb_like
+		  join project using (pro_no)
+		  join category using(ca_no)
+		where mem_no = #{memNo}
+	</select>
 
 </mapper>
