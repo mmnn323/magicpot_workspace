@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -178,47 +179,18 @@
         
         
         <!-- 커뮤니티 카테고리 영역 -->
-        	 
-	        <div id="cm_categoryArea" align="center">
-	            <div id="cm_categoryArea1" >
-	                <ul>
-	                    <li><a href="list.cm" id="ctgAll">전체</a></li>
-	                    <li><a href="list.cm?ctg=1" id="ctgFree">자유수다</a></li>
-	                    <li><a href="list.cm?ctg=2" id="ctgInfo">정보나눔</a></li>
-	                    <li><a href="list.cm?ctg=3" id="ctgChall">#용기내</a></li>
-	                </ul>
-	            </div>
-	        </div>
-	        
-	        
-	        <!-- 
-	        <div id="cm_categoryArea" align="center">
-	            <div id="cm_categoryArea1" >
-	                <ul>
-	                    <li><a id="ctgAll" onclick="postFormSubmit(0);">전체</a></li>
-	                    <li><a id="ctgFree" onclick="postFormSubmit(1);">자유수다</a></li>
-	                    <li><a id="ctgInfo" onclick="postFormSubmit(2);">정보나눔</a></li>
-	                    <li><a id="ctgChall" onclick="postFormSubmit(3);">#용기내</a></li>
-	                </ul>
-	            </div>
-	        </div>
-	    	 -->
+        <div id="cm_categoryArea" align="center">
+            <div id="cm_categoryArea1" >
+                <ul>
+                    <li><a href="list.cm" id="ctgAll">전체</a></li>
+                    <li><a href="list.cm?ctg=1" id="ctgFree">자유수다</a></li>
+                    <li><a href="list.cm?ctg=2" id="ctgInfo">정보나눔</a></li>
+                    <li><a href="list.cm?ctg=3" id="ctgChall">#용기내</a></li>
+                </ul>
+            </div>
+        </div>
          
        <script>
-       
-       	/*
-	       function postFormSubmit(num){
-	      		if(num == 0){ 
-	      			$("#categoryForm").attr("action", "list.cm").submit();
-	      		}else if(num == 1){
-	      			$("#categoryForm").attr("action", "list.cm?ctg=1").submit();
-	      		}else if(num == 2){
-	      			$("#categoryForm").attr("action", "list.cm?ctg=2").submit();
-	      		}else if(num == 3){
-	      			$("#categoryForm").attr("action", "list.cm?ctg=3").submit();
-	      		}
-	      	}
-	       */
 	       	$(function(){
 	       		switch(${ctg}){
 	       		case 0:
@@ -244,6 +216,7 @@
                     <option value="title" >제목</option>
                     <option value="content">내용</option>
                     <option value="titleContent">제목+내용</option>
+                    <option value="writer">작성자</option>
                 </select>
                 <input id="cm_keyword" type="text" name="cmKeyword" value="${ cmKeyword }" placeholder=" Search">
                 <input type="hidden" name="ctg" value="${ ctg }">
@@ -262,50 +235,73 @@
         
 
         <!-- 커뮤니티 리스트 보기 스타일 영역 -->
-        <div id="cm_btnArea" >
-            <div id="listStyle">
-                <a href=""><i class="fas fa-bars fa-2x"></i></a> 
-                <a href=""><i class="fas fa-th-large fa-2x"></i></a>
-            </div>
-        </div>
+        <c:if test="${fn:length(cList) gt 0}">
+	        <div id="cm_btnArea" >
+	            <div id="listStyle">
+	                <a href=""><i class="fas fa-bars fa-2x"></i></a> 
+	                <a href=""><i class="fas fa-th-large fa-2x"></i></a>
+	            </div>
+	        </div>
+        </c:if>
 
 
         <!-- 커뮤니티 글 리스트 영역 -->
         <div id="cm_listArea">
-			
-			<c:forEach var="c" items="${ cList }">
-	            <div class="cm_thumbnail" >
-	            	<c:choose>
-	            		<c:when test="${ empty c.cmImage }">
-	            			<img src="resources/images/community/cmNoImage.png">	
-	            		</c:when>
-	            		<c:otherwise>
-	                		<img src="${ c.cmImage }">
-	                	</c:otherwise>
-					</c:choose>
+        
+        	<c:choose>
+        		<c:when test="${fn:length(cList) gt 0}">
+	        		<c:forEach var="c" items="${ cList }">
+			            <div class="cm_thumbnail" >
+			            	<input type="hidden" name="cmNo" value="${ c.cmNo }">
+			            	<c:choose>
+			            		<c:when test="${ empty c.cmImage }">
+			            			<img src="resources/images/community/cmNoImage.png">	
+			            		</c:when>
+			            		<c:otherwise>
+			                		<img src="${ c.cmImage }">
+			                	</c:otherwise>
+							</c:choose>
 					
-					<c:choose>
-						<c:when test="${ c.cmCategory eq 1 }">
-		                	<small id="cm_Ctg">자유수다</small> <br>
-						</c:when>
-						<c:when test="${ c.cmCategory eq 2 }">
-							<small id="cm_Ctg">정보나눔</small> <br>
-						</c:when>
-						<c:otherwise>
-							<small id="cm_Ctg">#용기내</small> <br>
-						</c:otherwise>
-					</c:choose>
+							<c:choose>
+								<c:when test="${ c.cmCategory eq 1 }">
+				                	<small id="cm_Ctg">자유수다</small> <br>
+								</c:when>
+								<c:when test="${ c.cmCategory eq 2 }">
+									<small id="cm_Ctg">정보나눔</small> <br>
+								</c:when>
+								<c:otherwise>
+									<small id="cm_Ctg">#용기내</small> <br>
+								</c:otherwise>
+							</c:choose>
 	                
-	                <div id="cm_title">
-                    	<b>${ c.cmTitle }</b>
-                	</div>
-	                
-	                <div id="progress_status" style="margin-bottom: 5px;">
-	                    <small>${ c.memId }</small> <br>
-	                    <small>${ c.enrollDate } &nbsp&nbsp|&nbsp&nbsp 조회 ${ c.count }</small>
-	                </div>
-	            </div>
-            </c:forEach>
+			                <div id="cm_title">
+		                    	<b>${ c.cmTitle }</b>
+		                	</div>
+			                
+			                <div id="progress_status" style="margin-bottom: 5px;">
+			                    <small>${ c.memId }</small> <br>
+			                    <small>${ c.enrollDate } &nbsp&nbsp|&nbsp&nbsp 조회 ${ c.count }</small>
+			                </div>
+			            </div>
+            		</c:forEach>
+            	</c:when>
+            	<c:otherwise>
+            		<div id="noSearchResult">
+	               		등록된 게시글이 없습니다.
+	            	</div>
+            	</c:otherwise>
+        	</c:choose>
+        
+			
+            
+            <script>
+            	$(function(){
+            		$(".cm_thumbnail").click(function(){
+            			//alert("클릭됨");
+            			location.href='detail.cm?cmNo=' + $(this).children().eq(0).val();
+            		})
+            	})
+            </script>
         </div>
         
         <!-- 로그인한 회원일 경우 보여지는 글 등록 버튼 영역 -->
@@ -319,147 +315,97 @@
         <!-- 검색 후 페이징바 보완 : 검색 전, 후 페이징바 따로 만들어두고 조건 검색으로 해당 버튼 노출 -->
         <!-- 검색 전 : list.cm 요청, currentPage, cgt값 넘기기 -->
         <!-- 검색 후 : search.cm로 요청, currentPage, ctg, condition, cmKeyword 값 넘기기 -->
-        <div id="cm_pagingArea" align="center">
-            <div id="cm_paging" >
-                <ul class="pagination pagination">
-                
-                   
-                   
-                   <c:choose>
-                		<c:when test="${ pi.currentPage eq 1 }">
-	                    	<li class="page-item disabled" ><a class="page-link" href="#">&laquo;</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                    	<c:choose>
-	                    		<c:when test="${ empty condition }">
-	                    			<li class="page-item" ><a class="page-link" href="list.cm?currentPage=1&ctg=${ctg}">&laquo;</a></li>
-	                    		</c:when>
-	                    		<c:otherwise>
-	                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=1&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">&laquo;</a></li>
-	                    		</c:otherwise>
-	                    	</c:choose>
-	                    </c:otherwise>
-                    </c:choose>
-                    
-                    <c:choose>
-                    	<c:when test="${ pi.currentPage eq 1 }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                    	<c:choose>
-	                    		<c:when test="${ empty condition }">
-	                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.currentPage-1 }&ctg=${ctg}">&lt;</a></li>	                    			
-	                    		</c:when>
-	                    		<c:otherwise>
-	                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=${ pi.currentPage-1 }&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">&laquo;</a></li>
-	                    		</c:otherwise>
-	                    	</c:choose>
-	                    </c:otherwise>
-                    </c:choose>
-
-                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    	<c:choose>
-                    		<c:when test="${pi.currentPage eq p }">
-                    			<li class="page-item disabled"><a class="page-link" href="#" style="background-color: rgb(116, 152, 107); color:white;">${ p }</a></li>
-                    		</c:when>
-                    		<c:otherwise>
-                    			<c:choose>
+        <c:if test="${fn:length(cList) gt 0}">
+	        <div id="cm_pagingArea" align="center">
+	            <div id="cm_paging" >
+	                <ul class="pagination pagination">
+	                   
+	                   <c:choose>
+	                		<c:when test="${ pi.currentPage eq 1 }">
+		                    	<li class="page-item disabled" ><a class="page-link" href="#">&laquo;</a></li>
+		                    </c:when>
+		                    <c:otherwise>
+		                    	<c:choose>
 		                    		<c:when test="${ empty condition }">
-		                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ p }&ctg=${ctg}">${ p }</a></li>
+		                    			<li class="page-item" ><a class="page-link" href="list.cm?currentPage=1&ctg=${ctg}">&laquo;</a></li>
 		                    		</c:when>
 		                    		<c:otherwise>
-		                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=${ p }&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">${ p }</a></li>
+		                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=1&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">&laquo;</a></li>
+		                    		</c:otherwise>
+		                    	</c:choose>
+		                    </c:otherwise>
+	                    </c:choose>
+	                    
+	                    <c:choose>
+	                    	<c:when test="${ pi.currentPage eq 1 }">
+		                    	<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+		                    </c:when>
+		                    <c:otherwise>
+		                    	<c:choose>
+		                    		<c:when test="${ empty condition }">
+		                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.currentPage-1 }&ctg=${ctg}">&lt;</a></li>	                    			
+		                    		</c:when>
+		                    		<c:otherwise>
+		                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=${ pi.currentPage-1 }&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">&laquo;</a></li>
+		                    		</c:otherwise>
+		                    	</c:choose>
+		                    </c:otherwise>
+	                    </c:choose>
+	
+	                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	                    	<c:choose>
+	                    		<c:when test="${pi.currentPage eq p }">
+	                    			<li class="page-item disabled"><a class="page-link" href="#" style="background-color: rgb(116, 152, 107); color:white;">${ p }</a></li>
+	                    		</c:when>
+	                    		<c:otherwise>
+	                    			<c:choose>
+			                    		<c:when test="${ empty condition }">
+			                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ p }&ctg=${ctg}">${ p }</a></li>
+			                    		</c:when>
+			                    		<c:otherwise>
+			                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=${ p }&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">${ p }</a></li>
+		                    			</c:otherwise>
+		                    		</c:choose>
+	                    		</c:otherwise>
+	                    	</c:choose>
+	                    </c:forEach>
+	                    
+	                    <c:choose>
+	                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		                    	<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
+		                    </c:when>
+		                    <c:otherwise>
+		                    	<c:choose>
+		                    		<c:when test="${ empty condition }">
+		                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.currentPage+1 }&ctg=${ctg}">&gt;</a></li>
+		                    		</c:when>
+		                    		<c:otherwise>
+		                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=${ pi.currentPage+1 }&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">&gt;</a></li>
 	                    			</c:otherwise>
 	                    		</c:choose>
-                    		</c:otherwise>
-                    	</c:choose>
-                    </c:forEach>
-                    
-                    <c:choose>
-                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                    	<c:choose>
-	                    		<c:when test="${ empty condition }">
-	                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.currentPage+1 }&ctg=${ctg}">&gt;</a></li>
-	                    		</c:when>
-	                    		<c:otherwise>
-	                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=${ pi.currentPage+1 }&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">&gt;</a></li>
-                    			</c:otherwise>
-                    		</c:choose>
-	                    </c:otherwise>
-                    </c:choose>
-                    
-                    <c:choose>
-                    	<c:when test=" ${ pi.currentPage eq pi.maxPage }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                    	<c:choose>
-	                    		<c:when test="${ empty condition }">
-	                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.maxPage }&ctg=${ctg}">&raquo;</a></li>
-	                    		</c:when>
-	                    		<c:otherwise>
-	                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=${ pi.maxPage }&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">&raquo;</a></li>
-                    			</c:otherwise>
-                    		</c:choose>
-	                    </c:otherwise>
-                    </c:choose>
-                   
-                   
-                   
-                	<!-- 
-                	<c:choose>
-                		<c:when test="${ pi.currentPage eq 1 }">
-	                    	<li class="page-item disabled" ><a class="page-link" href="#">&laquo;</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-                   			<li class="page-item" ><a class="page-link" href="list.cm?currentPage=1&ctg=${ctg}">&laquo;</a></li>
-	                    </c:otherwise>
-                    </c:choose>
-                    
-                    <c:choose>
-                    	<c:when test="${ pi.currentPage eq 1 }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                    	<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.currentPage-1 }&ctg=${ctg}">&lt;</a></li>
-	                    </c:otherwise>
-                    </c:choose>
-
-                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    	<c:choose>
-                    		<c:when test="${pi.currentPage eq p }">
-                    			<li class="page-item disabled"><a class="page-link" href="#" style="background-color: rgb(116, 152, 107); color:white;">${ p }</a></li>
-                    		</c:when>
-                    		<c:otherwise>
-		                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ p }&ctg=${ctg}">${ p }</a></li>
-                    		</c:otherwise>
-                    	</c:choose>
-                    </c:forEach>
-                    
-                    <c:choose>
-                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                    	<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.currentPage+1 }&ctg=${ctg}">&gt;</a></li>
-	                    </c:otherwise>
-                    </c:choose>
-                    
-                    <c:choose>
-                    	<c:when test=" ${ pi.currentPage eq pi.maxPage }">
-	                    	<li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
-	                    </c:when>
-	                    <c:otherwise>
-	                    	<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.maxPage }&ctg=${ctg}">&raquo;</a></li>
-	                    </c:otherwise>
-                    </c:choose>
-                    -->
-                  </ul>
-            </div>
-        </div>
+		                    </c:otherwise>
+	                    </c:choose>
+	                    
+	                    <c:choose>
+	                    	<c:when test=" ${ pi.currentPage eq pi.maxPage }">
+		                    	<li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
+		                    </c:when>
+		                    <c:otherwise>
+		                    	<c:choose>
+		                    		<c:when test="${ empty condition }">
+		                    			<li class="page-item"><a class="page-link" href="list.cm?currentPage=${ pi.maxPage }&ctg=${ctg}">&raquo;</a></li>
+		                    		</c:when>
+		                    		<c:otherwise>
+		                    			<li class="page-item" ><a class="page-link" href="search.cm?currentPage=${ pi.maxPage }&ctg=${ctg}&condition=${condition}&cmKeyword=${cmKeyword}">&raquo;</a></li>
+	                    			</c:otherwise>
+	                    		</c:choose>
+		                    </c:otherwise>
+	                    </c:choose>
+	                    
+	                  </ul>
+	            </div>
+	        </div>
+        </c:if>
         
     </div>
     

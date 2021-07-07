@@ -156,6 +156,20 @@ div{box-sizing: border-box; }
     /* transform: scale( 1.03 ) */
 }
 
+/* 조회된 게시글이 없습니다 */
+#noSearchResult{
+    font-family: 'Noto Sans KR', sans-serif;
+    width:900px;
+    display:inline-block;
+    margin: 20px;
+    text-align: center;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    padding:100px;
+    margin-left: 60px;
+}
+
+
 /* 페이징 영역 */
 #cm_pagingArea{padding:30px;}
 /* #cm_paging{width:330px;} */
