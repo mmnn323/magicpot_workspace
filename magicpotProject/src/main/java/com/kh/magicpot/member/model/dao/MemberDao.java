@@ -107,11 +107,7 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.selectAdminMember", memNo);
 	}
 	
-	/*일반회원 탈퇴*/
-	public int deleteMember(SqlSessionTemplate sqlSession, int memNo){
-		return sqlSession.update("memberMapper.deleteMember", memNo);
-	}
-	
+
 	// 크리에이터 조회
 	public Creator creatSearch(SqlSessionTemplate sqlSession, int memNo) {
 		return sqlSession.selectOne("memberMapper.creatSearch", memNo);

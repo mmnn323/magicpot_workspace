@@ -35,9 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ad_default" property="adDefault"/>
 	</resultMap>
 	
-	<resultMap id="Project" type="Project">
+	<resultMap id="project" type="Project">
 		<id column="pro_no" property="proNo"/>
 		<result column="cre_no" property="creNo"/>
+		<result column="ca_no" property="caNo"/>
 		<result column="pro_title" property="proTitle"/>
 		<result column="pro_price" property="proPrice"/>
 		<result column="pro_image" property="proImage"/>
@@ -51,8 +52,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="close_date" property="closeDate"/>
 		<result column="pro_step" property="proStep"/>
 		<result column="pro_ad" property="proAd"/>
-		<collection resultMap="Category" property="category"/>
-
 	</resultMap>	
 	
 	<resultMap id="Creator" type="Creator" >
@@ -64,13 +63,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="cre_name" property="creName"/>
 		<result column="status" property="status"/>
 	</resultMap>
-	
-	<resultMap id="Category" type="Category" >
-		<id column="ca_no" property="caNo"/>
-		<result column="ca_name" property="caName"/>
-	</resultMap>
-	
-
 	
 	  
   	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
@@ -260,13 +252,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	   where mem_no = #{memNo}
   	</select>
   	
-  	<!-- 일반회원 탈퇴 -->
-  	<update id="deleteMember" parameterType="_int">
-  		update
-  		      member
-  		  set status ='N'
-  	    where mem_no = #{memNo}
-  	</update>
   	
   	<insert id="insertAddress" parameterType="Address">
   	insert
@@ -307,8 +292,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    , ad_default
 		 from address_list
 		 where ad_no = #{adNo}
-		   and ad_location = 'Y'
-		   
 		   
  
 	</select>  
@@ -330,7 +313,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  		   address_list
 	  	   set ad_default = 'N'  	     
 	  	 where ad_no != #{adNo}
-	  	   and mem_no = #{memNo}
    </update>
    
    <update id="fixAddress3" parameterType="Address">
@@ -369,11 +351,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 프로젝트조회 -->
-	<select id="madeProject" resultMap="Project" >
+	<select id="madeProject" resultMap="project" >
 
 		select
 		      pro_no
 		    , cre_no
+		    , ca_no
 		    , pro_title
 		    , pro_price
 		    , pro_image
@@ -387,23 +370,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    , close_date
 		    , pro_step
 		    , pro_ad
-		    , ca_name
-		    , ca_no
-		    , ca_name
-		 from project 
-		 join category using(ca_no)
+		 from project
 	    where cre_no = #{creNo}
-	      and pro_ad = 'Y'
-	     
-	</select>
 	
-	<!-- 내가만든 프로젝트 삭제 -->
-	<update id="deleteMyProject" parameterType="_int">
-		update
-		       project
-		   set pro_ad = 'N'
-		 where pro_no = #{proNo}
-	</update>
+	</select>
 	
 
 

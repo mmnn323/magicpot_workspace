@@ -127,7 +127,6 @@ public class MemberController {
 		return "member/adminMemberDetail";
 	}
 	
-	
 	// 회원가입폼 페이지
 	@RequestMapping("enrollForm.me")
 	public String enrollForm() {
