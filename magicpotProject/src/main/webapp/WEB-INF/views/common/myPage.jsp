@@ -68,13 +68,11 @@
             <td colspan="2">
             	<!-- 다인 추가 - 로그인 한 회원 상태에 따라 다른 페이지 연결 -->
             	<c:choose>
-	            	<c:when test="${ loginUser.status eq 'Y' }">
-	            		<input type="hidden" name="memNo" value="${ loginUser }">
-	                	<p> 메세지 <a id="myPage" href="myPageMsg.me">안 읽음 11개</a></p>  
+	            	<c:when test="${ loginUser.status eq 'Y' }">	       
+	                	<p><a id="myPage" href="myPageMsg.me">메세지</a></p>  
 	                </c:when>   
 	                <c:when test="${ loginUser.status eq 'C' }">
-	                	<input type="hidden" name="memNo" value="${ loginUser }">
-	                	<p> 메세지 <a id="creator" href="creatorMsg.me">안 읽음 11개</a></p>  
+	                	<p><a id="creator" href="creatorMsg.me">메세지</a></p>  
 	                </c:when>   
                 </c:choose>           
             </td>
