@@ -3,6 +3,32 @@
 
 <mapper namespace="guideMapper">
 
+	<resultMap id="Guide" type="Guide" >
+		<result column="gu_funding" property="guFunding"/>
+		<result column="gu_member" property="guMember"/>
+		<result column="gu_pay" property="guPay"/>
+		<result column="gu_reward" property="guReward"/>
+		<result column="gu_request" property="guRequest"/>
+		<result column="gu_evaluation" property="guEvaluation"/>
+		<result column="gu_calculate" property="guCalculate"/>
+		<result column="gu_provision" property="guProvision"/>
+	</resultMap>
+	
+	<resultMap id="Guide2" type="Guide2" >
+		<result column="gu_title" property="guTitle"/>
+		<result column="gu_content" property="guContent"/>
+		<result column="enroll_date" property="enrollDate"/>
+		<result column="modify_date" property="modifyDate"/>
+	</resultMap>
+	
+	<resultMap id="Faq" type="Faq" >
+		<id column="faq_no" property="faqNo"/>
+		<result column="faq_title" property="faqTitle"/>
+		<result column="faq_content" property="faqContent"/>
+		<result column="faq_date" property="faqDate"/>
+		<result column="count" property="count"/>
+		<result column="status" property="status"/>
+	</resultMap>
 
 
 	<!-- 이용약관 세부 / 수정용 페이지에 띄울 기본 이용약관 조회 -->
@@ -19,7 +45,109 @@
 		   set	gu_provision = #{gu_provision}
 	</update>
 
-
-
-
+	<!-- 이용가이드 페이지 -->
+	<select id="guideForm" resultMap="Guide2">
+		select
+		      gu_title
+		    , gu_content
+		    , enroll_date
+		    , modify_date
+		 from guide2
+		where
+		 	  <choose>
+		 	  	<when test="ctg == 1">
+		 	  		gu_title in ('결제', '리워드')  
+		 	  	</when>	
+		 	  	<when test="ctg == 2">
+		 	  		gu_title in ('프로젝트 신청', '프로젝트 심사')  
+		 	  	</when>	
+		 	  	<when test="ctg == 3">
+		 	  		gu_title in ('정산', '펀딩진행')  
+		 	  	</when>	
+		 	  	<otherwise>
+		 	  		gu_title in ('크라우드 펀딩이란?', '회원가입') 
+		 	  	</otherwise>
+		 	  </choose>
+	</select>
+	
+	<!-- faq갯수조회 -->
+	<select id="selectListCount" resultType="_int">
+		select
+		       count(*)
+		  from faq
+		 where status = 'Y' 
+	</select>
+	
+	<!-- faq 리스트조회 -->
+	<select id="faqList" resultMap="Faq">
+		select
+		      faq_no
+		    , faq_title
+		    , faq_content
+		    , faq_date
+		    , count
+		    , status
+		 from faq
+		where status = 'Y'
+		order
+		   by faq_no desc  
+	</select>
+	
+	<!-- faq 등록 -->
+	<insert id="insertForm" parameterType="Faq">
+		insert
+		  into faq
+		  (
+		    faq_no
+		  , faq_title
+		  , faq_content
+		  )
+		  values
+		  (
+		    seq_fano.nextval
+		  , #{faqTitle}
+		  , #{faqContent}
+		  )
+	</insert>
+	
+	<!-- faq 조회수 증가 -->
+	<update id="increaseCount" parameterType="_int">
+		update
+		       faq
+		   set count = count + 1
+		 where faq_no = #{faqNo}
+		   and status = 'Y'
+	</update>
+	
+	<!--  faq상세보기 -->
+	<select id="selectFaq" resultMap="Faq">
+		select
+		      faq_no
+		    , faq_title
+		    , faq_content
+		    , to_char(faq_date, 'YYYY-MM-DD') faq_date
+		    , count
+		    , status
+		 from faq
+		where status = 'Y'
+		  and faq_no = #{faqNo}
+	</select>
+	
+	<!-- faq 수정 -->
+	<update id="updateFa" parameterType="Faq">
+		update
+		       faq
+		    set faq_title = #{faqTitle}
+		      , faq_content = #{faqContent}
+		  where faq_no = #{faqNo}	
+	</update>
+	
+	<!-- faq 삭제 -->
+	<update id="deleteFa" parameterType="Faq">
+		update
+		       faq
+		    set status = 'N'
+		  where faq_no = #{faqNo}	
+	</update>
+	
 </mapper>

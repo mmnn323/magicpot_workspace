@@ -171,6 +171,9 @@
 		  <if test="condition == 'titleContent'">
 		   		and cm_title || cm_content 
 		  </if>
+		  <if test="condition == 'writer'">
+		   		and mem_id
+		  </if>
 		   		like '%' || #{cmKeyword} || '%'
 	</select>
 	
@@ -206,6 +209,9 @@
 		  <if test="condition == 'titleContent'">
 		   		and cm_title || cm_content 
 		  </if>
+		  <if test="condition == 'writer'">
+		   		and mem_id
+		  </if>
 		   		like '%' || #{cmKeyword} || '%'
          order
             by cm_no desc
@@ -235,5 +241,50 @@
  		  , #{cmImage}
  		  )
  	</insert>
+ 	
+ 	<!-- 커뮤니티 게시글 상세조회_1 : 조회수 증가 -->
+ 	<update id="increaseCmCount" parameterType="_int">
+ 		update
+		       community
+		   set count = count + 1
+		 where cm_no = #{cmNo}
+		   and status = 'Y'
+ 	</update>
+ 	
+ 	<!-- 커뮤니티 게시글 상세조회_2 : 게시글 상세조회 -->
+ 	<select id="selectCommunity" resultMap="community" parameterType="Community">
+ 		select
+		       cm_no
+		     , mem_no
+		     , mem_id
+		     , cm_category
+		     , cm_title
+		     , cm_content
+		     , cm_image
+		     , to_char(enroll_date, 'YYYY-MM-DD HH24:MI:SS') enroll_date
+		 from community
+		 where cm_no = #{cmNo}
+		   and status = 'Y'
+ 	</select>
+ 	
+ 	<!-- 커뮤니티 게시글 수정 -->
+ 	<update id="updateCommunity" parameterType="Community">
+ 		update
+ 		       community
+ 		   set cm_category = #{cmCategory}
+ 		     , cm_title = #{cmTitle}
+ 		     , cm_content = #{cmContent}
+ 		     , cm_image = #{cmImage}
+ 		     , modify_date = sysdate
+ 		 where cm_no = #{cmNo}
+ 	</update>
+ 	
+ 	<!-- 커뮤니티 게시글 삭제 -->
+ 	<update id="deleteCommunity" parameterType="_int">
+ 		update
+ 		       community
+ 		   set status = 'N'
+ 		 where cm_no = #{cmNo}
+ 	</update>
  
 </mapper>

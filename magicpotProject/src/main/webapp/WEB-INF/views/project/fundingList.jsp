@@ -113,7 +113,7 @@
         
     }
 
-    .fa-search{
+    #searchMark{
         font-size: 3.1ch;
         margin-top: 5px;
         color: rgb(116, 152, 107);
@@ -457,7 +457,7 @@
 	                     <input type="hidden" name="ctg2" value="${ ctg2 }">
 	                </div>
 	                <button type="submit" id="searchBtn">
-	                    <i class="fa fa-search fa-2x"></i>
+	                    <i class="fa fa-search fa-2x" id="searchMark"></i>
 	                </button>
 	                        
 	                    
@@ -487,7 +487,7 @@
 			                   <br><br>
 			                   <small class="projectCtg" style="color:gray; font-weight:bold;">${pr[i].category.caName } &nbsp; | &nbsp; ${pr[i].creator.creName }</small>
 			   
-			                   <p style="margin-top: 0;">
+			                   <p style="margin-top: 0; height:60px;">
 			                           ${pr[i].proTitle }
 			                   </p>
 			   

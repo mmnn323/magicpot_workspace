@@ -21,6 +21,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.magicpot.member.model.vo.Address" alias="Address" />
 		<typeAlias type="com.kh.magicpot.notice.model.vo.Notice" alias="Notice" />
 		<typeAlias type="com.kh.magicpot.project.model.vo.Category" alias="Category" />
+		<typeAlias type="com.kh.magicpot.guide.model.vo.Faq" alias="Faq"/>
 		
 		
 		<!-- 휘경 -->
@@ -41,6 +42,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<!-- 다인 -->
 		<typeAlias type="com.kh.magicpot.guide.model.vo.Guide" alias="Guide"/>
+		<typeAlias type="com.kh.magicpot.guide.model.vo.Guide2" alias="Guide2"/>
 		<typeAlias type="com.kh.magicpot.report.model.vo.Report" alias="Report"/>
 		<typeAlias type="com.kh.magicpot.message.model.vo.Message" alias="Message"/>
 		

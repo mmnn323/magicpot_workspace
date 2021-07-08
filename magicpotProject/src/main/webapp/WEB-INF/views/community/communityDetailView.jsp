@@ -45,33 +45,78 @@
         <div id="cm_contentArea" align="center">
             <div id="cm_infoArea">
                 <div id="cm_category">
-                    #용기내
+                    <c:choose>
+                    	<c:when test="${ cm.cmCategory == 1 }">
+                    		자유수다
+                    	</c:when>
+                    	<c:when test="${ cm.cmCategory == 2 }">
+                    		정보나눔
+                    	</c:when>
+                    	<c:otherwise>
+                    		#용기내
+                    	</c:otherwise>
+                    </c:choose>
                 </div>
                 <div id="cm_title">
-                    #용기내 챌린지와 함께 씨리얼 구매했어요!
+                    ${ cm.cmTitle }
                 </div>
                 <div id="cm_info">
-                    user23 &nbsp | &nbsp  2021-05-11 13:56
+                    ${ cm.memId } &nbsp | &nbsp  ${ cm.enrollDate }
                 </div>
             </div>
+            
+            <c:if test="${ !empty loginUser and loginUser.memId eq cm.memId }">
+		        <div id="WriterBtnArea" align="center">
+		                <span id="WriterBtnArea2" style="margin-left: 800px;">
+		                    <a class="btn btn-success" onclick="postFormSubmit(1);">수정</a>
+		                    <a class="btn btn-success" data-toggle="modal" data-target="#cmDeleteBtn">삭제</a>
+		                </span>
+		         </div>
+	         </c:if>
+	         
+	         <form id="postForm" action="" method="post">
+        		<input type="hidden" name="cmNo" value="${ cm.cmNo }">
+        		<input type="hidden" name="filePath" value="${ cm.cmImage }">
+        	
+	    		<!-- The Modal : 공지사항 삭제-->
+	            <div class="modal fade" id="cmDeleteBtn" align="center">
+	                <div class="modal-dialog modal-dialog-centered">
+	                    <div class="modal-content">
+	
+	                        <!-- Modal body -->
+	                        <br>
+	                        <div class="modal-body">
+	                            	커뮤니티 게시글을 삭제하시겠습니까?
+	                        </div>
+	                        
+	                        <!-- Modal footer -->
+	                        <div id="cmModalFooter">
+	                            <button id="cmOkBtn" class="btn btn-warning" onclick="postFormSubmit(2);">OK</button>
+	                            <button id="cmCancleBtn" data-dismiss="modal" class="btn btn-secondary">Cancle</button>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </form>
+        
+        <script>
+	       	function postFormSubmit(num){
+	       		if(num == 1){ // 수정하기 클릭 시
+	       			$("#postForm").attr("action", "updateForm.cm").submit();
+	       		}else{ // 삭제하기 클릭 시
+	       			$("#postForm").attr("action", "delete.cm").submit();
+	       		}
+	       	}
+       </script>
 
             <div id="noticeLine"></div>
 
             <div id="cm_content">
-                <img src="../../../resources/images/community/커뮤니티 상세보기 예시_1.png" alt="">
-                <pre style="text-align: left;">
-                    합정에 씨리얼 스토어에서 씨리얼 구매 했어요!
-
-                    처음이라 부끄럽기도 했지만 제로웨이스트에 한 걸음 다가간 것 같아서 뿌듯했어요.
-                    사장님도 요새는 직접 포장 용기를 가져와서 담아가는 손님들이 부쩍 늘었다고 하시더라구요~!
-                    내일을 위한 소비 습관! 정말 보기 좋습니다! 여러분들도 함께 동참해요!
-                </pre>
-                <img src="../../../resources/images/community/커뮤니티 상세보기 예시_2.png" alt="">
-                <pre style="text-align: left;">
-                    뿌듯함에 집에서 요거트 딸기 블루베리 넣어서 먹었답니다ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ
-                </pre>
+                ${ cm.cmContent }
             </div>
         </div>
+        
+        
 
         <div id="noticeLine"></div>
 
@@ -79,18 +124,23 @@
         <div id="cm_commentArea">
 
             <div id="cm_conmment" align="center">
+            
                 <!-- 댓글 등록 영역 -->
-                <!-- 로그인 상태 -->
-                <div id="enrollComment" class="enrollComment">
-                    <div style="color:rgb(83, 83, 83);">user23</div>
-                    <textarea name="" id="" cols="90" rows="3"  placeholder="댓글을 남겨보세요"></textarea>
-                    <a href="" class="btn btn-success btn-sm" >등록</a>
-                </div>
-                <!-- 비로그인 상태 -->
-                <!-- <div id="enrollComment" align="center">
-                    <textarea name="" id="" cols="90" rows="3"  placeholder="로그인이 필요한 서비스 입니다" readonly></textarea>
-                    <a href="" class="btn btn-success btn-sm disabled" >등록</a>
-                </div> -->
+                <c:choose>
+                	<c:when test="${ !empty loginUser }">
+		                <div id="enrollComment" class="enrollComment">
+		                    <div style="color:rgb(83, 83, 83);">user23</div>
+		                    <textarea name="" id="" cols="90" rows="3"  placeholder="댓글을 남겨보세요"></textarea>
+		                    <a href="" class="btn btn-success btn-sm" >등록</a>
+		                </div>
+	                </c:when>
+	                <c:otherwise>
+		                <div id="enrollComment" align="center">
+		                    <textarea name="" id="" cols="90" rows="3"  placeholder="로그인이 필요한 서비스 입니다" readonly></textarea>
+		                    <a href="" class="btn btn-success btn-sm disabled" >등록</a>
+		                </div>
+	                </c:otherwise>
+                </c:choose>
 
                 <div id="noticeLine"></div>
 
@@ -190,11 +240,11 @@
 
         <div id="btnArea" align="center">
             <span id="btnArea1">
-                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#enrollBtn">글쓰기</a>
+                <a href="enrollForm.cm" class="btn btn-success">글쓰기</a>
             </span>
             <span id="btnArea2" style="margin-left: 700px;">
-                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#enrollBtn">목록</a>
-                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#enrollBtn"><i class="fas fa-caret-up"></i> TOP</a>
+                <a href="list.cm" class="btn btn-success">목록</a>
+                <a href="#cm_titleArea"" class="btn btn-success"><i class="fas fa-caret-up"></i> TOP</a>
             </span>
         </div>
 	

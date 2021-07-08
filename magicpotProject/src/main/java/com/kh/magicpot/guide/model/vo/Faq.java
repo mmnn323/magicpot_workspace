@@ -1,5 +1,7 @@
 package com.kh.magicpot.guide.model.vo;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,16 +12,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Guide {
+public class Faq {
+	private int faqNo;
+	private String faqTitle;
+	private String faqContent;
+	private String faqDate;
+	private int count;
+	private String status;
 
-	private String guFunding;
-	private String guMember;
-	private String guPay;
-	private String guReward;
-	private String guRequest;
-	private String guEvaluation;
-	private String guCalculate;
-	private String guProvision;
-	
-	
 }
