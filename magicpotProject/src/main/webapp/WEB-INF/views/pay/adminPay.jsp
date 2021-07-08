@@ -168,7 +168,7 @@ table, tr, th, td {
 </head>
 <body>
 	<jsp:include page="../common/adminPageTemplate2.jsp" />
-	
+
 
 	<div id="content">
 		<div class="outer">
@@ -208,25 +208,27 @@ table, tr, th, td {
 								<th width="40"><input type="checkbox"></th>
 								<th width="150">회원 번호</th>
 								<th width="100">아이디</th>
-								<th width="90">이름</th>
-								<th width="100">카테고리</th>
+								<th width="100">이름</th>
 								<th width="200">프로젝트</th>
+								<th width="200">결제일자</th>
 								<th width="150">결제금액</th>
 								<th width="150">달성현황</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td>41</td>
-								<td><a href="">user10</a></td>
-								<td>132</td>
-								<td>리빙</td>
-								<td>소창수건</td>
-								<td>23000</td>
-								<td>y</td>
-							</tr>
 
+							<c:forEach var="a" items="${ list }">
+								<tr>
+									<td><input type="checkbox"></td>
+									<td>${ a.memNo }</td>
+									<td>${ a.memId }</td>
+									<td>${ a.memName }</td>
+									<td>${ a.proTitle }</td>
+									<td>${ a.payDate }</td>
+									<td>${ a.payPrice }</td>
+									<td>${ a.proAd }</td>
+								</tr>
+							</c:forEach>
 
 
 
@@ -241,15 +243,33 @@ table, tr, th, td {
 
 				<div id="cm_paging">
 					<ul class="pagination pagination">
-						<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-						<li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">&gt;</a></li>
-						<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+						<c:choose>
+							<c:when test=" ${ pi.currentPage eq 1 } ">
+								<li class="page-item disabled"><a class="page-link"
+									href="#">&lt;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link"
+									href="adminPay.me?currentPage=${ pi.currentPage-1 }">&lt;</a></li>
+							</c:otherwise>
+						</c:choose>
+
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<li class="page-item"><a class="page-link"
+								href="adminPay.me?currentPage=${ p }">${ p }</a></li>
+						</c:forEach>
+
+						<c:choose>
+							<c:when test="${ pi.currentPage eq pi.maxPage }">
+								<li class="page-item disabled"><a class="page-link"
+									href="#">&gt;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link"
+									href="list.bo?currentPage=${ pi.currentPage+1 }">&gt;</a></li>
+							</c:otherwise>
+						</c:choose>
+
 					</ul>
 				</div>
 
@@ -257,6 +277,6 @@ table, tr, th, td {
 
 		</div>
 	</div>
-	</div>
+
 </body>
 </html>

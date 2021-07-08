@@ -63,10 +63,8 @@ public class MemberController {
 			mv.setViewName("common/errorPage");
 		}
 		
-		return mv;
-		
-	
-}
+		return mv;	
+	}	
 	
 	@RequestMapping("logout.me")
 	public String logoutMember(HttpSession session) {
@@ -77,6 +75,16 @@ public class MemberController {
 	@RequestMapping("myPage.me")
 	public String myPage() {
 		return "common/myPage";
+	}
+	
+	@RequestMapping("fId.me")
+	public String FindId(HttpSession session) {
+		return "member/FId";
+	}
+	
+	@RequestMapping("fPwd.me")
+	public String FindPwd(HttpSession session) {
+		return "member/FPwd";
 	}
 	
 	

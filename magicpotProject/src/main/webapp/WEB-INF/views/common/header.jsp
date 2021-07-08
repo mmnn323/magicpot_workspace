@@ -177,8 +177,8 @@
 						<tr>
 							<td><input type="checkbox" id="remember_memId" name="remember_memId"> 아이디 저장</td>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<th><a href="">아이디 찾기 </a> |
-							<a href=""> 비밀번호 </a></th>
+							<th><a href="fId.me">아이디 찾기 </a> |
+							<a href="fPwd.me"> 비밀번호 </a></th>
 						</tr>
 					</div>
 

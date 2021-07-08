@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.magicpot.coupon.model.service.AdminCouponService;
@@ -47,15 +48,16 @@ public class AdminCouponController {
 		
 	}
 	
-	@RequestMapping("admindelete.me")
-	public String deleteCoupon(int cpNo, HttpSession session, Model model) {
+	@RequestMapping(value="admindelete.me", method=RequestMethod.POST)
+	public String deleteCoupon(int cpNumber, HttpSession session, Model model) {
+		//System.out.println("cpNumber " + cpNumber);
 		
-		Coupon couponNo = (Coupon)session.getAttribute("couponNo");
+		//Coupon couponNo = (Coupon)session.getAttribute("couponNo");
 		
-		int result = cService.deleteCoupon(couponNo.getCpNo());
+		int result = cService.deleteCoupon(cpNumber);
 		
 		if(result > 0) {
-			session.removeAttribute("cpNo");
+			session.removeAttribute("cpNumber");
 			session.setAttribute("alertMsg", "성공적으로 삭제 되었습니다.");
 		
 			return "redirect:adminCoupon.me";
