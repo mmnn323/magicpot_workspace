@@ -8,31 +8,48 @@
 <title>단계3</title>
 <style>
     /* 상태바 */
+	ul{list-style: none} /* ul표시 없앰 */
+    .step-state ul:after{
+        content: '';
+        display: block;
+        clear: both
+    }
+    .step-state ul li{
+        float: left;
+        position: relative;
+        width: 25%; /* 4개 진행바를 4등분*/
+        padding-top: 50px; /* 진행바 영역 확보*/
+    }
+    /* 회색 진행바 */
+    .step-state ul li:before{
+        /* border:1px solid pink; */
+        position: absolute;
+        top: -13px;
+        left: -43px;
+        right: 0;
+        height: 3px; /* 진행바 두께 */
+        background: #ddd;
+        content: '';
+    }
     /* 활성화 상태바 표시 */
     .step-state.step3 ul li:nth-child(-n+3):before{
-        position:absolute;
-        background:rgb(116, 152, 107);
+        background: rgb(116, 152, 107);
     }
     /* 1/2영역 비활성화 */
     .step-state ul li p:before{
-        position:absolute;
+        position:  absolute;
         top:35px;
         left:50%;
-        right:0;
-        height:3px;
-        content:'';
-    }	
-    .step-state.step3 ul li:nth-child(3) p:before{
-        background:#ddd;
-        top:-13px;
+        right: 0;
+        height: 3px;
+        content: '';
     }
 
     /* content */
     #content1{padding-left:50px}
     #summary{color:#757575;margin-bottom: -3px;}
-    button{cursor:pointer;}
     #before_btn{
-        font-size: 15px;
+        font-size: 18px;
         font-weight: 600;
         color:white;
         background-color:#c7c7c7;
@@ -43,7 +60,7 @@
         float:left;
     }
     #after_btn{
-        font-size: 15px;
+        font-size: 18px;
         font-weight: 600;
         color:white;
         background-color:rgb(116, 152, 107);
@@ -96,9 +113,9 @@
 				<h6 id="level_summary">리워드 발송과 펀딩금 반환이 모두 완료되면 최종정산이 진행됩니다.</h6>
 
 				<br><br><br>
-				<button id="before_btn">이전</button> 
+				<button type="button" id="before_btn" onclick="location.href='level2.pro'">이전</button> 
 				&nbsp;
-				<button id="after_btn">다음</button>
+				<button type="button" id="after_btn" onclick="location.href='level4.pro'">다음</button>
 			</div>
 		</div>
 	</div>

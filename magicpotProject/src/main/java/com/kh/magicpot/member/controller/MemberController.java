@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -33,6 +32,7 @@ import com.kh.magicpot.member.model.service.MemberService;
 import com.kh.magicpot.member.model.vo.Address;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.member.model.vo.NaverLoginBO;
+import com.kh.magicpot.project.model.service.ProjectService;
 import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.Project;
 
@@ -55,6 +55,9 @@ public class MemberController {
 	private MemberService mService;
 	
 	@Autowired
+	private ProjectService pService;
+	
+	@Autowired
 	private JavaMailSender mailSender;
 	
 	@Autowired
@@ -67,6 +70,14 @@ public class MemberController {
 		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
 		
 		Member loginUser = mService.loginMember(m);
+		
+		// 로그인시 creator 조회
+		Creator creator = pService.selectCreator(loginUser);
+		
+		if(creator != null) {
+			session.setAttribute("creator", creator);
+//			System.out.println(creator);
+		}
 		
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginUser.getMemPwd())) {

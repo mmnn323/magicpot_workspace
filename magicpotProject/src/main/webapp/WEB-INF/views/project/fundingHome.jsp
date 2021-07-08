@@ -8,6 +8,25 @@
 <title>펀딩 준비 홈</title>
 <!-- css -->
 <link rel="stylesheet" href="resources/css/funding/fundinghome.css">
+<style>
+	#field1{
+	    width: 70%;
+	    padding-left:20px;
+	    padding-right:15px;
+	    padding-bottom:10px;
+	    border: 2px solid #b4b4b4;
+	    border-radius: 5px;
+	}
+	#linkField{
+	    width: 70%;
+	    height: 70px;
+	    padding-left:20px;
+	    padding-right:15px;
+	    padding-bottom:10px;
+	    border: 2px solid #b4b4b4;
+	    border-radius: 5px;
+	}
+</style>
 </head>
 <body>
     <div class="wrap">
@@ -18,7 +37,7 @@
                 <h5 id="summary">본격적으로 펀딩을 오픈하기 위해 프로젝트에 대한 필수항목을 작성하세요.</h5>
                 <br><br>
                 
-                <fieldset>
+                <fieldset id="field1">
                     <!-- 단계별로 내용 바뀜 -> select로 전부 내용있으면 작성 완료로 변경, 그외는 프로젝트 상태로 -->
                     <h4 style="font-weight:600;margin-top:25px">프로젝트 준비 상태</h4>
                     <p id="p5">펀딩 준비 작성 중</p>
@@ -28,9 +47,18 @@
 
                 <fieldset id="linkField">
                     <!-- 작성 중 작성 완료 단계 변경 필요 -->
-                    <h4>기본 요건</h4>
-                    <p id="p7">&nbsp;&nbsp;작성 중</p>
-                    <button id="linkBtn">작성하기</button>
+                    <c:choose>
+                    	<c:when test="${ ! empty proRequire }">
+                    		<h4>기본 요건</h4>
+		                    <p id="p7">&nbsp;&nbsp;작성 완료</p>
+		                    <button id="linkBtn" onclick="location.href='requireEnroll.pro'">수정하기</button>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<h4>기본 요건</h4>
+		                    <p id="p7">&nbsp;&nbsp;작성 중</p>
+		                    <button id="linkBtn" onclick="location.href='requireEnroll.pro'">작성하기</button>
+                    	</c:otherwise>
+                    </c:choose>
                 </fieldset>
                 <br>
 
@@ -38,7 +66,7 @@
                     <!-- 작성 중 작성 완료 단계 변경 필요 -->
                     <h4>기본 정보</h4>
                     <p id="p7">&nbsp;&nbsp;작성 중</p>
-                    <button id="linkBtn">작성하기</button>
+                    <button id="linkBtn" onclick="location.href='basicEnroll.pro'">작성하기</button>
                 </fieldset>
                 <br>
 
@@ -46,7 +74,7 @@
                     <!-- 작성 중 작성 완료 단계 변경 필요 -->
                     <h4>스토리 작성</h4>
                     <p id="p7">&nbsp;&nbsp;작성 중</p>
-                    <button id="linkBtn">작성하기</button>
+                    <button id="linkBtn" onclick="location.href='storyEnroll.pro'">작성하기</button>
                 </fieldset>
                 <br>
 
@@ -54,7 +82,7 @@
                     <!-- 작성 중 작성 완료 단계 변경 필요 -->
                     <h4>리워드 작성</h4>
                     <p id="p7">&nbsp;&nbsp;작성 중</p>
-                    <button id="linkBtn">작성하기</button>
+                    <button id="linkBtn" onclick="location.href='rewardEnroll.pro'">작성하기</button>
                 </fieldset>
                 <br>
 
