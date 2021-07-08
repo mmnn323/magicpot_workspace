@@ -75,6 +75,7 @@ th {
 </head>
 <body>
 
+
 	<jsp:include page="../common/header.jsp" />
 
 	<table class="wrap">
@@ -201,6 +202,7 @@ th {
 	</table>
 
 	<jsp:include page="../common/footer.jsp" />
+
 
 </body>
 </html>

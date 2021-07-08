@@ -7,8 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.dao.ProjectDao;
 import com.kh.magicpot.project.model.vo.Creator;
+import com.kh.magicpot.project.model.vo.ProRequire;
 import com.kh.magicpot.project.model.vo.Project;
 
 @Service
@@ -43,8 +45,8 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public int insertCre(Creator c) {
-		return pDao.insertCre(sqlSession, c);
+	public int insertCreator(Creator c) {
+		return pDao.insertCreator(sqlSession, c);
 	}
 
 	@Override
@@ -62,7 +64,55 @@ public class ProjectServiceImpl implements ProjectService{
 		return pDao.searchList2(sqlSession, map);
 	}
 
+	@Override
+	public Creator selectCreator(Member m) {
+		return pDao.selectCreator(sqlSession, m);
+	}
 	
+	@Override
+	public int insertProject(HashMap<String, Integer> map) {
+		return pDao.insertProject(sqlSession, map);
+	}
+	
+	@Override
+	public int selectRanNo(int ranNo) {
+		return pDao.selectRanNo(sqlSession, ranNo);
+	}
+
+	@Override
+	public int selectRanNo2(int pno) {
+		return pDao.selectRanNo2(sqlSession, pno);
+	}
+
+	@Override
+	public Project selectProject1(int ranNo) {
+		return pDao.selectProject1(sqlSession, ranNo);
+	}
+
+	@Override
+	public int updateProStep1(int ranNo) {
+		return pDao.updateProStep1(sqlSession, ranNo);
+	}
+
+	@Override
+	public Project selectProject2(int pno) {
+		return pDao.selectProject2(sqlSession, pno);
+	}
+
+	@Override
+	public ProRequire selectRequire(int pno) {
+		return pDao.selectRequire(sqlSession, pno);
+	}
+	
+	@Override
+	public int insertRequire(ProRequire proRequire) {
+		return pDao.insertRequire(sqlSession, proRequire);
+	}
+	
+	@Override
+	public int updateRequire(ProRequire proRequire) {
+		return pDao.updateRequire(sqlSession, proRequire);
+	}	
 	
 	
 
