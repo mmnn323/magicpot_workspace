@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -21,7 +22,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/dd18300701.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style>
     div, form, input{ box-sizing: border-box;}
     div, p, form, a, input {font-family: 'Noto Sans KR', sans-serif;}
@@ -152,11 +153,11 @@
                         </tr>
                         <tr>
                             <td>     
-                                <input type="email" class="form-control" id="email" name="email" placeholder="이메일 입력" required >
+                                <input type="email" class="form-control" id="email" name="email" placeholder="이메일 입력" required  readonly>
                                 <sapn class="mail_input_box_warn"></sapn>
                             </td>
                             <td>
-                                <button type="button" id="emailCheckYN" class="btn btn-success"  >인증확인</button>
+                                <button type="button" id="emailCheckYN" class="btn btn-success"  disabled >인증확인</button>
                             </td>
                         
                         </tr>
@@ -173,7 +174,7 @@
                         <tr>
                             <td colspan="2">
                                 <br>
-                                <input type="text" class="form-control" id="userName" name="memName" placeholder="사용할 이름" required>
+                                <input type="text" class="form-control" id="userName" name="memName" placeholder="사용할 이름" required readonly>
                                 
                             </td>
                             
@@ -244,15 +245,7 @@
                 <img src="resources/images/common/bound.png" >
 
                 <br><br>
-                <button id="socialBtn" type="button" onclick="">
-                    <img src="resources/images/common/naverBtn.png">
-                </button>
-                <div id="naver_id_login" ></div>
                 
-                <!--  네이버 로그인 보류중
-                <a href="login">로그인 하러 가기 </a>
-                <div id="naver_id_login" style="text-align:center"><a href="${url }"><img width="223" src="resources/images/common/naverBtn.png"/></a></div>
-                -->
             </div>
         </div>
         
@@ -347,65 +340,7 @@
                            
         });
         
-		$(function(){
-			var code = "";
-			
-	    	
-	    	
-			/* 입력 이메일 형식 유효성 검사 */
-			 function mailFormCheck(email){
-			    var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-			    return form.test(email);
-			}
-
 		
-	    	/* 인증번호 발송 */
-			$("#emailCheckYN").click(function(){
-				var email = $("#email").val();
-				var warnMsg = $(".mail_input_box_warn");
-				
-				/* 이메일 형식 유효성 검사 */
-			    if(mailFormCheck(email)){
-			    	 $('#checkInput').show();
-			    	 alert('인증번호가 전송되었습니다.'); 
-
-			    	
-			    } else {
-			    	 alert('유효하지 못한형식의 메일입니다. 다시 입력해주세요'); 
-			        return false;
-			    }    
-				
-				$.ajax({
-			        
-			        type:"GET",
-			        url:"mailCheck?email=" + email,
-			        success:function(data){
-			        	code = data;
-			        }
-			                
-			    });
-			});
-			
-			
-			/* 인증번호 비교 */
-			$("#emailCC").blur(function(){
-				var inputCode = $("#emailCC").val();        // 입력코드    
-			    var checkResult = $("#mail_check_input");    // 비교 결과     
-			    
-			    if(inputCode == code){                            // 일치할 경우
-			        checkResult.html("인증번호가 일치합니다.");
-			        checkResult.attr("class", "correct");  
-			        $("#subBtn").attr("disabled", false);
-			    } else {                                            // 일치하지 않을 경우
-			        checkResult.html("인증번호를 다시 확인해주세요.");
-			        checkResult.attr("class", "incorrect");
-			        $("#subBtn").attr("disabled", true);
-			    }    
-			});
-			
-			
-		
-		})
 		
 		/* 아이디 중복 확인*/
 		
@@ -464,19 +399,20 @@
     		});
     	})
     	
-    	// 네이버로 회원가입 로그인
-	   	var naver_id_login = new naver_id_login("B9KN9Y8GGTbbNdrMWbIA", "http://localhost:8883/magicpot/naver.en");
-	  	var state = naver_id_login.getUniqState();
-	  	naver_id_login.setButton("src", 3,40);
-	  	naver_id_login.setDomain("http://localhost:8883/magicpot/enrollForm.me");
-	  	naver_id_login.setState(state);
-	  	naver_id_login.setPopup();
-	  	naver_id_login.init_naver_id_login();   	
-  	
+    
+   		// 네이버로 회원가입 콜백
+  		var naver_id_login = new naver_id_login("B9KN9Y8GGTbbNdrMWbIA", "http://localhost:8883/magicpot/naver.en");
+            // 접근 토큰 값 출력
+            // 네이버 사용자 프로필 조회
+            naver_id_login.get_naver_userprofile("naverSignInCallback()");
+            // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+            function naverSignInCallback() {
+            	document.getElementById("userName").value = naver_id_login.getProfileData('name');
+            	document.getElementById("email").value = naver_id_login.getProfileData('email');
+              
+            }  
   
-  		$(document).ready(function(){
-  			$('#naver_id_login').find('img').attr('src', 'resources/images/common/naverBtn.png');
-  		})
+  	
   	
    
 	  

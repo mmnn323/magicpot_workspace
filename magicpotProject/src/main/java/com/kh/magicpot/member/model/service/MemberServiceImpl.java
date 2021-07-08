@@ -106,12 +106,28 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<Member> selectList(PageInfo pi) {
 		return mDao.selectList(sqlSession, pi);
 	}
+	
+	// 일반회원관리 검색 리스트 조회 
+	@Override
+	public int selectSearchListCount(HashMap<String, String> map) {
+		return mDao.selectSearchListCount(sqlSession, map);
+	}
+	
+	// 일반회원관리 검색 요청 페이지 보여질 회원 리스트
+	@Override
+	public ArrayList<Member> selectSearchList(HashMap<String, String> map, PageInfo pi) {
+		return mDao.selectSearchList(sqlSession, map, pi);
+	}
+	
+	@Override
+	public int deleteMember(int memNo) {
+		return mDao.deleteMember(sqlSession, memNo);
+	}
 
 	// 회원 상세조회
 	@Override
 	public Member selectAdminMember(int memNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return mDao.selectAdminMember(sqlSession, memNo);
 	}
 	
 	// 크리에이터 조회
@@ -132,6 +148,7 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteMyProject(int proNo) {
 		return mDao.deleteMyProject(sqlSession, proNo);
 	}
+
 
 
 

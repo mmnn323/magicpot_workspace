@@ -21,6 +21,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<beans:bean class="com.kh.magicpot.member.model.vo.NaverLoginBO" id="naverLoginBO"/>
+	
 	<context:component-scan base-package="com.kh.magicpot" />
 	
 	

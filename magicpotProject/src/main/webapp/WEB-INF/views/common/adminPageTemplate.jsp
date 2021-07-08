@@ -142,7 +142,7 @@
                             </li>
                             <li>
                                 <h4>
-                                    <a href="" id="abled">결제관리</a><span style="margin-left:110px"></span></h4>
+                                    <a href="adminPay.me" id="abled">결제관리</a><span style="margin-left:110px"></span></h4>
                                 </h4>
                             </li>
                             <li>
@@ -151,7 +151,7 @@
                                     <i id="btn1" class="fas fa-angle-down" style="margin-left:93px"></i>
                                 </h4>
                                 <ul id="subMenu">
-                                    <li><a href="coupon.me">쿠폰등록/삭제</a></li>
+                                    <li><a href="adminCoupon.me">쿠폰등록/삭제</a></li>
                                     <li><a href="">회원별 쿠폰</a></li>
                                 </ul>
                             </li>

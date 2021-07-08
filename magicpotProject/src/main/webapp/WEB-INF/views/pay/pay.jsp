@@ -37,6 +37,7 @@ table, tr, th, td {
 .wrap {
 	width: 950px;
 	height: 1200px;
+	
 }
 
 #img {
@@ -94,7 +95,7 @@ table, tr, th, td {
 
 	<jsp:include page="../common/header.jsp" />
 
-	<table class="wrap">
+	<table class="wrap" align="center">
 
 		<tr>
 			<th id="empty"></th>

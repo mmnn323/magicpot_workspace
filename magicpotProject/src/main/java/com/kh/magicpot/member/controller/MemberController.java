@@ -1,15 +1,19 @@
 package com.kh.magicpot.member.controller;
 
-import java.text.ParseException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -17,15 +21,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.common.template.Pagination;
 import com.kh.magicpot.member.model.service.MemberService;
 import com.kh.magicpot.member.model.vo.Address;
 import com.kh.magicpot.member.model.vo.Member;
+import com.kh.magicpot.member.model.vo.NaverLoginBO;
 import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.Project;
 
@@ -35,7 +42,14 @@ import com.kh.magicpot.project.model.vo.Project;
 @Controller
 public class MemberController {
 
+	/* NaverLoginBO */
+	private NaverLoginBO naverLoginBO;
+	private String apiResult = null;
 	
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
+	}
 	
 	@Autowired
 	private MemberService mService;
@@ -63,10 +77,8 @@ public class MemberController {
 			mv.setViewName("common/errorPage");
 		}
 		
-		return mv;
-		
-	
-}
+		return mv;	
+	}	
 	
 	@RequestMapping("logout.me")
 	public String logoutMember(HttpSession session) {
@@ -77,6 +89,16 @@ public class MemberController {
 	@RequestMapping("myPage.me")
 	public String myPage() {
 		return "common/myPage";
+	}
+	
+	@RequestMapping("fId.me")
+	public String FindId(HttpSession session) {
+		return "member/FId";
+	}
+	
+	@RequestMapping("fPwd.me")
+	public String FindPwd(HttpSession session) {
+		return "member/FPwd";
 	}
 	
 	
@@ -94,7 +116,16 @@ public class MemberController {
 		
 		return "member/adminMember";
 	}
-	
+
+	/* 일반회원 상세보기 */
+	@RequestMapping("detail.me")
+	public String selectAdminMember(int mno, Model model) {
+				
+		Member m = mService.selectAdminMember(mno);
+		model.addAttribute("m", m);
+		
+		return "member/adminMemberDetail";
+	}
 	
 	
 	// 회원가입폼 페이지
@@ -390,6 +421,68 @@ public class MemberController {
 				return "common/errorPage";
 			}
 		}
-	
+		
+		
+		
+		//로그인 첫 화면 요청 메소드 ************** 보류
+		@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
+		public String login(Model model, HttpSession session) {
+			
+			/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+			String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+			
+			//https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
+			//redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
+			
+			//네이버 
+			model.addAttribute("url", naverAuthUrl);
+
+			/* 생성한 인증 URL을 View로 전달 */
+			return "member/memberEnrollForm";
+		}
+		
+		//성공시 callback호출 메소드 ****************** 보류
+		@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
+		public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+				throws IOException, ParseException {
+			System.out.println("여기는 callback");
+			OAuth2AccessToken oauthToken;
+	        oauthToken = naverLoginBO.getAccessToken(session, code, state);
+	        //로그인 사용자 정보를 읽어온다.
+		    apiResult = naverLoginBO.getUserProfile(oauthToken);
+		    System.out.println(apiResult);
+		  //2. String형식인 apiResult를 json형태로 바꿈
+		    JSONParser parser = new JSONParser();
+		    Object obj = parser.parse(apiResult);
+		    JSONObject jsonObj = (JSONObject) obj;
+
+		  //  3. 데이터 파싱
+		  //Top레벨 단계 _response 파싱
+		  JSONObject response_obj = (JSONObject)jsonObj.get("response");
+		  //response의 nickname값 파싱
+		  String name = (String)response_obj.get("name");
+		  System.out.println(name);
+		  //4.파싱 닉네임 세션으로 저장
+		  session.setAttribute("sessionId",name); //세션 생성
+
+		
+		    
+		    
+		    
+			model.addAttribute("result", apiResult);
+			
+
+			
+	        /* 네이버 로그인 성공 페이지 View 호출 */
+			return "main";
+		}
+		
+		// 네이버회원가입
+
+		@RequestMapping("naver.en")
+		public String enrollNaver() {
+			return "member/naverEnrollForm";
+		}
+		
 	
 }

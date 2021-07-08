@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -67,6 +68,7 @@ public class MemberDao {
 	public Address selectDefault(SqlSessionTemplate sqlSession, int memNo) {
 		return sqlSession.selectOne("memberMapper.selectDefault", memNo);
 	}
+	
 	/*관리자 일반회원관리*/
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("memberMapper.selectListCount");
@@ -82,6 +84,32 @@ public class MemberDao {
 		
 		return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
 		
+	}
+	
+	/*관리자 일반회원관리 검색*/
+	public int selectSearchListCount(SqlSession sqlSession, HashMap<String, String> map) {
+
+		return sqlSession.selectOne("memberMapper.selectSearchListCount", map);
+
+	}
+
+	public ArrayList<Member> selectSearchList(SqlSession sqlSession, HashMap<String, String> map, PageInfo pi) {
+
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+
+		return (ArrayList) sqlSession.selectList("memberMapper.selectSearchList", map, rowBounds);
+
+	}
+	
+	/*일반회원 상세 조회*/
+	public Member selectAdminMember(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("memberMapper.selectAdminMember", memNo);
+	}
+	
+	/*일반회원 탈퇴*/
+	public int deleteMember(SqlSessionTemplate sqlSession, int memNo){
+		return sqlSession.update("memberMapper.deleteMember", memNo);
 	}
 	
 	// 크리에이터 조회
