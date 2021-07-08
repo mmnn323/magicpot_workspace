@@ -1,9 +1,7 @@
-@@ -1,197 +1,13 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +87,7 @@ th {
 
 			<!--펀딩횟수-->
 			<th class="pd2" colspan="6"><h2>펀딩하기</h2> <a
-				style="font-size: 20px;" href="" id="myPageA" >0회</a></th>
+				style="font-size: 20px;" href="" id="myPageA">0회</a></th>
 			<th id="pd" rowspan="8"></th>
 		</tr>
 		<tr>
@@ -114,7 +112,7 @@ th {
 				<th><i class="fas fa-tags fa-2x"></i></th>
 				<td class="icons">
 					<p>
-						쿠폰 <a id="myPageA" href="" > 사용가능 1장</a>
+						쿠폰 <a id="myPageA" href=""> 사용가능 1장</a>
 					</p>
 				</td>
 			</tr>
@@ -126,48 +124,56 @@ th {
 
 			<tr>
 				<th><i class="far fa-edit fa-2x"></i></th>
-				<td colspan="2"><a href="made.pr" id="a"><p>내가 만든 프로젝트</p></a></td>
+				<td colspan="2"><c:choose>
+						<c:when test="${loginUser.status eq 'C' }">
+							<a href="made.pr"><p>내가 만든 프로젝트</p></a>
+						</c:when>
+						<c:otherwise>
+							<a href="" onclick="creatorYn();"><p>내가 만든 프로젝트</p></a>
+						</c:otherwise>
+					</c:choose></td>
 
 				<th></th>
 				<!--그냥 가운데 공간주는 용도-->
 
 				<th><i class="fas fa-heart fa-2x"></i></th>
-				<td><a href="like.pr" id="a"><p>좋아하는 프로젝트</p></a></td>
+				<td><a href="like.pr"><p>좋아하는 프로젝트</p></a></td>
 
 			</tr>
+
 
 
 			<!-- 문의 내역, 정보변경 -->
-			<tr>
-				<th><i class="fas fa-question fa-2x"></i></th>
-				<td colspan="2"><a href="" id="a"><p>나의 문의 내역</p></a></td>
+		<tr>
+			<th><i class="fas fa-question fa-2x"></i></th>
+			<td colspan="2"><a href="" id="a"><p>나의 문의 내역</p></a></td>
 
 
-				<th></th>
-				<!-- 공간유지용-->
+			<th></th>
+			<!-- 공간유지용-->
 
-				<th><i class="fas fa-user-plus fa-2x"></i></th>
-				<td><a href="profile.me" id="a"><p>정보변경</p></a></td>
-			</tr>
+			<th><i class="fas fa-user-plus fa-2x"></i></th>
+			<td><a href="profile.me" id="a"><p>정보변경</p></a></td>
+		</tr>
 
-			<tr>
-				<th></th>
-				<th><i class="fas fa-map-marker-alt fa-2x"></i></th>
-				<td colspan="2"><a href="address.me" id="a"><p>배송지 관리</p></a></td>
-
-
-				<th></th>
-				<!-- 공간유지용-->
-
-				<th><i class="fas fa-file-invoice-dollar fa-2x"></i></th>
-				<td><a href="pay.me" id="a"><p>주문목록</p></a></td>
-			</tr>
+		<tr>
+			<th></th>
+			<th><i class="fas fa-map-marker-alt fa-2x"></i></th>
+			<td colspan="2"><a href="address.me" id="a"><p>배송지 관리</p></a></td>
 
 
-			<!-- 서포터 팁!-->
+			<th></th>
+			<!-- 공간유지용-->
+
+			<th><i class="fas fa-file-invoice-dollar fa-2x"></i></th>
+			<td><a href="pay.me" id="a"><p>주문목록</p></a></td>
+		</tr>
+
+
+		<!-- 서포터 팁!-->
 		<tr class="my">
 
-			
+
 			<!-- 공간유지용-->
 			<td></td>
 			<td colspan="3">
