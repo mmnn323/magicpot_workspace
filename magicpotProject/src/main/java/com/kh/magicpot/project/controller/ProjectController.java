@@ -91,8 +91,36 @@ public class ProjectController {
 	@RequestMapping(value="newAjax.pj", produces="application/json; charset=utf-8")
 	public String AjaxMethod4() {
 		ArrayList<Project> list4 = pService.newList();
-
-		return new Gson().toJson(list4);
+		
+		// 남은 일 계산		
+		int[] arr = new int[list4.size()];
+			
+		for(int i=0; i<list4.size(); i++) {
+			Date date1=list4.get(i).getCloseDate();
+			Date date2 = new Date(System.currentTimeMillis());
+			 
+			long calDateDays = 0;
+			SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+			Date FirstDate = date1;
+			Date SecondDate = date2;
+				
+			long calDate = SecondDate.getTime()-FirstDate.getTime(); 
+				
+			// Date.getTime() 은 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지를 반환 
+			// 24*60*60*1000을 나눠주면 일수 나옴
+			calDateDays = calDate / ( 24*60*60*1000); 
+	 
+			calDateDays = Math.abs(calDateDays);
+				
+			arr[i] = (int)calDateDays;
+				
+		}
+		
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("pr", list4);
+		map.put("arr", arr);
+		return new Gson().toJson(map);
 	}
 	
 

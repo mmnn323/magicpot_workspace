@@ -236,7 +236,7 @@
         
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-success" id="subBtn">회원가입</button>
+                    <button type="submit" onclick="$('#enrollForm').submit();" class="btn btn-success" id="subBtn">회원가입</button>
 
                 </form>
                 <br>

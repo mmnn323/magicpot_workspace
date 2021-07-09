@@ -30,8 +30,8 @@
             <ul>
                 <li><a href="provision.gu">이용약관</a></li>
                 <li><a href="detail.fd">공지사항</a></li>
-                <li><a href="">FAQ</a></li>
-                <li style="margin-right: 0;"><a href="">펀딩설명</a></li>
+                <li><a href="faq.li">FAQ</a></li>
+                <li style="margin-right: 0;"><a href="guide.me">펀딩설명</a></li>
             </ul>
         </div>
         <div id="footer_2">

@@ -267,8 +267,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  from
 		       ( select
 		              pro_no
-		            , cre_no
-		            , ca_no
 		            , pro_title
 		            , pro_price
 		            , pro_image
@@ -282,7 +280,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		            , close_date
 		            , pro_step
 		            , pro_ad
+		            , ca_no
+		            , ca_name
+		            , cre_no
+		            , cre_name
 		         from project
+	             join category using(ca_no)
+	             join creator using(cre_no)		         
 		        order
 		           by open_date desc)
 		        where rownum between 1 and 6

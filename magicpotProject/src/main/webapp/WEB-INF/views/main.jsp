@@ -75,7 +75,8 @@
     }
     #textTitle1, #textTitle2, #textTitle3{
         margin-top: 80px;
-        margin-left:10px
+        margin-left:10px;
+        font-size : 30px;
     }
     
     
@@ -128,9 +129,12 @@
     .reTitle1, .reTitle2, .reTitle3{
     	height:70px
     }
-    .percent1, .percent2, .percent3{
+    .percent1, .percent2, .percent3, .percent11, .percent12, .percent13{
         color: rgb(116, 152, 107);
         margin-top: -10px;
+    }
+    .percent1, .percent2, .percent3{
+    
     }
 
     .raContent>div{
@@ -239,6 +243,15 @@
    .rankTitle{
     	font-size: x-small;
     }
+    #limit1, #limit2, #limit3, #limit4, #limit5, #limit6{
+    	margin-left:-1px;
+    }
+    
+    #customerBtn{
+    position: fixed;
+    right: 30px;
+    top: 1050px;
+	}
 
 
 
@@ -269,10 +282,16 @@
                      </div> 
                     
                     <div class="textArea1" >
-                       <h4 id="textTitle1"><b> </b></h4>
+                       <h4 id="textTitle1">
+                       	 <b>
+                       		에어팟? 이어폰?<br>
+                       		이건  #실리콘 스트로우
+                       	 </b></h4>
                         <br>
                         <p id="text1">
-                       
+                        	<br>
+                       		가지고 다니면서 여기저기서 콕콕~ <br>
+                       		제로웨이스트를 실천하기 위한 첫걸은 UiU 스트로우
                         </p>
                     </div>
                   </div>
@@ -285,10 +304,17 @@
                     </div> 
                    
                    <div class="textArea2" >
-                      <h4 id="textTitle2"><b> </b></h4>
+                      <h4 id="textTitle2">
+                      	 <b> 
+                      	 	향균력 99.999% <br>
+                      	 	피나투보 세라믹 보틀
+                      	 </b></h4>
                        <br>
                        <p id="text2">
-                       
+                        	<br>
+                        	안전하면서도 이쁜 보틀이 필요해! <br>
+                        	피나투보 공법과 베이직한 디자인! <br>
+                        	세라믹 보틀
                        </p>
                    </div>
                   </div>
@@ -301,10 +327,17 @@
                     </div> 
                    
                    <div class="textArea3" >
-                      <h4 id="textTitle3"><b> </b></h4>
+                      <h4 id="textTitle3">
+                      		<b> 
+                      			바다동물 살리기 프로젝트<br>
+                      			For 친환경 비누
+                      		</b></h4>
                        <br>
                        <p id="text3">
-                       
+                       		<br>
+                       		플라스틱으로 위협받는 바다동물위해! <br>
+                       		폴클렌징과 바디위시 대신 <br>
+                       		#연결For 친환경비누
                        </p>
                    </div>
                     
@@ -325,9 +358,10 @@
 						success:function(list){
 							var i="i";
 							for(var i=1; i<=3; i++){
-								$("#textTitle" + i).text(list[i-1].proTitle);
-								$("#text" + i).text(list[i-1].proSummary);
+								//$("#textTitle" + i).text(list[i-1].proTitle);
+								//$("#text" + i).text(list[i-1].proSummary);
 								$("#mainImg" + i).attr("src",list[i-1].proImage);
+								$("#imgUrl"+i).attr("href", "detail.fd?proNo=" + list[i-1].proNo);
 							}
 							
 							
@@ -356,10 +390,9 @@
                 <br>
                 
                 
-	                <div class="thumbnail1" >
-	                    <a class="detailUrl1" href="">
-	                         <img class="reImg1" src="">
-	                    </a>
+	            <a class="detailUrl1" href="" style="text-decoration: none; color: black;">
+	            	<div class="thumbnail1" >
+	                	<img class="reImg1" src="">
 	                
 	                    <br>
 	                    <br>
@@ -370,41 +403,41 @@
 	                        
 	                    </p>
 	
-	                    <p class="percent1">
+	                    <p class="percent11">
 	                        150% 달성
 	                    </p>
 	                
 	                
 	                </div>
+	           </a>
                 
 
 				  
-                <div class="thumbnail2" >
-                    <a class="detailUrl2" href="">
-                         <img class="reImg2" src="">
+               <a class="detailUrl2" href="" style="text-decoration: none; color: black;">
+              		<div class="thumbnail2" >
+                        <img class="reImg2" src="">
+                
+	                    <br>
+	                    <br>
+	    
+	                    <small class="projectCtg2">리빙</small>
+	    
+	                    <p class="reTitle2" style="margin-top: 0;">
+	                       
+	                    </p>
+	
+	                    <p class="percent12">
+	                        150% 달성
+	                    </p>
+                
+                
+                	</div>
                     </a>
-                
-                    <br>
-                    <br>
-    
-                    <small class="projectCtg2">리빙</small>
-    
-                    <p class="reTitle2" style="margin-top: 0;">
-                       
-                    </p>
-
-                    <p class="percent2">
-                        150% 달성
-                    </p>
-                
-                
-                </div>
 
                 
+               <a class="detailUrl3" href="" style="text-decoration: none; color: black;">
                     <div class="thumbnail3" >
-                        <a class="detailUrl3" href="">
-                            <img class="reImg3" src="">
-                        </a>
+                       <img class="reImg3" src="">
                     
                         <br>
                         <br>
@@ -415,12 +448,13 @@
                             
                         </p>
 
-                        <p class="percent3">
+                        <p class="percent13">
                             150% 달성
                         </p>
                     
                     
                     </div>
+              </a>
                 	
                 
             </div>
@@ -439,6 +473,9 @@
 							for(var i=1; i<=3; i++){
 								$(".reTitle" + i).text(list[i-1].proTitle);
 								$(".reImg" + i).attr("src",list[i-1].proImage);
+								$(".detailUrl"+i).attr("href", "detail.fd?proNo=" + list[i-1].proNo);
+								$(".percent1"+i).text(Math.round(list[i-1].proFundPrice / list[i-1].proPrice  *100) +"% 달성");
+								
 							}
 							
 							
@@ -464,7 +501,7 @@
                 
                 <br>
                 <c:forEach var="i" begin="1" end="3">
-	                <a class="raUrl" href="" style="text-decoration: none; color: black;">
+	                <a class="raUrl${i }" href="" style="text-decoration: none; color: black;">
 	                    <div class="raContent">
 	                        <div class="raNo">
 	                            <h3 ><b>${i }</b></h3>
@@ -503,6 +540,8 @@
 									$(".rankTitle" + i).text(list[i-1].proTitle);
 									$(".rankPrice" + i).text(list[i-1].proFundPrice);
 									$(".raImg" + i).attr("src",list[i-1].proImage);
+									$(".raUrl"+i).attr("href", "detail.fd?proNo=" + list[i-1].proNo);
+
 								}
 								
 								
@@ -547,7 +586,7 @@
                     </p>
 
                     <div class="progress" style="height:10px; margin-bottom: 0;">
-                        <div class="progress-bar" id="proBar1" style="width:80%; background-color: rgb(116, 152, 107);"></div>
+                        <div class="progress-bar" id="proBar1" style="width:; background-color: rgb(116, 152, 107);"></div>
                     </div>
 
                     <div class="progress_status" style="margin-bottom: 5px; color: rgb(116, 152, 107);">
@@ -571,7 +610,7 @@
                     </p>
 
                     <div class="progress" style="height:10px; margin-bottom: 0;">
-                        <div class="progress-bar" id="proBar2" style="width:80%; background-color: rgb(116, 152, 107);"></div>
+                        <div class="progress-bar" id="proBar2" style="width:; background-color: rgb(116, 152, 107);"></div>
                     </div>
 
                     <div class="progress_status" style="margin-bottom: 5px; color: rgb(116, 152, 107);">
@@ -596,7 +635,7 @@
                     </p>
 
                     <div class="progress" style="height:10px; margin-bottom: 0;">
-                        <div class="progress-bar" id="proBar3" style="width:80%; background-color: rgb(116, 152, 107);"></div>
+                        <div class="progress-bar" id="proBar3" style="width:; background-color: rgb(116, 152, 107);"></div>
                     </div>
 
                     <div class="progress_status" style="margin-bottom: 5px; color: rgb(116, 152, 107);">
@@ -621,7 +660,7 @@
                     </p>
 
                     <div class="progress" style="height:10px; margin-bottom: 0;">
-                        <div class="progress-bar" id="proBar4" style="width:80%; background-color: rgb(116, 152, 107);"></div>
+                        <div class="progress-bar" id="proBar4" style="width:; background-color: rgb(116, 152, 107);"></div>
                     </div>
 
                     <div class="progress_status" style="margin-bottom: 5px; color: rgb(116, 152, 107);">
@@ -646,7 +685,7 @@
                     </p>
 
                     <div class="progress" style="height:10px; margin-bottom: 0;">
-                        <div class="progress-bar" id="proBar5" style="width:80%; background-color: rgb(116, 152, 107);"></div>
+                        <div class="progress-bar" id="proBar5" style="width:; background-color: rgb(116, 152, 107);"></div>
                     </div>
 
                     <div class="progress_status" style="margin-bottom: 5px; color: rgb(116, 152, 107);">
@@ -671,7 +710,7 @@
                     </p>
 
                     <div class="progress" style="height:10px; margin-bottom: 0;">
-                        <div class="progress-bar" id="proBar6" style="width:80%; background-color: rgb(116, 152, 107);"></div>
+                        <div class="progress-bar" id="proBar6" style="width:; background-color: rgb(116, 152, 107);"></div>
                     </div>
 
                     <div class="progress_status" style="margin-bottom: 5px; color: rgb(116, 152, 107);">
@@ -683,7 +722,7 @@
              </a>
 
             <div id="btnArea"> 
-                <a href="" class="btn btn-success">신규 펀딩 더보기</a>
+                <a href="fund.li?ctg=0&ctg2=2" class="btn btn-success">신규 펀딩 더보기</a>
             </div>
         </div>
         <br><br>
@@ -701,9 +740,13 @@
 								
 								var i="i";
 								for(var i=1; i<=6; i++){
-									$("#newText" + i).text(list[i-1].proTitle);
-									
-									$("#new" + i).attr("src",list[i-1].proImage);
+									$("#newText" + i).text(list.pr[i-1].proTitle);
+									$("#new" + i).attr("src",list.pr[i-1].proImage);
+									$(".projectCtg" + i).text(list.pr[i-1].category.caName);
+									$("#ach"+i).text(Math.round(list.pr[i-1].proFundPrice / list.pr[i-1].proPrice  *100) +"% 달성")
+									$("#limit" + i).text(list.arr[i-1] + "일 남음");
+									$("#proBar"+i).css("width", Math.round(list.pr[i-1].proFundPrice / list.pr[i-1].proPrice  *100)+"%");
+									$("#newUrl"+i).attr("href", "detail.fd?proNo=" + list.pr[i-1].proNo);
 								}
 								
 								
@@ -785,7 +828,7 @@
             <div id="customerBtn">
                 
                 
-                <a id="upBtn" href="">
+                <a id="upBtn" href="" onclick="goTop()">
                     <img src="resources/images/common/upBtn.png" >
                 </a>
                 <br>
@@ -813,7 +856,17 @@
             function alertFn() {
 
    	    	 alert("클릭됨1");
-   	    }
+   	  		}
+            
+            function goTop(){
+            	if (document.body.scrollTop!=0 || document.documentElement.scrollTop!=0){
+                    window.scrollBy(0,-50);
+                    timeOut=setTimeout('scrollToTop()',10);
+                }
+                else clearTimeout(timeOut);
+            	
+            }
+            	
             
             
         </script>

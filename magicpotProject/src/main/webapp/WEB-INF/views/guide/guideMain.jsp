@@ -128,7 +128,11 @@
         text-decoration: none;
     }
     
-
+    #customerBtn{
+    position: fixed;
+    right: 30px;
+    top: 1050px;
+	}
     
 
 
@@ -269,8 +273,27 @@
 		
 	
     </div>
-    
+
+   <div id="customerBtn">
+                
+                
+   		<a id="upBtn" href="" onclick="goTop()">
+        	<img src="resources/images/common/upBtn.png" >
+        </a>
+            <br>
+        <a id="requestBtn" href="">
+            <img src="resources/images/common/requestBtn.png" >
+        </a>
+    </div>    
     
 	<jsp:include page="../common/footer.jsp"/>
+	
+	<script>
+    function goTop(){
+    	$( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+    	return false;
+    	
+    }	  	
+	</script>
 </body>
 </html>
