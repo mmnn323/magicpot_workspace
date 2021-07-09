@@ -20,7 +20,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="mem_post" property="memPost"/>
 		<result column="mem_road" property="memRoad"/>
 		<result column="mem_detail" property="memDetail"/>
-		<result column="cre_no" property="creNo"/>
 	</resultMap>
 	
 	<resultMap type="Address" id="Address">
@@ -81,7 +80,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		     , mem_post
   		     , mem_road
   		     , mem_detail
-  		     , cre_no
   		  from member
   		 where status not in ('B','N')
   		   and mem_id = #{memId}
