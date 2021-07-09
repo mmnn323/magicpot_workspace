@@ -163,7 +163,7 @@
 
 				<!-- 버튼 영역 -->
 				<!-- Button to Open the Modal -->
-				<button type="button" class="btn btn-primary" data-toggle="modal"
+				<button type="button" id="delSelect" class="btn btn-primary" data-toggle="modal"
 					data-target="#myModal" style="background-color: red; border: none;">
 					회원 탈퇴</button>
 
@@ -183,7 +183,7 @@
 
 							<!-- Modal footer -->
 							<div class="modal-footer">
-								<button type="button" class="btn btn-danger"
+								<button type="button" class="btn btn-danger" id="btn btn-danger"
 									data-dismiss="modal">네</button>
 							</div>
 
@@ -203,7 +203,7 @@
 				<table class="table" id="cmNoticeList" align="center">
 					<thead class="thead-light">
 						<tr>
-							<th width="40"><input type="checkbox"></th>
+							<th width="40"><input type="checkbox" id="allCheckbox"></th>
 							<th width="90">번호</th>
 							<th width="100">아이디</th>
 							<th width="110">이름</th>
@@ -215,7 +215,7 @@
 					<tbody>
 						<c:forEach var="m" items="${ list }">
 						<tr>
-							<th><input type="checkbox"></th>
+							<th onclick="event.cancelBubble=true"><input type="checkbox" name="noList" value="${ m.memNo }"></th>
 							<td class="mno">${ m.memNo }</td>
 							<td>${ m.memId }</td>
 							<td>${ m.memName }</td>
@@ -226,9 +226,18 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<script> //전체 선택
+					$('#cmNoticeListArea #allCheckbox').on('click', function(){
+						if($('#allCheckbox').prop("checked")){
+							$("input[type=checkbox]").prop("checked", true);
+						}else{
+							$("input[type=checkbox]").prop("checked", false);	
+						}
+					}) 
+				</script>
 				<script>
 					$(function(){
-						$("#cmNoticeList tbody tr td").click(function(){
+						$("#cmNoticeList tbody tr").click(function(){
 							location.href="detail.me?mno=" + $(this).children(".mno").text();
 						})
 					})

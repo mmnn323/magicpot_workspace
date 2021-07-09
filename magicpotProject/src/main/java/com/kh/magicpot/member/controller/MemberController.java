@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -33,6 +32,7 @@ import com.kh.magicpot.member.model.service.MemberService;
 import com.kh.magicpot.member.model.vo.Address;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.member.model.vo.NaverLoginBO;
+import com.kh.magicpot.project.model.service.ProjectService;
 import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.Project;
 
@@ -55,6 +55,9 @@ public class MemberController {
 	private MemberService mService;
 	
 	@Autowired
+	private ProjectService pService;
+	
+	@Autowired
 	private JavaMailSender mailSender;
 	
 	@Autowired
@@ -68,6 +71,14 @@ public class MemberController {
 		
 		Member loginUser = mService.loginMember(m);
 		
+		// 로그인시 creator 조회
+		Creator creator = pService.selectCreator(loginUser);
+		
+		if(creator != null) {
+			session.setAttribute("creator", creator);
+//			System.out.println(creator);
+		}
+		
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginUser.getMemPwd())) {
 			session.setAttribute("loginUser", loginUser);
@@ -77,10 +88,8 @@ public class MemberController {
 			mv.setViewName("common/errorPage");
 		}
 		
-		return mv;
-		
-	
-}
+		return mv;	
+	}	
 	
 	@RequestMapping("logout.me")
 	public String logoutMember(HttpSession session) {
@@ -91,6 +100,16 @@ public class MemberController {
 	@RequestMapping("myPage.me")
 	public String myPage() {
 		return "common/myPage";
+	}
+	
+	@RequestMapping("fId.me")
+	public String FindId(HttpSession session) {
+		return "member/FId";
+	}
+	
+	@RequestMapping("fPwd.me")
+	public String FindPwd(HttpSession session) {
+		return "member/FPwd";
 	}
 	
 	
@@ -118,7 +137,6 @@ public class MemberController {
 		
 		return "member/adminMemberDetail";
 	}
-	
 	
 	// 회원가입폼 페이지
 	@RequestMapping("enrollForm.me")

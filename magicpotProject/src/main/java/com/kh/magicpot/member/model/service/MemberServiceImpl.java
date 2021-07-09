@@ -119,16 +119,13 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.selectSearchList(sqlSession, map, pi);
 	}
 	
-	@Override
-	public int deleteMember(int memNo) {
-		return mDao.deleteMember(sqlSession, memNo);
-	}
-
+	
 	// 회원 상세조회
 	@Override
 	public Member selectAdminMember(int memNo) {
 		return mDao.selectAdminMember(sqlSession, memNo);
 	}
+	
 	
 	// 크리에이터 조회
 	@Override
@@ -148,7 +145,6 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteMyProject(int proNo) {
 		return mDao.deleteMyProject(sqlSession, proNo);
 	}
-
 
 
 

@@ -32,8 +32,9 @@
 <title>Insert title here</title>
 <style>
     *{font-family:'Noto Sans KR', sans-serif;}
-    div{border:1px solid white;}
-    #outer{width:1000px; height:px; text-align:center; margin:auto;}
+    div{border:px solid white;}
+    #outer{width:1000px;overflow:hidden;
+		  height:auto; text-align:center; margin:auto;}
     
     #category{
         width:100px; 
@@ -55,16 +56,16 @@
     #content1_2{float:left; margin-left:40px;}
     #content1_2_1,#content1_2_2,#content1_2_3,#content1_2_4{float:left;}
 
-    .progress{
+    #progress{
         height:10px; 
         margin-bottom: 0;
     }
-    .progress-bar{
+    #progress-bar{
         background-color: rgb(116, 152, 107); 
         border-radius:5px;
     }
 
-    .btn-success{
+    #btn-success1{
         width:360px;
         height:45px;
         background-color:rgb(116, 152, 107);
@@ -76,6 +77,11 @@
         border-color:lightgray;
         
     }
+    
+    .btn-outline-secondary:hover{
+		background-color:#fff!important;
+    	color:#000!important;	
+	}
     .btn-outline-secondary>img{
         width:35px; 
         height:35px; 
@@ -86,7 +92,7 @@
 
     /*content2*/
     #content2>ul{list-style-type:none;}
-    #content2>ul>li{float:left; margin-left:50px; margin-top:-5px;}
+    #content2>ul>li{float:left; margin-left:50px;}
     #content2>ul>li>a{text-decoration:none; color:lightslategray;}
     
     /*content3*/
@@ -140,8 +146,8 @@
                     <span style="font-size:25px;">11</span>일 남음
                 </div>
                 <br><br>
-                <div class="progress">
-                    <div class="progress-bar" style="width:80%;"></div>
+                <div class="progress" id="progress">
+                    <div class="progress-bar" id="progress-bar"style="width:80%;"></div>
                 </div>
 
                 <div id="content1_2_2">
@@ -156,7 +162,7 @@
                     <span style="font-size:25px;">102</span>명의 서포터
                 </div><br><br>
 
-                <button type="button" class="btn btn-success">펀딩하기</button>
+                <button type="button" class="btn btn-success" id="btn-success1">펀딩하기</button>
                 <br><br>
                 
                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#messageModal"><i class="far fa-envelope fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>문의</p></button>&nbsp;&nbsp;&nbsp;
@@ -282,7 +288,7 @@
                     <li><a href="author.fd">작가의 말</a></li>
                     <li><a href="review.fd">체험리뷰</a></li>
                 </ul>
-        </div>
+        </div><br>
         <hr>
           
         <div id="content3">

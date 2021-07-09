@@ -8,27 +8,53 @@
 <title>단계4</title>
 <style>
     /* 상태바 */
+	ul{list-style: none} /* ul표시 없앰 */
+    .step-state ul:after{
+        content: '';
+        display: block;
+        clear: both
+    }
+    .step-state ul li{
+        float: left;
+        position: relative;
+        width: 25%; /* 4개 진행바를 4등분*/
+        padding-top: 50px; /* 진행바 영역 확보*/
+    }
+    /* 회색 진행바 */
+    .step-state ul li:before{
+        /* border:1px solid pink; */
+        position: absolute;
+        top: -13px;
+        left: -43px;
+        right: 0;
+        height: 3px; /* 진행바 두께 */
+        background: #ddd;
+        content: '';
+    }
     /* 활성화 상태바 표시 */
     .step-state.step4 ul li:nth-child(-n+4):before{
-        position:absolute;
-        background:rgb(116, 152, 107);
+        background: rgb(116, 152, 107);
     }
     /* 1/2영역 비활성화 */
     .step-state ul li p:before{
-        position:absolute;
+        position:  absolute;
         top:35px;
         left:50%;
-        right:0;
-        height:3px;
-        content:'';
-    }	
+        right: 0;
+        height: 3px;
+        content: '';
+    }
+    .step-state.step2 ul li:nth-child(3) p:before{
+        position: absolute;
+        top: -13px;
+        background:#ddd;
+    }
 
     /* content */
     #content1{padding-left:50px}
     #summary{color:#757575;margin-top: -3px;}
-    button{cursor:pointer;}
     #before_btn{
-        font-size: 15px;
+        font-size: 18px;
         font-weight: 600;
         color:white;
         background-color:#c7c7c7;
@@ -39,7 +65,7 @@
         float:left;
     }
     #after_btn{
-        font-size: 15px;
+        font-size: 18px;
         font-weight: 600;
         color:white;
         background-color:rgb(116, 152, 107);
@@ -159,7 +185,7 @@
 								$("#after_btn").attr("disabled", true);
 								// console.log($("[name=checkAll]").is(":checked"));
 							}
-					});
+						});
 	
 					$("[name=checkOne]").each(function(){
 						$(this).click(function(){
@@ -176,17 +202,14 @@
 							});
 						});
 					});
-		
-					function click1(){
-						console.log("클릭됨")
-					}
 				</script>
 	
 				<br>
-				<button id="before_btn">이전</button> 
+				<button type="button" id="before_btn" onclick="location.href='level3.pro'">이전</button> 
 				&nbsp;
 				<!-- 전체 선택 되어야 넘어가고 전체 선택 안되어있으면 버튼 클릭안됨 -->
-				<button id="after_btn" onclick="click1();" disabled>다음</button>
+				<!-- session에 ranNo있을때 fundingHome1.pro -->
+				<button type="button" id="after_btn" onclick="location.href='fundingHome1.pro'" disabled>다음</button>
 			</div>
 		</div>
 	</div>

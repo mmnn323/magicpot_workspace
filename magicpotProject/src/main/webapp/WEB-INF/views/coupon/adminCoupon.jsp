@@ -195,38 +195,62 @@
                         이 부분은 기능구현 부분이니 tr 클릭 시 요청하고 싶으신 분들은 그렇게 수정해주셔도 될 것 같아요~!
                         -->
 			<div id="cmNoticeListArea">
-				<form action="adminInsert.me">
-					<table class="table" id="cmNoticeList" align="center">
-						<thead class="thead-light">
-							<tr>
-								<th width="600">쿠폰 번호</th>
-								<th width="2000">쿠폰명</th>
-								<th width="500">할인금액</th>
-								<th width="600">최소구매금액</th>
-								<th width="900">사용기간</th>
-								<th width="1200">특이사항</th>
-								<th></th>
-								<th width=""></th>
-							</tr>
-						</thead>
+				<table class="table" id="cmNoticeList" align="center">
+					<thead class="thead-light">
+						<tr>
+							<th width="600">쿠폰 번호</th>
+							<th width="2000">쿠폰명</th>
+							<th width="500">할인금액</th>
+							<th width="600">최소구매금액</th>
+							<th width="900">사용기간</th>
+							<th width="1200">특이사항</th>
+							<th></th>
+							<th width=""></th>
+						</tr>
+					</thead>
 
-						<c:forEach var="c" items="${ list }">
-							<tr class="font">
-								<th>${ c.cpNo } </th>	
-								<th>${ c.cpName }</th>
-								<th>${ c.cpPrice }</th>
-								<th>${ c.cpLower }</th>
-								<th>${ c.cpLimit }</th>
-								<th>${ c.cpCondition }</th>
+					<c:forEach var="c" items="${ list }">
+						<tr class="font">
+							<th>${ c.cpNo }</th>
+							<th>${ c.cpName }</th>
+							<th>${ c.cpPrice }</th>
+							<th>${ c.cpLower }</th>
+							<th>${ c.cpLimit }</th>
+							<th>${ c.cpCondition }</th>
 
-								<th width="800"><a href="" style="color: white;" class="btn btn-success"
-									id="cm_enrollBtn" data-toggle="modal"
-									data-target="#deleteModal">삭제</a></th>
+							<th width="800"><a href="" style="color: white;"
+								class="btn btn-success" id="cm_enrollBtn" data-toggle="modal"
+								data-target="#deleteModal">삭제</a>
+								
+									<div class="modal" id="deleteModal">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<!-- Modal Header -->
+												<div class="modal-header">
+													<h4 class="modal-title">쿠폰삭제</h4>
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+												</div>
+	
+												<div class="modal-body" align="center">
+													<form action="admindelete.me" method="post">
+														정말 삭제하시겠습니까? <br> <br> <br>
+														<input type="hidden" value="${c.cpNo}" name="cpNumber" >
+														<button type="submit" id="couponBtn" class="btn btn-danger"
+															data-target="#deleteModal">삭제하기</button>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</th>
+								
+								
+								
+								
+						</tr>
+					</c:forEach>
+				</table>
 
-							</tr>
-						</c:forEach>
-					</table>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -249,7 +273,8 @@
 						<table align="center" class="empty">
 							<tr>
 								<th>쿠폰명</th>
-								<th><input type="text" name="cpName" maxlength="30" placeholder="30자 이내 "></th>
+								<th><input type="text" name="cpName" maxlength="30"
+									placeholder="30자 이내 "></th>
 							</tr>
 							<tr>
 								<th>할인금액</th>
@@ -265,8 +290,8 @@
 							</tr>
 							<tr>
 								<th>쿠폰 특이사항</th>
-								<th><input type="text" name="cpCondition"
-								maxlength="30" placeholder="30자 이내"></th>
+								<th><input type="text" name="cpCondition" maxlength="30"
+									placeholder="30자 이내"></th>
 
 							</tr>
 							<tr align="center">
@@ -288,33 +313,7 @@
 		</div>
 	</div>
 
-	<div class="modal" id="deleteModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
-
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">쿠폰삭제</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body" align="center">
-					<form action="admindelete.me" method="post">
-						정말 삭제하시겠습니까? 
-						<br>
-						<br>
-						<br>
-
-						<button type="submit" id="couponBtn" class="btn btn-danger"
-							data-target="#deleteModal">삭제하기</button>
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
+	
 
 
 

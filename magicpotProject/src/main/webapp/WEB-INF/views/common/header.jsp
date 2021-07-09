@@ -93,7 +93,40 @@
 		<div id="header_2">
 			<ul>
 				<li><a href="fund.li">펀딩하기</a></li>
-				<li><a href="">프로젝트 올리기</a></li>
+				<c:choose>
+					<c:when test="${ empty loginUser }">
+						<li><a href="" onclick="alertFn1();">프로젝트 올리기</a></li>
+						<script>
+							function alertFn1(){
+								alert("로그인이 필요합니다.");
+								// sweetalert 창 바로 닫히는 에러(timer안먹힘 차후 수정할지)
+							}		  
+	                  	 </script>
+					</c:when>
+					<c:when test="${ loginUser.status eq 'C' && creator.status eq 'Y' }">
+	                 	<li id="project"><a style="cursor:pointer;">프로젝트 올리기</a></li>
+						<input type="hidden" name="proNo" id="proNo" value="52">
+						
+						<script>
+							$(function(){
+			            		$("#project").click(function(){
+			            			location.href="fundingHome2.pro?pno=" + $(this).next().val();
+			            		})
+			            	})
+						</script>
+	                </c:when>
+					<c:when test="${ loginUser.status ne 'C' && creator.status eq 'N'}">
+						<li><a href="" onclick="alertFn2();">프로젝트 올리기</a></li>
+						<script>
+							function alertFn2(){
+								alert("승인 대기중입니다");	
+							}
+						</script>
+					</c:when>
+	                <c:otherwise>
+						<li><a href="enrollPage.cre">프로젝트 올리기</a></li>
+					</c:otherwise>
+				</c:choose>
 				<li><a href="guide.me">이용가이드</a></li>
 				<li><a href="list.cm">커뮤니티</a></li>
 			</ul>
@@ -177,8 +210,8 @@
 						<tr>
 							<td><input type="checkbox" id="remember_memId" name="remember_memId"> 아이디 저장</td>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<th><a href="">아이디 찾기 </a> |
-							<a href=""> 비밀번호 </a></th>
+							<th><a href="fId.me">아이디 찾기 </a> |
+							<a href="fPwd.me"> 비밀번호 </a></th>
 						</tr>
 					</div>
 

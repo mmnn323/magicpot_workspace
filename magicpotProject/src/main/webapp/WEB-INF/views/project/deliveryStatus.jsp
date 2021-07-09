@@ -143,7 +143,7 @@
               </div>
               <br><br><br>
           </div>
-          <!-- The Modal -->
+          <!-- 배송상태 변경 모달 -->
           <div class="modal fade" id="myModal">
               <div class="modal-dialog">
                   <div class="modal-content">

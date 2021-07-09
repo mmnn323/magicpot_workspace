@@ -8,23 +8,46 @@
 <title>단계2</title>
 <style>
     /* 상태바 */
+	ul{list-style: none} /* ul표시 없앰 */
+    .step-state ul:after{
+        content: '';
+        display: block;
+        clear: both
+    }
+    .step-state ul li{
+        float: left;
+        position: relative;
+        width: 25%; /* 4개 진행바를 4등분*/
+        padding-top: 50px; /* 진행바 영역 확보*/
+    }
+    /* 회색 진행바 */
+    .step-state ul li:before{
+        /* border:1px solid pink; */
+        position: absolute;
+        top: -13px;
+        left: -43px;
+        right: 0;
+        height: 3px; /* 진행바 두께 */
+        background: #ddd;
+        content: '';
+    }
     /* 활성화 상태바 표시 */
     .step-state.step2 ul li:nth-child(-n+2):before{
-        position: absolute;
         background: rgb(116, 152, 107);
     }
     /* 1/2영역 비활성화 */
     .step-state ul li p:before{
-        position: absolute;
-        top: 35px;
-        left: 50%;
+        position:  absolute;
+        top:35px;
+        left:50%;
         right: 0;
         height: 3px;
         content: '';
-    }	
+    }
     .step-state.step2 ul li:nth-child(2) p:before{
-        background: #ddd;
+        position: absolute;
         top: -13px;
+        background:#ddd;
     }
 
     /* content */
@@ -33,7 +56,6 @@
         margin-top: -5px;
         color: #757575;
     }
-    button{cursor:pointer;}
     #beforeBtn{
         float: left;
         width: 100px;
@@ -41,7 +63,7 @@
         border: none;
         border-radius: 5px;
         background-color: #c7c7c7;
-        font-size: 15px;
+        font-size: 18px;
         font-weight: 600;
         color: white;
     }
@@ -51,7 +73,7 @@
         border: none;
         border-radius: 5px;
         background-color: rgb(116, 152, 107);
-        font-size: 15px;
+        font-size: 18px;
         font-weight: 600;
         color: white;
     }
@@ -110,9 +132,9 @@
 				<h6 id="levelSummary">모든 준비가 완료되면 오픈이 승인됩니다. 크리에이터님이 직접 '바로 오픈' 혹은 '오픈 예약' 할 수 있습니다.</h6>
 
 				<br><br><br>
-				<button id="beforeBtn">이전</button> 
+				<button type="button" id="beforeBtn" onclick="location.href='level1.pro'">이전</button> 
 				&nbsp;
-				<button id="afterBtn">다음</button>
+				<button type="button" id="afterBtn" onclick="location.href='level3.pro'">다음</button>
 			</div>
 		</div>
     </div>

@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.kh.magicpot.member.model.service.MemberService;
 import com.kh.magicpot.project.model.service.ProjectService;
 import com.kh.magicpot.project.model.vo.Creator;
+import com.kh.magicpot.project.model.vo.ProRequire;
 import com.kh.magicpot.project.model.vo.Project;
 
 @Controller
@@ -171,7 +172,7 @@ public class ProjectController {
 	@RequestMapping("insert.cre")
 	public String insertCreator(Creator creator, HttpSession session) {
 //		System.out.println(creator);
-		int result = pService.insertCre(creator);
+		int result = pService.insertCreator(creator);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "크리에이터 신청이 완료되었습니다.");
@@ -373,5 +374,163 @@ public class ProjectController {
 		return "project/searchFunding";
 	}
 	
+	// 프로젝트 단계별 안내 조회
+	// level1 진입과 동시에 project 기본 생성
+	@RequestMapping("insert.pro")
+	public String insertPro(HttpSession session) {
+		Creator creator = (Creator)session.getAttribute("creator");
+		int creNo = creator.getCreNo();
+		int ranNo = (int)Math.floor(Math.random( ) * (10000 - 1) + 1);
+//		System.out.println(ranNo);
+//		System.out.println(creNo);
+
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
+		// 중복 검사 -> ranNo을 DB에 저장하기 전에 DB와 비교하여 중복 체크
+		int ranCheck = pService.selectRanNo(ranNo);
+//		System.out.println(ranCheck);
+		
+		if(ranCheck > 0) { // 중복된 경우 -> 다시 random값 받기
+			ranNo = (int)Math.floor(Math.random( ) * (10000 - 1) + 1);
+		}else { // 중복 아닌 경우 -> map에 값 넣기
+			map.put("creNo", creNo);
+			map.put("ranNo", ranNo);
+		}
+
+		int result = pService.insertProject(map);
+		
+		if(result > 0) {
+			session.setAttribute("ranNo", ranNo);
+			return "project/level1";
+		}else {
+			return "common/errorPage";
+		}
+			
+	}
+
+	// pno로 가져온 경우 ranNo조회해서 담음
+	@RequestMapping("level1.pro")
+	public String level1(HttpSession session, int pno) {
+		int ranNo = pService.selectRanNo2(pno);
+		
+		if(ranNo > 0) {
+			session.setAttribute("ranNo", ranNo);
+		}
+		
+		return "project/level1";
+	}
 	
+	@RequestMapping("level2.pro")
+	public String level2() {
+		return "project/level2";
+	}
+	
+	@RequestMapping("level3.pro")
+	public String level3() {
+		return "project/level3";
+	}
+	
+	@RequestMapping("level4.pro")
+	public String level4() {
+		return "project/level4";
+	}
+	
+	// 생성 단계에서 이어서 들어온 경우  -> session에 저장된 ranNo이용
+	@RequestMapping("fundingHome1.pro")
+	public String fundingHome1(HttpSession session) {
+		int ranNo = (Integer)session.getAttribute("ranNo");
+				
+		int result = pService.updateProStep1(ranNo);
+		Project project = pService.selectProject1(ranNo);
+		int pno = project.getProNo();
+		
+		if(project != null && result > 0 ) {
+			session.setAttribute("project", project);
+			session.setAttribute("pno", pno);
+//			System.out.println(project);
+			return "project/fundingHome";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 생성 단계 아닌 proNo을 받아서 들어온 경우 proNo으로 project조회해서 session에 담기
+	@RequestMapping("fundingHome2.pro")
+	public String fundingHome2(HttpSession session, Model model, int pno) {
+		// 기본 요건 조회
+		ProRequire proRequire = pService.selectRequire(pno);
+		if(proRequire != null) {
+			model.addAttribute(proRequire);
+		}
+		
+//		System.out.println(pno);
+		Project project = pService.selectProject2(pno);
+
+		if(project != null) {
+			session.setAttribute("project", project);
+			session.setAttribute("pno", pno);
+			
+			System.out.println(project);
+			return "project/fundingHome";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 기본 요건 불러오기
+	@RequestMapping("requireEnroll.pro")
+	public String requireEnroll(HttpSession session, Model model) {
+		// 기본 요건 값 있는지 확인 필요
+		int pno = (Integer)session.getAttribute("pno");
+		
+		ProRequire proRequire = pService.selectRequire(pno);
+//		System.out.println(proRequire);
+		
+		if(proRequire != null) {
+			model.addAttribute(proRequire);
+		}
+		
+		return "project/requireEnrollForm";
+	}
+	
+	// 기본 정보 불러오기
+	@RequestMapping("basicEnroll.pro")
+	public String basicEnroll() {
+		return "project/basicEnrollForm";
+	}
+	
+	// 스토리 작성 불러오기
+	@RequestMapping("storyEnroll.pro")
+	public String storyEnroll() {
+		return "project/storyEnrollForm";
+	}
+	
+	// 리워드 작성 불러오기
+	@RequestMapping("rewardEnroll.pro")
+	public String rewardEnroll() {
+		return "project/rewardEnrollForm";
+	}	
+	
+	// 기본 요건 insert
+	@RequestMapping("insertRequire.pro")
+	public String insertRequire(HttpSession session, ProRequire proRequire) {
+		int result = pService.insertRequire(proRequire);
+		
+		if(result > 0) {
+			return "project/fundingHome";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping("updateRequire.pro")
+	public String updateRequire(HttpSession session, ProRequire proRequire) {
+		int result = pService.updateRequire(proRequire);
+		
+		if(result > 0) {
+			return "project/fundingHome";
+		}else {
+			return "common/errorPage";
+		}
+	}
 }

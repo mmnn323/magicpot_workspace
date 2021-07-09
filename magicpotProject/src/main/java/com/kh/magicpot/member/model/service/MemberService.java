@@ -52,12 +52,9 @@ public interface MemberService {
 	// 일반회원관리 검색 조회
 	int selectSearchListCount(HashMap<String, String> map);
 	ArrayList<Member> selectSearchList(HashMap<String, String> map, PageInfo pi);
-	
+
 	// 일반회원관리 회원 상세조회
 	Member selectAdminMember(int memNo);
-	
-	// 일반회원관리 회원 탈퇴
-	int deleteMember(int memNo);
 	
 	// 크리에이터 조회
 	Creator creatSearch(int memNo);

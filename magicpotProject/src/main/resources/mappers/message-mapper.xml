@@ -2,5 +2,198 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="messageMapper">
+	
+	<resultMap id="Message" type="Message">
+	
+		<id column="msg_no" property="msgNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="creator_no" property="creatorNo"/>
+		<result column="msg_send" property="msgSend"/>
+		<result column="msg_content" property="msgContent"/>
+		<result column="msg_reply" property="msgReply"/>
+		<result column="msg_answer" property="msgAnswer"/>
+		<result column="msg_status" property="msgStatus"/>	
+			
+		<collection resultMap="Member" property="member"/>
+		<collection resultMap="Creator" property="creator"/>
+		<collection resultMap="Project" property="project"/>		
+	</resultMap>
+	
+	<resultMap id="Member" type="Member">
+	
+		<id column="mem_no" property="memNo"/>
+		<result column="mem_id" property="memId"/>
+		<result column="mem_pwd" property="memPwd"/>
+		<result column="mem_name" property="memName"/>
+		<result column="phone" property="phone"/>
+		<result column="email" property="email"/>
+		<result column="email_yn" property="emailYn"/>
+		<result column="enroll_route" property="enrollRoute"/>
+		<result column="enroll_date" property="enrollDate"/>
+		<result column="status" property="status"/>
+		<result column="mem_post" property="memPost"/>
+		<result column="mem_road" property="memRoad"/>
+		<result column="mem_detail" property="memDetail"/>
+	</resultMap>
+	
+	<resultMap id="Creator" type="Creator" >
+		<id column="cre_no" property="creNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="cre_business" property="creBusiness"/>
+		<result column="cre_phone" property="crePhone"/>
+		<result column="cre_privacy" property="crePrivacy"/>
+		<result column="cre_name" property="creName"/>
+		<result column="status" property="status"/>
+		<result column="pro_no" property="proNo"/>
+	</resultMap>
+	
+	<resultMap id="Project" type="Project">
+	
+		<id column="pro_no" property="proNo"/>
+		<result column="cre_no" property="creNo"/>
+		<result column="pro_title" property="proTitle"/>
+		<result column="pro_price" property="proPrice"/>
+		<result column="pro_image" property="proImage"/>
+		<result column="pro_summary" property="proSummary"/>
+		<result column="pro_story" property="proStory"/>
+		<result column="pro_fundprice" property="proFundPrice"/>
+		<result column="pro_status" property="proStatus"/>
+		<result column="create_word" property="createWord"/>
+		<result column="pro_shippirce" property="proShipPrice"/>
+		<result column="open_date" property="openDate"/>
+		<result column="close_date" property="closeDate"/>
+		<result column="pro_step" property="proStep"/>
+		<result column="pro_ad" property="proAd"/>
+	</resultMap>
+	
+	<resultMap id="MessageList" type="MessageList">
+	
+		<id column="msg_no" property="msgNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="creator_no" property="creatorNo"/>
+		<result column="msg_send" property="msgSend"/>
+		<result column="msg_content" property="msgContent"/>
+		<result column="msg_reply" property="msgReply"/>
+		<result column="msg_answer" property="msgAnswer"/>
+		<result column="msg_status" property="msgStatus"/>	
+			
+		<result column="mem_id" property="memId"/>
+		<result column="mem_pwd" property="memPwd"/>
+		<result column="mem_name" property="memName"/>
+		<result column="phone" property="phone"/>
+		<result column="email" property="email"/>
+		<result column="email_yn" property="emailYn"/>
+		<result column="enroll_route" property="enrollRoute"/>
+		<result column="enroll_date" property="enrollDate"/>
+		<result column="status" property="status"/>
+		<result column="mem_post" property="memPost"/>
+		<result column="mem_road" property="memRoad"/>
+		<result column="mem_detail" property="memDetail"/>
+		
+		<result column="cre_business" property="creBusiness"/>
+		<result column="cre_phone" property="crePhone"/>
+		<result column="cre_privacy" property="crePrivacy"/>
+		<result column="cre_name" property="creName"/>
+			
+		<result column="cre_no" property="creNo"/>
+		<result column="pro_title" property="proTitle"/>
+		<result column="pro_price" property="proPrice"/>
+		<result column="pro_image" property="proImage"/>
+		<result column="pro_summary" property="proSummary"/>
+		<result column="pro_story" property="proStory"/>
+		<result column="pro_fundprice" property="proFundPrice"/>
+		<result column="pro_status" property="proStatus"/>
+		<result column="create_word" property="createWord"/>
+		<result column="pro_shippirce" property="proShipPrice"/>
+		<result column="open_date" property="openDate"/>
+		<result column="close_date" property="closeDate"/>
+		<result column="pro_step" property="proStep"/>
+		<result column="pro_ad" property="proAd"/>
+	</resultMap>
+	
+	
+	<!-- 일반 회원 메세지 페이지 리스트 조회 -->
+	<select id="msgList" resultMap="MessageList" parameterType="MessageList">
+		select  
+		         m.mem_id
+		       , m.mem_name
+		       , msg.msg_no
+		       , msg.mem_no
+		       , msg.creator_no
+		       , to_char(msg.msg_send, 'YY-MM-DD') msg_send
+		       , msg.msg_content
+		       , msg.msg_reply
+		       , msg.msg_status  
+		       , to_char(msg.msg_answer, 'YY-MM-DD') msg_answer
+		       , c.cre_name
+		       , p.pro_title
+		       , p.pro_image
+		   from  member m 
+		   join  message msg on (msg.mem_no = m.mem_no)
+		   join  creator c on (c.cre_no = msg.creator_no)
+		   join  project p on(p.pro_no = msg.pro_no) 
+          where  msg.mem_no = #{memNo} 
+		  order 
+		     by  msg.msg_no
+	</select>
+
+	<!-- 
+	<choose>
+    		<when test="status == Y">
+    			where  msg.mem_no = #{memNo}
+    		</when>
+    		<when test="status == C">
+    			where  msg.creator_no = #{creNo}		 
+    		</when>
+      </choose>  
+ 	-->
+ 
+	<!-- 크리에이터 메세지 페이지 리스트 조회 -->
+	<select id="creMsgList" resultMap="MessageList">
+		select  
+		         m.mem_id
+		       , m.mem_name
+		       , msg.msg_no
+		       , msg.mem_no
+		       , msg.creator_no
+		       , to_char(msg.msg_send, 'YY-MM-DD') msg_send
+		       , msg.msg_content
+		       , msg.msg_reply
+		       , msg.msg_status  
+		       , to_char(msg.msg_answer, 'YY-MM-DD') msg_answer
+		       , c.cre_name
+		       , p.pro_title
+		       , p.pro_image
+		   from  member m 
+		   join  message msg on (msg.mem_no = m.mem_no)
+		   join  creator c on (c.cre_no = msg.creator_no)
+		   join  project p on(p.pro_no = msg.pro_no) 
+		  where  msg.creator_no = #{creNo}		   
+		  order 
+		     by  msg.msg_no
+	</select>
+	
+	<!-- 페이징 처리 -->
+	<select id="selectListCount" resultType="_int">
+		select
+		 		count(*)
+		  from 	message
+		 where  mem_no = #{memNo} 	
+	</select>
+	
+	<!-- 안 읽은 메세지 페이징 처리 -->
+	<select id="selectStaListCount" resultType="_int">
+		   select 
+				count(*)
+		  from 	message
+		 where  msg_status = 'N'
+           and  creator_no in (select cre_no
+	                             from member m
+	                             join creator c
+	                               on m.mem_no = c.mem_no
+	                            where m.mem_no = #{memNo)
+	</select>
+
+
   
 </mapper>

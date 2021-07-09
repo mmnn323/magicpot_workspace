@@ -19,7 +19,6 @@
             <h5 id="summary">프로젝트를 대표할 주요 기본 정보를 입력하세요.</h5>
             <br>
             <form action="" method="post">
-                
                 <h5>프로젝트 제목</h5>
                 <input type="text" placeholder="제목 입력" onkeyup="fn_checkByte(this)" required>
                 <p id="counter">200자 남음</p>
@@ -29,7 +28,7 @@
                 <p id="p5">서포터들에게 크리에이터 소개를 해주세요!</p>
 
                 <div id="createrWord">
-                    <textarea id="summernote" name="editordata"></textarea>
+                    <textarea id="summernote" name="editordata" required></textarea>
                 </div>
                 <br><br>
                 <script>
@@ -64,7 +63,7 @@
 
                 <h5>대표 이미지</h5>
                 <label id="imageUpfile" for="proImage"><i class="fas fa-camera"></i> 등록하기</label>
-                <input type="file" id="proImage" class="form-control-file border" name="proImage" style="display:none;">
+                <input type="file" id="proImage" class="form-control-file border" name="proImage" style="display:none;" required>
                 <p id="p6">
                     3MB 이하의 JPEG, PNG 파일<br>
                     해상도 1200x675 픽셀 이상<br>
@@ -74,7 +73,7 @@
 
                 <h5>카테고리</h5>
                 <select name="category" id="category" required>
-                    <option value="x">카테고리 선택</option>
+                    <option value="">카테고리 선택</option>
                     <option value="LIVING">LIVING</option>
                     <option value="KITCHEN">KITCHEN</option>
                     <option value="BATHROOM">BATHROOM</option>
@@ -87,12 +86,14 @@
                 <p id="p5">요건 / 콘텐츠 확인 및 프로젝트 진행 일정과 리워드 발송 일정을 함께 고려하여 종료일을 설정해주세요.</p>
                 <input type="date" id="closeDate" name="closeDate" required>
                 <p id="p6">
-                    펀딩 결제일 <span>2021.06.23 - 2021.06.28</span><br>
+                    펀딩 결제일 <span id="dateSpan">2021.06.23 - 2021.06.28</span><br>
                     펀딩이 성공 종료 된 후 결제가 +4 영업일 동안 진행됩니다.
                 </p>
                 <br>
                 <script>
-                    // 펀딩 결제일 날짜 선택시 나오도록 추가
+                    $(function(){
+                    	
+                    })
                 </script>
                 <!-- 전부 입력 되어야 disabled 해제 -->
                 <button id="submitBtn" type="submit">저장하기</button>

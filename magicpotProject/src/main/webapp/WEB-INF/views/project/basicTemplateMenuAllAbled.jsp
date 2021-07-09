@@ -151,7 +151,7 @@
             <!-- 나가기 클릭시 메인페이지로 이동 -->
             <div id="logo"><img src="resources/images/common/mainLogo.png" width="120px" height="45px;"></div>
             <div id="creatorName">돈조 매직팟 님</div>
-            <div id="outPage" style="cursor:pointer;">나가기</div>
+            <div id="outPage" style="cursor:pointer;" onclick="location.href='${ pageContext.servletContext.contextPath }'">나가기</div>
         </div>
         <div id="menu_content">
             <div id="menu">

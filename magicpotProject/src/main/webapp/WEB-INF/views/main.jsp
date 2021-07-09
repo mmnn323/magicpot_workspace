@@ -778,9 +778,9 @@
                     <div id="backBtn"> 
 	                    <c:choose>
 	                    	<c:when test="${ empty loginUser }">
-	                    		<a href="" id="fnBtn" class="btn btn-success" onclick="alertFn();"><h3>펀딩 올리기</h3></a>
+	                    		<a href="" id="fnBtn" class="btn btn-success" onclick="alertFn1();"><h3>펀딩 올리기</h3></a>
 	                        	<script>
-									function alertFn(){
+									function alertFn1(){
 										alert("로그인이 필요합니다.");
 										// sweetalert 창 바로 닫히는 에러(timer안먹힘 차후 수정할지)
 									}		  
@@ -812,10 +812,18 @@
 									*/
 	                  	        </script>
 	                        </c:when>
-	                        <c:when test="${ loginUser.status eq 'C' }">
+	                        <c:when test="${ loginUser.status eq 'C' && creator.status eq 'Y' }">
 	                        	<!-- 내가 만든 프로젝트로 이동 추가 필요 -->
-	                        	<a href="" class="btn btn-success"><h3>펀딩 올리기</h3></a>
+	                        	<a href="insert.pro" class="btn btn-success"><h3>펀딩 올리기</h3></a>
 	                        </c:when>
+	                        <c:when test="${ loginUser.status ne 'C' && creator.status eq 'N'}">
+								<a href="" class="btn btn-success" onclick="alertFn2();"><h3>펀딩 올리기</h3></a>
+								<script>
+									function alertFn2(){
+										alert("승인 대기중입니다");	
+									}
+								</script>
+							</c:when>
 	                        <c:otherwise>
 	                        	<a href="enrollPage.cre" class="btn btn-success"><h3>펀딩 올리기</h3></a>
 	                        </c:otherwise>
