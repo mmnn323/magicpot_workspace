@@ -15,6 +15,7 @@ import com.kh.magicpot.common.template.Pagination;
 import com.kh.magicpot.guide.model.service.GuideService;
 import com.kh.magicpot.guide.model.vo.Faq;
 import com.kh.magicpot.guide.model.vo.Guide;
+import com.kh.magicpot.guide.model.vo.Guide2;
 
 @Controller
 public class GuideController {
@@ -61,7 +62,7 @@ public class GuideController {
 	public String guideForm(@RequestParam(value="ctg", defaultValue="0") int ctg,
 							HttpSession session, Model model) {
 		
-		ArrayList<Guide> gu = gService.guideForm(ctg);
+		ArrayList<Guide2> gu = gService.guideForm(ctg);
 		
 		model.addAttribute("gu",gu);
 		return "guide/guideMain";
@@ -172,5 +173,39 @@ public class GuideController {
 		
 	}
 	
+	// 관리자 이용가이드 목록
+	@RequestMapping("adminProList.gu")
+	public String guideForm( Model model) {
+		
+
+		return "guide/adminGuideList";
+	}
 	
+	// 관리자 이용가이드 내용
+	@RequestMapping("detail.gu")
+	public String guideDetail(@RequestParam(value="ctg") int ctg,
+							HttpSession session, Model model) {
+		
+		Guide2 gu = gService.guideDetail(ctg);
+		
+		System.out.println(gu);
+		model.addAttribute("gu",gu);
+		return "guide/adminGuideDetail";
+	}
+	
+	// 관리자 이용가이드 수정
+	@RequestMapping("update.adGu")
+	public String updateGu(Guide2 gu, Model model,  HttpSession session) {
+		
+		int result = gService.updateGu(gu);
+
+		if(result > 0) { 
+			return "guide/adminGuideList";
+		}else { 
+
+			return "common/errorPage";
+		}
+			
+		
+	}
 }

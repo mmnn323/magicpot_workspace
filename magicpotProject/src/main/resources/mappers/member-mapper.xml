@@ -81,7 +81,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		     , mem_post
   		     , mem_road
   		     , mem_detail
-  		     , cre_no
   		  from member
   		 where status not in ('B','N')
   		   and mem_id = #{memId}
@@ -377,6 +376,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
-
+	<!-- 회원탈퇴 -->
+	<update id="deleteMember" parameterType="string">
+		update
+			  member
+		  set status = 'N'
+		where mem_id = #{memId}
+	</update>
 
   </mapper>

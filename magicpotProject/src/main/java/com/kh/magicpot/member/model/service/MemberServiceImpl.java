@@ -146,6 +146,12 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.deleteMyProject(sqlSession, proNo);
 	}
 
+	// 회원탈퇴
+	@Override
+	public int deleteMember(String memId) {
+		return mDao.deleteMember(sqlSession, memId);
+	}
+
 
 
 

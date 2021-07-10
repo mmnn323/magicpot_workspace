@@ -487,12 +487,48 @@ public class MemberController {
 			return "main";
 		}
 		
-		// 네이버회원가입
+	// 네이버회원가입
 
-		@RequestMapping("naver.en")
-		public String enrollNaver() {
-			return "member/naverEnrollForm";
+	@RequestMapping("naver.en")
+	public String enrollNaver() {
+		return "member/naverEnrollForm";
+	}
+		
+	// 회원탈퇴
+	@RequestMapping("delete.me")
+	public String deleteMember(String memPwd, HttpSession session, Model model) { 
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		
+		if(bcryptPasswordEncoder.matches(memPwd, loginUser.getMemPwd())) {
+			// 비밀번호 일치 => 본인 맞음
+			int result = mService.deleteMember(loginUser.getMemId());
+			
+			if(result > 0) {
+				session.removeAttribute("loginUser");
+				session.setAttribute("alertMsg", "회원탈퇴가 완료되었습니다. 그동안 이용해주셔서 감사합니다.");
+				
+				// => 메인페이지
+				return "redirect:/";
+				
+			}else{ // => 에러페이지
+				model.addAttribute("errorMsg", "회원 탈퇴 실패");
+				return "common/errorPage"; // 포워딩
+			}
+			
+		}else {
+			// 비밀번호 일치 x
+			session.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
+			return "redirect:profile.me";
 		}
 		
+	}
+	
+	
+	
+	
+	
+	
 	
 }

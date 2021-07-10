@@ -51,7 +51,7 @@
         font-size: x-large;
     }
 
-    #no{color: rgb(116, 152, 107);}
+    #no{color: rgb(225, 212, 169);}
     #btnArea{
         
     }
@@ -161,12 +161,12 @@
         <div class="content_2">
             <div id="btnArea">
             	
-                <button onclick="location.href='search2.pr?&keyword=${keyword}'" id="all">ALL</button>
-                <button onclick="location.href='search2.pr?&keyword=${keyword}&ctg=5'" id="living">LIVING</button>
-                <button onclick="location.href='search2.pr?&keyword=${keyword}&ctg=1'" id="office">OFFICE</button>
-                <button onclick="location.href='search2.pr?&keyword=${keyword}&ctg=2'" id="kitchen">KITCHEN</button>
-                <button onclick="location.href='search2.pr?&keyword=${keyword}&ctg=3'" id="travel">TRAVEL</button>
-                <button onclick="location.href='search2.pr?&keyword=${keyword}&ctg=4'" id="bath">BATH </button>
+                <button onclick="location.href='search2.pr?&keyword=${keyword}'" id="ctgAll">ALL</button>
+                <button onclick="location.href='search2.pr?&keyword=${keyword}&ctg=5'" id="ctgLiving">LIVING</button>
+                <button onclick="location.href='search2.pr?&keyword=${keyword}&ctg=1'" id="ctgOffice">OFFICE</button>
+                <button onclick="location.href='search2.pr?&keyword=${keyword}&ctg=2'" id="ctgKitchen">KITCHEN</button>
+                <button onclick="location.href='search2.pr?&keyword=${keyword}&ctg=3'" id="ctgTravel">TRAVEL</button>
+                <button onclick="location.href='search2.pr?&keyword=${keyword}&ctg=4'" id="ctgBath">BATH </button>
                 
             </div>
         </div>
@@ -200,7 +200,7 @@
 	        		</c:when>
         		<c:otherwise>
 		        	<c:forEach var="i" begin="0" end="${pr.size()-1 }">
-			            <a id="TotalUrl" href="" style="text-decoration:none; color:black">
+			            <a id="TotalUrl" href="detail.fd?proNo=${pr[i].proNo }" style="text-decoration:none; color:black">
 			                    
 			                <div class="newThumbnail" >
 			                   <img src="${pr[i].proImage }">
@@ -235,7 +235,31 @@
     </div>
     <jsp:include page="../common/footer.jsp"/>
     
-    
+    <script>
+   	$(function(){
+   		switch(${ctg}){
+   		case 0:
+   			$("#ctgAll").css("border", "1px solid rgb(116, 152, 107)").css("color", "rgb(116, 152, 107)");
+   			break;
+   		case 5:
+   			$("#ctgLiving").css("border", "1px solid rgb(116, 152, 107)").css("color", "rgb(116, 152, 107)");
+   			break;
+   		case 1:
+   			$("#ctgOffice").css("border", "1px solid rgb(116, 152, 107)").css("color", "rgb(116, 152, 107)");
+   			break;
+   		case 2:
+   			$("#ctgKitchen").css("border", "1px solid rgb(116, 152, 107)").css("color", "rgb(116, 152, 107)");
+   			break;
+   		case 3:
+   			$("#ctgTravel").css("border", "1px solid rgb(116, 152, 107)").css("color", "rgb(116, 152, 107)");
+   			break;
+   		case 4:
+   			$("#ctgBath").css("border", "1px solid rgb(116, 152, 107)").css("color", "rgb(116, 152, 107)");
+   			break;
+   		};
+   		
+   	});	 	    
+    </script>
     
    
     

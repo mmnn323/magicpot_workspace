@@ -174,7 +174,7 @@
                             </li>
                             <li>
                                 <h4>
-                                    <a href="adminProList.gu" id="abled">이용약관 관리</a><span style="margin-left:80px"></span>
+                                    <a href="adminProList.gu" id="abled">이용가이드 관리</a><span style="margin-left:80px"></span>
                                 </h4>
                             </li>
                             <li>

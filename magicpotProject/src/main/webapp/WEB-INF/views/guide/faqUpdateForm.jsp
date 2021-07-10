@@ -221,9 +221,7 @@
                                         
                                     <tr>
                                         <td colspan="4">
-                                            <textarea name="faqContent" rows="7" cols="70" w style="resize: none;" required>
-${fa.faqContent }
-                                            </textarea>
+                                            <textarea name="faqContent" rows="7" cols="70"  style="resize: none;" required>${fa.faqContent }</textarea>
                                         </td>
                                     </tr>
                                 </table>

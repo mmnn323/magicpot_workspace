@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id column="ca_no" property="caNo"/>
 		<result column="ca_name" property="caName"/>
 	</resultMap>
-	
+	 
 	<resultMap id="ProRequire" type="ProRequire">
 		<id column="pro_no" property="proNo"/>
 		<result column="reward_plan" property="rewardPlan"/>
@@ -415,7 +415,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		       pro_step = '펀딩준비'
 		 where ran_no = #{ranNo}
 	</update>
-	
+	 
 	<select id="selectRequire" resultMap="ProRequire">
 		select
 		       pro_no
@@ -438,7 +438,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
-	<update id="updateRequire" parameterType="proRequire">
+	<update id="updateRequire" parameterType="ProRequire">
 		update
 		       pro_require
 		   set
@@ -447,6 +447,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 , reward_category = #{rewardCategory}
 		 where pro_no = #{proNo}
 	</update>
-	 
+	
 </mapper>
 

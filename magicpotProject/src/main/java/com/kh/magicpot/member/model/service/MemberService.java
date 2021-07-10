@@ -65,6 +65,8 @@ public interface MemberService {
 	// 내가 만든 프로젝트 삭제
 	int deleteMyProject(int proNo);
 
+	// 회원탈퇴
+	int deleteMember(String memId);
 	
 	
 }
