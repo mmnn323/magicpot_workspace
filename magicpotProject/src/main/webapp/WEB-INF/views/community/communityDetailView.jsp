@@ -10,13 +10,6 @@
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="resources/css/community/communityDetailView.css">  
 
-<!-- 써머노트 -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 </head>
 <body>
 
@@ -65,6 +58,7 @@
                 </div>
             </div>
             
+            <!-- 로그인 && 로그인 유저=글쓴이인 경우 보이는 수정/삭제 버튼 -->
             <c:if test="${ !empty loginUser and loginUser.memId eq cm.memId }">
 		        <div id="WriterBtnArea" align="center">
 		                <span id="WriterBtnArea2" style="margin-left: 800px;">
@@ -82,13 +76,11 @@
 	            <div class="modal fade" id="cmDeleteBtn" align="center">
 	                <div class="modal-dialog modal-dialog-centered">
 	                    <div class="modal-content">
-	
 	                        <!-- Modal body -->
 	                        <br>
 	                        <div class="modal-body">
 	                            	커뮤니티 게시글을 삭제하시겠습니까?
 	                        </div>
-	                        
 	                        <!-- Modal footer -->
 	                        <div id="cmModalFooter">
 	                            <button id="cmOkBtn" class="btn btn-warning" onclick="postFormSubmit(2);">OK</button>
@@ -99,15 +91,15 @@
 	            </div>
 	        </form>
         
-        <script>
-	       	function postFormSubmit(num){
-	       		if(num == 1){ // 수정하기 클릭 시
-	       			$("#postForm").attr("action", "updateForm.cm").submit();
-	       		}else{ // 삭제하기 클릭 시
-	       			$("#postForm").attr("action", "delete.cm").submit();
-	       		}
-	       	}
-       </script>
+	        <script>
+		       	function postFormSubmit(num){
+		       		if(num == 1){ // 수정하기 클릭 시
+		       			$("#postForm").attr("action", "updateForm.cm").submit();
+		       		}else{ // 삭제하기 클릭 시
+		       			$("#postForm").attr("action", "delete.cm").submit();
+		       		}
+		       	}
+	        </script>
 
             <div id="noticeLine"></div>
 
@@ -115,133 +107,297 @@
                 ${ cm.cmContent }
             </div>
         </div>
-        
-        
 
         <div id="noticeLine"></div>
 
-        <!-- 커뮤니티 댓글 영역 -->
+		<!-- 커뮤니티 댓글 영역 -->
         <div id="cm_commentArea">
 
-            <div id="cm_conmment" align="center">
-            
-                <!-- 댓글 등록 영역 -->
-                <c:choose>
-                	<c:when test="${ !empty loginUser }">
-		                <div id="enrollComment" class="enrollComment">
-		                    <div style="color:rgb(83, 83, 83);">user23</div>
-		                    <textarea name="" id="" cols="90" rows="3"  placeholder="댓글을 남겨보세요"></textarea>
-		                    <a href="" class="btn btn-success btn-sm" >등록</a>
-		                </div>
-	                </c:when>
-	                <c:otherwise>
-		                <div id="enrollComment" align="center">
-		                    <textarea name="" id="" cols="90" rows="3"  placeholder="로그인이 필요한 서비스 입니다" readonly></textarea>
-		                    <a href="" class="btn btn-success btn-sm disabled" >등록</a>
-		                </div>
-	                </c:otherwise>
-                </c:choose>
+            <div id="cm_conmmentArea_1" align="center">
 
-                <div id="noticeLine"></div>
-
-                <div id="commentCount" align="left" >
-                    <div><i class="far fa-comment-dots"></i> 댓글 <b style="color:gray;">2</b></div>
+                <!--댓글 수 노출 -->
+                <div id="commentCount" align="left">
+                    <div><i class="far fa-comment-dots"></i> 댓글 <span id="rcount"><b style="color:gray;">0</b></span></div>
                 </div>
                 
+                <!-- 댓글 리스트 -->
                 <div id="commentList" align="left" style="width:800px;">
                 
-                    <table style="margin-top: 20px;" id="commentArea" >
-                        <!-- 댓글만 있는 버전 -->
-                        <tr>
-                            <td colspan="2" id="commentArea1" > <b style="color: rgb(116, 152, 107);">user10</b> <small style="color:gray"> &nbsp;&nbsp; 2021-05-23 17:58</small> &nbsp;
-                            <!-- 댓글 작성자와 글 작성자가 일치할 경우 보여지는 span -->
-                            <!-- <span class="writerBtn">작성자</span></td> -->
-                        </tr>
-                        <tr>
-                            <td colspan="2" id="commentArea2"> 처음이 어려운 것 같아요! 멋있습니다~!</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" id="commentArea3" >
-                                <a href="javascript:return false;" onclick="reCommentOpen();">댓글</a>
-                                <!-- 댓글 작성자와 글 작성자가 일치하지 않을 경우 보여지는 신고 a태그  -->
-                                / <a href="" data-toggle="modal" data-target="#reportModal">신고</a>
-                                <!-- 댓글 작성자와 글 작성자가 일치할 경우 보여지는 수정,삭제 a태그 -->
-                                <!-- / <a href="">수정</a>
-                                / <a href="">삭제</a> -->
-                                <div id="commentLine"></div>
-                            </td>
-                        </tr>
-
-                        <!-- 댓글(+대댓글) 버전 -->
-                        <tr>
-                            <td colspan="2" id="commentArea1" > <b style="color: rgb(116, 152, 107);">user10</b> <small style="color:gray"> &nbsp;&nbsp; 2021-05-23 17:58</small> &nbsp;
-                            <!-- 댓글 작성자와 글 작성자가 일치할 경우 보여지는 span -->
-                            <!-- <span class="writerBtn">작성자</span></td> -->
-                        </tr>
-                        <tr>
-                            <td colspan="2" id="commentArea2"> 처음이 어려운 것 같아요! 멋있습니다~!</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" id="commentArea3" >
-                                <a href="javascript:return false;" onclick="reCommentOpen();">댓글</a>
-                                <!-- 댓글 작성자와 글 작성자가 일치하지 않을 경우 보여지는 신고 a태그  -->
-                                / <a href="" data-toggle="modal" data-target="#reportModal">신고</a>
-                                <!-- 댓글 작성자와 글 작성자가 일치할 경우 보여지는 수정,삭제 a태그 -->
-                                <!-- / <a href="">수정</a>
-                                / <a href="">삭제</a> -->
-
-                                <!-- 댓글 버튼 클릭시 노출되는 대댓글 등록 div -->
-                                <div id="reComment" align="center" >
-                                    <div style="color:rgb(83, 83, 83);">user23</div>
-                                    <textarea name="" id="" cols="90" rows="3"  placeholder="댓글을 남겨보세요" ></textarea>
-                                    <a class="btn btn-success btn-sm" style="margin-left:670px;" onclick="reCommentClose();">취소</a>
-                                    <a href="" class="btn btn-success btn-sm" style="margin-left:5px;">등록</a>
-                                </div>
-
-                                <!-- 대댓글 클릭 시 댓글창 열리도록-->
-                                <script>
-                                    function reCommentOpen(){
-                                        // $(this).after("<div>hello</div>");
-                                        // $(this).after("<div>hello</div>");
-                                        // $(this).wrap("<div class='enrollComment'></div>");
-                                        // alert("클릭");
-                                        // $("tr:odd").css("backgroundColor", "yellow"); 
-                                        // $("tr:last").css({backgroundColor:"red", color:"white"});
-
-                                        // var test = $(".enrollComment").clone(true);
-                                        // $("tr:last").append(test);
-                                        // $("tr:last").parent().css( 'backgroundColor', 'green' );
-                                        // $(this).parent().append(test);
-                                    }
-                                    function reCommentClose(){
-                                        $("#reComment").hide();
-                                        // alert("클릭");
-                                    }
-                                </script>
-
-                                <div id="commentLine"></div>
-                            </td>
-                        </tr>
-                        </tr>
-                       
-                    </table>
-                    
-                    <!-- 댓글 버튼 클릭시 노출되는 대댓글 등록 div -->
-                    <!-- <div id="reComment" align="center" >
-                        <textarea name="" id="" cols="90" rows="3"  placeholder="댓글을 작성해주세요" ></textarea>
-                        <a href="" class="btn btn-success" style="margin-left: 670px;">취소</a>
-                        <a href="" class="btn btn-success" >등록</a>
-                    </div> -->
-
                 </div>
+                
+                <!-- 댓글 등록 영역 -->
+                <c:choose>
+                <c:when test="${ !empty loginUser }">
+	                <div id="enrollComment" class="enrollComment">
+	                    <div style="color:rgb(83, 83, 83);">${ loginUser.memId }</div>
+	                    <textarea style="border:none;"id="enrollContent" class="reCoContent" cols="90" rows="3"  placeholder="댓글을 남겨보세요"></textarea>
+	                    <!-- <a class="btn btn-success btn-sm" onclick="addComment(0, 0, 11);">등록</a> -->
+	                    <a class="btn btn-success btn-sm" id="enrollTest" onclick="beforeEnrollContent();">등록</a>
+	                </div>
+                </c:when>
+                <c:otherwise>
+	                <div id="enrollComment" align="center">
+	                    <textarea name="" id="" cols="90" rows="3"  placeholder="로그인이 필요한 서비스 입니다" readonly></textarea>
+	                    <a class="btn btn-success btn-sm disabled" >등록</a>
+	                </div>
+                </c:otherwise>
+                </c:choose>
+				
+				<!-- 스크립트 : 댓글 관련 -->
+                <script>
+                	
+                	// 댓글 작성 : 유효성 검사 후 댓글 작성 함수 addComment() 호출
+                	function beforeEnrollContent(){
+                		var cmCommentContent = $("#enrollContent").val();
+                		//alert(cmCommentContent);
+                		if(cmCommentContent.trim().length != 0){
+                			addComment(0, 0, cmCommentContent);
+                		} else{
+                			swal("", "내용을 입력해주세요.", "warning");
+                		}
+                	}
+                
+                	// 댓글 리스트 조회
+	                $(function(){
+	                	selectCmCommentList();
+	            		
+	            		// 실시간 댓글 반영 => 댓글리스트 조회를 주기적으로 하면 된다!
+	            		// 1초 간격으로 매번 댓글 리스트를 조회해옴
+	            		//setInterval(selectCmCommentList, 1000);
+	            		// => 메인페이지 : 실시간 리스트
+	            	})
+            	
+	            	// ajax : 댓글 등록
+	            	function addComment(cmCommentNo, cmCommentDepth, cmCommentContent){
+						
+	        			var cmCommentNo 	 = parseInt(cmCommentNo);		// 댓글번호 담기     (댓글 등록 시 CMCO_REF가 된다)
+	        			var cmCommentDepth 	 = parseInt(cmCommentDepth);	// 댓글의 깊이 담기 (댓글 등록시 댓글깊이 +1로 insert!)
+	            		var cmCommentContent = cmCommentContent				// 댓글 내용 담기
+	        			
+			    		if($(".reCoContent").val().trim().length != 0){ 	// 댓글이 작성 유효성 검사 : 공백을 제외한 텍스트 길이가 0 이상일 경우 댓글 등록 ajax 실행
+			    			
+			    			$.ajax({
+			    				url:"rinsert.cm",
+			    				data:{
+			    					memNo:"${ loginUser.memNo }",			// 로그인한 회원의 회원번호 (댓글 작성자 번호)
+			    					cmNo:${cm.cmNo},						// 커뮤니티 게시글 번호       (해당 댓글이 어느 게시글에 달린 건지)
+			    					memId:"${ loginUser.memId }",			// 로그인한 회원의 아이디    (댓글 작성자 아이디)
+			    					cmCommentRef:cmCommentNo, 				// 참조댓글번호                  (원글0  || 실제참조댓글번호)
+			    					cmCommentDepth:cmCommentDepth+1,		// 댓글의 깊이                    (원글1,대댓글2,대대댓글3,..) => 현재 댓글 깊이의 +1
+			    					cmCommentContent:cmCommentContent		// 댓글 내용
+			    				},
+			    				success:function(status){					// 댓글 등록 성공 => 댓글창 비우기, 갱신된 댓글 리스트 조회
+			    					if(status == "success"){			
+			    						$("#enrollContent").val("");
+			    						selectCmCommentList();
+			    					}
+			    				},error:function(){
+			    					console.log("댓글 작성용 ajax 통신 실패");
+			    				}
+			    			})
+			    		
+			    		}else{ 												// 댓글 미작성 => alert
+			    			swal("", "내용을 입력해주세요.", "warning");		
+			    		}
+			    		
+			    	}
+            	
+	                 // ajax : 댓글 리스트 조회
+	                 function selectCmCommentList(){
+	                	 
+	             		$.ajax({
+	             			url:"rlist.cm",
+	             			data:{cmNo:${ cm.cmNo }},	// 커뮤니티 게시글 번호
+	             			success:function(list){
+	             				
+	             				var value="";						// 응답데이터로 돌려줄 댓글 리스트 변수
+	             				var status="";						// * 임시 (참조된 댓글일 경우 삭제 시 : '삭제된 댓글입니다'로 표현하고 싶음)
+	             				$.each(list, function(i,obj){
+	             					status = obj.status;			// * 임시 (참조된 댓글일 경우 삭제 시 : '삭제된 댓글입니다'로 표현하고 싶음)
+	             					value += "<div class='cmComment'";
+	             					
+	             					//if('${loginUser.memId}' == obj.memId){ // 내가 쓴 댓글일 경우 css 적용
+	             						//value += "style='background-color:rgba(238, 238, 238, 0.349); border-radius:5px;'"
+	             					//}
+	             					
+	             					value  += 	"><input type='hidden' value=" + obj.cmCommentNo + ">"							// hidden : 댓글번호
+	             						   + 	"<input type='hidden' value=" + obj.cmCommentDepth + ">"						// hidden : 댓글깊이
+	             						   + 	"<input type='hidden' value=" + obj.memId + ">" 								// hidden : 댓글작성자 아이디 (위치 탐색해서 쓰면 되는데 탐색 못하겠음,,)
+	             						   + 	"<input type='hidden' value='" + obj.cmCommentContent + "'>" 						// hidden : 댓글내용 (위치 탐색해서 쓰면 되는데 탐색 못하겠음,,)
+	             					       +	"<div id='commentArea' style='margin-left:" + obj.cmCommentDepth*20 +"px;'>"	// 대댓글일 경우 div위치 조정
+	             					       +		"<div id='commentArea1'>";
+	             					
+									if(obj.cmCommentRef > 0){ // 대댓글일 경우 화살표 아이콘 추가
+	             						value += 		"<span><i class='fas fa-reply fa-rotate-180' style='color:rgb(92, 121, 85);'></i></span> &nbsp"
+	             					}
+	             					     
+									value +=			"<b style='color: rgb(116, 152, 107);'>" + obj.memId + "</b>"					// 댓글 작성자 아이디
+	             					       +			"<small style='color:gray'> &nbsp;&nbsp;" + obj.enrollDate + "</small> &nbsp;";	// 댓글 작성일
+	             					    
+	             					if('${cm.memId}' == obj.memId && status == 'Y'){ // 커뮤니티 게시글 작성자 == 댓글 작성자 일 경우 작성자 아이콘 추가
+	             						value += 		"<span class='writerBtn'>작성자</span>"
+	             					}
+	             						   
+	             					value += 		"</div>"
+		          						   + 	 	"<div id='commentArea2'>" + obj.cmCommentContent + "</div>";	// 댓글 내용
+		          						   
+									if(${ !empty loginUser } ){ // 로그인했을 경우에만 댓글/신고/수정/삭제 버튼 노출
+	             						value += 	"<div id='commentArea3'>"
+									          +   		"<a class='reComment'> 댓글</a>";
+	             						if('${loginUser.memId}' != obj.memId){	// 내가 쓴 댓글이 아닐 경우 : 신고 버튼 노출
+	             							value += 	" / <a href='' data-toggle='modal' data-target='#reportModal'> 신고</a>"
+	             						}else if('${loginUser.memId}' == obj.memId){  // 내가 쓴 댓글일 경우 : 수정/삭제 버튼 노출
+	             							value += 	" / <a class='updateCommentForm'> 수정</a>"
+	             								   + 	" / <a class='deleteComment'> 삭제</a>";
+	             						}
+	             						value += 	"</div>";
+	             					}
+	             					value += 	"</div>"
+	             					      +  "</div>";
+	             				})
+	             				$("#commentList").html(value);  // 댓글 리스트
+	             				$("#rcount").text(list.length); // 댓글 수 
+	             				
+	             			},error:function(){
+	             				console.log("댓글 리스트 조회용 ajax 통신 실패");
+	             			}
+	             		})
+	             	}
+                </script>
+                
+                
+                <script>
+                	var a = 0;					// 대댓글 창 열고 닫기 위한 변수
+                	var cmCommentNo = 0;		// 참조하고있는 댓글 번호를 담을 변수
+                	var cmCommentDepth = 0;		// 참조하고있는 댓글 깊이를 담을 변수
+                	var cmCommentContent = "";	// 
+                	
+	             	// 대댓글 창 열기 (동적으로 만들어진 댓글리스트 내에 댓글 버튼 클릭 시 해당 댓글에 대한 대댓글 창 열기)
+	         		$(document).on("click", ".reComment", function(){
+						//alert("클릭됨");
+						cmCommentNo 	= $(this).parents(".cmComment").children().eq(0).val();
+						cmCommentDepth 	= $(this).parents(".cmComment").children().eq(1).val();
+						cmMemId 		= $(this).parents(".cmComment").children().eq(2).val();
+						
+	         			var reCommentVar = "";
+						reCommentVar += "<div id='reComment' align='center' style='margin-top:10px;'>"
+					                  + 	"<div style='color:rgb(83, 83, 83);'>" + "${loginUser.memId}" + "</div>"
+					                  + 	"<textarea class='reCoContent' cols='90' rows='3' placeholder='댓글을 남겨보세요' >"+ " @" + cmMemId + "&nbsp;" + "</textarea>"
+					                  + 	"<a class='btn btn-success btn-sm reCommentClose' style='margin-left:670px;' >취소</a>"
+					                  + 	"<a class='btn btn-success btn-sm addComment2' style='margin-left:5px;' >등록</a> </div>";
+					                  + "</div>";      
+					                  
+					   if(a == 0){ // 전역변수 a를 활용하여 대댓글창 열고 닫기
+						   $(this).parent().append(reCommentVar);
+							a++;
+					   }else if(a == 1){
+						   $("#reComment").remove();
+						   a--;
+					   }
+					   
+					});
+					
+	             	// 대댓글 창 제거(대댓글 창 안 취소 버튼 클릭 시)
+					$(document).on("click", ".reCommentClose", function(){
+						$("#reComment").remove();
+					});
+	             	
+	             	// 대댓글 등록
+	             	$(document).on("click", ".addComment2", function(){
+	             		cmCommentContent = $(this).siblings(".reCoContent").val();
+	             		//alert(cmCommentContent);
+	             		addComment(cmCommentNo, cmCommentDepth, cmCommentContent);
+	             	})
+	             	
+	             	// ajax : 댓글 삭제
+	             	$(document).on("click", ".deleteComment", function(){
+	             		cmCommentNo = $(this).parents(".cmComment").children().eq(0).val();
+	             		//alert(cmCommentNo);
+	             		
+	             		$.ajax({
+			    			url:"rdelete.cm",
+			    			data:{cmCommentNo:cmCommentNo},
+			    			success:function(status){
+			    				//console.log(list);
+			    				if(status == "success"){
+				    				swal("Success!", "댓글이 삭제되었습니다.", "success");
+				    				selectCmCommentList();
+			    				}else if(status ="hasComment")
+			    					swal("", "댓글이 달려있는 댓글은 삭제할 수 없습니다", "warning");
+			    			},error:function(){
+			    				console.log("댓글 삭제용 ajax 통신 실패");
+			    			}
+		    			})
+		    			
+	             	})
+	             	
+	             	// 댓글 수정 화면으로 변환
+	             	$(document).on("click", ".updateCommentForm", function(){
+	             		//alert("수정 클릭");
+	             		cmCommentNo  = $(this).parents(".cmComment").children().eq(0).val();
+	             		oldComment   = $(this).parents(".cmComment").children().eq(3).val();
+						//alert(oldComment);
+	             		var reCommentUpdateVar = "";
+	             		reCommentUpdateVar += "<div id='reComment' align='center' style='margin-top:10px;'>"
+	             							+ 	"<input type='hidden' value=" + cmCommentNo + ">" // 댓글번호
+							                + 	"<div style='color:rgb(83, 83, 83);'>" + "${loginUser.memId}" + "</div>"
+							                + 	"<textarea class='reCoContent2' id='updateContent' cols='90' rows='3'  placeholder='댓글을 남겨보세요' >"+ oldComment + "</textarea>"
+							                + 	"<a class='btn btn-success btn-sm cancelUpdate' style='margin-left:670px;' >취소</a>"
+							                + 	"<a class='btn btn-success btn-sm updateComment2' style='margin-left:5px;' >수정</a> </div>"
+							                + "</div>";
+						//$('#rid' + rid).replaceWith(htmls);
+						$(this).parents(".cmComment").replaceWith(reCommentUpdateVar);
+						$('.reCoContent2').focus(); // => *보완필요 : 커서 끝으로 이동시키고 싶음
+	             	})
+	             	
+	             	// 댓글 수정 취소
+	             	$(document).on("click", ".cancelUpdate", function(){
+	             		//alert("수정취소");
+	             		selectCmCommentList();
+	             	})
+	             	
+	             	// ajax : 댓글 수정
+	             	$(document).on("click", ".updateComment2", function(){
+	             		updateContent = $("#updateContent").val();
+	             		cmCommentNo = $(this).parents("#reComment").children().eq(0).val();
+	             		//alert(updateContent);
+	             		//alert(cmCommentNo);
+	             		if(updateContent.trim().length != 0){
+	             		
+		             		$.ajax({
+				    			url:"rupdate.cm",
+				    			data:{
+				    					cmCommentNo:cmCommentNo, 
+				    					cmCommentContent:updateContent
+				    			},
+				    			success:function(status){
+				    				
+				    				if(status == "success"){
+					    				swal("Success!", "댓글이 수정되었습니다.", "success");
+					    				selectCmCommentList();
+				    				}else if(status ="hasComment")
+				    					swal("", "댓글 수정을 실패했습니다.", "warning");
+				    				
+				    			},error:function(){
+				    				console.log("댓글 삭제용 ajax 통신 실패");
+				    			}
+			    			})
+	             		}else{
+	             			swal("", "내용을 입력해주세요.", "warning");
+	             		}
+	             	})
+						
+                </script>
+
             </div>
-            
         </div>
 
         <div id="btnArea" align="center">
-            <span id="btnArea1">
-                <a href="enrollForm.cm" class="btn btn-success">글쓰기</a>
-            </span>
+        	<c:if test="${ !empty loginUser }">
+	            <span id="btnArea1">
+	                <a href="enrollForm.cm" class="btn btn-success">글쓰기</a>
+	            </span>
+            </c:if>
             <span id="btnArea2" style="margin-left: 700px;">
                 <a href="list.cm" class="btn btn-success">목록</a>
                 <a href="#cm_titleArea"" class="btn btn-success"><i class="fas fa-caret-up"></i> TOP</a>

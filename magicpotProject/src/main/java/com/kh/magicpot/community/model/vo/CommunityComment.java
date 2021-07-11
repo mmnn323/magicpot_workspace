@@ -22,4 +22,6 @@ public class CommunityComment { // 커뮤니티 댓글 vo클래스
 	private String enrollDate;		// 댓글 작성일
 	private String modifyDate;		// 댓글 수정일
 	private String status;			// 댓글활성화여부(Y/N)
+	
+	private String cmWriter;		// 커뮤니티 글 작성자 아이디
 }
