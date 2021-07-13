@@ -138,23 +138,6 @@ public class MemberController {
 		return "member/adminMemberDetail";
 	}
 	
-	/* 일반회원관리 회원 탈퇴 */
-	@RequestMapping("delete.me")
-	public String deleteMember(int memNo, HttpSession session, Model model) {
-		System.out.println(memNo);
-		int result = mService.deleteMember(memNo);
-		
-		if(result > 0) { 
-			
-			session.setAttribute("alertMsg", "성공적으로 회원이 탈퇴되었습니다.");
-			return "redirect:admin.me";
-			
-		}else {
-			model.addAttribute("errorMsg", "회원 탈퇴 실패");
-			return "common/errorPage";
-		}
-	}
-	
 	
 	// 회원가입폼 페이지
 	@RequestMapping("enrollForm.me")

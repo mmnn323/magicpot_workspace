@@ -126,12 +126,6 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.selectAdminMember(sqlSession, memNo);
 	}
 	
-	// 일반회원관리 회원 탈퇴
-	@Override
-	public int deleteMember(int memNo) {
-		return mDao.deleteMember(sqlSession, memNo);
-	}
-	
 	
 	// 크리에이터 조회
 	@Override

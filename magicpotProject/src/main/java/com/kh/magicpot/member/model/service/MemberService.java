@@ -56,9 +56,6 @@ public interface MemberService {
 	// 일반회원관리 회원 상세조회
 	Member selectAdminMember(int memNo);
 	
-	// 일반회원관리 회원 탈퇴
-	int deleteMember(int memNo);
-	
 	// 크리에이터 조회
 	Creator creatSearch(int memNo);
 	
