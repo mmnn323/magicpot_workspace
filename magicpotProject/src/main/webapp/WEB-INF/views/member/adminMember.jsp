@@ -151,10 +151,10 @@
 				<!-- 커뮤니티 검색바 -->
 				<div id="cm_searchArea">
 					<form action="">
-						<input type="hidden" name="currenPage"  value="1">
+						<input type="hidden" name="search_option"  value="1">
 							<select name="condition" id="cm_SearchCtg">
-								<option value="id">회원 ID</option>
-								<option value="name">이름</option>
+								<option value="memId">회원 ID</option>
+								<option value="memName">이름</option>
 								<option value="email">이메일</option>
 							</select> 
 						<input name="kewword" id="cm_keyword" type="text" placeholder=" Search">
@@ -165,7 +165,8 @@
 				<!-- Button to Open the Modal -->
 				<button type="button" id="delSelect" class="btn btn-primary" data-toggle="modal"
 					data-target="#myModal" style="background-color: red; border: none;">
-					회원 탈퇴</button>
+					회원 탈퇴
+				</button>
 
 				<!-- The Modal -->
 				<div class="modal" id="myModal">
@@ -177,16 +178,17 @@
 								<h4 class="modal-title">회원 탈퇴</h4>
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 							</div>
+							<form action="delete.me">
+								<!-- Modal body -->
+								<div class="modal-body">회원을 탈퇴하겠습니까?</div>
 
-							<!-- Modal body -->
-							<div class="modal-body">회원을 탈퇴하겠습니까?</div>
-
-							<!-- Modal footer -->
-							<div class="modal-footer">
-								<button type="button" class="btn btn-danger" id="btn btn-danger"
-									data-dismiss="modal">네</button>
-							</div>
-
+								<!-- Modal footer -->
+								<div class="modal-footer">
+									<input type="hidden" value="${ m.memNo }" name="memNo">
+									<button type="submit" class="btn btn-danger" id="btn-danger"
+										data-dismiss="modal">네</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -199,8 +201,8 @@
                                 mybatis 수업시간에 제목에 a태그 달아서 제목만 클릭 시 상세보기로 넘어갔는데 일단 그렇게 적용했어요!
                                                                         이 부분은 기능구현 부분이니 tr 클릭 시 요청하고 싶으신 분들은 그렇게 수정해주셔도 될 것 같아요~!
                             -->
-			<div id="cmNoticeListArea">
-				<table class="table" id="cmNoticeList" align="center">
+			<div id=li"cmNoticeListArea">
+				<table class="table" id="cmNoticeList" align="center" action="multiDel">
 					<thead class="thead-light">
 						<tr>
 							<th width="40"><input type="checkbox" id="allCheckbox"></th>

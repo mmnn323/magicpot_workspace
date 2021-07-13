@@ -254,6 +254,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	   where mem_no = #{memNo}
   	</select>
   	
+  	<!-- 일반회원관리 회원 탈퇴 -->
+  	<update id="deleteMember" parameterType="string">
+  		update
+  		       member
+  		   set status = 'N'
+  		 where mem_no = #{mem_no}
+  	</update>
   	
   	<insert id="insertAddress" parameterType="Address">
   	insert
