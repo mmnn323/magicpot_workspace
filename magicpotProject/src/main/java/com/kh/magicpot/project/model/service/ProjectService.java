@@ -66,5 +66,9 @@ public interface ProjectService {
 	// 기본 요건 수정
 	int updateRequire(ProRequire proRequire);
 	
+	// 프로젝트 상세 페이지
+	Project selectFundingDetail(int proNo);
+	// 프로젝트 상세 작가의말
+	Project authorAjax(int proNo);
 }
 

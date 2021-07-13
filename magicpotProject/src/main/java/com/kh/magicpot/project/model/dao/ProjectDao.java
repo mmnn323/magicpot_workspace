@@ -101,5 +101,12 @@ public class ProjectDao {
 		return sqlSession.update("updateRequire", proRequire);
 	}	
 
+	public Project selectFundingDetail(SqlSessionTemplate sqlSession, int proNo) {
+		return sqlSession.selectOne("projectMapper.selectFundingDetail", proNo);
+	}
+	
+	public Project authorAjax(SqlSessionTemplate sqlSession, int proNo) {
+		return sqlSession.selectOne("projectMapper.authorAjax", proNo);
+	}
 }
 

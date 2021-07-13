@@ -112,8 +112,17 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public int updateRequire(ProRequire proRequire) {
 		return pDao.updateRequire(sqlSession, proRequire);
-	}	
-	
-	
+	}
+
+	@Override
+	public Project selectFundingDetail(int proNo) {
+		return pDao.selectFundingDetail(sqlSession, proNo);
+	}
+
+	@Override
+	public Project authorAjax(int proNo) {
+		return pDao.authorAjax(sqlSession, proNo);
+	}
+
 
 }

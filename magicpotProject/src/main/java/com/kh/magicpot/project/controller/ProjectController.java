@@ -39,18 +39,40 @@ public class ProjectController {
 	@Autowired
 	private MemberService mService;
 	
-	@RequestMapping("detail.fd")
-	public String fundingDetail() {
+	/* 펀딩상세페이지 */
+	@RequestMapping(value={"detail.fd", "author.fd"})
+	public String selectFundingDetail(int proNo, Model model) {
 		
+		Project p = pService.selectFundingDetail(proNo);
+		model.addAttribute("p", p);
+		//System.out.println(proNo);
+				
+		// 남은 일 계산		
+		int d = 0;
+			
+			Date date1= p.getCloseDate();
+			Date date2 = new Date(System.currentTimeMillis());
+			 
+			long calDateDays = 0;
+			SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+			Date FirstDate = date1;
+			Date SecondDate = date2;
+				
+			long calDate = SecondDate.getTime()-FirstDate.getTime(); 
+				
+			// Date.getTime() 은 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지를 반환 
+			// 24*60*60*1000을 나눠주면 일수 나옴
+			calDateDays = calDate / ( 24*60*60*1000); 
+	 
+			calDateDays = Math.abs(calDateDays);
+				
+			d = (int)calDateDays;
+			
+			model.addAttribute("d", d);
+			//System.out.println(d);
+
 		return "project/fundingDetail";
 	}
-	
-	@RequestMapping("story.fd")
-	public String fundingDetailStory() {
-		
-		return "project/fundingDetail";
-	}
-	
 	
 	// 실시간 랭킹
 	@ResponseBody
@@ -204,7 +226,7 @@ public class ProjectController {
 		
 		// 남은 일 계산		
 		int[] arr = new int[pr.size()];
-			
+		
 		for(int i=0; i<pr.size(); i++) {
 			Date date1=pr.get(i).getCloseDate();
 			Date date2 = new Date(System.currentTimeMillis());

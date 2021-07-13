@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="pro_step" property="proStep"/>
 		<result column="pro_ad" property="proAd"/>
 		<result column="ran_no" property="ranNo"/>
+		<result column="ca_Name" property="caName"/>	
 		<collection resultMap="Category" property="category"/>
 		<collection resultMap="Creator" property="creator"/>
 	</resultMap>	
@@ -448,5 +449,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where pro_no = #{proNo}
 	</update>
 	 
+	<!-- 펀딩상세페이지 --> 
+	<select id="selectFundingDetail" resultMap="Project" parameterType="_int">
+		select
+		      ca_name
+		    , pro_title
+		    , pro_image
+		    , open_date
+		    , close_date
+		    , pro_price
+		    , pro_fundprice
+		    , pro_story
+		    , create_word
+		 from project 
+		 join category using(ca_no)
+		where pro_no = #{proNo} 
+	</select> 
+	
 </mapper>
 
