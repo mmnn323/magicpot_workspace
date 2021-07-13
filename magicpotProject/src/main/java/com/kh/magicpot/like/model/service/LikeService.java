@@ -14,4 +14,7 @@ public interface LikeService {
 	
 	// 좋아요 삭제
 	int deleteLike(Like l);
+	
+	// 좋아요 여부 확인
+	int isChecked(Like l);
 }
