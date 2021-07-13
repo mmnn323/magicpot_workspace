@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.service.MemberService;
+import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.service.ProjectService;
 import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.ProRequire;
@@ -41,7 +42,7 @@ public class ProjectController {
 	
 	/* 펀딩상세페이지 */
 	@RequestMapping(value={"detail.fd", "author.fd"})
-	public String selectFundingDetail(int proNo, Model model) {
+	public String selectFundingDetail(int proNo, Model model, HttpSession session, Like l) {
 		
 		Project p = pService.selectFundingDetail(proNo);
 		model.addAttribute("p", p);
@@ -70,6 +71,22 @@ public class ProjectController {
 			
 			model.addAttribute("d", d);
 			//System.out.println(d);
+			
+			// [휘경] 해당 프로젝트 좋아요 여부 (로그인한 회원이 좋아요한 프로젝트일 경우 펀딩 상세페이지 빨간 하트로 표시)
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			if(loginUser != null) {
+				int memNo = loginUser.getMemNo();
+				l.setMemNo(memNo);
+				l.setProNo(proNo);
+				int isChecked = pService.isChecked(l);
+				model.addAttribute("isChecked", isChecked);
+			}else {
+				model.addAttribute("inChecked", 0);
+			}
+			
+			// [휘경] 해당 프로젝트 좋아요 수
+			int countLike = pService.countLike(proNo);
+			model.addAttribute("countLike", countLike);
 
 		return "project/fundingDetail";
 	}
@@ -555,4 +572,55 @@ public class ProjectController {
 			return "common/errorPage";
 		}
 	}
+	
+	/**
+	 * [휘경] ajax : 프로젝트 좋아요 취소
+	 * @param l
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("deleteLike2.pr")
+	public String ajaxDeleteLike(Like l) {
+		
+		int result = pService.deleteLike(l);
+		
+		if(result > 0) { // 좋아요 삭제 성공
+			return "success";
+		}else { // 좋아요 삭제 실패
+			return "fail";
+		}
+	}
+	
+	/**
+	 * [휘경] ajax : 프로젝트 좋아요 추가
+	 * @param l
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("insertLike.pr")
+	public String ajaxInsertLike(Like l) {
+		
+		int result = pService.insertLike(l);
+		
+		if(result > 0) { // 좋아요 추가 성공
+			return "success";
+		}else { // 좋아요 추가 실패
+			return "fail";
+		}
+	}
+	
+	/**
+	 * [휘경] ajax : 프로젝트 좋아요 카운트 조회
+	 * @param proNo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="countLike.pr", produces="application/json; charset=utf-8")
+	public String ajaxCountLike(int proNo) {
+		int result = pService.countLike(proNo);
+		System.out.println(result);
+		return new Gson().toJson(result);
+	}
+	
+	
 }
