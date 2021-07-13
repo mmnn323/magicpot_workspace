@@ -127,4 +127,9 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.deleteMyProject", proNo);
 	}
 	
+	// 회원탈퇴
+	public int deleteMember(SqlSessionTemplate sqlSession, String memId) {
+		return sqlSession.update("memberMapper.deleteMember", memId);
+	}
+	
 }

@@ -132,7 +132,7 @@
 <body>
     <div class="wrap">
         <div class="content_1">
-            <a href="">
+            <a href="${ pageContext.servletContext.contextPath }">
                 <img id="logoImg" src="resources/images/common/logo.png" width="200" height="100" >
             </a>
         </div>

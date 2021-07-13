@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.community.model.vo.Community;
+import com.kh.magicpot.community.model.vo.CommunityComment;
 import com.kh.magicpot.community.model.vo.CommunityNotice;
 
 @Repository
@@ -173,6 +174,66 @@ public class CommunityDao {
 	 */
 	public int deleteCommunity(SqlSessionTemplate sqlSession, int cmNo) {
 		return sqlSession.update("communityMapper.deleteCommunity", cmNo);
+	}
+	
+	/**
+	 * 커뮤니티 댓글 리스트 조회
+	 * @param sqlSession
+	 * @param cmNo
+	 * @return
+	 */
+	public ArrayList<CommunityComment> selectCmCommentList(SqlSessionTemplate sqlSession, int cmNo){
+		return (ArrayList)sqlSession.selectList("communityMapper.selectCmCommentList", cmNo);
+	}
+	
+	/**
+	 * 커뮤니티 댓글 등록
+	 * @param sqlSession
+	 * @param r
+	 * @return
+	 */
+	public int insertComment(SqlSessionTemplate sqlSession, CommunityComment r) {
+		return sqlSession.insert("communityMapper.insertComment", r);
+	}
+	
+	/**
+	 * 커뮤니티 댓글 삭제_1 : 참조된 댓글인지 확인
+	 * @param sqlSession
+	 * @param cmNommentNo
+	 * @return
+	 */
+	public int checkReComment(SqlSessionTemplate sqlSession, int cmCommentNo) {
+		return sqlSession.selectOne("communityMapper.checkReComment", cmCommentNo);
+	}
+	
+	/**
+	 * 커뮤니티 댓글 삭제_2_1 : 참조된 댓글인 경우 내용 update
+	 * @param sqlSession
+	 * @param cmCommnetNo
+	 * @return
+	 */
+	public int deleteRefComment(SqlSessionTemplate sqlSession, int cmCommnetNo) {
+		return sqlSession.update("communityMapper.deleteRefComment", cmCommnetNo);
+	}
+	
+	/**
+	 * 커뮤니티 댓글 삭제_2_2 : 참조된 댓글이 없는 경우 상태 update
+	 * @param sqlSession
+	 * @param cmCommentNo
+	 * @return
+	 */
+	public int deleteComment(SqlSessionTemplate sqlSession, int cmCommentNo) {
+		return sqlSession.update("communityMapper.deleteComment", cmCommentNo);
+	}
+	
+	/**
+	 * 커뮤니티 댓글 수정
+	 * @param sqlSession
+	 * @param r
+	 * @return
+	 */
+	public int updateComment(SqlSessionTemplate sqlSession, CommunityComment r) {
+		return sqlSession.update("communityMapper.updateComment", r);
 	}
 
 }

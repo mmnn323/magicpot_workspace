@@ -37,7 +37,7 @@
     .wrap>div{width:100%}
     .content_1{height: 140px; border-bottom: 1px solid lightgray;}
     .content_2{
-        height: 1150px;
+        height: 1000px;
         background-color: rgba(220, 221, 206, 0.25);
         
         
@@ -50,7 +50,7 @@
     .enrollContent{
         border:1px solid lightgray;
         width:480px;
-        height: 1000px;
+        height: 900px;
         margin:auto;
         padding:60px 40px;
         background:white;   
@@ -133,7 +133,7 @@
 <body>
     <div class="wrap">
         <div class="content_1">
-            <a href="">
+            <a href="${ pageContext.servletContext.contextPath }">
                 <img id="logoImg" src="resources/images/common/logo.png" width="200" height="100" >
             </a>
         </div>
@@ -239,10 +239,7 @@
                     <button type="submit" onclick="$('#enrollForm').submit();" class="btn btn-success" id="subBtn">회원가입</button>
 
                 </form>
-                <br>
-                <br>
 
-                <img src="resources/images/common/bound.png" >
 
                 <br><br>
                 

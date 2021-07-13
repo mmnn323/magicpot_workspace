@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.guide.model.vo.Faq;
 import com.kh.magicpot.guide.model.vo.Guide;
+import com.kh.magicpot.guide.model.vo.Guide2;
 
 @Repository
 public class GuideDao {
@@ -25,7 +26,7 @@ public class GuideDao {
 	}
 	
 	// 이용가이드 페이지
-	public ArrayList<Guide> guideForm(SqlSessionTemplate sqlSession, int ctg) {
+	public ArrayList<Guide2> guideForm(SqlSessionTemplate sqlSession, int ctg) {
 		return (ArrayList)sqlSession.selectList("guideMapper.guideForm", ctg);
 	}
 	
@@ -64,7 +65,19 @@ public class GuideDao {
 	}
 	
 	// faq 삭제
-		public int deleteFa(SqlSessionTemplate sqlSession, Faq fa) {
-			return sqlSession.update("guideMapper.deleteFa", fa);
-		}
+	public int deleteFa(SqlSessionTemplate sqlSession, Faq fa) {
+		return sqlSession.update("guideMapper.deleteFa", fa);
+	}
+	
+	// 관리자 이용가이드 내용
+	public Guide2 guideDetail(SqlSessionTemplate sqlSession, int ctg) {
+		return sqlSession.selectOne("guideMapper.guideDetail", ctg);
+	}	
+	
+	// 관리자 이용가이드 수정
+	public int updateGu(SqlSessionTemplate sqlSession, Guide2 gu) {
+		return sqlSession.update("guideMapper.updateGu", gu);
+	}
+	
+		
 }

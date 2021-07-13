@@ -101,6 +101,19 @@
         background-color: rgb(225, 212, 169);
     }
     
+    .deleteBtn> a{
+        background-color: rgb(225, 212, 169);
+        border: none;
+        width: 90px;
+        height: 40px;
+    }
+
+    .deleteBtn> button{
+        background-color: rgb(225, 212, 169);
+        border: none;
+        width: 90px;
+        height: 40px;
+    }
     .modal-content_2{
         height: 150px;
         width: 350px;
@@ -110,29 +123,29 @@
     }
 
     .modal-content_2>h5{
-        margin-left: 30px;
+        margin-left: 50px;
         
     }
-
     .deleteBtn{
         margin-left: 130px;
-        margin-top: 50px;
+        margin-top: 2px;
     }
 
-    .deleteBtn> a{
-        background-color: rgb(225, 212, 169);
+	#adGoBtn{
+		background-color: rgb(225, 212, 169);
         border: none;
         width: 90px;
         height: 40px;
-    }
-
-    .deleteBtn> button{
-        background-color: rgb(94, 94, 94);
+        margin-left: 85px;
+        margin-top:20px;
+	}
+	#adNoBtn{
+		background-color: rgb(94, 94, 94);
         border: none;
         width: 90px;
         height: 40px;
-    }
-
+        margin-top:20px;
+	}
     
 </style>
 <body>
@@ -198,7 +211,7 @@
 
                             </td>
                             <td >
-                                <button type="button" id="addInput" class="btn btn-success" data-toggle="modal" data-target="#deleteModal" onclick="" >우편번호</button>
+                                <button type="button" id="addInput" class="btn btn-success" data-toggle="modal" data-target="#deleteModal2" onclick="" >우편번호</button>
                             </td>
                         </tr>
                         <tr>
@@ -214,13 +227,36 @@
                     </table>
                     <br>
                     <div class="btns" align="center">
-                        <button type="reset" id="cancel" class="btn btn-success">취소</button>
+                        <button type="button" id="cancel" class="btn btn-success" data-toggle="modal" data-target="#deleteModal">획원탈퇴</button>
                         <button type="submit" id="check" class="btn btn-success"> 확인</button>
                     </div>
 					
                 </form>
             </div>
+            <!-- 회원탈퇴 모달 -->
+            <div class="modal" id="deleteModal">
+                <div class="modal-dialog2">
+                    <div class="modal-content_2">
 
+                        <b style="margin-left: 75px;">
+			                            탈퇴 후 복구가 불가능합니다. <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			                            정말로 탈퇴 하시겠습니까?
+                        </b>                      
+                       
+                        
+                        <form action="delete.me">
+                            <br>&nbsp;&nbsp;
+                            	비밀번호:
+                            <input type="password" name="memPwd" required>
+                            <div class="deleteBtn">
+                                <button type="submit" class="btn btn-success" style="height: 40px;">탈퇴확인</button>
+                            </div>
+                        </form>
+                       
+                        
+                    </div>
+                </div>
+            </div>       
         </div>
 
     </div>
@@ -228,17 +264,17 @@
     <jsp:include page="../common/footer.jsp"/>
     
 	<!-- The Modal -->
-	<div class="modal" id="deleteModal">
+	<div class="modal" id="deleteModal2">
 		<div class="modal-dialog2">
 			<div class="modal-content_2">
 			<br>
-				<h5><b>배송지 목록으로 이동하시겠습니까?</b></h5>
+				<h5 style="margin-left:20px;"><b>배송지 목록으로 이동하시겠습니까?</b></h5>
 									                   
 									                    
 									                   
-				<div class="deleteBtn">
-					<a href="address.me" class="btn btn-success">이동</a>
-					<button type="reset" class="btn btn-success" data-dismiss="modal">취소</button>
+				<div class="addressBtn">
+					<a href="address.me" id="adGoBtn" class="btn btn-success">이동</a>
+					<button type="reset" id="adNoBtn" class="btn btn-success" data-dismiss="modal">취소</button>
 				</div>
 									                    
 									                   

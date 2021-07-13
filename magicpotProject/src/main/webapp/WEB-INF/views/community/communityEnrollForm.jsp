@@ -177,7 +177,7 @@
                 fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
                 callbacks: {
                 	onImageUpload : function(files, editor, welEditable) {
-                		console.log("sss");
+                		//console.log("sss");
                         // 파일 업로드(다중업로드를 위해 반복문 사용)
                         for (var i = files.length - 1; i >= 0; i--) {
                         	uploadSummernoteImageFile(files[i],this);

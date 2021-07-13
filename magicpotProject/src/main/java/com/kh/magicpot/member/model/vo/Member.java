@@ -28,6 +28,5 @@ public class Member {
 	private String memPost;
 	private String memRoad;
 	private String memDetail;
-	private int creNo;
 
 }

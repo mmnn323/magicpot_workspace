@@ -216,22 +216,28 @@
                 </ul>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img id="mainImg1" src=""  width="1000" height="350">
+                  	<a href="" id="imgUrl1">
+                    	<img id="mainImg1" src=""  width="1000" height="350">
+                    </a>
                     <div class="carousel-caption">
-                      <h4 id="textTitle1"></h3>
+                      <h4 id="textTitle1"></h4>
                       
                     </div>   
                   </div>
                   <div class="carousel-item">
-                    <img id="mainImg2" src=""  width="1000" height="350">
+                  	<a href="" id="imgUrl2">	
+                    	<img id="mainImg2" src=""  width="1000" height="350">
+                    </a>
                     <div class="carousel-caption">
-                      <h4 id="textTitle2"></h3>
+                      <h4 id="textTitle2"></h4>
                     </div>   
                   </div>
                   <div class="carousel-item">
-                    <img id="mainImg3" src=""  width="1000" height="350">
+                  	<a href="" id="imgUrl3">
+                    	<img id="mainImg3" src=""  width="1000" height="350">
+                    </a>
                     <div class="carousel-caption">
-                      <h4 id="textTitle3"></h3>
+                      <h4 id="textTitle3"></h4>
                     </div>   
                   </div>
                 </div>
@@ -252,8 +258,8 @@
 							var i="i";
 							for(var i=1; i<=3; i++){
 								$("#textTitle" + i).text(list[i-1].proTitle);
-								$("#text" + i).text(list[i-1].proSummary);
 								$("#mainImg" + i).attr("src",list[i-1].proImage);
+								$("#imgUrl"+i).attr("href", "detail.fd?proNo=" + list[i-1].proNo);
 							}
 							
 							
@@ -276,42 +282,42 @@
             	<c:choose>
 	            	<c:when test="${empty keyword }">
 		                <a id="all" href="fund.li" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgAll" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/all.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: 15px;">ALL</div>
 		                </a>
 		                <a  href="fund.li?ctg=5" style="text-decoration: none; color: black;">
-		                    <div id="living" class="box" style="background: #BDBDBD;">
+		                    <div id="ctgLiving" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/living.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">LIVING</div>
 		                </a>
 		                <a id="office" href="fund.li?ctg=1" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgOffice" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/office.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">OFFICE</div>
 		                </a>
 		                <a id="kitchen" href="fund.li?ctg=2" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgKitchen" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/kitchen.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: -2px;">KITCHEN</div>
 		                </a>
 		                <a id="travel" href="fund.li?ctg=3" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgTravel" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/travel.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: 2px;">TRAVEL</div>
 		                </a>
 		                <a id="bath" href="fund.li?ctg=4" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgBath" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/bath.jpg">
 		                    
 		                    </div>
@@ -320,42 +326,42 @@
                 </c:when>
                 <c:when test="${condition == 'title' }">
 		                <a id="all" href="search.pr?condition=title&keyword=${keyword }&ctg=0&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgAll" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/all.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: 15px;">ALL</div>
 		                </a>
 		                <a  href="search.pr?condition=title&keyword=${keyword }&ctg=5&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
-		                    <div id="living" class="box" style="background: #BDBDBD;">
+		                    <div id="ctgLiving" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/living.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">LIVING</div>
 		                </a>
 		                <a id="office" href="search.pr?condition=title&keyword=${keyword }&ctg=1&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgOffice" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/office.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">OFFICE</div>
 		                </a>
 		                <a id="kitchen" href="search.pr?condition=title&keyword=${keyword }&ctg=2&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgKitchen" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/kitchen.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: -2px;">KITCHEN</div>
 		                </a>
 		                <a id="travel" href="search.pr?condition=title&keyword=${keyword }&ctg=3&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgTravel" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/travel.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: 2px;">TRAVEL</div>
 		                </a>
 		                <a id="bath" href="search.pr?condition=title&keyword=${keyword }&ctg=4&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgBath" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/bath.jpg">
 		                    
 		                    </div>
@@ -364,42 +370,42 @@
                 </c:when>
                 <c:when test="${condition == 'writer' }">
 		                <a id="all" href="search.pr?condition=writer&keyword=${keyword }&ctg=0&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgAll" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/all.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: 15px;">ALL</div>
 		                </a>
 		                <a  href="search.pr?condition=writer&keyword=${keyword }&ctg=5&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
-		                    <div id="living" class="box" style="background: #BDBDBD;">
+		                    <div id="ctgLiving" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/living.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">LIVING</div>
 		                </a>
 		                <a id="office" href="search.pr?condition=writer&keyword=${keyword }&ctg=1&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgOffice" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/office.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: 4px;">OFFICE</div>
 		                </a>
 		                <a id="kitchen" href="search.pr?condition=writer&keyword=${keyword }&ctg=2&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgKitchen" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/kitchen.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: -2px;">KITCHEN</div>
 		                </a>
 		                <a id="travel" href="search.pr?condition=writer&keyword=${keyword }&ctg=3&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgTravel" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/travel.jpg">
 		                    
 		                    </div>
 		                    <div class="fundCate" style="margin-top: 10px; margin-left: 2px;">TRAVEL</div>
 		                </a>
 		                <a id="bath" href="search.pr?condition=writer&keyword=${keyword }&ctg=4&ctg2=${ctg2 }" style="text-decoration: none; color: black;">
-		                    <div class="box" style="background: #BDBDBD;">
+		                    <div id="ctgBath" class="box" style="background: #BDBDBD;">
 		                        <img class="profile" src="resources/images/funding/bath.jpg">
 		                    
 		                    </div>
@@ -485,7 +491,7 @@
 	        		</c:when>
         		<c:otherwise>
 		        	<c:forEach var="i" begin="0" end="${pr.size()-1 }">
-			            <a id="TotalUrl" href="" style="text-decoration:none; color:black">
+			            <a id="TotalUrl" href="detail.fd?proNo=${pr[i].proNo }" style="text-decoration:none; color:black">
 			                    
 			                <div class="newThumbnail" >
 			                   <img src="${pr[i].proImage }">
@@ -573,7 +579,29 @@
         	
         }	   
     	
-	 
+       	$(function(){
+       		switch(${ctg}){
+       		case 0:
+       			$("#ctgAll").css("border", "2px solid rgb(92, 216, 169)");
+       			break;
+       		case 5:
+       			$("#ctgLiving").css("border", "2px solid rgb(92, 216, 169)");
+       			break;
+       		case 1:
+       			$("#ctgOffice").css("border", "2px solid rgb(92, 216, 169)");
+       			break;
+       		case 2:
+       			$("#ctgKitchen").css("border", "2px solid rgb(92, 216, 169)");
+       			break;
+       		case 3:
+       			$("#ctgTravel").css("border", "2px solid rgb(92, 216, 169)");
+       			break;
+       		case 4:
+       			$("#ctgBath").css("border", "2px solid rgb(92, 216, 169)");
+       			break;
+       		};
+       		
+       	});	 	
 	    
 	   
 	   

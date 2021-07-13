@@ -22,11 +22,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.common.template.Pagination;
 import com.kh.magicpot.community.model.service.CommunityService;
 import com.kh.magicpot.community.model.vo.Community;
+import com.kh.magicpot.community.model.vo.CommunityComment;
 import com.kh.magicpot.community.model.vo.CommunityNotice;
 
 @Controller
@@ -239,34 +241,6 @@ public class CommunityController {
 		
 		JsonObject jsonObject = new JsonObject();
 		
-		// 내부경로로 저장
-		/*
-		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot = contextRoot+"resources/community_uploadFiles/";
-		
-		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
-		System.out.println(originalFileName);
-		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-		
-		File targetFile = new File(fileRoot + savedFileName);	
-		
-		try {
-			//InputStream fileStream = multipartFile.getInputStream();
-			//FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-			multipartFile.transferTo(targetFile);
-			System.out.println(fileRoot + savedFileName);
-			
-			jsonObject.addProperty("url", "resources/community_uploadFiles/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
-			jsonObject.addProperty("responseCode", "success");
-				
-		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
-			jsonObject.addProperty("responseCode", "error");
-			e.printStackTrace();
-		}
-		*/
-		
 		String savedFileName = saveFile(session, multipartFile);
 		jsonObject.addProperty("url", "resources/community_uploadFiles/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
 		//jsonObject.addProperty("responseCode", "success");
@@ -395,6 +369,14 @@ public class CommunityController {
 		}
 	}
 	
+	/**
+	 * 커뮤니티 게시글 삭제
+	 * @param cmNo
+	 * @param filePath
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("delete.cm")
 	public String communityDelete(int cmNo, String filePath, HttpSession session, Model model) {
 		// 1_1. DB에서 해당 게시글 상태 N으로 변경
@@ -411,5 +393,83 @@ public class CommunityController {
 			return "common/errorPage";
 		}
 	}
+	
+	/**
+	 * ajax : 커뮤니티 댓글 리스트 조회
+	 * @param cmNo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="rlist.cm", produces="application/json; charset=utf-8")
+	public String ajaxSelectCmCommentList(int cmNo) {
+		// ajax로 요청했기떄문에 포워딩 X
+		// 요청했던 곳으로 응답데이터만 돌려주면 된다
+		// json형태로 바꿔서 응답(Gson 라이브러리 등록)
+		//System.out.println("요청되나?");
+		ArrayList<CommunityComment> list = cService.selectCmCommentList(cmNo);
+		//System.out.println(list);
+		return new Gson().toJson(list);
+		//return new Gson().toJson(cService.selectCmCommentList(cmNo));
+		
+	}
+	
+	/**
+	 * ajax : 커뮤니티 댓글 등록
+	 * @param r
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("rinsert.cm")
+	public String ajaxInsertComment(CommunityComment r) {
+		// 이 메소드 요청 시 전달되는 데이터 Comment로 받고자 한다면
+		// ajax에서도 해당 vo 클래스의 필드명과 일치하는 키값으로 전달해주면 알아서 담긴다!
+		int result = cService.insertComment(r);
+		
+		if(result > 0) { // 댓글 등록 성공
+			return "success";
+		}else { // 댓글 등록 실패
+			return "fail";
+		}
+	}
+	
+	/**
+	 * ajax : 커뮤니티 댓글 삭제
+	 * @param cmCommentNo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("rdelete.cm")
+	public String ajaxDeleteComment(int cmCommentNo) {
+		
+		// 1_삭제하려는 댓글을 참조하고 있는 대댓글이 있는지 확인 (내용->삭제된 댓글입니다 로 update)
+		int count = cService.checkReComment(cmCommentNo);
+		
+		int result = 0;
+		if(count > 0) { // 대댓글이 달려있는 경우 => 내용->삭제된 댓글입니다 로 업데이트 OR 삭제 방지
+			//result = cService.deleteRefComment(cmCommentNo);
+			return "hasComment";
+		}else { // 대댓글이 달려있지 않은 경우 => status -> N 으로 update
+			result = cService.deleteComment(cmCommentNo);
+		}
+		
+		if(result > 0) { // 댓글 삭제 성공
+			return "success";
+		}else { // 댓글 삭제 실패
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("rupdate.cm")
+	public String ajaxUpdateComment(CommunityComment r) {
+		int result = cService.updateComment(r);
+		if(result > 0) { // 댓글 수정 성공
+			return "success";
+		}else { // 댓글 수정 실패
+			return "fail";
+		}
+	}
+	
+	
 	
 }

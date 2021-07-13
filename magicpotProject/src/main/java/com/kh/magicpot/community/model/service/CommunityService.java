@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.community.model.vo.Community;
+import com.kh.magicpot.community.model.vo.CommunityComment;
 import com.kh.magicpot.community.model.vo.CommunityNotice;
 
 public interface CommunityService {
@@ -52,4 +53,22 @@ public interface CommunityService {
 	// 커뮤니티 글 삭제
 	int deleteCommunity(int cmNo);
 //  int deleteCmFile(int cmNo); 글 삭제 시 첨부파일 관련 메소드
+	
+	// 커뮤니티 댓글 리스트 조회
+	ArrayList<CommunityComment> selectCmCommentList(int cmNo);
+	
+	// 커뮤니티 댓글 등록
+	int insertComment(CommunityComment r);
+	
+	// 커뮤니티 댓글 삭제_1 : 참조된 댓글인지 확인
+	int checkReComment(int cmCommentNo);
+	
+	// 커뮤니티 댓글 삭제_2_1 : 참조된 댓글인 경우 내용 update
+	int deleteRefComment(int cmCommentNo);
+	
+	// 커뮤니티 댓글 삭제_2_2 : 참조된 댓글이 없는 경우 상태 update
+	int deleteComment(int cmCommentNo);
+	
+	// 커뮤니티 댓글 수정
+	int updateComment(CommunityComment r);
 }

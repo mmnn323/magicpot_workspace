@@ -167,7 +167,7 @@
                 <br><br>
                 
                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#messageModal"><i class="far fa-envelope fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>문의</p></button>&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn btn-outline-secondary"><i class="far fa-heart fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>238</p></button>&nbsp;&nbsp;&nbsp;
+                <button type="button" id="likeBtn" class="btn btn-outline-secondary"><i class="far fa-heart fa-2x" style="float: left; margin-left:7px; margin-top:2px; color:gray;"></i><p>238</p></button>&nbsp;&nbsp;&nbsp;
                 <button type="button" id="share" class="btn btn-outline-secondary"><i class="fas fa-share-alt fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>공유</p></button>
             </div>
         </div>

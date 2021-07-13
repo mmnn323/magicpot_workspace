@@ -31,6 +31,20 @@
 		<result column="status" property="status" />
 	</resultMap>
 	
+	<!-- CommunityComment ResultMap -->
+	<resultMap id="communityComment" type="CommunityComment">
+		<id column="cmco_no" property="cmCommentNo" />
+		<result column="mem_no" property="memNo" />
+		<result column="cm_no" property="cmNo" />
+		<result column="mem_id" property="memId" />
+		<result column="cmco_ref" property="cmCommentRef" />
+		<result column="cmco_depth" property="cmCommentDepth" />
+		<result column="cmco_content" property="cmCommentContent" />
+		<result column="enroll_date" property="enrollDate" />
+		<result column="modify_date" property="modifyDate" />
+		<result column="status" property="status" />
+	</resultMap>
+	
 	<!-- 커뮤니티 공지사항 리스트 조회 -->
 	<select id="selectCmNoticeList" resultMap="communityNotice">
 		select
@@ -286,5 +300,83 @@
  		   set status = 'N'
  		 where cm_no = #{cmNo}
  	</update>
+ 	
+ 	<!-- 커뮤니티 댓글 리스트 조회 -->
+	<select id="selectCmCommentList" resultMap="communityComment" parameterType="_int">
+		select 
+		       cmco_no
+		     , cm_no
+		     , mem_id
+		     , cmco_ref
+		     , cmco_depth
+		     , cmco_content
+		     , to_char(enroll_date, 'YYYY-MM-DD HH24:MI') enroll_date
+		     , status
+		  from cm_comment
+		where cm_no = #{cmNo}
+		  and status = 'Y'
+		start with cmco_ref = 0
+		connect by prior cmco_no = cmco_ref
+		order siblings by enroll_date asc
+	</select>
+	
+	<!-- 커뮤니티 댓글 등록 -->
+	<insert id="insertComment" parameterType="CommunityComment">
+		insert
+		  into cm_comment
+		  (
+		    cmco_no
+		  , mem_no
+		  , cm_no
+		  , mem_id
+		  , cmco_ref
+		  , cmco_depth
+		  , cmco_content
+		  )
+		  values
+		  (
+		    seq_ccno.nextval
+		  , #{memNo}
+		  , #{cmNo}
+		  , #{memId}
+		  , #{cmCommentRef}
+		  , #{cmCommentDepth}
+		  , #{cmCommentContent}
+		  )
+	</insert>
+	
+	<!-- 커뮤니티 댓글 삭제_1 : 참조된 댓글인지 확인 -->
+	<select id="checkReComment" resultType="_int" parameterType="_int">
+		select count(*)
+		  from cm_comment
+		 where cmco_ref = #{cmCommentNo}
+		   and status = 'Y'
+	</select>
+	
+	<!-- X : 커뮤니티 댓글 삭제_2_1 : 참조된 댓글인 경우 내용 update-->
+	<!-- 참조된 댓글일 경우 댓글 삭제 방지로 대체
+	<update id="deleteRefComment" parameterType="_int">
+		update cm_comment
+		   set cmco_content = '삭제된 댓글입니다'
+		     , status = 'D'
+		 where cmco_no = #{cmCommentNo}
+		   and status = 'Y'
+	</update>
+	 -->
+	 
+	<!-- 커뮤니티 댓글 삭제_2_2 : 참조된 댓글이 없는 경우 상태 update -->
+	<update id="deleteComment" parameterType="_int">
+		update cm_comment
+		   set status = 'N'
+		 where cmco_no = #{cmCommentNo}
+	</update>
+	
+	<!-- 커뮤니티 댓글 수정 -->
+	<update id="updateComment" parameterType="CommunityComment">
+		update
+		       cm_comment
+		   set cmco_content = #{cmCommentContent}
+		 where cmco_no = #{cmCommentNo}
+	</update>
  
 </mapper>

@@ -150,4 +150,48 @@
 		  where faq_no = #{faqNo}	
 	</update>
 	
+	<!-- 관리자 이용가이드 내용 -->
+	<select id="guideDetail" resultMap="Guide2">
+		select
+		      gu_title
+		    , gu_content
+		    , enroll_date
+		    , modify_date
+		 from guide2
+		where
+		 	  <choose>
+		 	  	<when test="ctg == 1">
+		 	  		gu_title = '크라우드 펀딩이란?' 
+		 	  	</when>	
+				<when test="ctg == 2">
+		 	  		gu_title = '회원가입' 
+		 	  	</when>	
+		 	  	<when test="ctg == 3">
+		 	  		gu_title = '결제' 
+		 	  	</when>	
+		 	  	<when test="ctg == 4">
+		 	  		gu_title = '리워드' 
+		 	  	</when>	
+		 	  	<when test="ctg == 5">
+		 	  		gu_title = '프로젝트 신청' 
+		 	  	</when>	
+		 	  	<when test="ctg == 6">
+		 	  		gu_title = '프로젝트 심사' 
+		 	  	</when>	
+		 	  	<when test="ctg == 7">
+		 	  		gu_title = '펀딩진행' 
+		 	  	</when>	
+		 	  	<when test="ctg == 8">
+		 	  		gu_title = '정산' 
+		 	  	</when>	
+		 	  </choose>
+	</select>	
+	
+	<!-- 이용가이드 수정 -->
+	<update id="updateGu" parameterType="Guide2">
+		update
+		       Guide2
+		    set gu_content = #{guContent}
+		  where gu_title = #{guTitle}	
+	</update>
 </mapper>

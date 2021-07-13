@@ -10,6 +10,7 @@ import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.guide.model.dao.GuideDao;
 import com.kh.magicpot.guide.model.vo.Faq;
 import com.kh.magicpot.guide.model.vo.Guide;
+import com.kh.magicpot.guide.model.vo.Guide2;
 
 @Service
 public class GuideServiceImpl implements GuideService {
@@ -36,7 +37,7 @@ public class GuideServiceImpl implements GuideService {
 
 	// 이용가이드페이지
 	@Override
-	public ArrayList<Guide> guideForm(int ctg) {
+	public ArrayList<Guide2> guideForm(int ctg) {
 		return gDao.guideForm(sqlSession, ctg);	
 	}
 	
@@ -80,6 +81,18 @@ public class GuideServiceImpl implements GuideService {
 	@Override
 	public int deleteFa(Faq fa) {
 		return gDao.deleteFa(sqlSession, fa);
+	}
+
+	// 이용가이드 내용
+	@Override
+	public Guide2 guideDetail(int ctg) {
+		return gDao.guideDetail(sqlSession, ctg);
+	}
+
+	// 이용가이드 수정
+	@Override
+	public int updateGu(Guide2 gu) {
+		return gDao.updateGu(sqlSession, gu);
 	}
 	
 	

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.guide.model.vo.Faq;
 import com.kh.magicpot.guide.model.vo.Guide;
+import com.kh.magicpot.guide.model.vo.Guide2;
 
 public interface GuideService {
 	
@@ -16,7 +17,7 @@ public interface GuideService {
 	public int proModify(String gu_provision);
 
 	// 이용가이드 페이지
-	public ArrayList<Guide> guideForm(int ctg);
+	public ArrayList<Guide2> guideForm(int ctg);
 	
 	// faq 갯수조회
 	int selectListCount();
@@ -38,4 +39,10 @@ public interface GuideService {
 	
 	// faq 삭제
 	int deleteFa(Faq fa);
+	
+	// 이용가이드 내용
+	Guide2 guideDetail(int ctg);
+	
+	// 이용가이드 수정
+	int updateGu(Guide2 gu);
 }
