@@ -27,6 +27,7 @@ import com.kh.magicpot.project.model.service.ProjectService;
 import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.ProRequire;
 import com.kh.magicpot.project.model.vo.Project;
+import com.kh.magicpot.project.model.vo.ProjectReward;
 
 @Controller
 public class ProjectController {
@@ -47,7 +48,11 @@ public class ProjectController {
 		Project p = pService.selectFundingDetail(proNo);
 		model.addAttribute("p", p);
 		//System.out.println(proNo);
-				
+		
+		//리워드
+		ArrayList<Project> list = pService.selectReward(proNo);
+		model.addAttribute("list", list);
+		System.out.println(list);
 		// 남은 일 계산		
 		int d = 0;
 			
@@ -90,7 +95,26 @@ public class ProjectController {
 
 		return "project/fundingDetail";
 	}
+
+	/* 상세페이지 - 스토리 */
+	@ResponseBody
+	@RequestMapping(value="story.fd", produces="application/json; charset=utf-8")
+	public String storyAjax(int proNo) {
+		Project p = pService.authorAjax(proNo);
+		//System.out.println(p);
+		
+		return new Gson().toJson(p);
+	}
 	
+	/* 상세페이지 - 작가의말 */
+	@ResponseBody
+	@RequestMapping(value="author.fd", produces="application/json; charset=utf-8")
+	public String authorAjax(int proNo) {
+		Project p = pService.authorAjax(proNo);
+		//System.out.println(p);
+		
+		return new Gson().toJson(p);
+	}
 	
 	// 실시간 랭킹
 	@ResponseBody
@@ -622,6 +646,5 @@ public class ProjectController {
 		System.out.println(result);
 		return new Gson().toJson(result);
 	}
-	
 	
 }

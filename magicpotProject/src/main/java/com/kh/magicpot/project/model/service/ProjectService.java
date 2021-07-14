@@ -8,6 +8,7 @@ import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.ProRequire;
 import com.kh.magicpot.project.model.vo.Project;
+import com.kh.magicpot.project.model.vo.ProjectReward;
 
 public interface ProjectService {
 	
@@ -69,7 +70,8 @@ public interface ProjectService {
 	
 	// 프로젝트 상세 페이지
 	Project selectFundingDetail(int proNo);
-	// 프로젝트 상세 작가의말
+
+	// 프로젝트 작가의말
 	Project authorAjax(int proNo);
 	
 	// [휘경] 좋아요 체크 여부
@@ -83,5 +85,7 @@ public interface ProjectService {
 	
 	// [휘경] 프로젝트 좋아요 추가
 	int insertLike(Like l);
+
+	ArrayList<Project> selectReward(int proNo);
 }
 

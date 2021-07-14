@@ -22,10 +22,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="pro_step" property="proStep"/>
 		<result column="pro_ad" property="proAd"/>
 		<result column="ran_no" property="ranNo"/>
-		<result column="ca_Name" property="caName"/>	
+		<result column="ca_Name" property="caName"/>
 		<collection resultMap="Category" property="category"/>
 		<collection resultMap="Creator" property="creator"/>
 	</resultMap>	
+	
+	<resultMap id="ProjectReward" type="ProjectReward">
+		<id column="reward_no" property="rewardNo"/>
+		<result column="pro_no" property="proNo"/>
+		<result column="reward_title" property="rewardTitle"/>
+		<result column="reward_price" property="rewardPrice"/>
+		<result column="reward_explain" property="rewardExplain"/>
+	</resultMap>
 	
 	<resultMap id="Creator" type="Creator" >
 		<id column="cre_no" property="creNo"/>
@@ -464,8 +472,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    , create_word
 		 from project 
 		 join category using(ca_no)
+		 join pro_reward using(pro_no)
 		where pro_no = #{proNo} 
 	</select> 
+
+	<!-- 상세페이지 리워드 -->
+	<select id="selectReward" resultMap="ProjectReward" parameterType="_int">
+		select
+			  pro_no
+			, reward_no
+		    , reward_price
+		    , reward_explain
+		 from pro_reward
+		where pro_no = #{ proNo }
+	</select>
 	
 	<!-- [휘경] 프로젝트 좋아요 여부 확인 -->
 	<select id="isChecked" resultType="_int" parameterType="Like">
