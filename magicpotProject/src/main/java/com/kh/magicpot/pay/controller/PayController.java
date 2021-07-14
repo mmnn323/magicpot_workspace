@@ -11,45 +11,49 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.common.template.Pagination;
-import com.kh.magicpot.pay.model.service.AdminPayService;
-import com.kh.magicpot.pay.model.vo.AdminPay;
+import com.kh.magicpot.pay.model.service.PayService;
+import com.kh.magicpot.pay.model.vo.Pay;
 
 
 @Controller
-public class AdminPayController {
+public class PayController {
 	
 	@Autowired
-	private AdminPayService aService;
-	
-	/*
-	@RequestMapping("adminPay.me")
-	public String selectAdminPayList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model) {
-		
-		int listCount = aService.selectListCount();
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
-		
-		ArrayList<AdminPay> list = aService.selectList(pi);
-		
-		model.addAttribute("pi", pi);
-		model.addAttribute("list", list);
-		
-		return "pay/adminPay";
-	}
-	*/
+	private PayService aService;
+
 	
 	@RequestMapping("adminPay.me")
 	public ModelAndView selectAdminPayList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		int listCount = aService.selectListCount();
+		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
-		ArrayList<AdminPay> list = aService.selectList(pi);
+		ArrayList<Pay> list = aService.selectList(pi);
 		
 		mv.addObject("pi", pi)
 		  .addObject("list", list)
 		  .setViewName("pay/adminPay");
 		
 		return mv;
+	}
+	
+	@RequestMapping("detail.pay")
+	public String paySelect(int ano, Model model) {
+		
+		ArrayList<Pay> a = aService.paySelect(ano);
+
+		model.addAttribute("a", a);
+		
+		return "pay/adminDetailPay";
+		
+	}
+	
+	
+	// 사용자 pay
+	@RequestMapping("pay.me")
+	public String myPage() {
+		return "pay/pay";
 	}
 
 }

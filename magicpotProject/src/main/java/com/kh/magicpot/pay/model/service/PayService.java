@@ -3,19 +3,19 @@ package com.kh.magicpot.pay.model.service;
 import java.util.ArrayList;
 
 import com.kh.magicpot.common.model.vo.PageInfo;
-import com.kh.magicpot.pay.model.vo.AdminPay;
+import com.kh.magicpot.pay.model.vo.Pay;
 
-public interface AdminPayService {
+public interface PayService {
 
 	//결제리스트 
 	int selectListCount();
-	ArrayList<AdminPay> selectList(PageInfo pi);
+	ArrayList<Pay> selectList(PageInfo pi);
 
 	//상세
-	AdminPay PaySelect(int memNo);
+	ArrayList<Pay> paySelect(int memNo);
 	
 	//결제 취소 시 수정
-	int updateAdminPay(AdminPay a);
+
 
 	
 	

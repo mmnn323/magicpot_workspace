@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.magicpot.coupon.model.service.AdminCouponService;
+import com.kh.magicpot.coupon.model.service.CouponService;
 import com.kh.magicpot.coupon.model.vo.Coupon;
 
 @Controller
-public class AdminCouponController {
+public class CouponController {
 	
 	
 	@Autowired
-	private AdminCouponService cService;
+	private CouponService cService;
 	
 	
 	@RequestMapping("adminInsert.me")
@@ -50,9 +50,6 @@ public class AdminCouponController {
 	
 	@RequestMapping(value="admindelete.me", method=RequestMethod.POST)
 	public String deleteCoupon(int cpNumber, HttpSession session, Model model) {
-		//System.out.println("cpNumber " + cpNumber);
-		
-		//Coupon couponNo = (Coupon)session.getAttribute("couponNo");
 		
 		int result = cService.deleteCoupon(cpNumber);
 		

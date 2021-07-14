@@ -166,7 +166,7 @@ th {
 			<!-- 공간유지용-->
 
 			<th><i class="fas fa-file-invoice-dollar fa-2x"></i></th>
-			<td><a href="pay.me" id="a"><p>주문목록</p></a></td>
+			<td><a href="" id="a"><p>주문목록</p></a></td>
 		</tr>
 
 

@@ -19,7 +19,6 @@
 <script src="https://kit.fontawesome.com/dd18300701.js"
 	crossorigin="anonymous"></script>
 
-
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
@@ -182,10 +181,10 @@ table, tr, th, td {
 			<div id="searchBtnArea">
 				<!-- 커뮤니티 검색바 -->
 				<div id="cm_searchArea">
-					<select name="" id="cm_SearchCtg">
-						<option value="">회원ID</option>
-						<option value="">이름</option>
-						<option value="">이메일</option>
+					<select>
+						<option value="memId">회원ID</option>
+						<option value="memName">이름</option>
+						<option value="email">이메일</option>
 					</select> <input id="cm_keyword" type="text" placeholder=" Search">
 				</div>
 
@@ -202,11 +201,12 @@ table, tr, th, td {
                         -->
 			<div id="cmNoticeListArea">
 				<form action="adminPay.me" method="post">
-					<table class="table" id="cmNoticeList" align="center">
+
+					<table class="table" id="adminPay" align="center">
 						<thead class="thead-light">
 							<tr>
-								<th width="40"><input type="checkbox"></th>
-								<th width="150">회원 번호</th>
+								<th width="40"><input type="checkbox" id="allCheckbox"></th>
+								<th width="150">회원번호</th>
 								<th width="100">아이디</th>
 								<th width="100">이름</th>
 								<th width="200">프로젝트</th>
@@ -216,11 +216,10 @@ table, tr, th, td {
 							</tr>
 						</thead>
 						<tbody>
-
 							<c:forEach var="a" items="${ list }">
 								<tr>
-									<td><input type="checkbox"></td>
-									<td>${ a.memNo }</td>
+									<th onclick="event.cancelBubble=true"><input type="checkbox"></th>
+									<td class="ano">${ a.memNo }</td>
 									<td>${ a.memId }</td>
 									<td>${ a.memName }</td>
 									<td>${ a.proTitle }</td>
@@ -228,12 +227,33 @@ table, tr, th, td {
 									<td>${ a.payPrice }</td>
 									<td>${ a.proAd }</td>
 								</tr>
+
 							</c:forEach>
-
-
-
 						</tbody>
 					</table>
+
+					<script>
+						$('#cmNoticeListArea #allCheckbox').on(
+								'click',
+								function() {
+									if ($('#allCheckbox').prop("checked")) {
+										$("input[type=checkbox]").prop(
+												"checked", true);
+									} else {
+										$("input[type=checkbox]").prop(
+												"checked", false);
+									}
+								})
+					</script>
+
+					<script>
+						$(function(){
+							$("#cmNoticeListArea tbody tr").click(function(){
+								location.href="detail.pay?ano=" + $(this).children(".ano").text();
+							})
+						})
+					</script>
+					<br>
 				</form>
 			</div>
 

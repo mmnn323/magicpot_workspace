@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.magicpot.coupon.model.vo.Coupon;
 
-public interface AdminCouponService {
+public interface CouponService {
 
 	int insertCoupon(Coupon c);
 

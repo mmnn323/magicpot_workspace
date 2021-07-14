@@ -8,25 +8,29 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.magicpot.common.model.vo.PageInfo;
-import com.kh.magicpot.pay.model.vo.AdminPay;
+import com.kh.magicpot.pay.model.vo.Pay;
 
 @Repository
-public class AdminPayDao {
+public class PayDao {
 
 	public int selectListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("adminPayMapper.selectListCount");
+		return sqlSession.selectOne("PayMapper.selectListCount");
 		
 	}
 
-	public ArrayList<AdminPay> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Pay> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		
 		int offset =(pi.getCurrentPage() - 1) * pi.getBoardLimit(); 
 		int limit = pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("adminPayMapper.selectList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("PayMapper.selectList", null, rowBounds);
 		
+	}
+
+	public Pay PaySelect(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("PayMapper.selectList", memNo);
 	}
 
 	
