@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.ProRequire;
@@ -107,6 +108,46 @@ public class ProjectDao {
 	
 	public Project authorAjax(SqlSessionTemplate sqlSession, int proNo) {
 		return sqlSession.selectOne("projectMapper.authorAjax", proNo);
+	}
+	
+	/**
+	 * [휘경] 프로젝트 좋아요 여부 확인
+	 * @param sqlSession
+	 * @param l
+	 * @return
+	 */
+	public int isChecked(SqlSessionTemplate sqlSession, Like l) {
+		return sqlSession.selectOne("projectMapper.isChecked", l);
+	}
+	
+	/**
+	 * [휘경] 프로젝트 좋아요 수 조회
+	 * @param sqlSession
+	 * @param proNo
+	 * @return
+	 */
+	public int countLike(SqlSessionTemplate sqlSession, int proNo) {
+		return sqlSession.selectOne("projectMapper.countLike", proNo);
+	}
+	
+	/**
+	 * [휘경] 좋아요 취소
+	 * @param sqlSession
+	 * @param l
+	 * @return
+	 */
+	public int deleteLike(SqlSessionTemplate sqlSession, Like l) {
+		return sqlSession.delete("projectMapper.deleteLike", l);
+	}
+	
+	/**
+	 * [휘경] 좋아요 추가
+	 * @param sqlSession
+	 * @param l
+	 * @return
+	 */
+	public int insertLike(SqlSessionTemplate sqlSession, Like l) {
+		return sqlSession.insert("projectMapper.insertLike", l);
 	}
 }
 

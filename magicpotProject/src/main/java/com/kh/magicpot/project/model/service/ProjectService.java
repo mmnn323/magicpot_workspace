@@ -3,6 +3,7 @@ package com.kh.magicpot.project.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.ProRequire;
@@ -70,5 +71,17 @@ public interface ProjectService {
 	Project selectFundingDetail(int proNo);
 	// 프로젝트 상세 작가의말
 	Project authorAjax(int proNo);
+	
+	// [휘경] 좋아요 체크 여부
+	int isChecked(Like l);
+	
+	// [휘경] 프로젝트 좋아요 수 조회
+	int countLike(int proNo);
+	
+	// [휘경] 프로젝트 좋아요 취소
+	int deleteLike(Like l);
+	
+	// [휘경] 프로젝트 좋아요 추가
+	int insertLike(Like l);
 }
 

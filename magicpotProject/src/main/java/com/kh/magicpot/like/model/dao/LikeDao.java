@@ -16,6 +16,25 @@ public class LikeDao {
 	 */
 	public ArrayList<Like> selectLikeList(SqlSessionTemplate sqlSession, int memNo){
 		return (ArrayList)sqlSession.selectList("likeMapper.selectLikeList", memNo);
-		
+	}
+	
+	/**
+	 * 좋아요 삭제
+	 * @param sqlSession
+	 * @param l
+	 * @return
+	 */
+	public int deleteLike(SqlSessionTemplate sqlSession, Like l) {
+		return sqlSession.delete("likeMapper.deleteLike", l);
+	}
+	
+	/**
+	 * 좋아요 여부 확인
+	 * @param sqlSession
+	 * @param l
+	 * @return
+	 */
+	public int isChecked(SqlSessionTemplate sqlSession, Like l) {
+		return sqlSession.selectOne("likeMapper.isChecked", l);
 	}
 }

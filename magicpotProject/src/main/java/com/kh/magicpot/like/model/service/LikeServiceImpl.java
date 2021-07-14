@@ -33,11 +33,21 @@ public class LikeServiceImpl implements LikeService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+	/**
+	 * 좋아요 삭제
+	 */
 	@Override
 	public int deleteLike(Like l) {
-		// TODO Auto-generated method stub
-		return 0;
+		return lDao.deleteLike(sqlSession, l);
+	}
+	
+	/**
+	 * 좋아요 여부 확인
+	 */
+	@Override
+	public int isChecked(Like l) {
+		return lDao.isChecked(sqlSession, l);
 	}
 
 }
