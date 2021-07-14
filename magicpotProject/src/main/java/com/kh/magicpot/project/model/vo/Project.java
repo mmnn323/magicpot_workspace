@@ -35,4 +35,6 @@ public class Project {
 	private Category category;
 	private Creator creator;
 	private int ranNo;				// 랜덤함수
+	private String caName;
+	
 }

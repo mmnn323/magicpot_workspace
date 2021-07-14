@@ -107,7 +107,6 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.selectAdminMember", memNo);
 	}
 	
-
 	// 크리에이터 조회
 	public Creator creatSearch(SqlSessionTemplate sqlSession, int memNo) {
 		return sqlSession.selectOne("memberMapper.creatSearch", memNo);

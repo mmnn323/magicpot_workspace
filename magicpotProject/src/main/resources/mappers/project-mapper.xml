@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="pro_step" property="proStep"/>
 		<result column="pro_ad" property="proAd"/>
 		<result column="ran_no" property="ranNo"/>
+		<result column="ca_Name" property="caName"/>	
 		<collection resultMap="Category" property="category"/>
 		<collection resultMap="Creator" property="creator"/>
 	</resultMap>	
@@ -447,6 +448,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 , reward_category = #{rewardCategory}
 		 where pro_no = #{proNo}
 	</update>
+	 
+	<!-- 펀딩상세페이지 --> 
+	<select id="selectFundingDetail" resultMap="Project" parameterType="_int">
+		select
+			  pro_no
+		    , ca_name
+		    , pro_title
+		    , pro_image
+		    , open_date
+		    , close_date
+		    , pro_price
+		    , pro_fundprice
+		    , pro_story
+		    , create_word
+		 from project 
+		 join category using(ca_no)
+		where pro_no = #{proNo} 
+	</select> 
 	
+	<!-- [휘경] 프로젝트 좋아요 여부 확인 -->
+	<select id="isChecked" resultType="_int" parameterType="Like">
+		select count(*)
+		  from tb_like
+		 where mem_no = #{memNo}
+		   and pro_no = #{proNo}
+	</select>
+	
+	<!-- [휘경] 프로젝트의 좋아요 수 조회-->
+	<select id="countLike" resultType="_int" parameterType="_int">
+		select count(*)
+		  from tb_like
+		 where pro_no = #{proNo}
+	</select>
+	
+	<!-- [휘경] 프로젝트 좋아요 취소-->
+	<delete id="deleteLike" parameterType="Like">
+		delete from tb_like
+		where mem_no = #{memNo}
+		  and pro_no = #{proNo}
+	</delete>
+	
+	<!-- [휘경] 프로젝트 좋아요 추가 -->
+	<insert id="insertLike" parameterType="Like">
+		insert
+		  into tb_like
+		  (
+		    mem_no
+		  , pro_no
+		  )
+		  values
+		  (
+		  	#{memNo}
+		  , #{proNo}
+		  )
+	</insert>
+
 </mapper>
 

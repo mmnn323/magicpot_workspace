@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.dao.ProjectDao;
 import com.kh.magicpot.project.model.vo.Creator;
@@ -112,8 +113,49 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public int updateRequire(ProRequire proRequire) {
 		return pDao.updateRequire(sqlSession, proRequire);
-	}	
+	}
+
+	@Override
+	public Project selectFundingDetail(int proNo) {
+		return pDao.selectFundingDetail(sqlSession, proNo);
+	}
+
+	@Override
+	public Project authorAjax(int proNo) {
+		return pDao.authorAjax(sqlSession, proNo);
+	}
 	
+	/**
+	 * [휘경] 프로젝트 좋아요 여부 확인
+	 */
+	@Override
+	public int isChecked(Like l) {
+		return pDao.isChecked(sqlSession, l);
+	}
 	
+	/**
+	 * [휘경] 프로젝트 좋아요 수 조회
+	 */
+	@Override
+	public int countLike(int proNo) {
+		return pDao.countLike(sqlSession, proNo);
+	}
+	
+	/**
+	 * [휘경] 프로젝트 좋아요 취소
+	 */
+	@Override
+	public int deleteLike(Like l) {
+		return pDao.deleteLike(sqlSession, l);
+	}
+	
+	/**
+	 * [휘경] 프로젝트 좋아요 추가
+	 */
+	@Override
+	public int insertLike(Like l) {
+		return pDao.insertLike(sqlSession, l);
+	}
+
 
 }
