@@ -40,7 +40,7 @@ public class ProjectController {
 	private MemberService mService;
 	
 	/* 펀딩상세페이지 */
-	@RequestMapping(value={"detail.fd", "author.fd"})
+	@RequestMapping("detail.fd")
 	public String selectFundingDetail(int proNo, Model model) {
 		
 		Project p = pService.selectFundingDetail(proNo);
@@ -73,6 +73,7 @@ public class ProjectController {
 
 		return "project/fundingDetail";
 	}
+	
 	
 	// 실시간 랭킹
 	@ResponseBody

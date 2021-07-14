@@ -452,7 +452,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 펀딩상세페이지 --> 
 	<select id="selectFundingDetail" resultMap="Project" parameterType="_int">
 		select
-		      ca_name
+			  pro_no
+		    , ca_name
 		    , pro_title
 		    , pro_image
 		    , open_date

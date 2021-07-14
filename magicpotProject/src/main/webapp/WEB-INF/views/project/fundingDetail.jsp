@@ -287,24 +287,24 @@
                 <ul>
                     <li><a href="#">스토리</a></li>
                     <li>
-                    	<a id="author" href="#"><input type="hidden" class="proNo"name="proNo" value="${ p.proNo }">작가의 말</a>
+                    	<a id="author">작가의 말</a>
                     </li>
                     <li><a href="review.fd">체험리뷰</a></li>
                 </ul>
         </div><br>
         <hr> 
         <script>
-        $("#author").on("click",function(proNo){
-        	proNo = $(this).children().text();
+        $("#author").on("click",function(){
         	
         	$.ajax({
         		url:"author.fd",
         		type:"post",
-        		data:{proNo:proNo},
+        		data:{proNo:${ p.proNo }},
         		error:function(){
         			alert("통신실패");
         		},
         		success:function(p){
+        			console.log(p);
         			$("#story").html(p.createWord);
         		}
         	})
