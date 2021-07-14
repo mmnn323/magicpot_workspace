@@ -42,7 +42,7 @@ public class ProjectController {
 	
 	/* 펀딩상세페이지 */
 	@RequestMapping("detail.fd")
-	public String selectFundingDetail(int proNo, Model model) {
+	public String selectFundingDetail(int proNo, Model model, HttpSession session, Like l) {
 
 		Project p = pService.selectFundingDetail(proNo);
 		model.addAttribute("p", p);
