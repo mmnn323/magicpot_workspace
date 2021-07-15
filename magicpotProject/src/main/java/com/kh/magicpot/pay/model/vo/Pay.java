@@ -13,20 +13,17 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class AdminPay {
+public class Pay {
 
-	//회원
 	private int memNo;
 	private String memId;
 	private String memName;
-
-	//결제금액
+	private String email;
 	private Date payDate;
 	private String payPrice;
-	
-	//프로젝트 타이틀, 달성현황 
 	private String proTitle;
-	private String proAd;
+
+	
 
 	
 

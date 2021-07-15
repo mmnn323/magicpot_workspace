@@ -198,10 +198,10 @@
 				<table class="table" id="cmNoticeList" align="center">
 					<thead class="thead-light">
 						<tr>
-							<th width="600">쿠폰 번호</th>
-							<th width="2000">쿠폰명</th>
-							<th width="500">할인금액</th>
-							<th width="600">최소구매금액</th>
+							<th width="400">쿠폰 번호</th>
+							<th width="700">쿠폰명</th>
+							<th width="1200">할인금액</th>
+							<th width="1500">최소구매금액</th>
 							<th width="900">사용기간</th>
 							<th width="1200">특이사항</th>
 							<th></th>

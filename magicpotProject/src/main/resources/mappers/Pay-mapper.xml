@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="PayMapper">
+
+
+	<resultMap id="adminPayResultSet" type="Pay">
+		<id column="mem_no" property="memNo" />
+		<result column="mem_id" property="memId" />
+		<result column="mem_name" property="memName" />
+		<result column="pay_date" property="payDate" />
+		<result column="pay_price" property="payPrice" />
+		<result column="pro_title" property="proTitle" />
+	</resultMap>
+	
+	<resultMap id="adminPayDetail" type="DetailPay">
+		<id column="mem_no" property="memNo" />
+		<result column="mem_id" property="memId" />
+		<result column="mem_name" property="memName" />
+		<result column="pro_title" property="proTitle" />
+		<result column="cp_price" property="cpPrice"/>
+		<result column="pay_price" property="payPrice" />
+		<result column="pay_method" property="payMethod"/>
+	</resultMap>
+
+	<select id="selectListCount" resultType="_int">
+		select
+		count(*)
+		from
+		member
+	</select>
+
+
+	<select id="selectList" resultMap="adminPayResultSet"
+		parameterType="_int">
+
+	select
+	      m.mem_no
+	    , m.mem_id
+	    , m.mem_name
+	    , m.email
+	    , a.pay_date
+	    , a.pay_price
+	    , p.pro_title
+	    from project p
+	    join pro_reward r on (p.pro_no = r.pro_no)
+	    join tb_order t on (r.reward_no = t.reward_no)
+	    join pay a on (t.or_no = a.or_no)
+	    join member m on (t.mem_no = m.mem_no)
+	</select>
+	
+<select id="selectDetailPay" resultMap="adminPayDetail" parameterType="_int">
+select 
+	  a.mem_no
+	, mem_id
+	, mem_name
+	, pro_title
+	, cp_price
+	, pay_price
+	, pay_method
+from 
+  (select 
+  		  m.mem_no
+		, m.mem_id
+		, m.mem_name
+		, p.pro_title
+          from member m
+           join tb_order on m.mem_no = tb_order.mem_no
+           join pro_reward on pro_reward.reward_no = tb_order.reward_no
+           join project p on p.pro_no  = pro_reward.pro_no
+           where m.mem_no = ${memNo}) a
+  join (select m.mem_no, coupon.cp_price
+from member m
+    join mem_coupon on mem_coupon.mem_no = m.mem_no
+    join coupon on coupon.cp_no = mem_coupon.cp_no
+where m.mem_no = ${memNo}) b
+                        on a.mem_no = b.mem_no
+   join (select 
+   		m.mem_no
+   	  , p.pay_price
+   	  , p.pay_method
+from member m
+    join tb_order on tb_order.mem_no = m.mem_no
+    join pay p on p.or_no = tb_order.or_no
+where m.mem_no = ${memNo}) c
+                         on b.mem_no = c.mem_no
+	</select>	
+
+	
+
+	
+
+
+</mapper>

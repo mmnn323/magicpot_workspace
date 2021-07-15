@@ -19,6 +19,8 @@
 <script src="https://kit.fontawesome.com/dd18300701.js"
 	crossorigin="anonymous"></script>
 
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="/resources/js/addressapi.js"></script>
 
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
@@ -89,6 +91,11 @@ table, tr, th, td {
 #postBtn {
 	background-color: rgb(116, 152, 107);
 }
+
+#myPageA {
+	text-decoration: none;
+	color: rgb(116, 152, 107);
+}
 </style>
 </head>
 <body>
@@ -137,10 +144,8 @@ table, tr, th, td {
 			<th id="empty"></th>
 			<td><h6>펀딩 금액</h6></td>
 			<td>24000원</td>
-
 			<td id="empty2"></td>
 			<!-- 공백용-->
-
 			<td></td>
 			<td></td>
 		</tr>
@@ -150,12 +155,10 @@ table, tr, th, td {
 		<tr>
 			<th id="empty"></th>
 			<td><h4>수령자 정보</h4></td>
-
 			<td></td>
 			<!-- 공백용-->
 			<td></td>
 			<!-- 공백용-->
-
 			<td></td>
 			<td><h4>결제수단</h4></td>
 		</tr>
@@ -192,10 +195,13 @@ table, tr, th, td {
 			<th id="empty"></th>
 			<td><h6>배송지 정보</h6></td>
 
-			<td><input type="text"> <input type="text"> <input
-				type="text"> <br> <a href="#"
-				class="btn btn-success btn-sm" id="postBtn" data-toggle="modal"
-				data-target="#enrollBtn">우편번호</a></td>
+			<td>
+			<input type="text"  placeholder="도로명 주소" id="addr2" name="addr2"> 
+			<input type="text" placeholder="상세주소" id="addr3" name="addr3">
+			<input type="text"  placeholder="우편번호" id="addr1" name="addr1">
+			<a href="#" class="btn btn-success btn-sm" id="postBtn" data-toggle="modal"
+				data-target="#enrollBtn" onclick="execPostCode();" >우편번호</a></td>
+				
 			<td></td>
 			<!-- 공백용-->
 
@@ -247,9 +253,10 @@ table, tr, th, td {
 			<!-- 공백용-->
 
 			<td></td>
-			<td colspan="2"><input type="checkbox" required>개인정보 제
-				3자 제공 동의 <a href="">내용보기</a> <br> <br> <input
-				type="checkbox" required>후원 유의 사항 <a href="">내용보기</a></td>
+			<td colspan="2">
+				<input type="checkbox" id="U_checkAgreement1" required>개인정보 제 3자 제공 동의 <a id="myPageA" href="">내용보기</a> 
+				<br> <br> 
+				<input type="checkbox" id="U_checkAgreement2" required>후원 유의 사항 <a id="myPageA" href="">내용보기</a></td>
 
 		</tr>
 
@@ -287,35 +294,51 @@ table, tr, th, td {
 			<td id="empty2"></td>
 			<!-- 공백용-->
 		</tr>
-		<!-- The Modal -->
-		<div class="modal fade" id="enrollBtn" align="center">
-			<!-- ex) 커뮤니티버튼영역 : cmEnrollBtn -->
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-
-					<!-- Modal body -->
-					<br>
-					<div class="modal-body">
-						<br>
-						<p>
-							TIP <br> 아래와 같은 조합으로 검색을 하시면 더욱 정확한 결과가 검색됩니다. <br> 도로명
-							+ 건물번호<br> 예) 판교역로 235, 제주 첨단로 242
-						</p>
-					</div>
-
-					<!-- Modal footer -->
-					<div id="modalFooter">
-						<!-- ex) 커뮤니티버튼영역 : cmModalFooter-->
-						<button id="okBtn" class="btn btn-sm">OK</button>
-						<!-- ex) 커뮤니티버튼영역 : cmOkBtn -->
-						<button id="cancleBtn" data-dismiss="modal"
-							class="btn btn-secondary">Cancle</button>
-						<!-- ex) 커뮤니티버튼영역 : cmCancleBtn -->
-					</div>
-				</div>
-			</div>
-		</div>
 	</table>
+
+	<script>
+		function execPostCode() {
+			new daum.Postcode({
+				oncomplete : function(data) {
+					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+					// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+					var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+						extraRoadAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다.
+					if (data.buildingName !== '' && data.apartment === 'Y') {
+						extraRoadAddr += (extraRoadAddr !== '' ? ', '
+								+ data.buildingName : data.buildingName);
+					}
+					// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if (extraRoadAddr !== '') {
+						extraRoadAddr = ' (' + extraRoadAddr + ')';
+					}
+					// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+					if (fullRoadAddr !== '') {
+						fullRoadAddr += extraRoadAddr;
+					}
+
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					console.log(data.zonecode);
+					console.log(fullRoadAddr);
+
+					$("[name=addr1]").val(data.zonecode);
+					$("[name=addr2]").val(fullRoadAddr);
+
+					document.getElementById('addr1').value = data.zonecode; //5자리 새우편번호 사용
+					document.getElementById('addr2').value = fullAddr;
+				}
+			}).open();
+		}
+	</script>
 
 	<jsp:include page="../common/footer.jsp" />
 </body>

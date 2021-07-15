@@ -126,7 +126,7 @@
     /* 다인 추가 - 공유하기 */
     #shareListButton{width:95%;}
     
-    
+   
 </style>
 </head>
 <body>
@@ -170,7 +170,7 @@
                     <span style="font-size:25px;">102</span>명의 서포터
                 </div><br><br>
 
-                <button type="button" class="btn btn-success" id="btn-success1">펀딩하기</button>
+                <a href="pay.me" type="button" class="btn btn-success" id="btn-success1">펀딩하기</a>
                 <br><br>
                 
                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#messageModal"><i class="far fa-envelope fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>문의</p></button>&nbsp;&nbsp;&nbsp;
@@ -383,27 +383,48 @@
         <hr>
         <div id="content2">
                 <ul>
-                    <li><a href="#">스토리</a></li>
                     <li>
-                    	<a id="author" href="#"><input type="hidden" class="proNo"name="proNo" value="${ p.proNo }">작가의 말</a>
+                    	<a id="story">스토리</a>
                     </li>
-                    <li><a href="review.fd">체험리뷰</a></li>
+                    <li>
+                    	<a id="author">작가의 말</a>
+                    </li>
+                    <li>
+                    	<a id="review">체험리뷰</a>
+                    </li>
                 </ul>
         </div><br>
         <hr> 
-        <script>
-        $("#author").on("click",function(proNo){
-        	proNo = $(this).children().text();
+        <script> /*스토리*/
+        $("#story").on("click",function(){
         	
         	$.ajax({
-        		url:"author.fd",
+        		url:"story.fd",
         		type:"post",
-        		data:{proNo:proNo},
+        		data:{proNo:${ p.proNo }},
         		error:function(){
         			alert("통신실패");
         		},
         		success:function(p){
-        			$("#story").html(p.createWord);
+        			console.log(p);
+        			$("#content3_1_1").html(p.proStory);
+        		}
+        	})
+        })
+        </script>
+        <script> /*작가의말*/
+        $("#author").on("click",function(){
+        	
+        	$.ajax({
+        		url:"author.fd",
+        		type:"post",
+        		data:{proNo:${ p.proNo }},
+        		error:function(){
+        			alert("통신실패");
+        		},
+        		success:function(p){
+        			console.log(p);
+        			$("#content3_1_1").html(p.createWord);
         		}
         	})
         })
@@ -412,15 +433,15 @@
         
         <div id="content3">
             <div id="content3_1">
-                <p id="story">${ p.proStory }</p>
+                <p id="content3_1_1">${ p.proStory }</p>
             </div>
 
             <div id="reward">
-            	<c:forEach var=" " items="">
+            	<c:forEach var="r" items="${ list }">
 	                <div id="reward_1">
-	                    <a href="#">
-	                        <b>원 펀딩</b><br>
-	                        <span></span>
+	                    <a href="">
+	                        <b>${ r.rewardPrice }원 펀딩</b><br>
+	                        <span>${ r.rewardExplain }</span>
 	                    </a>
 	                </div><br>
 				</c:forEach>

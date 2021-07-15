@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.magicpot.coupon.model.vo.Coupon;
 
 @Repository
-public class AdminCouponDao {
+public class CouponDao {
 	
 	public int insertCoupon(SqlSessionTemplate sqlSession, Coupon c) {
 		return sqlSession.insert("couponMapper.insertCoupon", c);

@@ -50,7 +50,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<!-- 희나 -->
 		<typeAlias type="com.kh.magicpot.coupon.model.vo.Coupon" alias="Coupon"/>
-		<typeAlias type="com.kh.magicpot.pay.model.vo.AdminPay" alias="AdminPay"/>
+		<typeAlias type="com.kh.magicpot.pay.model.vo.Pay" alias="Pay"/>
+		<typeAlias type="com.kh.magicpot.pay.model.vo.DetailPay" alias="DetailPay"/>
 		
 	</typeAliases>
 	
@@ -76,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<!-- 희나 -->
 		<mapper resource="/mappers/coupon-mapper.xml"/>
-		<mapper resource="/mappers/adminPay-mapper.xml"/>		
+		<mapper resource="/mappers/Pay-mapper.xml"/>		
 	</mappers>
 	
 </configuration>

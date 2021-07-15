@@ -7,17 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.magicpot.common.model.vo.PageInfo;
-import com.kh.magicpot.pay.model.dao.AdminPayDao;
-import com.kh.magicpot.pay.model.vo.AdminPay;
+import com.kh.magicpot.pay.model.dao.PayDao;
+import com.kh.magicpot.pay.model.vo.DetailPay;
+import com.kh.magicpot.pay.model.vo.Pay;
 
 @Service
-public class AdminPayServiceImpl implements AdminPayService {
+public class PayServiceImpl implements PayService {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	@Autowired
-	private AdminPayDao aDao;
+	private PayDao aDao;
 	
 	
 	@Override
@@ -28,22 +29,23 @@ public class AdminPayServiceImpl implements AdminPayService {
 
 
 	@Override
-	public ArrayList<AdminPay> selectList(PageInfo pi) {
+	public ArrayList<Pay> selectList(PageInfo pi) {
 		return aDao.selectList(sqlSession, pi);
 	}
 
+
 	@Override
-	public int updateAdminPay(AdminPay a) {
-		// TODO Auto-generated method stub
-		return 0;
+	public DetailPay selectDetailPay(int memNo) {
+		return aDao.selectDetailPay(sqlSession, memNo);
 	}
 
 
-	@Override
-	public AdminPay PaySelect(int memNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
+
+	
+
+
 
 
 
