@@ -107,6 +107,16 @@ public class ProjectDao {
 		return sqlSession.selectOne("projectMapper.selectFundingDetail", proNo);
 	}
 	
+	public ArrayList<Project> selectReward(SqlSessionTemplate sqlSession, int proNo){
+		return (ArrayList)sqlSession.selectList("projectMapper.selectReward", proNo);
+	}
+	
+	/*
+	public int selectSupporter(SqlSessionTemplate sqlSession, int proNo) {
+		return sqlSession.selectOne("projectMapper.selectSupporter", proNo);
+	}
+	*/
+	
 	public Project authorAjax(SqlSessionTemplate sqlSession, int proNo) {
 		return sqlSession.selectOne("projectMapper.selectFundingDetail", proNo);
 	}
@@ -148,10 +158,6 @@ public class ProjectDao {
 	 */
 	public int insertLike(SqlSessionTemplate sqlSession, Like l) {
 		return sqlSession.insert("projectMapper.insertLike", l);
-	}
-	
-	public ArrayList<Project> selectReward(SqlSessionTemplate sqlSession, int proNo){
-		return (ArrayList)sqlSession.selectList("projectMapper.selectReward", proNo);
 	}
 	
 }
