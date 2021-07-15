@@ -154,7 +154,7 @@
                 </div>
                 <br><br>
                 <div class="progress" id="progress">
-			        <large style="margin-right: 103px; font-size:0;">${Math.round(p.proFundPrice div p.proPrice*100)}</large>
+			        <div class="progress-bar"  style="font-size:0; width:${Math.round(p.proFundPrice div p.proPrice*100)}%; background-color: rgb(116, 152, 107);"></div>
                 </div>
                 
                 <div id="content1_2_2" style="margin-top:5px;">
