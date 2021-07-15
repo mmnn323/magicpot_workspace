@@ -13,20 +13,14 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Pay {
-
+public class DetailPay {
+	
 	private int memNo;
 	private String memId;
 	private String memName;
-	private String email;
-	private Date payDate;
-	private String payPrice;
 	private String proTitle;
+	private String cpPrice;
+	private String payPrice;
+	private String payMethod;
 
-	
-
-	
-
-	
-	
 }
