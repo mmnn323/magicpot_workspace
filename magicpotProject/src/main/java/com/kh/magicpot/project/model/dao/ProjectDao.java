@@ -153,9 +153,6 @@ public class ProjectDao {
 	public ArrayList<Project> selectReward(SqlSessionTemplate sqlSession, int proNo){
 		return (ArrayList)sqlSession.selectList("projectMapper.selectReward", proNo);
 	}
-
-	public Project selectSupporter(SqlSessionTemplate sqlSession, int proNo) {
-		return sqlSession.selectOne("projectMapper.selectSupporter", proNo);
-	}
+	
 }
 

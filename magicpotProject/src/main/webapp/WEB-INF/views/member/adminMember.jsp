@@ -148,14 +148,14 @@
 
 			<!-- 검색바 + 버튼 영역 (오븐에서 한 줄에 있길래 하나의 div안에 넣었어요!) -->
 			<div id="searchBtnArea">
-				<!-- 커뮤니티 검색바 -->
+				<!--검색바 -->
 				<div id="cm_searchArea">
-					<form action="">
+					<form action="search.me">
 						<input type="hidden" name="search_option"  value="1">
 							<select name="condition" id="cm_SearchCtg">
-								<option value="memId">회원 ID</option>
-								<option value="memName">이름</option>
-								<option value="email">이메일</option>
+								<option name="memId" value="${ m.memId }">회원 ID</option>
+								<option name="memName" value="${ m.memName }">이름</option>
+								<option name="email" value="${ m.email }">이메일</option>
 							</select> 
 						<input name="kewword" id="cm_keyword" type="text" placeholder=" Search">
 					</form>
@@ -193,7 +193,7 @@
 					</div>
 				</div>
 
-			</div>
+			</div><br>
 
 
 			<!-- 리스트 영역 -->
@@ -201,7 +201,7 @@
                                 mybatis 수업시간에 제목에 a태그 달아서 제목만 클릭 시 상세보기로 넘어갔는데 일단 그렇게 적용했어요!
                                                                         이 부분은 기능구현 부분이니 tr 클릭 시 요청하고 싶으신 분들은 그렇게 수정해주셔도 될 것 같아요~!
                             -->
-			<div id=li"cmNoticeListArea">
+			<div id="cmNoticeListArea">
 				<table class="table" id="cmNoticeList" align="center" action="multiDel">
 					<thead class="thead-light">
 						<tr>

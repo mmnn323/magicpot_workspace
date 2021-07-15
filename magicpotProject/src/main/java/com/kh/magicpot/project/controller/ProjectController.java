@@ -48,10 +48,6 @@ public class ProjectController {
 		Project p = pService.selectFundingDetail(proNo);
 		model.addAttribute("p", p);
 		//System.out.println(proNo);
-		
-		Project s = pService.selectSupporter(proNo);
-		model.addAttribute("s", s);
-		System.out.println(s);
 
 		//리워드
 		ArrayList<Project> list = pService.selectReward(proNo);

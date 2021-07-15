@@ -163,11 +163,6 @@ public class ProjectServiceImpl implements ProjectService{
 		return pDao.selectReward(sqlSession, proNo);
 	}
 
-	@Override
-	public Project selectSupporter(int proNo) {
-		return pDao.selectSupporter(sqlSession, proNo);
-	}
-
 	
 	
 }
