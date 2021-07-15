@@ -21,6 +21,7 @@
     #content {
         width:1000px;
         height:auto;
+        padding-bottom:20px;
         background-color: rgb(220, 221, 206);
     }
     #innerContent {
@@ -47,6 +48,10 @@
         color:grey;
         font-size: large;
     }
+    #innerFooter td {
+    	font-size:16px;
+    }
+    
 
     /* 답변 모달 */
     #meModal th, #meModal td {
@@ -84,29 +89,106 @@
             <div id="content">
 				<c:forEach var="m" items="${msgList}">
 	                <div id="innerContent" data-toggle="modal" data-target="#messageAnswer" >
-	                    <table>	                    	
-	                        <tr>
-	                            <td rowspan="4"><img src="${m.proImage}"></td>
-	                        </tr>
-	                        <tr>
-	                            <td id="title" colspan="3">
-	                                <p>${m.proTitle} <br><br> ${m.creName}</p>
-	                            </td>
-	                        </tr>
-	                        <tr id="innerFooter">
-	                            <td id="message">${m.msgReply}</td>
-	                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-	                            <td id="date">${m.msgAnswer}</td>
-	                        </tr>                 
-	                    </table>
+	                	<form>
+		                    <table id="msgTable">	                  
+		                    <input type="hidden" id="msgNo" name="msgNo" value="${m.msgNo}">  	
+		                        <tr>
+		                            <td rowspan="4"><img src="${m.proImage}"></td>
+		                        </tr>
+		                        <tr>
+		                            <td id="title" colspan="3">
+		                                <p>${m.proTitle} <br><br> ${m.creName}</p>
+		                            </td>
+		                        </tr>
+		                        <tr id="innerFooter">
+		                            <td id="message">${m.msgReply}</td>
+		                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		                            <td id="date">${m.msgAnswer}</td>
+		                        </tr>                 
+		                    </table>
+	                    </form>
 	                </div>      
 	            </c:forEach>
             </div>
 
-            <!-- 페이징 영역 -->
+
+    <!-- 메세지 클릭시 Modal -->
+    <div class="modal" id="messageAnswer">
+        <div class="modal-dialog">
+            <div class="modal-content" style="height:600px; width:700px;">
+            
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">메세지 답변</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
                 
+                <!-- Modal body -->
+                <div class="modal-body" align="center">
+
+                    <table id="meModal">
+                        <tr>
+                            <th>프로젝트명</th>
+                            <th>크리에이터</th>
+                            <th>질문 답변일</th>
+                        </tr>
+                        <tr>
+                            <td id="proTitle"></td>
+	                        <td id="creName"></td>
+	                        <td id="msgAnswer"></td>    
+                        </tr>
+                        <tr>
+                            <th style="padding-top:15px;" colspan="3">메세지 내용</th>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <textarea name="" id="msgContent" cols="70" rows="5" readonly></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="padding-top:15px;" colspan="3">답변</th>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <textarea name="" id="msgReply" cols="70" rows="5" readonly></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+     <script>
+		$(document).on("click", "#innerContent", function(){
+			
+			var listMsgNo = $(this).find("input[type=hidden]").val();
+    		listMsgNo = Number(listMsgNo);
+    		console.log(listMsgNo);
+       		
+       		$.ajax({
+       			url: "msgModal.msg",
+       			type: "post",
+       			data: {msgNo:listMsgNo},
+       			success : function(msgModal){
+       				
+       	    		$("#proTitle").html(msgModal.proTitle);
+       	    		$("#creName").html(msgModal.creName);
+       	    		$("#msgAnswer").html(msgModal.msgAnswer);
+       	    		console.log(msgAnswer);
+       	    		$("#msgContent").val(msgModal.msgContent);
+       	    		$("#msgReply").val(msgModal.msgReply);
+       				
+       			}, error : function(msgModal){
+       				console.log(msgModal);
+       				console.log("실패");
+       			}
+       		});
+       	})
+        </script>
+ 
+            <!-- 페이징 영역 -->
             <div id="me_pagingArea" align="center">
-                            
                 <div id="me_paging" >
                     <ul class="pagination pagination">
                         <c:choose>
@@ -135,55 +217,7 @@
             </div>
         </div>
     </div>
-
-    <!-- 답변달기 클릭시 Modal -->
-    <div class="modal" id="messageAnswer">
-        <div class="modal-dialog">
-            <div class="modal-content" style="height:600px; width:700px;">
-            
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">메세지 답변</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                
-                <!-- Modal body -->
-                <div class="modal-body" align="center">
-
-                    <table id="meModal">
-                        <tr>
-                            <th>프로젝트명</th>
-                            <th>크리에이터</th>
-                            <th>질문 답변일</th>
-                        </tr>
-                        <tr>
-                            <td>ddddddd</td>
-                            <td>user01</td>
-                            <td>21-11-11</td>
-                        </tr>
-                        <tr>
-                            <th style="padding-top:15px;" colspan="3">메세지 내용</th>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <textarea name="" id="" cols="70" rows="5" readonly>dkdfjfjkjd</textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th style="padding-top:15px;" colspan="3">답변</th>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <textarea name="" id="" cols="70" rows="5" readonly>dfjkejifej</textarea>
-                            </td>
-                        </tr>
-                    </table>
-
-                </div>
-                
-            </div>
-        </div>
-    </div>
+    
 	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

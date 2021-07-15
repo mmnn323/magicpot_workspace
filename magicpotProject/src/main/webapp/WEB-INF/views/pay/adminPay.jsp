@@ -212,7 +212,6 @@ table, tr, th, td {
 								<th width="200">프로젝트</th>
 								<th width="200">결제일자</th>
 								<th width="150">결제금액</th>
-								<th width="150">달성현황</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -225,7 +224,6 @@ table, tr, th, td {
 									<td>${ a.proTitle }</td>
 									<td>${ a.payDate }</td>
 									<td>${ a.payPrice }</td>
-									<td>${ a.proAd }</td>
 								</tr>
 
 							</c:forEach>

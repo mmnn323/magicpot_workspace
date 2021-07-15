@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.pay.model.dao.PayDao;
+import com.kh.magicpot.pay.model.vo.DetailPay;
 import com.kh.magicpot.pay.model.vo.Pay;
 
 @Service
@@ -34,18 +35,10 @@ public class PayServiceImpl implements PayService {
 
 
 	@Override
-	public ArrayList<Pay> paySelect(int memNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public DetailPay selectDetailPay(int memNo) {
+		return aDao.selectDetailPay(sqlSession, memNo);
 	}
 
-/*
-	@Override
-	public AdminPay paySelect(int memNo) {
-		return aDao.paySelect(sqlSession, memNo);
-	}
-
-*/
 
 
 
