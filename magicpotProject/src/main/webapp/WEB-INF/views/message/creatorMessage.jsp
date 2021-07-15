@@ -41,26 +41,23 @@
     }
 
     /* 버튼 영역 */
-    #me_btnArea a, #deModalFooter button {
+    #me_btnArea a {
         border:none;
         width:80px;
         padding:7px;
         margin-right: 10px;
     }
-    #me_enrollBtn{
+    #answerBtn #me_answerBtn{
+    	margin-left: 130px;
+    }
+    #me_enrollBtn, #me_answerBtn{
         background-color: rgb(116, 152, 107);
-        margin-left: 70px;
+        margin-left: 30px;
     }
     #me_enrollBtn:hover{
         background-color: rgb(93, 121, 86);
     }
-    #me_deleteBtn, #deleteBtn{
-        background-color: rgb(252, 99, 99);
-        color:white;
-    }
-    #me_deleteBtn:hover, #deleteBtn:hover {
-        background-color: rgb(216, 66, 66);
-    }
+
 
     /* 리스트 영역  */
     #me_ListArea{ 
@@ -101,15 +98,6 @@
     }
 
 
-    /* 메세지 삭제 모달 */
-    .modal-body {
-        height:120px;
-        padding:40px;
-    }
-    #deModalFooter {
-        margin:auto;
-        margin-bottom:30px;
-    }
 </style>
 </head>
 <body>
@@ -130,22 +118,43 @@
 
                     <div id="choiceArea">
                         <a href=""  id="all">모든 메세지</a>
-                        <a href="#" onclick="notRead();" id="notRead">안 읽은 메세지</a>
+                        <a href="#" id="notRead">안 읽은 메세지</a>
                     </div>
-                    <!-- 
+                    
+                    <!-- 안읽은 메세지 조회 페이지 -->
                     <script>
-                    	function notRead(){
+                    			                   
+                   		$(document).on("click", "#notRead", function(){
+                   			
                     		$.ajax({
-                    			
-                    			
-                    			
-                    		})              
-                    		
-                    	}
-                    
+                    			url : "notRead.msg",
+                    			type : "post",
+                    			success : function(notReadList){
+                    				console.log(notReadList);
+                    				
+                    				$("#notRead").css("backgroundColor", "lightgrey");
+                    				var value = "";
+                    				$.each(notReadList, function(i, obj){
+                    					value += "<tr>"
+                    						  +		"<td>" + obj.msgNo + "</td>"
+                    						  +		"<td>" + obj.msgSend + "</td>"
+                    						  +		"<td>" + obj.memId + "</td>"
+                    						  +		"<td>" + obj.msgContent + "</td>"
+                    						  +		"<td>" + "답변대기" + "</td>"      
+                    						  +		"<td>" +   
+                    						  "<a href='' class='btn btn-success' id='me_enrollBtn' data-toggle='modal' data-target='#meAnswerBtn' style='color: white;'>" + "답변달기" + "</a>"
+                    						  + "</td>"
+                    						  + "</tr>";
+                    				})
+                    				$("#messageList tbody").html(value);
+                    				
+                    			}, error : function(){
+                    				console.log("리스트 조회 실패");
+                    			}
+                    		});              	                   			
+                   		})        
                     </script>
-                     -->
-                    
+                                        
                     <!-- 이용약관 리스트 영역 -->
                     <div id="me_ListArea" >
                        <table class="table" id="messageList" align="center">
@@ -154,15 +163,15 @@
                                    <th width="90">번호</th>
                                    <th width="200">작성일</th>
                                    <th width="250">회원 아이디</th>
-                                   <th width="600">문의 내용</th>
+                                   <th width="700">문의 내용</th>
                                    <th width="200">처리 현황</th>
-                                   <th width="500">비고</th>
+                                   <th width="300">비고</th>
                                </tr>
                            </thead>
                            <tbody>
 	                           <c:forEach var="m" items="${creMsgList}">
 	                               <tr>
-	                                   <td>${m.msgNo}</td>
+	                                   <td id="messageNo">${m.msgNo}</td>
 	                                   <td>${m.msgSend}</td>
 	                                   <td>${m.memId}</td>
 	                                   <td>${m.msgContent}</td>
@@ -178,9 +187,15 @@
 	                                   </td>
 	                                   <td>
 	                                       <div id="me_btnArea">
-	                                           <a href="" class="btn btn-success" id="me_enrollBtn" data-toggle="modal" data-target="#meAnswerBtn" style="color: white;">답변달기</a>
-	                                           <a href="" class="btn btn-danger" id="me_deleteBtn" data-toggle="modal" data-target="#meDeleteBtn" style="color: white;">삭제</a>
-	                                       </div>
+		                                       <c:choose>
+			                                       <c:when test="${m.msgStatus eq 'N'}">
+			                                           <a href="" class="btn btn-success" id="me_enrollBtn" data-toggle="modal" data-target="#meAnswerBtn" style="color: white;">답변달기</a>
+			                                       </c:when>
+			                                       <c:otherwise>
+			                                       		<a href="" class="btn btn-success" id="me_enrollBtn" data-toggle="modal" data-target="#meAnswerBtn" style="color: white; width:120px; background-color:grey;">문의 내용 확인</a>
+			                                       </c:otherwise>
+		                                       </c:choose>
+	                                       </div> 
 	                                   </td>
 	                               </tr>
 	                           </c:forEach>                           
@@ -199,6 +214,7 @@
 	                        	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
 	                        </c:when>
 	                        <c:otherwise>
+	                        
 	                             <li class="page-item"><a class="page-link" href="creatorMsg.me?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 			                </c:otherwise>
 			             </c:choose>          
@@ -224,7 +240,7 @@
     <!-- 답변달기 클릭시 Modal -->
     <div class="modal" id="meAnswerBtn">
         <div class="modal-dialog">
-           <div class="modal-content" style="height:800px; width:700px;">
+           <div class="modal-content" style="height:600px; width:700px;">
            
                <!-- Modal Header -->
                <div class="modal-header">
@@ -234,74 +250,110 @@
                
                <!-- Modal body -->
                <div class="modal-body" align="center">
-
-                  <table id="meModal">
-                      <tr>
-                          <th>프로젝트명</th>
-                          <th>회원 아이디</th>
-                          <th>질문 작성일</th>
-                      </tr>                   
-                      <tr>
-                          <td>ㅐㅐㅐㅐㅐㅐㅐ</td>
-                          <td>user01</td>
-                          <td>21-02-11</td>                          
-                      </tr>
-                      <tr>
-                          <th style="padding-top:15px;" colspan="3">메세지 내용</th>
-                      </tr>
-                      <tr>
-                          <td colspan="3">
-                              <textarea name="" id="" cols="70" rows="5" readonly>비싸여</textarea>
-                          </td>
-                      </tr>
-                      <tr>
-                          <th style="padding-top:15px;" colspan="3">답변</th>
-                      </tr>
-                      <tr>
-                          <td colspan="3">
-                              <textarea name="" id="" cols="70" rows="5"></textarea>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td id="answerBtn" colspan="3">
-                              <button type="submit" class="btn btn-success" id="me_enrollBtn" style="color: white; margin-right:10px;">답변달기</button>
-                              <button id="cancleBtn" data-dismiss="modal" class="btn btn-secondary">취소</button>
-                          </td>
-                      </tr>
-                  </table>
+				  <form action="insertMsg.msg" method="post" >
+	                  <table id="meModal">
+	                      <tr>
+	                          <th>프로젝트명</th>
+	                          <th>회원 아이디</th>
+	                          <th>질문 작성일</th>
+	                      </tr>                   
+	                      <tr>
+	                          <td id="proTitle"></td>
+	                          <td id="memIdd"></td>
+	                          <td id="msgSend"></td>                          
+	                      </tr>
+	                      <tr>
+	                          <th style="padding-top:15px;" colspan="3">메세지 내용</th>
+	                      </tr>
+	                      <tr>
+	                          <td colspan="3">
+	                              <textarea name="" id="msgContent" cols="80" rows="5" readonly></textarea>
+	                          </td>
+	                      </tr>
+	                      <tr>
+	                          <th style="padding-top:15px;" colspan="3">답변</th>
+	                      </tr>
+	                      <tr>
+	                          <td colspan="3">
+	                              <textarea name="msgReply" id="msgReply" cols="80" rows="5"></textarea>
+	                          </td>
+	                      </tr>
+	                      <tr>
+	                          <td id="answerBtn" colspan="3">
+	                              <button type="submit" class="btn btn-success" id="me_answerBtn" style="color: white; margin-right:10px;">답변달기</button>
+	                              <button id="cancleBtn" data-dismiss="modal" class="btn btn-secondary">취소</button>
+	                          </td>
+	                      </tr>
+	                  </table>
+                  </form>
                </div>
            </div>
         </div>
     </div>
+    
+    <script>
+			$(document).on("click", "#me_enrollBtn", function(){
+				
+				var listMsgNo = $(this).parent().parent().siblings().first().text();
+	    		listMsgNo = Number(listMsgNo);
+        		
+        		$.ajax({
+        			url: "creMsgmodal.msg",
+        			type: "post",
+        			data: {msgNo:listMsgNo},
+        			success : function(msgModal){
+        	    		$("#proTitle").html(msgModal.proTitle);
+        	    		$("#memIdd").html(msgModal.memId);
+        	    		$("#msgSend").html(msgModal.msgSend);
+        	    		$("#msgContent").val(msgModal.msgContent);
+        	    		$("#msgReply").val(msgModal.msgReply);
+        	    		
+        	    		/*
+        	    		if(){ // 버튼에 적힌 내용이 문의 내용 확인인 경우
+        	    			//버튼 비활성화? 없애기?
+        	    		}
+        	    		*/
+        				
+        			}, error : function(msgModal){
+        				console.log(msgModal);
+        				console.log("실패");
+        			}
+        		});
+        	})
+        	
+        	
+        	$(document).on("click", "#me_answerBtn", function(){
+				
+				var listMsgNo = $("#messageNo").text();
+				console.log(listMsgNo);
+				
+	    		listMsgNo = Number(listMsgNo);
+        		
+        		$.ajax({
+        			url: "insertMsg.msg",
+        			type: "post",
+        			data: {
+        				
+        				msgNo:listMsgNo, 
+        				msgReply:$("#msgReply").val()
+        					
+        			}, success : function(result){
+        	    	
+        				if(result == "success"){
+        					swal("Success!", "답변이 등록 되었습니다.", "success");
+        					location.reload();
+        				}
+        				
+        			}, error : function(msgModal){
+        				console.log(msgModal);
+        				console.log("실패");
+        			}
+        		});
+        	})
+        	
 
+    </script>
 
-    <!-- 삭제 클릭시 모달 -->
-    <div class="modal" id="meDeleteBtn">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">메세지 삭제</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                
-                <!-- Modal body -->
-                <div class="modal-body" align="center">
-                    <b>
-			                      메세지를 삭제하면 복구할 수 없습니다. <br>   
-				            정말로 삭제하시겠습니까?? 
-                    </b>
-                </div>
-
-                <!-- Modal footer -->
-                <div id="deModalFooter">
-                    <button type="submit" id="deleteBtn" class="btn btn-warning">삭제</button>
-                    <button id="cancleBtn" data-dismiss="modal" class="btn btn-secondary">취소</button>
-                </div>               
-            </div>
-        </div>
-    </div>
 
     <jsp:include page="../common/footer.jsp"/>
 

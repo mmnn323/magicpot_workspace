@@ -14,29 +14,13 @@
 		<result column="msg_answer" property="msgAnswer"/>
 		<result column="msg_status" property="msgStatus"/>	
 			
-		<collection resultMap="Member" property="member"/>
+		<collection resultMap="Member" property="000member"/>
 		<collection resultMap="Creator" property="creator"/>
 		<collection resultMap="Project" property="project"/>		
 	</resultMap>
 	
-	<resultMap id="Member" type="Member">
-	
-		<id column="mem_no" property="memNo"/>
-		<result column="mem_id" property="memId"/>
-		<result column="mem_pwd" property="memPwd"/>
-		<result column="mem_name" property="memName"/>
-		<result column="phone" property="phone"/>
-		<result column="email" property="email"/>
-		<result column="email_yn" property="emailYn"/>
-		<result column="enroll_route" property="enrollRoute"/>
-		<result column="enroll_date" property="enrollDate"/>
-		<result column="status" property="status"/>
-		<result column="mem_post" property="memPost"/>
-		<result column="mem_road" property="memRoad"/>
-		<result column="mem_detail" property="memDetail"/>
-	</resultMap>
-	
 	<resultMap id="Creator" type="Creator" >
+	
 		<id column="cre_no" property="creNo"/>
 		<result column="mem_no" property="memNo"/>
 		<result column="cre_business" property="creBusiness"/>
@@ -44,26 +28,6 @@
 		<result column="cre_privacy" property="crePrivacy"/>
 		<result column="cre_name" property="creName"/>
 		<result column="status" property="status"/>
-		<result column="pro_no" property="proNo"/>
-	</resultMap>
-	
-	<resultMap id="Project" type="Project">
-	
-		<id column="pro_no" property="proNo"/>
-		<result column="cre_no" property="creNo"/>
-		<result column="pro_title" property="proTitle"/>
-		<result column="pro_price" property="proPrice"/>
-		<result column="pro_image" property="proImage"/>
-		<result column="pro_summary" property="proSummary"/>
-		<result column="pro_story" property="proStory"/>
-		<result column="pro_fundprice" property="proFundPrice"/>
-		<result column="pro_status" property="proStatus"/>
-		<result column="create_word" property="createWord"/>
-		<result column="pro_shippirce" property="proShipPrice"/>
-		<result column="open_date" property="openDate"/>
-		<result column="close_date" property="closeDate"/>
-		<result column="pro_step" property="proStep"/>
-		<result column="pro_ad" property="proAd"/>
 	</resultMap>
 	
 	<resultMap id="MessageList" type="MessageList">
@@ -111,9 +75,33 @@
 		<result column="pro_ad" property="proAd"/>
 	</resultMap>
 	
+ 	<!-- fundingDetail에서 문의 사항 추가  -->
+ 	<insert id="newMessage" parameterType="Message">
+ 		insert
+	  	  into message
+	  	  (
+	  	  	msg_no
+	  	  , mem_no
+	  	  , creator_no
+	  	  , msg_send
+	  	  , msg_content
+	  	  , msg_status
+	  	  , pro_no
+	  	  )
+	  	  values
+	  	  (
+	  	    seq_msno.nextval
+	  	  , #{memNo}
+	  	  , #{creatorNo}
+	  	  , #{msgSend}
+	  	  , #{msgContent}
+	  	  , 'N'
+	  	  , #{proNo}
+	  	  )
+ 	</insert>
 	
 	<!-- 일반 회원 메세지 페이지 리스트 조회 -->
-	<select id="msgList" resultMap="MessageList" parameterType="MessageList">
+	<select id="msgList" resultMap="MessageList">
 		select  
 		         m.mem_id
 		       , m.mem_name
@@ -134,9 +122,17 @@
 		   join  project p on(p.pro_no = msg.pro_no) 
           where  msg.mem_no = #{memNo} 
 		  order 
-		     by  msg.msg_no
+		     by  msg.msg_send desc
 	</select>
 
+	<!-- 일반화원 페이징 처리 -->
+	<select id="selectListCount" resultType="_int">
+		select
+		 		count(*)
+		  from 	message
+		 where  mem_no = #{memNo} 	
+	</select>
+	
 	<!-- 
 	<choose>
     		<when test="status == Y">
@@ -148,6 +144,7 @@
       </choose>  
  	-->
  
+ 	
 	<!-- 크리에이터 메세지 페이지 리스트 조회 -->
 	<select id="creMsgList" resultMap="MessageList">
 		select  
@@ -161,7 +158,6 @@
 		       , msg.msg_reply
 		       , msg.msg_status  
 		       , to_char(msg.msg_answer, 'YY-MM-DD') msg_answer
-		       , c.cre_name
 		       , p.pro_title
 		       , p.pro_image
 		   from  member m 
@@ -170,30 +166,95 @@
 		   join  project p on(p.pro_no = msg.pro_no) 
 		  where  msg.creator_no = #{creNo}		   
 		  order 
-		     by  msg.msg_no
+		     by  msg.msg_send desc
+	</select>
+	<!-- 안 읽은 메세지용 where문 추가 필요함 -->
+	
+	
+	<!-- 크리에이터 조회용 쿼리문 -->
+	<select id="creatorNo" resultMap="Creator">
+		   select c.cre_no
+                , c.cre_name
+                , c.mem_no
+             from member m
+             join creator c on (m.mem_no = c.mem_no)
+            where m.mem_no = c.mem_no
+              and m.mem_no = #{mem_no}
 	</select>
 	
-	<!-- 페이징 처리 -->
-	<select id="selectListCount" resultType="_int">
+	<!-- 크리에이터 페이징 처리 -->
+	<select id="selectCreListCount" resultType="_int">
 		select
 		 		count(*)
 		  from 	message
-		 where  mem_no = #{memNo} 	
+		 where  creator_no = #{creNo} 	
 	</select>
+	
+	<!-- 모달 조회 -->
+	<select id="msgModal" resultMap="MessageList">
+		select  
+	         m.mem_id
+	       , to_char(msg.msg_send, 'YY-MM-DD') msg_send
+	       , msg.msg_content
+	       , to_char(msg.msg_answer, 'YY-MM-DD') msg_answer
+	       , msg.msg_reply
+	       , p.pro_title
+	       , c.cre_name
+	   from  member m 
+	   join  message msg on (msg.mem_no = m.mem_no)
+	   join  creator c on (c.cre_no = msg.creator_no)
+	   join  project p on(p.pro_no = msg.pro_no) 
+	  where  msg.msg_no = #{msgNo}		   
+	</select>
+	
+	
+	<!-- 안 읽은 메세지 조회 -->
+	<select id="notReadList" resultMap="MessageList">
+		select  
+		         m.mem_id
+		       , m.mem_name
+		       , msg.msg_no
+		       , msg.mem_no
+		       , msg.creator_no
+		       , to_char(msg.msg_send, 'YY-MM-DD') msg_send
+		       , msg.msg_content
+		       , msg.msg_reply
+		       , msg.msg_status  
+		       , to_char(msg.msg_answer, 'YY-MM-DD') msg_answer
+		       , p.pro_title
+		       , p.pro_image
+		   from  member m 
+		   join  message msg on (msg.mem_no = m.mem_no)
+		   join  creator c on (c.cre_no = msg.creator_no)
+		   join  project p on(p.pro_no = msg.pro_no) 
+		  where  msg.creator_no = #{creNo}	
+		    and  msg.msg_status = 'N'	   
+		  order 
+		     by  msg.msg_send desc
+	</select>
+
 	
 	<!-- 안 읽은 메세지 페이징 처리 -->
 	<select id="selectStaListCount" resultType="_int">
-		   select 
+		select 
 				count(*)
 		  from 	message
 		 where  msg_status = 'N'
-           and  creator_no in (select cre_no
+           and  creator_no in (select c.cre_no
 	                             from member m
 	                             join creator c
 	                               on m.mem_no = c.mem_no
-	                            where m.mem_no = #{memNo)
+	                            where m.mem_no = #{memNo})
 	</select>
-
+	
+	<!-- 문의 답변 추가 -->
+	<update id="insertMsg" parameterType="Message">
+		update
+				message
+		   set 	msg_reply = #{msgReply}
+		   	  ,	msg_status = 'Y'
+		 where  msg_no = #{msgNo}  
+	</update>
 
   
 </mapper>

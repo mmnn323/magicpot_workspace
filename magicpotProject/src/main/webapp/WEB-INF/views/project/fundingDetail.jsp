@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:useBean id="now" class="java.util.Date" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,9 +19,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js%22%3E"></script>
 <script src="https://kit.fontawesome.com/dd18300701.js" crossorigin="anonymous"></script>
 
+<!-- 다인 추가 - 오늘 날짜 조회용 -->
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+
 <!-- 다인 추가 - 카카오 공유용 js파일 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>    
-
 
 <!-- 다인 추가 - 페이스북 공유용 코드 -->
 <meta property="og:type"          content="website" />
@@ -27,6 +31,8 @@
 <meta property="og:title"         content="Magicpot 제로웨이스트" />
 <meta property="og:description"   content="제로웨이스트의 시작, Magicpot과 환경을 지켜나가요." />
 <meta property="og:image"         content="resources/images/common/shareImage.jpg" />
+
+
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -193,23 +199,29 @@
         
                 <!-- Modal Header -->
                 <div class="modal-header" style="background-color: rgb(116, 152, 107); color:white;">
-                    <h4 class="modal-title">창작자에게 문의하기</h4>
+                    <h4 class="modal-title">크리에이터에게 문의하기</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
         
                 <!-- Modal body -->
-                <div class="modal-body">
-                      <div class="form-group">
-                        <label for="comment">문의 내용</label>
-                        <textarea class="form-control" rows="10" id="comment" name="reportContent" placeholder="크리에이터에게 문의하고 싶은 내용을 입력해주세요." style="resize:none"></textarea>
-                      </div>
-                </div>
-        
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline-success">메세지 보내기</button>
-                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">취소</button>
-                </div>
+                <form action="newMessage.msg"  method="post">
+                <input type="hidden" id="memNo" name="memNo" value="${loginUser.memNo}">
+                <input type="hidden" id="creatorNo" name="creatorNo" value="${p.creNo}">
+                <input type="hidden" id="msgSend" name="msgSend" value="<c:out value='${today}'/>">
+                <input type="hidden" id="proNo" name="proNo" value="${p.proNo}">
+	                <div class="modal-body">
+	                      <div class="form-group">
+	                        <label for="comment">문의 내용</label>
+	                        <textarea class="form-control" rows="10" id="msgContent" name="msgContent" placeholder="크리에이터에게 문의하고 싶은 내용을 입력해주세요." style="resize:none"></textarea>
+	                      </div>
+	                </div>
+	        
+	                <!-- Modal footer -->
+	                <div class="modal-footer">
+	                    <button type="submit" class="btn btn-outline-success">메세지 보내기</button>
+	                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">취소</button>
+	                </div>
+                </form>
         
             </div>
             </div>

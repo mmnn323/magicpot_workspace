@@ -16,6 +16,8 @@ import lombok.ToString;
 @ToString
 public class Message {
 
+	public Message(int msgNo, String msgReply) {}
+	
 	private int msgNo;			// 메세지 번호
 	private int memNo;			// 회원 번호
 	private int creatorNo;		// 크리에이터 번호
