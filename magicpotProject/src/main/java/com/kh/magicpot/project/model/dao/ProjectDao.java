@@ -11,6 +11,7 @@ import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.ProRequire;
 import com.kh.magicpot.project.model.vo.Project;
+import com.kh.magicpot.project.model.vo.ProjectReward;
 
 @Repository
 public class ProjectDao {
@@ -107,9 +108,8 @@ public class ProjectDao {
 	}
 	
 	public Project authorAjax(SqlSessionTemplate sqlSession, int proNo) {
-		return sqlSession.selectOne("projectMapper.authorAjax", proNo);
+		return sqlSession.selectOne("projectMapper.selectFundingDetail", proNo);
 	}
-	
 	/**
 	 * [휘경] 프로젝트 좋아요 여부 확인
 	 * @param sqlSession
@@ -148,6 +148,10 @@ public class ProjectDao {
 	 */
 	public int insertLike(SqlSessionTemplate sqlSession, Like l) {
 		return sqlSession.insert("projectMapper.insertLike", l);
+	}
+	
+	public ArrayList<Project> selectReward(SqlSessionTemplate sqlSession, int proNo){
+		return (ArrayList)sqlSession.selectList("projectMapper.selectReward", proNo);
 	}
 }
 

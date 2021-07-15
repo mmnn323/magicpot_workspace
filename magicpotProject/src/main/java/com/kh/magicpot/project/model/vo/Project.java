@@ -36,5 +36,5 @@ public class Project {
 	private Creator creator;
 	private int ranNo;				// 랜덤함수
 	private String caName;
-	
+
 }

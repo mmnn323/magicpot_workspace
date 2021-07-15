@@ -48,3 +48,21 @@
 }
 #footer_3_2>p{margin-right:65px; text-align: right;}
 #p3{margin-left:200px;}
+
+#magicpotChat{
+    margin-left: 570px;
+    padding:10px;
+    border-radius: 5px;
+    background-color: rgb(116, 152, 107);
+}
+#magicpotChat>a{
+    font-family: 'Noto Sans KR', sans-serif;
+    text-decoration: none;
+    color:white;
+}
+#magicpotChat:hover{ 
+    cursor: pointer;
+    transition: .6s;
+    background-color:  rgb(225, 212, 169);
+    transform: rotateY( 180deg );
+}

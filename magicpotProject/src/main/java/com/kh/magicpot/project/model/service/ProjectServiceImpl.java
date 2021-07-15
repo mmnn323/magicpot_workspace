@@ -13,6 +13,7 @@ import com.kh.magicpot.project.model.dao.ProjectDao;
 import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.ProRequire;
 import com.kh.magicpot.project.model.vo.Project;
+import com.kh.magicpot.project.model.vo.ProjectReward;
 
 @Service
 public class ProjectServiceImpl implements ProjectService{
@@ -119,12 +120,12 @@ public class ProjectServiceImpl implements ProjectService{
 	public Project selectFundingDetail(int proNo) {
 		return pDao.selectFundingDetail(sqlSession, proNo);
 	}
-
+	
 	@Override
 	public Project authorAjax(int proNo) {
 		return pDao.authorAjax(sqlSession, proNo);
 	}
-	
+
 	/**
 	 * [휘경] 프로젝트 좋아요 여부 확인
 	 */
@@ -157,5 +158,9 @@ public class ProjectServiceImpl implements ProjectService{
 		return pDao.insertLike(sqlSession, l);
 	}
 
-
+	@Override
+	public ArrayList<Project> selectReward(int proNo) {
+		return pDao.selectReward(sqlSession, proNo);
+	}
+	
 }
