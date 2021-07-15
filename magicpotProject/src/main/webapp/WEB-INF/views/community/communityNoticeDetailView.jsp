@@ -51,10 +51,12 @@
         </div>
 
         <div id="btnArea" align="center">
-            <span id="btnArea1">
-                <a class="btn btn-success" onclick="postFormSubmit(1);">수정</a>
-                <a class="btn btn-success" data-toggle="modal" data-target="#cmDeleteBtn">삭제</a>
-            </span>
+        	<c:if test="${ loginUser.status == 'A' }">
+	            <span id="btnArea1">
+	                <a class="btn btn-success" onclick="postFormSubmit(1);">수정</a>
+	                <a class="btn btn-success" data-toggle="modal" data-target="#cmDeleteBtn">삭제</a>
+	            </span>
+	         </c:if>
             <span id="btnArea2">
                 <a href="list.cm" class="btn btn-success">목록으로</a>
                 <a href="#cm_titleArea" class="btn btn-success"><i class="fas fa-caret-up"></i> TOP</a>
