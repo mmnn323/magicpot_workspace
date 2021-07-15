@@ -10,7 +10,7 @@
 	 div { box-sizing: border-box; }
     .wrap {
         width: 1000px;
-        height:1000px;
+        height:auto;
         margin: auto;
         font-family: 'Noto Sans KR', sans-serif;
     }

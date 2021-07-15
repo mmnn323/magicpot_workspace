@@ -240,7 +240,7 @@
     <!-- 답변달기 클릭시 Modal -->
     <div class="modal" id="meAnswerBtn">
         <div class="modal-dialog">
-           <div class="modal-content" style="height:600px; width:700px;">
+           <div class="modal-content" style="height:auto; width:700px;">
            
                <!-- Modal Header -->
                <div class="modal-header">

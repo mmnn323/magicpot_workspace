@@ -38,7 +38,7 @@ public class MessageController {
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "크리에이터에게 문의 사항이 전달되었습니다. ");
-			return "project/fundingDetail";
+			return "redirect:detail.fd?proNo=" + m.getProNo();
 			
 		} else {
 			return "common/errorPage";
@@ -86,9 +86,6 @@ public class MessageController {
 	@ResponseBody 
 	@RequestMapping(value="creMsgmodal.msg", produces="application/json; charset=utf-8")
 	public String creMsgModal (Model model, int msgNo) {
-		
-		//System.out.println(msgNo);
-		
 		return new Gson().toJson(msgService.msgModal(msgNo));
 	}
 	
@@ -97,7 +94,6 @@ public class MessageController {
 	@RequestMapping(value="msgModal.msg", produces="application/json; charset=utf-8")
 	public String msgModal (Model model, int msgNo) {
 		return new Gson().toJson(msgService.msgModal(msgNo));
-		
 	}
 	
 	
@@ -129,8 +125,8 @@ public class MessageController {
 		
 		//int msgNum = Integer.parseInt(msgNo);
 		
-		//System.out.println(msgNo);
-		//System.out.println(msgReply);
+		System.out.println(m.getMsgNo());
+		System.out.println(m.getMsgReply());
 		
 		int result = msgService.insertMsg(m);
 		
