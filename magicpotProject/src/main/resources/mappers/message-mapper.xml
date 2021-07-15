@@ -14,7 +14,7 @@
 		<result column="msg_answer" property="msgAnswer"/>
 		<result column="msg_status" property="msgStatus"/>	
 			
-		<collection resultMap="Member" property="000member"/>
+		<collection resultMap="Member" property="member"/>
 		<collection resultMap="Creator" property="creator"/>
 		<collection resultMap="Project" property="project"/>		
 	</resultMap>

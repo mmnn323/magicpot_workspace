@@ -2,6 +2,8 @@ package com.kh.magicpot.report.model.vo;
 
 import java.sql.Date;
 
+import com.kh.magicpot.member.model.vo.Member;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +21,7 @@ public class Blacklist {
 	private String suspended;
 	private Date suspendedDate;
 	private int reportCount;
+	
+	private String memId;
 
 }
