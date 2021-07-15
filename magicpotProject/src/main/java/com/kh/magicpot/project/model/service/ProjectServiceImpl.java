@@ -121,6 +121,13 @@ public class ProjectServiceImpl implements ProjectService{
 		return pDao.selectFundingDetail(sqlSession, proNo);
 	}
 	
+	/*서포터
+	@Override
+	public int selectSupporter(int proNo) {
+		return pDao.selectSupporter(sqlSession, proNo);
+	}
+	*/
+	
 	@Override
 	public Project authorAjax(int proNo) {
 		return pDao.authorAjax(sqlSession, proNo);
@@ -162,6 +169,7 @@ public class ProjectServiceImpl implements ProjectService{
 	public ArrayList<Project> selectReward(int proNo) {
 		return pDao.selectReward(sqlSession, proNo);
 	}
+
 
 	
 	

@@ -478,8 +478,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where pro_no = #{proNo} 
 	</select> 
 
-	<!-- 상세페이지 서포터 -->
-	<select id="selectSupporter" resultMap="Project" parameterType="_int">
+	<!-- 상세페이지 서포터 
+	<select id="selectSupporter" resultType="_int" parameterType="_int">
 		select
 				count(*)
 		   from tb_order
@@ -489,7 +489,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		                      where pro_no = #{proNo}
 		                     )
 		and or_delivery = '결제'
-	</select>
+	</select>-->
 	
 	<!-- 상세페이지 리워드 -->
 	<select id="selectReward" resultMap="ProjectReward" parameterType="_int">

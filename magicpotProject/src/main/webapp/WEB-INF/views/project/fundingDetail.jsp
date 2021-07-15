@@ -166,12 +166,8 @@
                     <span style="font-size:25px;">${ p.proFundPrice }</span>원 펀딩
                 </div><br><br>
 
-                <div id="content1_2_4">
-                    <span style="font-size:25px;">102</span>명의 서포터
-                </div><br><br>
-
                 <a href="pay.me" type="button" class="btn btn-success" id="btn-success1">펀딩하기</a>
-                <br><br>-
+                <br><br>
                 
                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#messageModal"><i class="far fa-envelope fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>문의</p></button>&nbsp;&nbsp;&nbsp;
                 
