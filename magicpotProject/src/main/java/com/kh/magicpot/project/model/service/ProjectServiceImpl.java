@@ -162,5 +162,12 @@ public class ProjectServiceImpl implements ProjectService{
 	public ArrayList<Project> selectReward(int proNo) {
 		return pDao.selectReward(sqlSession, proNo);
 	}
+
+	@Override
+	public Project selectSupporter(int proNo) {
+		return pDao.selectSupporter(sqlSession, proNo);
+	}
+
+	
 	
 }

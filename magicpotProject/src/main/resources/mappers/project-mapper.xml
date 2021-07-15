@@ -22,7 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="pro_step" property="proStep"/>
 		<result column="pro_ad" property="proAd"/>
 		<result column="ran_no" property="ranNo"/>
-		<result column="ca_Name" property="caName"/>
+		<result column="ca_Name" property="caName"/>		
+		<result column="reward_No" property="rewardNo"/>
 		<collection resultMap="Category" property="category"/>
 		<collection resultMap="Creator" property="creator"/>
 	</resultMap>	
@@ -476,6 +477,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where pro_no = #{proNo} 
 	</select> 
 
+	<!-- 상세페이지 서포터 -->
+	<select id="selectSupporter" resultMap="Project" parameterType="_int">
+		select
+				count(*)
+		   from tb_order
+		  where reward_no in(
+		                     select reward_no
+		                       from pro_reward
+		                      where pro_no = #{proNo}
+		                     )
+		and or_delivery = '결제'
+	</select>
+	
 	<!-- 상세페이지 리워드 -->
 	<select id="selectReward" resultMap="ProjectReward" parameterType="_int">
 		select

@@ -49,10 +49,15 @@ public class ProjectController {
 		model.addAttribute("p", p);
 		//System.out.println(proNo);
 		
+		Project s = pService.selectSupporter(proNo);
+		model.addAttribute("s", s);
+		System.out.println(s);
+
 		//리워드
 		ArrayList<Project> list = pService.selectReward(proNo);
 		model.addAttribute("list", list);
-		System.out.println(list);
+		//System.out.println(list);
+		
 		// 남은 일 계산		
 		int d = 0;
 			

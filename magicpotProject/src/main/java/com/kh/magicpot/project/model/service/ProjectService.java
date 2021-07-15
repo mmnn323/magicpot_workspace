@@ -70,7 +70,7 @@ public interface ProjectService {
 	
 	// 프로젝트 상세 페이지
 	Project selectFundingDetail(int proNo);
-
+	Project selectSupporter(int proNo);
 	// 프로젝트 작가의말
 	Project authorAjax(int proNo);
 	
@@ -87,5 +87,6 @@ public interface ProjectService {
 	int insertLike(Like l);
 
 	ArrayList<Project> selectReward(int proNo);
+	
 }
 

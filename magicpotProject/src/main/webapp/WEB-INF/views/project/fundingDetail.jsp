@@ -161,7 +161,7 @@
                 </div><br><br>
 
                 <div id="content1_2_4">
-                    <span style="font-size:25px;">102</span>명의 서포터
+                    <span style="font-size:25px;">${ s }</span>명의 서포터
                 </div><br><br>
 
                 <a href="pay.me" type="button" class="btn btn-success" id="btn-success1">펀딩하기</a>
@@ -417,7 +417,7 @@
         	})
         })
         </script>
-        
+       
         
         <div id="content3">
             <div id="content3_1">
