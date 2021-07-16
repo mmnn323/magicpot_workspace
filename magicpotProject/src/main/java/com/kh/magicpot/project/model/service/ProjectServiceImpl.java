@@ -170,6 +170,50 @@ public class ProjectServiceImpl implements ProjectService{
 		return pDao.selectReward(sqlSession, proNo);
 	}
 
+	@Override
+	public Project selectBasic(int pno) {
+		return pDao.selectBasic(sqlSession, pno);
+	}	
+
+	@Override
+	public int updateBasic(Project p) {
+		return pDao.updateBasic(sqlSession, p);
+	}
+
+	@Override
+	public int updateProAd(int pno) {
+		return pDao.updateProAd(sqlSession, pno);
+	}
+
+	@Override
+	public int updateStory(Project p) {
+		return pDao.updateStory(sqlSession, p);
+	}
+
+	@Override
+	public ArrayList<ProjectReward> selectReward2(int pno) {
+		return pDao.selectReward2(sqlSession, pno);
+	}
+	
+	@Override
+	public int insertReward(ProjectReward proReward) {
+		return pDao.insertReward(sqlSession, proReward);
+	}
+
+	@Override
+	public int updateReward(ProjectReward proReward) {
+		return pDao.updateReward(sqlSession, proReward);
+	}
+	
+	@Override
+	public int deleteReward(int rno) {
+		return pDao.deleteReward(sqlSession, rno);
+	}
+
+	@Override
+	public int updateProStep2(int pno) {
+		return pDao.updateProStep2(sqlSession, pno);
+	}
 
 	
 	

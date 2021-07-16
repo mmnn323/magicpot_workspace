@@ -34,6 +34,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="reward_title" property="rewardTitle"/>
 		<result column="reward_price" property="rewardPrice"/>
 		<result column="reward_explain" property="rewardExplain"/>
+		<result column="option_type" property="optionType"/>
+		<result column="choice_option" property="choiceOption"/>
+		<result column="input_option" property="inputOption"/>
+		<result column="quantity_limit" property="quantityLimit"/>
+		<result column="delivery_start" property="deliveryStart"/>
+		<collection resultMap="Project" property="project"/>
 	</resultMap>
 	
 	<resultMap id="Creator" type="Creator" >
@@ -312,6 +318,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        where rownum between 1 and 6
 	</select>
 	
+	<!-- 크리에이터 등록 -->
 	<insert id="insertCreator" parameterType="Creator">
 		insert
 		  into creator
@@ -332,6 +339,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  )
 	</insert>
 	
+	<!-- 크리에이터 조회 -->
 	<select id="selectCreator" resultMap="Creator" parameterType="Member">
 		select
 		       cre_no
@@ -344,6 +352,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where mem_no = #{memNo}
 	</select>
 	
+	<!-- 프로젝트 생성 -->
 	<insert id="insertProject" parameterType="hashmap">
 		insert
 		  into project
@@ -360,13 +369,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  )
 	</insert>
 	
+	<!-- 프로젝트 랜덤번호 조회(중복 검사용) -->
 	<select id="selectRanNo" resultType="_int" parameterType="_int">
 		select
 		       ran_no
 		  from project
 		 where ran_no = #{ranNo}
 	</select>
-	
+
+	<!-- 프로젝트 랜덤번호 조회(프로젝트 조회용) -->
 	<select id="selectRanNo2" resultType="_int" parameterType="_int">
 		select
 		       ran_no
@@ -374,6 +385,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where pro_no = #{pno}
 	</select>
 
+	<!-- 프로젝트 조회(랜덤번호 이용)  -->
 	<select id="selectProject1" resultMap="Project" parameterType="_int">
 		select
 		       pro_no
@@ -395,6 +407,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where ran_no = #{ranNo}
 	</select>
 	
+	<!-- 프로젝트 조회(프로젝트번호 이용) -->
 	<select id="selectProject2" resultMap="Project" parameterType="_int">
 		select
 		       pro_no
@@ -418,6 +431,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where pro_no = #{pno}
 	</select>
 	
+	<!-- 프로젝트 단계 펀딩준비로 변경 -->
 	<update id="updateProStep1" parameterType="_int">
 		update
 		       project
@@ -426,7 +440,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where ran_no = #{ranNo}
 	</update>
 	 
-	<select id="selectRequire" resultMap="ProRequire">
+	 <!-- 기본요건 조회 -->
+	<select id="selectRequire" resultMap="ProRequire" parameterType="_int">
 		select
 		       pro_no
 		     , reward_plan
@@ -436,6 +451,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where pro_no = #{pno}
 	</select>
 	
+	<!-- 기본요건 추가 -->
 	<insert id="insertRequire" parameterType="ProRequire">
 		insert
 		  into pro_require
@@ -448,6 +464,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
+	<!-- 기본요건 수정 -->
 	<update id="updateRequire" parameterType="ProRequire">
 		update
 		       pro_require
@@ -539,5 +556,137 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  )
 	</insert>
 
+	<!-- 기본정보 조회 -->
+	<select id="selectBasic" resultMap="Project" parameterType="_int">
+		select
+			   pro_title
+			 , create_word
+			 , pro_price
+			 , pro_image
+			 , ca_no
+			 , close_date
+		  from project
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 기본정보 수정 -->
+	<update id="updateBasic" parameterType="Project">
+		update
+		       project
+		   set 
+		       pro_title = #{proTitle}
+		     , create_word = #{createWord}
+		     , pro_price = #{proPrice}
+		     , pro_shippirce = #{proShipPrice}
+		     , pro_image = #{proImage}
+		     , ca_no = #{caNo}
+		     , close_date = #{closeDate}
+		 where pro_no = #{proNo} 
+	</update>
+	
+	<!-- 광고 심의 동의 상태 변경 -->
+	<update id="updateProAd" parameterType="_int">
+		update
+			   project
+		   set 
+		   	   pro_ad = 'Y'
+		 where pro_no = #{pno}
+	</update>
+	
+	<!-- 스토리 수정 -->
+	<update id="updateStory" parameterType="Project">
+		update
+		 	   project
+		   set 
+		   	   pro_summary = #{proSummary}
+		   	 , pro_story = #{proStory}
+		 where pro_no = #{proNo}
+	</update>
+	
+	<!-- 리워드 조회 -->
+	<select id="selectReward2" resultMap="ProjectReward" parameterType="_int">
+		select
+		       reward_no
+		     , pro_no
+		     , reward_title
+		     , reward_price
+		     , reward_explain
+		     , option_type
+		     , choice_option
+		     , input_option
+		     , quantity_limit
+		     , delivery_start
+		     , pro_shippirce
+		     , delivery_start1
+		     , delivery_start2
+		  from pro_reward
+		  join project using(pro_no)
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 리워드 생성 -->
+	<insert id="insertReward" parameterType="ProjectReward">
+		insert
+		  into pro_reward
+		  (
+		    reward_no
+		  , pro_no
+		  , reward_title
+		  , reward_price
+		  , reward_explain
+		  , option_type
+		  , choice_option
+		  , input_option
+		  , quantity_limit
+		  , delivery_start
+		  )
+		  values
+		  (
+		    seq_rwco.nextval
+		  , #{proNo}
+		  , #{rewardTitle}
+		  , #{rewardPrice}
+		  , #{rewardExplain}
+		  , #{optionType}
+		  , #{choiceOption}
+		  , #{inputOption}
+		  , #{quantityLimit}
+		  , #{deliveryStart}
+		  )
+	</insert>
+	
+	<!-- 리워드 수정 -->
+	<update id="updateReward" parameterType="ProjectReward">
+		update
+			   pro_reward
+		   set 
+		       reward_title = #{rewardTitle}
+		     , reward_price = #{rewardPrice}
+		     , reward_explain = #{rewardExplain}
+		     , option_type = #{optionType}
+		     , choice_option = #{choiceOption}
+		     , input_option = #{inputOption}
+		     , quantity_limit = #{quantityLimit}
+		     , delivery_start = #{deliveryStart} 
+		     , delivery_start1 = #{deliveryStartDate1}
+		     , delivery_start2 = #{deliveryStartDate2}
+	 	 where reward_no = #{rewardNo}
+	</update>
+	
+	<!-- 리워드 삭제 -->
+	<delete id="deleteReward" parameterType="_int">
+		delete
+		  from pro_reward
+		 where reward_no = #{rno}
+	</delete>
+	
+	<!-- 프로젝트 단계 요건확인으로 변경 -->
+	<update id="updateProStep2" parameterType="_int">
+		update
+		       project
+		   set
+		       pro_step = '요건확인'
+		 where pro_no = #{pno}
+	</update>
 </mapper>
 

@@ -61,7 +61,6 @@
                         예시) 욕실용품, 가구, 침구류, 그릇/홈세트, 타일, 침구, 커튼, 쿠션, 주방용품, 조리기구, 주방세제, 헹굼보조제 등
                     </p>
                     <br>
-                    <!-- 전부 입력 되어야 disabled 해제 -->
                     <c:choose>
                     	<c:when test="${ ! empty proRequire }">
                     		<button id="submit_btn" type="submit">수정하기</button>

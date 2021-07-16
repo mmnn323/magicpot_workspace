@@ -160,5 +160,42 @@ public class ProjectDao {
 		return sqlSession.insert("projectMapper.insertLike", l);
 	}
 	
+	public Project selectBasic(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectBasic", pno);
+	}	
+
+	public int updateBasic(SqlSessionTemplate sqlSession, Project p) {
+		return sqlSession.update("updateBasic", p);
+	}
+
+
+	public int updateProAd(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("updateProAd", pno);
+	}
+
+
+	public int updateStory(SqlSessionTemplate sqlSession, Project p) {
+		return sqlSession.update("updateStory", p);
+	}
+	
+	public ArrayList<ProjectReward> selectReward2(SqlSessionTemplate sqlSession, int pno) {
+		return (ArrayList)sqlSession.selectList("selectReward2", pno);
+	}
+
+	public int insertReward(SqlSessionTemplate sqlSession, ProjectReward proReward) {
+		return sqlSession.insert("insertReward", proReward);
+	}
+
+	public int updateReward(SqlSessionTemplate sqlSession, ProjectReward proReward) {
+		return sqlSession.update("updateReward", proReward);
+	}
+
+	public int deleteReward(SqlSessionTemplate sqlSession, int rno) {
+		return sqlSession.delete("deleteReward", rno);
+	}
+
+	public int updateProStep2(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("updateProStep2", pno);
+	}
 }
 

@@ -91,5 +91,32 @@ public interface ProjectService {
 
 	ArrayList<Project> selectReward(int proNo);
 	
+	// 기본 정보 조회
+	Project selectBasic(int pno);
+	
+	// 기본 정보 수정
+	int updateBasic(Project p);
+
+	// 광고 심의 동의 상태 변경
+	int updateProAd(int pno);
+
+	// 스토리 작성
+	int updateStory(Project p);
+
+	// 리워드 조회
+	ArrayList<ProjectReward> selectReward2(int pno);
+	
+	// 리워드 생성
+	int insertReward(ProjectReward proReward);
+
+	// 리워드 수정
+	int updateReward(ProjectReward proReward);
+	
+	// 리워드 삭제
+	int deleteReward(int rno);
+
+	// 펀딩 상태 -> 요건확인
+	int updateProStep2(int pno);
+	
 }
 

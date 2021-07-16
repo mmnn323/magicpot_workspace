@@ -105,7 +105,7 @@
 					</c:when>
 					<c:when test="${ loginUser.status eq 'C' && creator.status eq 'Y' }">
 	                 	<li id="project"><a style="cursor:pointer;">프로젝트 올리기</a></li>
-						<input type="hidden" name="proNo" id="proNo" value="52">
+						<input type="hidden" name="proNo" id="proNo" value="57">
 						
 						<script>
 							$(function(){
@@ -114,6 +114,9 @@
 			            		})
 			            	})
 						</script>
+	            	<!--
+	            		<li id="project"><a href="insert.pro">프로젝트 올리기</a></li>
+	            	-->
 	                </c:when>
 					<c:when test="${ loginUser.status ne 'C' && creator.status eq 'N'}">
 						<li><a href="" onclick="alertFn2();">프로젝트 올리기</a></li>
