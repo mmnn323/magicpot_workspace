@@ -20,7 +20,7 @@ import com.kh.magicpot.pay.model.vo.Pay;
 
 
 @Controller
-public class payController {
+public class PayController {
 	
 	@Autowired
 	private PayService aService;

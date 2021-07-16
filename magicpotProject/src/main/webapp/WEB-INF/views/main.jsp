@@ -123,7 +123,7 @@
         transition: .6s;
         transform: scale( 1.03 )
     }
-    .projectCtg1, .projectCtg2, .projectCtg3, .projectCtg4, .projectCtg5, .projectCtg6{
+    .projectCtg1, .projectCtg2, .projectCtg3, .projectCtg4, .projectCtg5, .projectCtg6, .projectCtg11, .projectCtg12, .projectCtg13{
         color: lightgray;
     }
     
@@ -249,12 +249,54 @@
     }
     
     #customerBtn{
-    position: fixed;
-    right: 30px;
-    top: 1050px;
+	    position: fixed;
+	    right: 30px;
+	    top: 1050px;
 	}
+	
+	.detailUrl1:hover span, .detailUrl2:hover span, .detailUrl3:hover span{
+		display:block;
+		transform-origin: 100% 0%;
+		-webkit-animation: fadeIn 0.3s ease-in-out;
+		animation: fadeIn 0.3s ease-in-out;
+		
+	}
+	
 
+	.pre1, .pre2, .pre3{
 
+		display: none;
+		text-align: left;
+		background-color: #1E2021;
+		padding: 20px;
+		width: 300px;
+		border-radius: 3px;
+		box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+		right: -4px;
+		color: #FFF;
+		font-size: 13px;
+		line-height: 1.4;
+	}
+	
+	.pre1:before, .pre2:before, .pre3:before{
+		position: absolute;
+		width:0;
+		height: 0;
+		border:6px solid transparent;
+		border-bottom-color:#1E2021;
+		right:10px;
+		top:-12px;
+	}
+	
+	
+	
+	.pre1:after, .pre2:after, .pre3:after{
+		width:100%;
+		height:40px;
+		position: absolute;
+		top:-40px;
+		left:0;
+	}
 
 
    
@@ -379,8 +421,7 @@
 	            	
           </script>
         
-        
-        
+       
 
         <div id="content_2">
 
@@ -398,15 +439,14 @@
 	                    <br>
 	                    <br>
 	    
-	                    <small class="projectCtg1">리빙</small>
+	                    <small class="projectCtg11"></small>
 	    
 	                    <p class="reTitle1"  style="margin-top: 0;">
 	                        
 	                    </p>
 	
-	                    <p class="percent11">
-	                        150% 달성
-	                    </p>
+	                    <p class="percent11"> </p>
+                		<span class="pre1"></span>
 	                
 	                
 	                </div>
@@ -414,24 +454,21 @@
                 
 
 				  
-               <a class="detailUrl2" href="" style="text-decoration: none; color: black;">
+               <a class="detailUrl2" href="" style="text-decoration: none; color: black;" >
               		<div class="thumbnail2" >
                         <img class="reImg2" src="">
                 
 	                    <br>
 	                    <br>
 	    
-	                    <small class="projectCtg2">리빙</small>
+	                    <small class="projectCtg12"></small>
 	    
 	                    <p class="reTitle2" style="margin-top: 0;">
 	                       
 	                    </p>
 	
-	                    <p class="percent12">
-	                        150% 달성
-	                    </p>
-                
-                
+	                    <p class="percent12"> </p>
+                		<span class="pre2"></span>
                 	</div>
                     </a>
 
@@ -443,18 +480,16 @@
                         <br>
                         <br>
         
-                        <small class="projectCtg3">리빙</small>
+                        <small class="projectCtg13"></small>
         
                         <p class="reTitle3" style="margin-top: 0;">
                             
                         </p>
 
-                        <p class="percent13">
-                            150% 달성
-                        </p>
-                    
-                    
+                        <p class="percent13"> </p>
+                        <span class="pre3"></span>
                     </div>
+                    
               </a>
                 	
                 
@@ -469,28 +504,23 @@
 					$.ajax({
 						url:"reAjax.pj",
 						success:function(list){
-							
+							console.log(list);
 							var i="i";
 							for(var i=1; i<=3; i++){
 								$(".reTitle" + i).text(list[i-1].proTitle);
 								$(".reImg" + i).attr("src",list[i-1].proImage);
 								$(".detailUrl"+i).attr("href", "detail.fd?proNo=" + list[i-1].proNo);
 								$(".percent1"+i).text(Math.round(list[i-1].proFundPrice / list[i-1].proPrice  *100) +"% 달성");
-								
+								$(".projectCtg1" + i).text(list[i-1].category.caName);
+								$(".pre"+i).text(list[i-1].proSummary);
 							}
-							
-							
-							
-							
-							
 							
 						},error:function(){
 							console.log("ajax통신 실패")
 						}
 					})
 				}
-	            	
-	            	
+	           
             </script>
                 
                 

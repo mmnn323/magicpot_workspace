@@ -158,13 +158,13 @@
 				                    <img src="${pr[i].proImage }">
 									<c:choose>
 										<c:when test="${pr[i].proStep eq '펀딩안내' }">
-					                    	<a href="level1.pro " id="editBtn"><i class="far fa-edit"></i></a>
+					                    	<a href="level1.pro?pno=${pr[i].proNo } " id="editBtn"><i class="far fa-edit"></i></a>
 					                    </c:when>
 					                    <c:when test="${pr[i].proStep eq '펀딩준비' || pr[i].proStep eq '콘텐츠확인' }">
-					                    	<a href="FundingHome2.pro " id="editBtn"><i class="far fa-edit"></i></a>
+					                    	<a href="fundingHome2.pro?pno=${pr[i].proNo } " id="editBtn"><i class="far fa-edit"></i></a>
 					                    </c:when>
 					                    <c:otherwise>
-					                    	<a href="FundingStatus.pro " id="editBtn"><i class="far fa-edit"></i></a>
+					                    	<a href="fundingStatus.pro?pno=${pr[i].proNo } " id="editBtn"><i class="far fa-edit"></i></a>
 					                    </c:otherwise>
 				                    </c:choose>
 				                    
