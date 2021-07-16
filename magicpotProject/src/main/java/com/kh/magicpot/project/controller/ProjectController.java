@@ -1,5 +1,7 @@
 package com.kh.magicpot.project.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,8 +20,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.kh.magicpot.common.model.vo.PageInfo;
+import com.kh.magicpot.common.template.Pagination;
 import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.service.MemberService;
 import com.kh.magicpot.member.model.vo.Member;
@@ -531,6 +538,11 @@ public class ProjectController {
 		if(proRequire != null) {
 			model.addAttribute(proRequire);
 		}
+		// 리워드 조회
+		ArrayList<ProjectReward> proReward = pService.selectReward2(pno);
+		if(proReward != null) {
+			model.addAttribute("proReward", proReward);
+		}
 		
 //		System.out.println(pno);
 		Project project = pService.selectProject2(pno);
@@ -539,7 +551,7 @@ public class ProjectController {
 			session.setAttribute("project", project);
 			session.setAttribute("pno", pno);
 			
-			System.out.println(project);
+//			System.out.println(project);
 			return "project/fundingHome";
 		}else {
 			return "common/errorPage";
@@ -576,28 +588,38 @@ public class ProjectController {
 	
 	// 리워드 작성 불러오기
 	@RequestMapping("rewardEnroll.pro")
-	public String rewardEnroll() {
+	public String rewardEnroll(HttpSession session, Model model) {
+		// 리워드 조회해오기
+		int pno = (Integer)session.getAttribute("pno");
+		ArrayList<ProjectReward> projectReward = pService.selectReward2(pno);
+//		System.out.println(projectReward);
+		if(projectReward != null) {
+			model.addAttribute("projectReward", projectReward);
+		}
 		return "project/rewardEnrollForm";
-	}	
+	}
 	
 	// 기본 요건 insert
 	@RequestMapping("insertRequire.pro")
 	public String insertRequire(HttpSession session, ProRequire proRequire) {
+		int pno = (Integer)session.getAttribute("pno");
 		int result = pService.insertRequire(proRequire);
 		
 		if(result > 0) {
-			return "project/fundingHome";
+			return "redirect:fundingHome2.pro?pno=" + pno;
 		}else {
 			return "common/errorPage";
 		}
 	}
 	
+	// 기본 요건 update
 	@RequestMapping("updateRequire.pro")
 	public String updateRequire(HttpSession session, ProRequire proRequire) {
+		int pno = (Integer)session.getAttribute("pno");
 		int result = pService.updateRequire(proRequire);
 		
 		if(result > 0) {
-			return "project/fundingHome";
+			return "redirect:fundingHome2.pro?pno=" + pno;
 		}else {
 			return "common/errorPage";
 		}
@@ -651,5 +673,302 @@ public class ProjectController {
 		System.out.println(result);
 		return new Gson().toJson(result);
 	}
+
 	
+	// 휘경씨 최고
+	// 첨부파일 수정명
+	public String saveFile(HttpSession session, MultipartFile upfile) {
+		String savePath = session.getServletContext().getRealPath("/resources/project_uploadFiles/"); // 경로
+		String originName = upfile.getOriginalFilename(); // 원본명
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // 수정명
+		int ranNum = (int)(Math.random() * 90000 + 10000); // 수정명
+		String ext = originName.substring(originName.lastIndexOf(".")); // 수정명
+		String changeName = "MagigPot_" + currentTime + ranNum + ext; // 수정명
+		try {
+			upfile.transferTo(new File(savePath + changeName)); // 수정명
+			//System.out.println(savePath + changeName);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return changeName;
+	}
+	
+	// 기본정보 등록(+대표이미지)
+	@RequestMapping("updateBasic.pro")
+	public String updateBasic(Project p, MultipartFile upfile, HttpSession session) {
+//		System.out.println(p);// 잘 넘어옴
+//		System.out.println(upfile.getOriginalFilename());// 잘 넘어옴
+		int pno = (Integer)session.getAttribute("pno");
+		p.setProNo(pno); // 가져온 project에 proNo 추가
+		
+		// 전달된 파일이 있을 경우(upfile의 원본명이 빈 문자열이 아닌 경우)
+		if(!upfile.getOriginalFilename().equals("")) {
+			String changeName = saveFile(session, upfile);
+			p.setProImage("resources/project_uploadFiles/" + changeName); // 경로담기
+		}
+		
+		//System.out.println(cm); //cmImage 잘 담김
+		
+		int result = pService.updateBasic(p);
+		
+		if(result > 0) { // 게시글 등록 성공
+			return "redirect:fundingHome2.pro?pno=" + pno;
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 기본 정보 등록 (써머노트 사진 경로 변경 및 첨부파일 수정명 반환)
+	@RequestMapping(value="/uploadSummernoteImageFile2", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String uploadSummernoteImageFile2(@RequestParam("file") MultipartFile multipartFile, HttpSession session)  {
+		
+		JsonObject jsonObject = new JsonObject();
+
+		String savedFileName = saveFile(session, multipartFile);
+		jsonObject.addProperty("url", "resources/project_uploadFiles/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+		
+		String a = jsonObject.toString();
+		return a;
+	}
+	
+	// 광고 심의 동의 여부 update
+	@RequestMapping("agreeCheck.pro")
+	public String agreeCheck(HttpSession session, Model model) {
+		int pno = (Integer)session.getAttribute("pno");
+		
+		int result =  pService.updateProAd(pno);
+		if(result > 0) {
+			// project 다시 조회해서 담기
+			Project project = pService.selectProject2(pno);
+			if(project != null) {
+				session.setAttribute("project", project);
+			}else {
+				return "common/errorPage";
+			}
+			
+			return "redirect:storyEnroll.pro";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 스토리 등록
+	@RequestMapping("updateStory.pro")
+	public String updateStory(Project p, HttpSession session) {
+		int pno = (Integer)session.getAttribute("pno");
+		p.setProNo(pno); // 가져온 project에 proNo 추가
+		
+		int result = pService.updateStory(p);
+		
+		if(result > 0) { // 게시글 등록 성공
+			return "redirect:fundingHome2.pro?pno=" + pno;
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 리워드 등록
+	@RequestMapping("insertReward.pro")
+	public String insertReward(HttpSession session, ProjectReward proReward) {
+		int pno = (Integer)session.getAttribute("pno");
+		proReward.setProNo(pno);
+		proReward.setDeliveryStart(proReward.getDeliveryStartDate1() + ' ' + proReward.getDeliveryStartDate2());
+
+		int result = pService.insertReward(proReward);
+		if(result > 0) {
+			return "redirect:rewardEnroll.pro";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 리워드 수정
+	@RequestMapping("updateReward.pro")
+	public String updateReward(ProjectReward proReward) {
+		proReward.setDeliveryStart(proReward.getDeliveryStartDate1() + ' ' + proReward.getDeliveryStartDate2());
+		int result = pService.updateReward(proReward);
+		if(result > 0) {
+			return "redirect:rewardEnroll.pro";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 리워드 삭제
+	@RequestMapping("deleteReward.pro")
+	public String deleteReward(int rno) {
+		int result = pService.deleteReward(rno);
+		if(result > 0) {
+			return "redirect:rewardEnroll.pro";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 단계 변경
+	@RequestMapping("updateStep.pro")
+	public String updateStep(HttpSession session) {
+		int pno = (Integer)session.getAttribute("pno");
+		int result = pService.updateProStep2(pno);
+		if(result > 0) {
+			return "redirect:fundingHome2.pro?pno=" + pno;
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 관리 조회
+	@RequestMapping("fundingManage.ad")
+	public ModelAndView fundingManage(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
+		int listCount = pService.selectListProCount(); 
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
+		
+		ArrayList<Project> list = pService.selectProjectList(pi);
+		
+		mv.addObject("pi", pi)
+		  .addObject("list", list)
+		  .setViewName("project/fundingManage");
+		
+		return mv;
+	}
+	
+	// 프로젝트 관리 상세조회(기본 정보)
+	@RequestMapping("fundingDetail.ad")
+	public String fundingManage1(int pno, Model model) {
+		model.addAttribute("pno", pno);
+		Project pro = pService.selectFunManageBasic(pno);
+		
+		if(pro != null) {
+			model.addAttribute("pro", pro);
+			return "project/fundingManage1";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 관리 상세조회(기본 요건)
+	@RequestMapping("fundingDetail2.ad")
+	public String fundingManage2(int pno, Model model) {
+		model.addAttribute("pno", pno);
+		ProRequire require = pService.selectRequire(pno);
+		
+		if(require != null) {
+			model.addAttribute("require", require);
+			return "project/fundingManage2";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 관리 상세조회(스토리)
+	@RequestMapping("fundingDetail3.ad")
+	public String fundingManage3(int pno, Model model) {
+		model.addAttribute("pno", pno);
+		Project pro = pService.selectFunManageStroy(pno);
+		
+		int result = 0;
+		String proStep = pService.selectProStep(pno);
+		if(!proStep.equals("펀딩오픈")) { // 단계 검사
+			result = pService.updateProStep3(pno);
+		}
+		
+		if(pro != null) {
+			model.addAttribute("pro", pro);
+			return "project/fundingManage3";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 관리 상세 조회(리워드)
+	@RequestMapping("fundingDetail4.ad")
+	public String fundingManage4(int pno, Model model) {
+		model.addAttribute("pno", pno);
+		ArrayList<ProjectReward> reward = pService.selectReward2(pno);
+		String proStep = pService.selectProStep(pno);
+		System.out.println(proStep);
+		if(reward != null) {
+			model.addAttribute("reward", reward);
+			return "project/fundingManage4";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 승인
+	@RequestMapping("funApproval")
+	public String funApproval(int pno) {
+		int result = pService.updateProStep4(pno);
+		if(result > 0) {
+			return "redirect:fundingManage.ad";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 미승인
+	@RequestMapping("funCancel")
+	public String funCancel(int pno) {
+		int result = pService.updateProCancel(pno);
+		if(result > 0) {
+			return "redirect:fundingManage.ad";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 관리 검색 조회 -> 수정 필요
+	@RequestMapping("searchFun.ad")
+	public ModelAndView searchFun(@RequestParam(value="currentPage", defaultValue="1") int currentPage, String searchCtg, String keyWord, Model model, ModelAndView mv) {
+		int listCount = pService.selectListProCount(); 
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("searchCtg", searchCtg);
+		map.put("keyWord", keyWord);
+		model.addAttribute("searchCtg", searchCtg);
+		model.addAttribute("keyWord", keyWord);
+		ArrayList<Project> searchList = pService.selectSearchList(pi, map);
+		
+		mv.addObject("pi", pi)
+		  .addObject("list", searchList)
+		  .setViewName("project/fundingManage");
+		
+		return mv;
+	}
+	
+	// 펀딩 현황 조회
+	@RequestMapping("fundingStatus.pro")
+	public String fundingStatus(int pno) {
+		return "project/fundingStatus";
+	}
+	
+	// 프로젝트 바로 오픈
+	@RequestMapping("updateOpenDateDir")
+	public String updateOpenDateDir(int pno) {
+		int result = pService.updateOpenDateDir(pno);
+		if(result > 0) {
+			return "redirect:fundingStatus.pro?pno=" + pno;
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 오픈 예약
+	@RequestMapping("updateOpenDateRes")
+	public String updateOpenDateRes(int pno, java.sql.Date openDate) {
+		Project pro = new Project();
+		pro.setProNo(pno);
+		pro.setOpenDate(openDate);
+		
+		int result = pService.updateOpenDateRes(pro);
+		if(result > 0) {
+			return "redirect:fundingStatus.pro?pno=" + pno;
+		}else {
+			return "common/errorPage";
+		}
+	}
 }

@@ -156,8 +156,18 @@
 				                <div class="thumbnail1" >
 				                    
 				                    <img src="${pr[i].proImage }">
-				
-				                    <a href="" id="editBtn"><i class="far fa-edit"></i></a>
+									<c:choose>
+										<c:when test="${pr[i].proStep eq '펀딩안내' }">
+					                    	<a href="level1.pro " id="editBtn"><i class="far fa-edit"></i></a>
+					                    </c:when>
+					                    <c:when test="${pr[i].proStep eq '펀딩준비' || pr[i].proStep eq '콘텐츠확인' }">
+					                    	<a href="FundingHome2.pro " id="editBtn"><i class="far fa-edit"></i></a>
+					                    </c:when>
+					                    <c:otherwise>
+					                    	<a href="FundingStatus.pro " id="editBtn"><i class="far fa-edit"></i></a>
+					                    </c:otherwise>
+				                    </c:choose>
+				                    
 				                    <a href="delete.pr?proNo=${pr[i].proNo}" style="text-decoration: none;"><span id="deleteBtn" ><i class="fas fa-times" data-toggle="modal" data-target="#deleteModal1"></i> </span></a>
 				
 				                    <small id="projectCtg" style="color:gray; font-weight:bold;">${pr[i].category.caName }</small>

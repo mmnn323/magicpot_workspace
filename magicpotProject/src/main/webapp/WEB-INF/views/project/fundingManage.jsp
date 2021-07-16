@@ -12,40 +12,32 @@
 <body>
     <jsp:include page="../common/adminPageTemplate2.jsp"/>
     <div id="content">
-        <div class="outer">
+        <div class="outer" style="margin-left:-20px">
             <div id="contentTitleArea">
                 <span id="title1">펀딩 관리</span>
             </div>
             <br><br><br><br><br>
             <!-- 검색바 + 버튼 영역 (오븐에서 한 줄에 있길래 하나의 div안에 넣었어요!) -->
             <div id="searchBtnArea" >
-                <!-- 커뮤니티 검색바 -->
-                <div id="searchArea" >
-                    <select name="" id="searchCtg" >
-                        <option value="userId">관리자 ID</option>
-                    <option value="userName">프로젝트</option>
-                    <option value="email">크리에이터(기업)명</option>
-                    </select>
-                    <input id="keyword" type="text" placeholder=" Search">
-                </div>
-        
-                <!-- 버튼 영역 -->
-                <div id="btnArea">
-                    <a href="" class="btn btn-success" id="enrollBtn" data-toggle="modal" data-target="#approval">승인</a>
-                    <a href="" class="btn btn-danger" id="deleteBtn" data-toggle="modal" data-target="#cancel">취소</a>
-                </div>
+                <div id="searchBtnArea">
+					<form action="searchFun.ad" id="searchArea" method="get">
+						<input type="hidden" name="currenPage"  value="1">
+							<select name="searchCtg" id="searchCtg" >
+		                        <option value="userId">관리자 ID</option>
+			                    <option value="project">프로젝트</option>
+			                    <option value="creator">크리에이터(기업)명</option>
+		                    </select> 
+						<input name="keyWord" id="keyWord" type="text" placeholder=" Search">
+					</form>
+				</div>
             </div>
             
             <!-- 리스트 영역 -->
-            <!-- 
-                mybatis 수업시간에 제목에 a태그 달아서 제목만 클릭 시 상세보기로 넘어갔는데 일단 그렇게 적용했어요!
-                이 부분은 기능구현 부분이니 tr 클릭 시 요청하고 싶으신 분들은 그렇게 수정해주셔도 될 것 같아요~!
-             -->
+            <!-- 검색 페이지 만들가 jsp -->
             <div id="fundingList" >
                   <table class="table" id="fundingListTable" align="center">
-                    <thead class="thead-light" >
+                    <thead class="thead-light">
                         <tr>
-                            <th></th>
                             <th>번호</th>
                             <th>아이디</th>
                             <th>프로젝트</th>
@@ -55,137 +47,79 @@
                             <th>승인현황</th>
                           </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="deleteCheck" id="deleteCheck">
-                            </td>
-                            <td>10</td>
-                            <td>user01</td>
-                            <td>버려진 종이컵과 나무로 만들어진 업사이클링 감성 달력</td>
-                            <td>제로제로</td>
-                            <td>800,000</td>
-                            <td>심사</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="deleteCheck" id="deleteCheck">
-                            </td>
-                            <td>10</td>
-                            <td>user01</td>
-                            <td>버려진 종이컵과 나무로 만들어진 업사이클링 감성 달력</td>
-                            <td>제로제로</td>
-                            <td>800,000</td>
-                            <td>심사</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="deleteCheck" id="deleteCheck">
-                            </td>
-                            <td>10</td>
-                            <td>user01</td>
-                            <td>버려진 종이컵과 나무로 만들어진 업사이클링 감성 달력</td>
-                            <td>제로제로</td>
-                            <td>800,000</td>
-                            <td>심사</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="deleteCheck" id="deleteCheck">
-                            </td>
-                            <td>10</td>
-                            <td>user01</td>
-                            <td>버려진 종이컵과 나무로 만들어진 업사이클링 감성 달력</td>
-                            <td>제로제로</td>
-                            <td>800,000</td>
-                            <td>심사</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="deleteCheck" id="deleteCheck">
-                            </td>
-                            <td>10</td>
-                            <td>user01</td>
-                            <td>버려진 종이컵과 나무로 만들어진 업사이클링 감성 달력</td>
-                            <td>제로제로</td>
-                            <td>800,000</td>
-                            <td>심사</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="deleteCheck" id="deleteCheck">
-                            </td>
-                            <td>10</td>
-                            <td>user01</td>
-                            <td>버려진 종이컵과 나무로 만들어진 업사이클링 감성 달력</td>
-                            <td>제로제로</td>
-                            <td>800,000</td>
-                            <td>심사</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="deleteCheck" id="deleteCheck">
-                            </td>
-                            <td>10</td>
-                            <td>user01</td>
-                            <td>버려진 종이컵과 나무로 만들어진 업사이클링 감성 달력</td>
-                            <td>제로제로</td>
-                            <td>800,000</td>
-                            <td>심사</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="deleteCheck" id="deleteCheck">
-                            </td>
-                            <td>10</td>
-                            <td>user01</td>
-                            <td>버려진 종이컵과 나무로 만들어진 업사이클링 감성 달력</td>
-                            <td>제로제로</td>
-                            <td>800,000</td>
-                            <td>심사</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="deleteCheck" id="deleteCheck">
-                            </td>
-                            <td>10</td>
-                            <td>user01</td>
-                            <td>버려진 종이컵과 나무로 만들어진 업사이클링 감성 달력</td>
-                            <td>제로제로</td>
-                            <td>800,000</td>
-                            <td>심사</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="deleteCheck" id="deleteCheck">
-                            </td>
-                            <td>10</td>
-                            <td>user01</td>
-                            <td>버려진 종이컵과 나무로 만들어진 업사이클링 감성 달력</td>
-                            <td>제로제로</td>
-                            <td>800,000</td>
-                            <td>심사</td>
-                        </tr>
-                    </tbody>
+                    <tbody style="cursor:pointer;">
+						<c:forEach var="p" items="${ list }">
+						<tr>
+							<td class="pno">${ p.proNo }</td>
+							<td>${ p.member.memId }</td>
+							<td>${ p.proTitle }</td>
+							<td>${ p.creator.creName }</td>
+							<td>${ p.proPrice }</td>
+							<td>${ p.proStatus }</td>
+						</tr>
+						</c:forEach>
+					</tbody>
                   </table>
             </div>
-    
+            <script>
+            	$(function(){
+            		$("#fundingListTable tbody tr").click(function(){
+            			location.href="fundingDetail.ad?pno=" + $(this).children(".pno").text();
+            		})
+            	})
+            </script>
             <!-- 페이징 영역 -->
     
             <div id="pagingArea" align="center">
-                
                 <div id="paging" >
                     <ul class="pagination pagination">
-                        <li class="page-item" ><a class="page-link" href="#">&laquo;</a></li>
-                        <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
-                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                      </ul>
+                        <c:choose>
+							<c:when test="${ pi.currentPage eq 1}">
+								<li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
+							</c:when>
+							<c:otherwise>						
+								<li class="page-item"><a class="page-link" href="fundingManage.ad?currentPage=${ pi.startPage }">&laquo;</a></li>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when test="${ pi.currentPage eq 1}">
+						<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+							</c:when>
+							<c:otherwise>						
+						<li class="page-item"><a class="page-link" href="fundingManage.ad?currentPage=${ pi.currentPage-1 }">&lt;</a></li>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:choose>
+								<c:when test="${ pi.currentPage eq p }">
+									<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link" href="fundingManage.ad?currentPage=${ p }">${ p }</a></li>	
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						
+						<c:choose>
+							<c:when test="${ pi.currentPage eq pi.maxPage }">
+								<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="fundingManage.ad?currentPage=${ pi.currentPage+1 }">&gt;</a></li>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when test="${ pi.currentPage eq pi.maxPage }">
+								<li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="fundingManage.ad?currentPage=${ pi.maxPage }">&raquo;</a></li>
+							</c:otherwise>
+						</c:choose>
+                    </ul>
                 </div>
             </div>
         </div>

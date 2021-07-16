@@ -21,4 +21,7 @@ public class ProjectReward {
 	private String inputOption;		// 직접 옵션 내용
 	private int quantityLimit;		// 제헌 수량
 	private String deliveryStart; 	// 발송 시작일
+	private String deliveryStartDate1; // 발송 시작일(연도/월)
+	private String deliveryStartDate2; // 발송 시작일(시기) 
+	private Project project;
 }
