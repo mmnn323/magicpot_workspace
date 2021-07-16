@@ -252,7 +252,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	   where mem_no = #{memNo}
   	</select>
   	
-  	
   	<insert id="insertAddress" parameterType="Address">
   	insert
 	  	  into address_list

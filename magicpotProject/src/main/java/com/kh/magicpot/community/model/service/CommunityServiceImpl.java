@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.community.model.dao.CommunityDao;
 import com.kh.magicpot.community.model.vo.Community;
+import com.kh.magicpot.community.model.vo.CommunityComment;
 import com.kh.magicpot.community.model.vo.CommunityNotice;
 
 @Service
@@ -140,6 +141,54 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public int deleteCommunity(int cmNo) {
 		return cDao.deleteCommunity(sqlSession, cmNo);
+	}
+
+	/**
+	 * 커뮤니티 댓글 리스트 조회
+	 */
+	@Override
+	public ArrayList<CommunityComment> selectCmCommentList(int cmNo) {
+		return cDao.selectCmCommentList(sqlSession, cmNo);
+	}
+
+	/**
+	 * 커뮤니티 댓글 등록
+	 */
+	@Override
+	public int insertComment(CommunityComment r) {
+		return cDao.insertComment(sqlSession, r);
+	}
+	
+	/**
+	 * 커뮤니티 댓글 삭제_1 : 참조된 댓글인지 확인
+	 */
+	@Override
+	public int checkReComment(int cmCommentNo) {
+		return cDao.checkReComment(sqlSession, cmCommentNo);
+	}
+	
+	/**
+	 * 커뮤니티 댓글 삭제_2_1 : 참조된 댓글인 경우 내용 update
+	 */
+	@Override
+	public int deleteRefComment(int cmCommentNo) {
+		return cDao.deleteRefComment(sqlSession, cmCommentNo);
+	}
+
+	/**
+	 * 커뮤니티 댓글 삭제_2_2 : 참조된 댓글이 없는 경우 상태 update
+	 */
+	@Override
+	public int deleteComment(int cmCommentNo) {
+		return cDao.deleteComment(sqlSession, cmCommentNo);
+	}
+
+	/**
+	 * 커뮤니티 댓글 수정
+	 */
+	@Override
+	public int updateComment(CommunityComment r) {
+		return cDao.updateComment(sqlSession, r);
 	}
 
 

@@ -36,6 +36,7 @@
         </div>
         <div id="footer_2">
             <a href="${ pageContext.servletContext.contextPath }"><img src="resources/images/common/mainLogo.png" alt=""></a>
+        	<span id="magicpotChat"><a href="#" target="_blank" onclick="openChat();"><i class="fas fa-headset fa-lg"></i>&nbsp&nbsp매직팟에 문의하기</a></span>
         </div>
         <div id="footer_3">
 
@@ -55,6 +56,13 @@
             </div>
         </div>
     </div>
+    
+    <script>
+	    function openChat(){
+	    	var popup = window.open('startChat.do', 'MagicPot 실시간 상담', 'width=400px,height=600px,status=no,location=no,resizable=no');
+	    }
+    
+    </script>
     
 </body>
 </html>

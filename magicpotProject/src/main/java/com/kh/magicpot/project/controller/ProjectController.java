@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.service.MemberService;
+import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.service.ProjectService;
 import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.ProRequire;
 import com.kh.magicpot.project.model.vo.Project;
+import com.kh.magicpot.project.model.vo.ProjectReward;
 
 @Controller
 public class ProjectController {
@@ -39,18 +41,85 @@ public class ProjectController {
 	@Autowired
 	private MemberService mService;
 	
+	/* 펀딩상세페이지 */
 	@RequestMapping("detail.fd")
-	public String fundingDetail() {
+	public String selectFundingDetail(int proNo, Model model, HttpSession session, Like l) {
+
+		Project p = pService.selectFundingDetail(proNo);
+		model.addAttribute("p", p);
+		//System.out.println(proNo);
 		
+		//서포터
+		//int result = pService.selectSupporter(proNo);
+		//System.out.println(result);
+		
+		//리워드
+		ArrayList<Project> list = pService.selectReward(proNo);
+		model.addAttribute("list", list);
+		//System.out.println(list);
+		
+		// 남은 일 계산		
+		int d = 0;
+			
+			Date date1= p.getCloseDate();
+			Date date2 = new Date(System.currentTimeMillis());
+			 
+			long calDateDays = 0;
+			SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+			Date FirstDate = date1;
+			Date SecondDate = date2;
+				
+			long calDate = SecondDate.getTime()-FirstDate.getTime(); 
+				
+			// Date.getTime() 은 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지를 반환 
+			// 24*60*60*1000을 나눠주면 일수 나옴
+			calDateDays = calDate / ( 24*60*60*1000); 
+	 
+			calDateDays = Math.abs(calDateDays);
+				
+			d = (int)calDateDays;
+			
+			model.addAttribute("d", d);
+			//System.out.println(d);
+			
+			// [휘경] 해당 프로젝트 좋아요 여부 (로그인한 회원이 좋아요한 프로젝트일 경우 펀딩 상세페이지 빨간 하트로 표시)
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			if(loginUser != null) {
+				int memNo = loginUser.getMemNo();
+				l.setMemNo(memNo);
+				l.setProNo(proNo);
+				int isChecked = pService.isChecked(l);
+				model.addAttribute("isChecked", isChecked);
+			}else {
+				model.addAttribute("inChecked", 0);
+			}
+			
+			// [휘경] 해당 프로젝트 좋아요 수
+			int countLike = pService.countLike(proNo);
+			model.addAttribute("countLike", countLike);
+
 		return "project/fundingDetail";
 	}
-	
-	@RequestMapping("story.fd")
-	public String fundingDetailStory() {
+
+	/* 상세페이지 - 스토리 */
+	@ResponseBody
+	@RequestMapping(value="story.fd", produces="application/json; charset=utf-8")
+	public String storyAjax(int proNo) {
+		Project p = pService.authorAjax(proNo);
+		//System.out.println(p);
 		
-		return "project/fundingDetail";
+		return new Gson().toJson(p);
 	}
 	
+	/* 상세페이지 - 작가의말 */
+	@ResponseBody
+	@RequestMapping(value="author.fd", produces="application/json; charset=utf-8")
+	public String authorAjax(int proNo) {
+		Project p = pService.authorAjax(proNo);
+		//System.out.println(p);
+		
+		return new Gson().toJson(p);
+	}
 	
 	// 실시간 랭킹
 	@ResponseBody
@@ -204,7 +273,7 @@ public class ProjectController {
 		
 		// 남은 일 계산		
 		int[] arr = new int[pr.size()];
-			
+		
 		for(int i=0; i<pr.size(); i++) {
 			Date date1=pr.get(i).getCloseDate();
 			Date date2 = new Date(System.currentTimeMillis());
@@ -533,4 +602,54 @@ public class ProjectController {
 			return "common/errorPage";
 		}
 	}
+	
+	/**
+	 * [휘경] ajax : 프로젝트 좋아요 취소
+	 * @param l
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("deleteLike2.pr")
+	public String ajaxDeleteLike(Like l) {
+		
+		int result = pService.deleteLike(l);
+		
+		if(result > 0) { // 좋아요 삭제 성공
+			return "success";
+		}else { // 좋아요 삭제 실패
+			return "fail";
+		}
+	}
+	
+	/**
+	 * [휘경] ajax : 프로젝트 좋아요 추가
+	 * @param l
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("insertLike.pr")
+	public String ajaxInsertLike(Like l) {
+		
+		int result = pService.insertLike(l);
+		
+		if(result > 0) { // 좋아요 추가 성공
+			return "success";
+		}else { // 좋아요 추가 실패
+			return "fail";
+		}
+	}
+	
+	/**
+	 * [휘경] ajax : 프로젝트 좋아요 카운트 조회
+	 * @param proNo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="countLike.pr", produces="application/json; charset=utf-8")
+	public String ajaxCountLike(int proNo) {
+		int result = pService.countLike(proNo);
+		System.out.println(result);
+		return new Gson().toJson(result);
+	}
+	
 }

@@ -23,6 +23,7 @@ public class Like { // 좋아요 vo클래스
     private int proFundPrice; 	// 후원된 금액
     private Date openDate; 		// 오픈일
     private Date closeDate; 	// 종료일
+    private int decimalDay;		// 프로젝트 남은 일 수
     private String proStep; 	// 펀딩 단계
     private String caName;		// 카테고리명
 	

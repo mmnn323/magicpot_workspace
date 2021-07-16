@@ -1,8 +1,6 @@
-package com.kh.magicpot.report.model.vo;
+package com.kh.magicpot.pay.model.vo;
 
 import java.sql.Date;
-
-import com.kh.magicpot.member.model.vo.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,18 +8,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
 @ToString
-public class Blacklist {
+public class DetailPay {
 	
-	private int blacklistNo;
 	private int memNo;
-	private String suspended;
-	private Date suspendedDate;
-	private int reportCount;
-	
 	private String memId;
+	private String memName;
+	private String proTitle;
+	private String cpPrice;
+	private String payPrice;
+	private String payMethod;
 
 }

@@ -134,6 +134,7 @@
         </div><br>
 
         <div id="content1">
+        	<input type="hidden" value="3">
             <h2><b>${ p.proTitle }</b></h2>
             <br>
 
@@ -167,7 +168,20 @@
                 <br><br>
                 
                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#messageModal"><i class="far fa-envelope fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>문의</p></button>&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn btn-outline-secondary"><i class="far fa-heart fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>238</p></button>&nbsp;&nbsp;&nbsp;
+                
+                <!-- !!휘경!! -->
+                <c:choose>
+                	<c:when test="${ loginUser == null }">
+                		<span id="btnArea" onclick="swal('', '로그인 후 좋아요 서비스를 이용해보세요!', 'warning');"><button type="button" id="likeBtn" class="btn btn-outline-secondary"><i id="heart1" class="far fa-heart fa-2x" style="float: left; margin-left:7px; margin-top:2px; color:gray;"></i><p id="lCount">${ countLike }</p></button>&nbsp;&nbsp;&nbsp;</span>
+                	</c:when>
+                	<c:when test="${ loginUser != null and isChecked eq 1 }">
+	                	<span id="btnArea" onclick="deleteLike();"><button type="button" id="likeBtn" class="btn btn-outline-secondary"><i id="heartIcon" class="far fa-heart fa-2x" style="float: left; margin-left:7px; margin-top:2px; color:red;"></i><p id="lCount">${ countLike }</p></button>&nbsp;&nbsp;&nbsp;</span>
+	                </c:when>
+	                <c:when test="${ loginUser != null and isChecked eq 0 }">
+	                	<span id="btnArea" onclick="insertLike();"><button type="button" id="likeBtn" class="btn btn-outline-secondary"><i id="heartIcon" class="far fa-heart fa-2x" style="float: left; margin-left:7px; margin-top:2px; color:gray;"></i><p id="lCount">${ countLike }</p></button>&nbsp;&nbsp;&nbsp;</span>
+                	</c:when>
+                </c:choose>
+                
                 <button type="button" id="share" class="btn btn-outline-secondary"><i class="fas fa-share-alt fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>공유</p></button>
             </div>
         </div>
@@ -281,18 +295,93 @@
     			; window.kakaoDemoCallback && window.kakaoDemoCallback() }
     			catch(e) { window.kakaoDemoException && window.kakaoDemoException(e) }
         </script>
-
+        
+        <!-- [휘경] 좋아요 관련 스크립트 시작 -->
+        <script>
+        	// [휘경] ajax : 좋아요 취소
+			function deleteLike(){
+	           		$.ajax({
+			    			url:"deleteLike2.pr",
+			    			data:{
+			    					memNo:${ loginUser.memNo },
+			    					proNo:${p.proNo}
+			    			},
+			    			success:function(status){
+			    				
+			    				if(status == "success"){
+			    					$("#heartIcon").css("color", "gray");
+	            					$("#btnArea").attr("onclick", "insertLike();");
+				    				swal("Success!", "좋아하는 프로젝트에서 제거되었습니다.", "success");
+				    				selectLikeCount();
+			    				}else
+			    					swal("", "좋아요 취소를 실패했습니다.", "warning");
+			    				
+			    			},error:function(){
+			    				console.log("댓글 삭제용 ajax 통신 실패");
+			    			}
+		    		})
+			}
+        	
+			// [휘경] ajax : 좋아요 추가
+			function insertLike(){
+           		$.ajax({
+		    			url:"insertLike.pr",
+		    			data:{
+		    					memNo:${ loginUser.memNo },
+		    					proNo:${p.proNo}
+		    			},
+		    			success:function(status){
+		    				if(status == "success"){ // 좋아요 성공
+		    					$("#heartIcon").css("color", "red");
+            					$("#btnArea").attr("onclick", "deleteLike();");
+			    				swal("Success!", "좋아하는 프로젝트에 추가되었습니다.", "success");
+			    				selectLikeCount(); 
+		    				}else
+		    					swal("", "좋아요 추가를 실패했습니다.", "warning");
+		    				
+		    			},error:function(){
+		    				console.log("댓글 삭제용 ajax 통신 실패");
+		    			}
+	    		})
+			};
+	         
+	        // [휘경] 좋아요 카운트 조회
+	        $(function(){
+	        	selectLikeCount();
+	        });
+	        
+	        // [휘경] ajax : 좋아요 카운트 조회
+	        function selectLikeCount(){
+	        	$.ajax({
+	        		url:"countLike.pr",
+	        		data:{
+    					proNo:${p.proNo}
+    				},
+	        		success:function(result){
+	        			$("#lCount").html(result);
+	        			
+	        		},error:function(){
+	        			console.log("좋아요 카운트 조회용 ajax 통신 실패");
+	        		}
+	        	})
+	        };
+        </script>
+		<!-- [휘경] 좋아요 관련 스크립트 끝 -->
+		
         <hr>
         <div id="content2">
                 <ul>
                     <li><a href="#">스토리</a></li>
-                    <li><a id="author" href="#">작가의 말</a></li>
+                    <li>
+                    	<a id="author" href="#"><input type="hidden" class="proNo"name="proNo" value="${ p.proNo }">작가의 말</a>
+                    </li>
                     <li><a href="review.fd">체험리뷰</a></li>
                 </ul>
         </div><br>
         <hr> 
         <script>
         $("#author").on("click",function(proNo){
+        	proNo = $(this).children().text();
         	
         	$.ajax({
         		url:"author.fd",
@@ -301,8 +390,8 @@
         		error:function(){
         			alert("통신실패");
         		},
-        		success:function(createWord){
-        			$("#story").html(createWord);
+        		success:function(p){
+        			$("#story").html(p.createWord);
         		}
         	})
         })
@@ -311,7 +400,7 @@
         
         <div id="content3">
             <div id="content3_1">
-                <p id="story">${ p.createWord }</p>
+                <p id="story">${ p.proStory }</p>
             </div>
 
             <div id="reward">
