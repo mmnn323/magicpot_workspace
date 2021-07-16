@@ -22,6 +22,7 @@
 <script src="https://kit.fontawesome.com/dd18300701.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style>
     div, form, input{ box-sizing: border-box;}
     div, p, form, a {font-family: 'Noto Sans KR', sans-serif;}
@@ -723,6 +724,7 @@
 
             <div id="btnArea"> 
                 <a href="fund.li?ctg=0&ctg2=2" class="btn btn-success">신규 펀딩 더보기</a>
+                 <!--  <input type="button" onClick="sendLinkCustom();" value="Custom"/>-->
             </div>
         </div>
         <br><br>
@@ -874,9 +876,16 @@
                 else clearTimeout(timeOut);
             	
             }
-            	
-            
-            
+           
+            /*
+            // 카카오 메세지
+            function sendLinkCustom() {
+                Kakao.init("9c1dec44297aec7ae7dbd863f963dc54");
+                Kakao.Link.sendCustom({
+                    templateId: [templete id]
+                });
+            }   
+            */
         </script>
 
       
