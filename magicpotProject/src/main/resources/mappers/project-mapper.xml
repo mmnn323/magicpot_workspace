@@ -64,6 +64,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="reward_category" property="rewardCategory"/>
 	</resultMap>
 	
+	<resultMap id="Member" type="Member">
+		<id column="mem_no" property="memNo"/>
+		<result column="mem_id" property="memId"/>
+		<result column="mem_name" property="memName"/>
+	</resultMap>
+	
 	<select id="rankList" resultMap="Project" >
 		select *
 		  from 
@@ -687,6 +693,146 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   set
 		       pro_step = '요건확인'
 		 where pro_no = #{pno}
+	</update>
+	
+		
+	<!-- 프로젝트 개수 조회 -->
+	<select id="selectListProCount" resultType="_int">
+  		select
+  			   count(*)
+  		  from project
+	</select>
+	
+	<!-- 프로젝트 리스트 조회 -->
+	<select id="selectProjectList" resultMap="Project">
+	    select
+		       pro_no
+		     , pro_title
+		     , pro_price
+		     , pro_status
+		     , ran_no
+		     , cre_name
+             , mem_id
+		  from project p
+          join creator c on(p.cre_no = c.cre_no)
+		  join member m on(c.mem_no = m.mem_no)
+		 order
+		    by pro_no desc
+	</select>
+	
+	<!-- 프로젝트 상세조회 기본 정보 -->
+	<select id="selectFunManageBasic" resultMap="Project" parameterType="_int">
+		select
+		       pro_title
+		     , create_word
+			 , pro_price
+			 , pro_image
+			 , ca_name
+			 , close_date
+		  from project
+		  join category using(ca_no)
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 프로젝트 단계 조회 -->
+	<select id="selectProStep" resultType="string" parameterType="_int">
+		select
+			   pro_step
+		  from project
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 프로젝트 단계 변경(콘텐츠 확인) -->
+	<update id="updateProStep3" parameterType="_int">
+		update
+		       project
+		   set
+		       pro_step = '콘텐츠확인'
+		 where pro_no = #{pno}
+	</update>
+	
+	<!-- 프로젝트 상세조회 스토리 작성 -->	
+	<select  id="selectFunManageStory" resultMap="Project" parameterType="_int">
+		select
+			   pro_summary
+			 , pro_story
+		  from project
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 프로젝트 단계 변경(펀딩 오픈) + 프로젝트 승인 -->
+	<update id="updateProStep4" parameterType="_int">
+		update
+		       project
+		   set
+		       pro_step = '펀딩오픈'
+		     , pro_status = '승인'
+		 where pro_no = #{pno}
+	</update>
+	
+	<!-- 프로젝트 상태 변경(미승인) -->
+	<update id="updateProCancel" parameterType="_int">
+		update
+		       project
+		   set
+		   	   pro_step = '펀딩취소'
+		     , pro_status = '미승인'
+		 where pro_no = #{pno}
+	</update>
+	
+	<!-- 프로젝트 오픈일 입력 -->
+	<update id="updateOpenDate" parameterType="Project">
+		update
+			    project
+		    set 
+		    	open_date = #{openDate}
+		  where pro_no = #{proNo}
+	</update>
+	
+	<!-- 프로젝트 검색  -->
+	<select id="selectProSearchList" resultMap="Project" parameterType="map">
+		 select 
+		         pro_no
+		       , pro_title
+		       , pro_price
+		       , pro_status
+		       , ran_no
+		       , cre_name
+               , mem_id
+		    from project p
+            join creator c on(p.cre_no = c.cre_no)
+		    join member m on(c.mem_no = m.mem_no)
+	        <choose>
+	            <when test="searchCtg == 'userId'">
+	                where mem_id like '%' || #{keyWord} || '%'
+	            </when>
+	            <when test="searchCtg == 'project'">
+	                where pro_title like '%' || #{keyWord} || '%'		
+	            </when>
+	            <when test="searchCtg == 'creator'">
+	                where cre_name like '%' || #{keyWord} || '%'		
+	            </when>
+	        </choose>
+	       order
+	          by pro_no desc
+	</select>
+	
+	<!-- 바로 오픈 -->
+	<update id="updateOpenDateDir" parameterType="_int">
+		update
+			    project
+			set
+				open_date = sysdate
+		  where pro_no = #{pno}
+	</update>
+	
+	<!-- 오픈 예약 -->
+	<update id="updateOpenDateRes" parameterType="Project">
+		update
+			   project
+		   set
+		       open_date = #{openDate}
+		 where pro_no = #{proNo} 
 	</update>
 </mapper>
 

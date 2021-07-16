@@ -169,7 +169,7 @@
                             </li>
                             <li>
                                 <h4>
-                                    <a href="" id="abled">펀딩관리</a><span style="margin-left:110px"></span></h4>
+                                    <a href="fundingManage.ad" id="abled">펀딩관리</a><span style="margin-left:110px"></span></h4>
                                 </h4>
                             </li>
                             <li>

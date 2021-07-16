@@ -21,9 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.kh.magicpot.common.model.vo.PageInfo;
+import com.kh.magicpot.common.template.Pagination;
 import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.service.MemberService;
 import com.kh.magicpot.member.model.vo.Member;
@@ -812,6 +815,158 @@ public class ProjectController {
 		int result = pService.updateProStep2(pno);
 		if(result > 0) {
 			return "redirect:fundingHome2.pro?pno=" + pno;
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 관리 조회
+	@RequestMapping("fundingManage.ad")
+	public ModelAndView fundingManage(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
+		int listCount = pService.selectListProCount(); 
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
+		
+		ArrayList<Project> list = pService.selectProjectList(pi);
+		
+		mv.addObject("pi", pi)
+		  .addObject("list", list)
+		  .setViewName("project/fundingManage");
+		
+		return mv;
+	}
+	
+	// 프로젝트 관리 상세조회(기본 정보)
+	@RequestMapping("fundingDetail.ad")
+	public String fundingManage1(int pno, Model model) {
+		model.addAttribute("pno", pno);
+		Project pro = pService.selectFunManageBasic(pno);
+		
+		if(pro != null) {
+			model.addAttribute("pro", pro);
+			return "project/fundingManage1";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 관리 상세조회(기본 요건)
+	@RequestMapping("fundingDetail2.ad")
+	public String fundingManage2(int pno, Model model) {
+		model.addAttribute("pno", pno);
+		ProRequire require = pService.selectRequire(pno);
+		
+		if(require != null) {
+			model.addAttribute("require", require);
+			return "project/fundingManage2";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 관리 상세조회(스토리)
+	@RequestMapping("fundingDetail3.ad")
+	public String fundingManage3(int pno, Model model) {
+		model.addAttribute("pno", pno);
+		Project pro = pService.selectFunManageStroy(pno);
+		
+		int result = 0;
+		String proStep = pService.selectProStep(pno);
+		if(!proStep.equals("펀딩오픈")) { // 단계 검사
+			result = pService.updateProStep3(pno);
+		}
+		
+		if(pro != null) {
+			model.addAttribute("pro", pro);
+			return "project/fundingManage3";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 관리 상세 조회(리워드)
+	@RequestMapping("fundingDetail4.ad")
+	public String fundingManage4(int pno, Model model) {
+		model.addAttribute("pno", pno);
+		ArrayList<ProjectReward> reward = pService.selectReward2(pno);
+		String proStep = pService.selectProStep(pno);
+		System.out.println(proStep);
+		if(reward != null) {
+			model.addAttribute("reward", reward);
+			return "project/fundingManage4";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 승인
+	@RequestMapping("funApproval")
+	public String funApproval(int pno) {
+		int result = pService.updateProStep4(pno);
+		if(result > 0) {
+			return "redirect:fundingManage.ad";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 미승인
+	@RequestMapping("funCancel")
+	public String funCancel(int pno) {
+		int result = pService.updateProCancel(pno);
+		if(result > 0) {
+			return "redirect:fundingManage.ad";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 관리 검색 조회 -> 수정 필요
+	@RequestMapping("searchFun.ad")
+	public ModelAndView searchFun(@RequestParam(value="currentPage", defaultValue="1") int currentPage, String searchCtg, String keyWord, Model model, ModelAndView mv) {
+		int listCount = pService.selectListProCount(); 
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("searchCtg", searchCtg);
+		map.put("keyWord", keyWord);
+		model.addAttribute("searchCtg", searchCtg);
+		model.addAttribute("keyWord", keyWord);
+		ArrayList<Project> searchList = pService.selectSearchList(pi, map);
+		
+		mv.addObject("pi", pi)
+		  .addObject("list", searchList)
+		  .setViewName("project/fundingManage");
+		
+		return mv;
+	}
+	
+	// 펀딩 현황 조회
+	@RequestMapping("fundingStatus.pro")
+	public String fundingStatus(int pno) {
+		return "project/fundingStatus";
+	}
+	
+	// 프로젝트 바로 오픈
+	@RequestMapping("updateOpenDateDir")
+	public String updateOpenDateDir(int pno) {
+		int result = pService.updateOpenDateDir(pno);
+		if(result > 0) {
+			return "redirect:fundingStatus.pro?pno=" + pno;
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	// 프로젝트 오픈 예약
+	@RequestMapping("updateOpenDateRes")
+	public String updateOpenDateRes(int pno, java.sql.Date openDate) {
+		Project pro = new Project();
+		pro.setProNo(pno);
+		pro.setOpenDate(openDate);
+		
+		int result = pService.updateOpenDateRes(pro);
+		if(result > 0) {
+			return "redirect:fundingStatus.pro?pno=" + pno;
 		}else {
 			return "common/errorPage";
 		}

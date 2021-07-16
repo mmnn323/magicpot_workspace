@@ -3,6 +3,7 @@ package com.kh.magicpot.project.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.vo.Creator;
@@ -117,6 +118,40 @@ public interface ProjectService {
 
 	// 펀딩 상태 -> 요건확인
 	int updateProStep2(int pno);
+	
+
+	// 펀딩 리스트 조회
+	ArrayList<Project> selectProjectList(PageInfo pi);
+
+	// 펀딩 리스트 개수 조회
+	int selectListProCount();
+
+	// 프로젝트 상세조회 기본 정보
+	Project selectFunManageBasic(int pno);
+
+	// 프로젝트 상세조회 스토리
+	Project selectFunManageStroy(int pno);
+	
+	// 프로젝트 단계 조회
+	String selectProStep(int pno);
+	
+	// 프로젝트 단계 변경(콘텐츠확인)
+	int updateProStep3(int pno);
+
+	// 프로젝트 단계 변경(펀딩오픈 + 승인)
+	int updateProStep4(int pno);
+	
+	// 프로젝트 상태 변경(미승인)
+	int updateProCancel(int pno);
+	
+	// 프로젝트 관리 검색
+	ArrayList<Project> selectSearchList(PageInfo pi, HashMap<String, String> map);
+
+	// 프로젝트 바로 오픈
+	int updateOpenDateDir(int pno);
+
+	// 프로젝트 오픈 예약
+	int updateOpenDateRes(Project pro);
 	
 }
 

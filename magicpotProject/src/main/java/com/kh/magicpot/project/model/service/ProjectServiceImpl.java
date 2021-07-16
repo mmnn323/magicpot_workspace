@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.dao.ProjectDao;
@@ -214,6 +215,62 @@ public class ProjectServiceImpl implements ProjectService{
 	public int updateProStep2(int pno) {
 		return pDao.updateProStep2(sqlSession, pno);
 	}
+	
+	@Override
+	public ArrayList<Project> selectProjectList(PageInfo pi) {
+		return pDao.selectProjectList(sqlSession, pi);
+	}
+
+	@Override
+	public int selectListProCount() {
+		return pDao.selectListProCount(sqlSession);
+	}
+
+	@Override
+	public Project selectFunManageBasic(int pno) {
+		return pDao.selectFunManageBasic(sqlSession, pno);
+	}
+
+	@Override
+	public Project selectFunManageStroy(int pno) {
+		return pDao.selectFunManageStory(sqlSession, pno);
+	}
+
+	@Override
+	public String selectProStep(int pno) {
+		return pDao.selectProStep(sqlSession, pno);
+	}
+	
+	@Override
+	public int updateProStep3(int pno) {
+		return pDao.updateProStep3(sqlSession, pno);
+	}
+
+	@Override
+	public int updateProStep4(int pno) {
+		return pDao.updateProStep4(sqlSession, pno);
+	}
+
+	@Override
+	public int updateProCancel(int pno) {
+		return pDao.updateProCancel(sqlSession, pno);
+	}
+
+	@Override
+	public ArrayList<Project> selectSearchList(PageInfo pi, HashMap<String, String> map) {
+		return pDao.selectSearchList(sqlSession, pi, map);
+	}
+
+	@Override
+	public int updateOpenDateDir(int pno) {
+		return pDao.updateOpenDateDir(sqlSession, pno);
+	}
+
+	@Override
+	public int updateOpenDateRes(Project pro) {
+		return pDao.updateOpenDateRes(sqlSession, pro);
+	}
+
 
 	
 	

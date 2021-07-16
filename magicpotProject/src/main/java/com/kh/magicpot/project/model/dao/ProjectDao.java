@@ -3,9 +3,11 @@ package com.kh.magicpot.project.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.vo.Creator;
@@ -196,6 +198,61 @@ public class ProjectDao {
 
 	public int updateProStep2(SqlSessionTemplate sqlSession, int pno) {
 		return sqlSession.update("updateProStep2", pno);
+	}
+	
+
+	public ArrayList<Project> selectProjectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("selectProjectList", null, rowBounds);
+	}
+
+	public int selectListProCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("selectListProCount");
+	}
+
+	public Project selectFunManageBasic(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectFunManageBasic", pno);
+	}
+	
+	public Project selectFunManageStory(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectFunManageStory", pno);
+	}
+	
+	public String selectProStep(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectProStep", pno);
+	}
+	
+	public int updateProStep3(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("updateProStep3", pno);
+	}
+
+	public int updateProStep4(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("updateProStep4", pno);
+	}
+
+	public int updateProCancel(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("updateProCancel", pno);
+	}
+
+	public ArrayList<Project> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi, HashMap<String, String> map) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("selectProSearchList", map, rowBounds);
+	}
+
+	public int updateOpenDateDir(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("updateOpenDateDir", pno);
+	}
+
+
+	public int updateOpenDateRes(SqlSessionTemplate sqlSession, Project pro) {
+		return sqlSession.update("updateOpenDateRes", pro);
 	}
 }
 
