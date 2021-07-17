@@ -141,9 +141,9 @@
                     						  +		"<td>" + obj.memId + "</td>"
                     						  +		"<td>" + obj.msgContent + "</td>"
                     						  +		"<td>" + "답변대기" + "</td>"      
-                    						  +		"<td>" +   
+                    						  +		"<td> <div>" +
                     						  "<a href='' class='btn btn-success' id='me_enrollBtn' data-toggle='modal' data-target='#meAnswerBtn' style='color: white;'>" + "답변달기" + "</a>"
-                    						  + "</td>"
+                    						  + "</div> </td>"
                     						  + "</tr>";
                     				})
                     				$("#messageList tbody").html(value);

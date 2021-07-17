@@ -115,6 +115,11 @@
     #pro_modifyBtn:hover{
         background-color: rgb(41, 89, 248);
     }
+    
+    #guideLogo{
+        margin-left: 450px;
+        margin-top: -130px;
+    }
 
 </style>
 </head>
@@ -135,7 +140,7 @@
                 </p>
             </div>
 
-            <img src="resources/image/guideLogo.png" id="guideLogo">
+            <img src="resources/images/common/guideLogo.png" id="guideLogo">
                                             
         </div>
 

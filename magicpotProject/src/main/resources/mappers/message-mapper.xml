@@ -204,7 +204,7 @@
 	   join  message msg on (msg.mem_no = m.mem_no)
 	   join  creator c on (c.cre_no = msg.creator_no)
 	   join  project p on(p.pro_no = msg.pro_no) 
-	  where  msg.msg_no = #{msgNo}		   
+	  where  msg.msg_no = #{msgNo}		  
 	</select>
 	
 	
@@ -253,6 +253,7 @@
 				message
 		   set 	msg_reply = #{msgReply}
 		   	  ,	msg_status = 'Y'
+		   	  , msg_answer = sysdate
 		 where  msg_no = #{msgNo}  
 	</update>
 
