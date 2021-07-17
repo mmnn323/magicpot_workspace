@@ -216,9 +216,9 @@
 	             					status = obj.status;			// * 임시 (참조된 댓글일 경우 삭제 시 : '삭제된 댓글입니다'로 표현하고 싶음)
 	             					value += "<div class='cmComment'";
 	             					
-	             					//if('${loginUser.memId}' == obj.memId){ // 내가 쓴 댓글일 경우 css 적용
-	             						//value += "style='background-color:rgba(238, 238, 238, 0.349); border-radius:5px;'"
-	             					//}
+	             					if('${loginUser.memId}' == obj.memId){ // 내가 쓴 댓글일 경우 css 적용
+	             						value += "style='background-color:rgba(238, 238, 238, 0.349); border-radius:5px;'"
+	             					}
 	             					
 	             					value  += 	"><input type='hidden' value=" + obj.cmCommentNo + ">"							// hidden : 댓글번호
 	             						   + 	"<input type='hidden' value=" + obj.cmCommentDepth + ">"						// hidden : 댓글깊이
@@ -280,10 +280,10 @@
 						cmMemId 		= $(this).parents(".cmComment").children().eq(2).val();
 						
 	         			var reCommentVar = "";
-						reCommentVar += "<div id='reComment' align='center' style='margin-top:10px;'>"
+						reCommentVar += "<div id='reComment' align='center' style='margin-top:10px; background-color:white;'>"
 					                  + 	"<div style='color:rgb(83, 83, 83);'>" + "${loginUser.memId}" + "</div>"
-					                  + 	"<textarea class='reCoContent' cols='90' rows='3' placeholder='댓글을 남겨보세요' >"+ " @" + cmMemId + "&nbsp;" + "</textarea>"
-					                  + 	"<a class='btn btn-success btn-sm reCommentClose' style='margin-left:670px;' >취소</a>"
+					                  + 	"<textarea class='reCoContent' style='width:90%;' rows='3' placeholder='댓글을 남겨보세요' >"+ " @" + cmMemId + "&nbsp;" + "</textarea>"
+					                  + 	"<a class='btn btn-success btn-sm reCommentClose' style='margin-left:80%;' >취소</a>"
 					                  + 	"<a class='btn btn-success btn-sm addComment2' style='margin-left:5px;' >등록</a> </div>";
 					                  + "</div>";      
 					                  
@@ -347,7 +347,11 @@
 							                + "</div>";
 						//$('#rid' + rid).replaceWith(htmls);
 						$(this).parents(".cmComment").replaceWith(reCommentUpdateVar);
+						//$('.reCoContent2').focus(); // => *보완필요 : 커서 끝으로 이동시키고 싶음
+	             	
+						var len = $(this).parents(".cmComment").children().eq(3).val().length;
 						$('.reCoContent2').focus(); // => *보완필요 : 커서 끝으로 이동시키고 싶음
+						$('.reCoContent2')[0].setSelectionRange(len, len);
 	             	})
 	             	
 	             	// 댓글 수정 취소
@@ -400,7 +404,7 @@
             </c:if>
             <span id="btnArea2" style="margin-left: 700px;">
                 <a href="list.cm" class="btn btn-success">목록</a>
-                <a href="#cm_titleArea"" class="btn btn-success"><i class="fas fa-caret-up"></i> TOP</a>
+                <a href="#cm_contentArea"" class="btn btn-success"><i class="fas fa-caret-up"></i> TOP</a>
             </span>
         </div>
 	

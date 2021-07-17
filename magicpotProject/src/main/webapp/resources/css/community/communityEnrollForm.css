@@ -150,4 +150,6 @@ color: black;
 }
 #cmOkBtn:hover{background-color: rgb(225, 212, 169);}
 
-
+#cm_title:focus, #cm_category:focus{
+    outline: none;
+}

@@ -104,7 +104,8 @@ border-bottom: 1px solid lightgray;
    #commentArea{
        /* height: 80px; */
        font-family: 'Noto Sans KR', sans-serif;
-       margin:15px 0px 15px 0px;
+       /*margin:15px 0px 15px 0px;*/
+       padding:15px 0px 15px 0px;
     }
     #commentArea div{
         padding:2px;
@@ -135,7 +136,8 @@ border-bottom: 1px solid lightgray;
     /* 대댓글 등록 영역 */
     #reComment{
         font-size: medium;
-        width: 800px;
+        /*width: 800px;*/
+        width:98%;
         border:1px solid lightgray;
         border-radius: 3px;
         margin:0px 0px 30px 0px;
