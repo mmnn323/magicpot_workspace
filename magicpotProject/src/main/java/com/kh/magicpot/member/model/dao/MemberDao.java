@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.magicpot.common.model.vo.PageInfo;
+import com.kh.magicpot.community.model.vo.Community;
 import com.kh.magicpot.member.model.vo.Address;
 
 import com.kh.magicpot.member.model.vo.Member;
@@ -86,22 +87,6 @@ public class MemberDao {
 		
 	}
 	
-	/*관리자 일반회원관리 검색*/
-	public int selectSearchListCount(SqlSession sqlSession, HashMap<String, String> map) {
-
-		return sqlSession.selectOne("memberMapper.selectSearchListCount", map);
-
-	}
-
-	public ArrayList<Member> selectSearchList(SqlSession sqlSession, HashMap<String, String> map, PageInfo pi) {
-
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-
-		return (ArrayList) sqlSession.selectList("memberMapper.selectSearchList", map, rowBounds);
-
-	}
-	
 	/*일반회원 상세 조회*/
 	public Member selectAdminMember(SqlSessionTemplate sqlSession, int memNo) {
 		return sqlSession.selectOne("memberMapper.selectAdminMember", memNo);
@@ -125,6 +110,22 @@ public class MemberDao {
 	// 회원탈퇴
 	public int deleteMember(SqlSessionTemplate sqlSession, String memId) {
 		return sqlSession.update("memberMapper.deleteMember", memId);
+	}
+	
+	// 일반회원관리 상세 회원 탈퇴
+	public int deleteAdminMember(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.update("memberMapper.deleteAdminMember", memNo);
+	}
+	
+	// 일반회원관리 다중 선택 회원 탈퇴
+	public int multiDeleteAdopt(SqlSessionTemplate sqlSession,Member m) {
+		return sqlSession.update("memberMapper.multiDeleteAdopt", m);
+	}
+	
+	// 일반회원관리 검색
+	public ArrayList<Member> searchAdminList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
+		return (ArrayList)sqlSession.selectList("memberMapper.searchAdminList", map);
+		
 	}
 	
 }

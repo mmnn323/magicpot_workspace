@@ -171,9 +171,9 @@
 			<div id="cm_btnArea" align="center">
 				<a href="" class="btn btn-success" id="cm_enrollBtn">이전</a>
 				<button type="button" id="delete" class="btn btn-primary"
-					data-toggle="modal" data-target="#myModal">회원탈퇴</button>
+					data-toggle="modal" data-target="#myModal" onclick="postFormSubmit">회원탈퇴</button>
 			</div>
-
+			
 
 			<!-- 취소 모달 -->
 			<!-- The Modal -->
@@ -184,21 +184,27 @@
 						<!-- Modal Header -->
 						<div class="modal-header">
 							<h4 class="modal-title">회원 탈퇴</h4>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<button type="button" class="close" >&times;</button>
 						</div>
 
 						<!-- Modal body -->
+					<form id="postForm" action="delete.am" method="post">
 						<div class="modal-body">탈퇴하겠습니까?</div>
-
+							<input type="hidden" name="memNo" value="${ m.memNo }">
 						<!-- Modal footer -->
 						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">네</button>
+							<button type="submit" class="btn btn-danger">네</button>
 						</div>
-
+					</form>
+						
 					</div>
 				</div>
 			</div>
-
+			<script>
+				function postFormSubmit(){
+					$("postForm").attr("action", "delete.am").submit();
+				}
+			</script>
 
 			<br>
 			<br>

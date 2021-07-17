@@ -147,51 +147,56 @@
 			<br> <br> <br> <br> <br>
 
 			<!-- 검색바 + 버튼 영역 (오븐에서 한 줄에 있길래 하나의 div안에 넣었어요!) -->
-			<div id="searchBtnArea">
+			<div id="searchArea">
 				<!--검색바 -->
 				<div id="cm_searchArea">
-					<form action="search.me">
-						<input type="hidden" name="search_option"  value="1">
+					<form action="search.me" method="post">
 							<select name="condition" id="cm_SearchCtg">
-								<option name="memId" value="${ m.memId }">회원 ID</option>
-								<option name="memName" value="${ m.memName }">이름</option>
-								<option name="email" value="${ m.email }">이메일</option>
+								<option value="memId">회원 ID</option>
+								<option value="memName">이름</option>
+								<option value="email">이메일</option>
 							</select> 
-						<input name="kewword" id="cm_keyword" type="text" placeholder=" Search">
+						<input type="text" id="cm_keyword" name="cmKeyword" placeholder=" Search">
 					</form>
 				</div>
-
+				
+				<c:if test="${ !empty condition }" >
+		        	<script>
+		        	$(function(){
+		        		$("#SearchArea option[value=${condition}]").attr("selected", true);
+		        	})
+		        	</script>
+				</c:if>
 				<!-- 버튼 영역 -->
 				<!-- Button to Open the Modal -->
-				<button type="button" id="delSelect" class="btn btn-primary" data-toggle="modal"
+				<button type="button" id="selectDelete_btn" class="btn btn-primary" data-toggle="modal"
 					data-target="#myModal" style="background-color: red; border: none;">
 					회원 탈퇴
 				</button>
 
-				<!-- The Modal -->
-				<div class="modal" id="myModal">
+			<!-- The Modal -->
+				<!-- <div class="modal" id="myModal">
 					<div class="modal-dialog">
-						<div class="modal-content">
+						<div class="modal-content"> -->
 
 							<!-- Modal Header -->
-							<div class="modal-header">
+							<!-- <div class="modal-header">
 								<h4 class="modal-title">회원 탈퇴</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-							<form action="delete.me">
-								<!-- Modal body -->
+								<button type="button" class="close">&times;</button>
+							</div> -->
+							 
+							<!-- <form id="postForm" action="delete.acm" method="post">-->
+								<!-- Modal body 
 								<div class="modal-body">회원을 탈퇴하겠습니까?</div>
-
-								<!-- Modal footer -->
+				                  <input type="hidden" name="memNo" value="${ m.memNo }">-->
+								<!-- Modal footer 
 								<div class="modal-footer">
-									<input type="hidden" value="${ m.memNo }" name="memNo">
-									<button type="submit" class="btn btn-danger" id="btn-danger"
-										data-dismiss="modal">네</button>
+									<button type="submit" class="btn btn-danger" id="delSelect">네</button>
 								</div>
 							</form>
 						</div>
 					</div>
-				</div>
+				</div>-->
 
 			</div><br>
 
@@ -204,6 +209,7 @@
 			<div id="cmNoticeListArea">
 				<table class="table" id="cmNoticeList" align="center" action="multiDel">
 					<thead class="thead-light">
+						<form method="get" id="delList" actiont="multiDel">
 						<tr>
 							<th width="40"><input type="checkbox" id="allCheckbox"></th>
 							<th width="90">번호</th>
@@ -217,7 +223,9 @@
 					<tbody>
 						<c:forEach var="m" items="${ list }">
 						<tr>
-							<th onclick="event.cancelBubble=true"><input type="checkbox" name="noList" value="${ m.memNo }"></th>
+							<th onclick="event.cancelBubble=true">
+							<input type="checkbox" class="chBox" name="noList" value="${ m.memNo }"  data-cartNum="${ m.memNo }">
+							</th>
 							<td class="mno">${ m.memNo }</td>
 							<td>${ m.memId }</td>
 							<td>${ m.memName }</td>
@@ -226,17 +234,48 @@
 							<td>${ m.enrollDate }</td>
 						</tr>
 						</c:forEach>
+						</form>
 					</tbody>
 				</table>
 				<script> //전체 선택
-					$('#cmNoticeListArea #allCheckbox').on('click', function(){
-						if($('#allCheckbox').prop("checked")){
-							$("input[type=checkbox]").prop("checked", true);
+					$('#allCheckbox').click(function(){
+						var chk = $("#allCheckbox").prop("checked");
+						if(chk){
+							$(".chBox").prop("checked", true);
 						}else{
-							$("input[type=checkbox]").prop("checked", false);	
+							$(".chBox").prop("checked", false);
 						}
-					}) 
+					})
 				</script>
+				
+				<script>
+				$("#selectDelete_btn").click(function(){
+					var confirm_val = confirm("정말 삭제하시겠습니까?");
+					
+					if(confirm_val){
+						var checkArr = new Array();
+						
+						$("input[class='chBox']:checked").each(function(){
+							checkArr.push($(this).attr("data-cartNum"));
+						})
+						
+						$.ajax({
+							url:"delete.amc",
+							type:"post",
+							data:{chBox: checkArr},
+							success:function(result){
+								if(result==1){
+									location.href="admin.me";
+								}else{
+									alert("삭제 오류");
+								}
+							}
+						})
+					}
+				})
+				
+				</script>
+			
 				<script>
 					$(function(){
 						$("#cmNoticeList tbody tr").click(function(){
@@ -258,7 +297,7 @@
 								<li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
 							</c:when>
 							<c:otherwise>						
-								<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ pi.startPage }">&laquo;</a></li>
+								<li class="page-item"><a class="page-link" href="admin.me?currentPage=1">&laquo;</a></li>
 							</c:otherwise>
 						</c:choose>
 						

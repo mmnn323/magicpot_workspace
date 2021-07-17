@@ -2,6 +2,7 @@ package com.kh.magicpot.member.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.member.model.vo.Address;
@@ -50,8 +51,7 @@ public interface MemberService {
 	ArrayList<Member> selectList(PageInfo pi);
 	
 	// 일반회원관리 검색 조회
-	int selectSearchListCount(HashMap<String, String> map);
-	ArrayList<Member> selectSearchList(HashMap<String, String> map, PageInfo pi);
+	ArrayList<Member> searchAdminList(HashMap<String, Object> map);
 
 	// 일반회원관리 회원 상세조회
 	Member selectAdminMember(int memNo);
@@ -68,5 +68,10 @@ public interface MemberService {
 	// 회원탈퇴
 	int deleteMember(String memId);
 	
+	// 일반회원관리 상세 회원 탈퇴
+	int deleteAdminMember(int memNo);
+	
+	// 일반회원관리 다중 선택 회원 탈퇴
+	public int multiDeleteAdopt(Member m);
 	
 }
