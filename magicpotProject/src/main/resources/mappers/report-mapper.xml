@@ -26,6 +26,14 @@
 		<result column="cm_no" property="cmNo"/>
 	</resultMap>	
 	
+	<!-- 활동 중지된 회원 조회 - 로그아웃 -->
+	<select id="reLogout" resultType="_int">
+		select  count(*)
+		  from  blacklist
+		 where  suspended = 'Y'
+		   and  mem_no = #{memNo} 
+	</select>
+	
 	<!-- 블랙리스트 페이징 처리 -->
 	<select id="selectListCount" resultType="_int">
 		select 

@@ -20,6 +20,12 @@ public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private ReportDao rDao;
 
+	// 활동 중지된 회원 조회 - 로그아웃
+	@Override
+	public int reLogout(int memNo) {
+		return rDao.reLogout(sqlSession, memNo);
+	}
+
 	// 블랙리스트 페이징 처리
 	@Override
 	public int selectListCount() {
@@ -55,6 +61,7 @@ public class ReportServiceImpl implements ReportService {
 	public int cmPage(int cmcoNo) {
 		return rDao.cmPage(sqlSession, cmcoNo);
 	}
+
 
 	
 

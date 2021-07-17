@@ -20,6 +20,9 @@ public class Report {
 	private String reportDate;
 	private String reportType;
 	private String reportStatus;
+	private int memNo;
+	private int reMemNo;
+	private int blacklistNo;
 	
 	private int cmNo;
 }

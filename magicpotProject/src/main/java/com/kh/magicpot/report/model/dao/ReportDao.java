@@ -13,6 +13,11 @@ import com.kh.magicpot.report.model.vo.Report;
 @Repository
 public class ReportDao {
 
+	// 활동 중지된 회원 조회 - 로그아웃
+	public int reLogout(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("reportMapper.reLogout", memNo);
+	}
+	
 	// 블랙리스트 페이징 처리
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("reportMapper.selectListCount");

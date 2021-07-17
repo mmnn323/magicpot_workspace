@@ -8,6 +8,9 @@ import com.kh.magicpot.report.model.vo.Report;
 
 public interface ReportService {
 	
+	// 활동 중지된 회원 조회 - 로그아웃 
+	int reLogout(int memNo);
+	
 	// 블랙리스트 페이징 처리
 	int selectListCount();
 

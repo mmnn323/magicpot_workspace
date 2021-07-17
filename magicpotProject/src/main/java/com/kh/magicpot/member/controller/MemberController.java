@@ -29,15 +29,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.common.template.Pagination;
+import com.kh.magicpot.member.model.service.MemberService;
 import com.kh.magicpot.community.model.vo.Community;
 import com.kh.magicpot.community.model.vo.CommunityNotice;
-import com.kh.magicpot.member.model.service.MemberService;
 import com.kh.magicpot.member.model.vo.Address;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.member.model.vo.NaverLoginBO;
 import com.kh.magicpot.project.model.service.ProjectService;
 import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.Project;
+import com.kh.magicpot.report.model.service.ReportService;
 
 
 
@@ -61,6 +62,9 @@ public class MemberController {
 	private ProjectService pService;
 	
 	@Autowired
+	private ReportService rService;
+	
+	@Autowired
 	private JavaMailSender mailSender;
 	
 	@Autowired
@@ -73,6 +77,21 @@ public class MemberController {
 		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
 		
 		Member loginUser = mService.loginMember(m);
+		
+		// 다인 추가  - 신고 3회 이상으로 계정 정지된 회원 alert띄워주기
+		int result = rService.reLogout(loginUser.getMemNo());
+		
+		if(result > 0) {
+			// 로그아웃 안되는거 보완,,
+			session.removeAttribute("loginUser");
+			session.setAttribute("errorMsg", "신고 처리로 사이트 이용 불가능한 회원 입니다. 문의 바랍니다.");
+			//session.invalidate();
+			mv.setViewName("redirect:/");
+			
+		} else {
+			session.setAttribute("loginUser", loginUser);
+			mv.setViewName("redirect:/");
+		}
 		
 		// 로그인시 creator 조회
 		Creator creator = pService.selectCreator(loginUser);

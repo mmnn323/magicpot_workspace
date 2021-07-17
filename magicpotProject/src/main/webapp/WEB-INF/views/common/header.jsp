@@ -100,6 +100,14 @@ a#MOVE_TOP_BTN {
 		<c:remove var="alertMsg" scope="session" />
 	</c:if>
 
+	<!-- 다인 추가 -->
+	<c:if test="${ !empty errorMsg }">
+		<script>
+			swal("error", "${errorMsg}", "error");
+		</script>
+		<c:remove var="errorMsg" scope="session" />
+	</c:if>
+
 	<!-- 로고 영역 -->
 	<div id="header">
 		<div id="header_1">
