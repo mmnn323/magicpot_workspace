@@ -14,10 +14,18 @@ public interface ReportService {
 	// 관리자 블랙리스트 조회
 	ArrayList<Blacklist> adminBlacklist(PageInfo pi);
 	
+	// 블랙리스트 모달 조회
+	ArrayList<Report> modalBlacklist(int blacklistNo);
+	
 	// 관리자 신고 리스트 페이징 처리
 	int selectReListCount();
 	
 	// 관리자 신고 리스트 조회
 	ArrayList<Report> adminReportList(PageInfo pi);
+
+	// 관리자 신고 디테일
+	ArrayList<Report> reportDetail();
+
+
 
 }

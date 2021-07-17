@@ -45,6 +45,22 @@
 		 	by  blacklist_no desc
 	</select>
 	
+	<!-- 블랙리스트 모달 조회 -->
+	<select id="modalBlacklist" resultMap="Report">
+		select 
+				 r.report_no
+			  ,  r.cmco_no
+			  ,  r.report_type
+			  ,  to_char(r.report_date, 'YY-MM-DD') report_date
+			  ,  cm.cm_no
+		   from  report r  	
+		   join  cm_comment co on (r.cmco_no = co.cmco_no)
+		   join  community cm on (co.cm_no = cm.cm_no)
+		  where  r.blacklist_no = #{blacklistNo}
+		  order
+		     by  r.report_no
+	</select>
+	
 	<!-- 관리자 신고 리스트 페이징 처리 -->
 	<select id="selectReListCount" resultType="_int">
 		select 
@@ -65,6 +81,7 @@
 		 order
 		    by  report_no desc
 	</select>
-	 	
+	
+
  
 </mapper>

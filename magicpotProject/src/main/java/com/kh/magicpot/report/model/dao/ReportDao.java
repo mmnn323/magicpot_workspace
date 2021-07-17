@@ -29,6 +29,11 @@ public class ReportDao {
 		return (ArrayList)sqlSession.selectList("reportMapper.adminBlacklist", null, rowBounds);
 	}
 	
+	// 블랙리스트 모달 조회
+	public ArrayList<Report> modalBlacklist (SqlSessionTemplate sqlSession, int blacklistNo){
+		return (ArrayList)sqlSession.selectList("reportMapper.modalBlacklist", blacklistNo);
+	}
+	
 	// 관리자 신고 리스트 페이징 처리
 	public int selectReListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("reportMapper.selectReListCount");
@@ -44,5 +49,12 @@ public class ReportDao {
 		
 		return (ArrayList)sqlSession.selectList("reportMapper.adminReportList", null, rowBounds);
 	}
+
+	// 관리자 신고 디테일
+	public ArrayList<Report> reportDetail(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("reportMapper.adminReportList", null);
+	}
+
+
 
 }

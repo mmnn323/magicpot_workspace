@@ -5,11 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.common.template.Pagination;
 import com.kh.magicpot.report.model.service.ReportService;
-import com.kh.magicpot.report.model.vo.Blacklist;
 
 @Controller
 public class ReportController {
@@ -32,6 +33,13 @@ public class ReportController {
 		return "report/adminBlacklistListView";
 	}
 	
+	// 블랙리스트 모달 조회
+	@ResponseBody
+	@RequestMapping(value="modalBlacklist.re", produces="application/json; charset=utf-8")
+	public String modalBlacklist (Model model, int blacklistNo) {
+		return new Gson().toJson(rService.modalBlacklist(blacklistNo));
+	}
+	
 	
 	// 관리자 신고 관리 페이지 연결
 	@RequestMapping("adminReportList.re")
@@ -47,7 +55,15 @@ public class ReportController {
 		return "report/adminReportList";
 	}
 	
-	
+	// 관리자 신고 디테일
+	@ResponseBody
+	@RequestMapping("reportDetail.re")
+	public String reportDetail (Model model) {
+		
+		model.addAttribute("reportDetail", rService.reportDetail());
+		
+		return "";
+	}
 	
 
 }

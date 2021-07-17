@@ -17,7 +17,7 @@ public class Report {
 	private int reportNo;
 	private int cmcoNo;
 	private String reportContent;
-	private Date reportDate;
+	private String reportDate;
 	private String reportType;
 	private String reportStatus;
 	
