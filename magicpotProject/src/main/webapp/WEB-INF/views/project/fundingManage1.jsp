@@ -57,7 +57,7 @@
                     })
                 </script>
                 <h4>목표 금액</h4>
-                <p id="p2">${ pro.proPrice } 원</p>
+                <p id="p2">${ proPrice } 원</p>
                 <br><br><br>
 
                 <h4>대표 이미지</h4>

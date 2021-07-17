@@ -2,6 +2,7 @@ package com.kh.magicpot.project.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,6 +33,7 @@ import com.kh.magicpot.member.model.service.MemberService;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.service.ProjectService;
 import com.kh.magicpot.project.model.vo.Creator;
+import com.kh.magicpot.project.model.vo.PayStatus;
 import com.kh.magicpot.project.model.vo.ProRequire;
 import com.kh.magicpot.project.model.vo.Project;
 import com.kh.magicpot.project.model.vo.ProjectReward;
@@ -825,8 +827,13 @@ public class ProjectController {
 	public ModelAndView fundingManage(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		int listCount = pService.selectListProCount(); 
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
-		
 		ArrayList<Project> list = pService.selectProjectList(pi);
+		
+		DecimalFormat moneyForm = new DecimalFormat("###,###");
+		for(Project pro : list) {
+			String proPrice = moneyForm.format(pro.getProPrice());
+			pro.setProPriceForm(proPrice);
+		}
 		
 		mv.addObject("pi", pi)
 		  .addObject("list", list)
@@ -841,8 +848,12 @@ public class ProjectController {
 		model.addAttribute("pno", pno);
 		Project pro = pService.selectFunManageBasic(pno);
 		
+		DecimalFormat moneyForm = new DecimalFormat("###,###");
+		String proPrice = moneyForm.format(pro.getProPrice());
+		
 		if(pro != null) {
 			model.addAttribute("pro", pro);
+			model.addAttribute("proPrice", proPrice);
 			return "project/fundingManage1";
 		}else {
 			return "common/errorPage";
@@ -920,29 +931,50 @@ public class ProjectController {
 		}
 	}
 	
-	// 프로젝트 관리 검색 조회 -> 수정 필요
+	// 프로젝트 관리 검색 조회
 	@RequestMapping("searchFun.ad")
 	public ModelAndView searchFun(@RequestParam(value="currentPage", defaultValue="1") int currentPage, String searchCtg, String keyWord, Model model, ModelAndView mv) {
-		int listCount = pService.selectListProCount(); 
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
-		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("searchCtg", searchCtg);
 		map.put("keyWord", keyWord);
 		model.addAttribute("searchCtg", searchCtg);
 		model.addAttribute("keyWord", keyWord);
+		
+		int listCount = pService.selectListProSearchCount(map); 
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
 		ArrayList<Project> searchList = pService.selectSearchList(pi, map);
 		
 		mv.addObject("pi", pi)
 		  .addObject("list", searchList)
-		  .setViewName("project/fundingManage");
+		  .addObject("map", map)
+		  .setViewName("project/fundingManageSearch");
 		
 		return mv;
 	}
 	
 	// 펀딩 현황 조회
 	@RequestMapping("fundingStatus.pro")
-	public String fundingStatus(int pno) {
+	public String fundingStatus(int pno, Model model, HttpSession session) {
+		session.setAttribute("pno", pno);
+		Project pro = pService.selectFunStatus(pno);
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("orderCount", pService.selectOrderCount(pno));
+		map.put("reviewCount", pService.selectReviewCount(pno));
+		map.put("supCount", pService.selectSupCount(pno));
+		
+		Date now = new Date();
+		model.addAttribute("now", now);
+		
+		if(pro != null) {
+			DecimalFormat moneyForm = new DecimalFormat("###,###");
+			String proPrice = moneyForm.format(pro.getProPrice());
+			String proFunPrice = moneyForm.format(pro.getProFundPrice());
+			
+			model.addAttribute("map", map);
+			model.addAttribute("proPrice", proPrice);
+			model.addAttribute("proFunPrice", proFunPrice);
+			model.addAttribute("pro", pro);
+		}
 		return "project/fundingStatus";
 	}
 	
@@ -971,4 +1003,72 @@ public class ProjectController {
 			return "common/errorPage";
 		}
 	}
+	
+	// 결제 현황 조회
+	@RequestMapping("payStatus.pro")
+	public ModelAndView payStatus(@RequestParam(value="currentPage", defaultValue="1") int currentPage, @RequestParam(value="cate", defaultValue="0")int cate, HttpSession session, ModelAndView mv) {
+		int pno = (Integer)session.getAttribute("pno");
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("pno", pno);
+		map.put("cate", cate);
+		int listCount = pService.selectPayStatusCount(pno); 
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
+		
+		ArrayList<PayStatus> payStatusList = pService.selectPayStatusList(pi, map);
+		
+		int funPrice1 = pService.selectFunPrice(pno);
+		int returnPrice1 = pService.selectReturnPrice(pno);
+		DecimalFormat moneyForm = new DecimalFormat("###,###");
+		String funPrice = moneyForm.format(funPrice1);
+		String returnPrice = moneyForm.format(returnPrice1);
+		
+		mv.addObject("pi", pi)
+		  .addObject("payStatusList", payStatusList)
+		  .addObject("cate", cate)
+		  .addObject("funPrice", funPrice)
+		  .addObject("returnPrice", returnPrice)
+		  .setViewName("project/payStatus");
+		
+		return mv;
+	}
+	
+	// 배송 현황 조회
+	@RequestMapping("deliStatus.pro")
+	public ModelAndView deliStatus(@RequestParam(value="currentPage", defaultValue="1") int currentPage, @RequestParam(value="cate", defaultValue="0")int cate, HttpSession session, ModelAndView mv) {
+		int pno = (Integer)session.getAttribute("pno");
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("pno", pno);
+		map.put("cate", cate);
+		int listCount = pService.selectdeliStatusCount(pno); 
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 10);
+		
+		ArrayList<PayStatus> deliStatusList = pService.selectdeliStatusList(pi, map);
+
+		int funPrice1 = pService.selectFunPrice(pno);
+		int finishPrice1 = pService.selectFinishPrice(pno);
+		DecimalFormat moneyForm = new DecimalFormat("###,###");
+		String funPrice = moneyForm.format(funPrice1);
+		String finishPrice = moneyForm.format(finishPrice1);
+		
+		mv.addObject("pi", pi)
+		  .addObject("deliStatusList", deliStatusList)
+		  .addObject("cate", cate)
+		  .addObject("funPrice", funPrice)
+		  .addObject("finishPrice", finishPrice)
+		  .setViewName("project/deliveryStatus");
+		
+		return mv;
+	}
+	
+	// 운송장 변경
+	@RequestMapping("deliverChange")
+	public String deliverChange(PayStatus payStatus) {
+		int result = pService.updateDeliverNo(payStatus);
+		if(result != 0) {
+			return "redirect:deliStatus.pro";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
 }

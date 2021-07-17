@@ -164,34 +164,27 @@
                     <div id="accordian">
                         <ul>
                             <li>
-                                <h4 id="ready" style="cursor:pointer;">
-                                    <p id="menu_title" style="display:inline;">펀딩 준비</p>
-                                    <i id="btn" class="fas fa-angle-down" style="margin-left:93px"></i>
+                            	<h4 id="fundingStatus" align="left">
+                                    <a href="fundingHome2.pro?pno=${ project.proNo }">펀딩 준비 홈</a>
                                 </h4>
-                                <ul id="subMenu">
-                                    <li><a href="">기본 요건</a></li>
-                                    <li><a href="">기본 정보</a></li>
-                                    <li><a href="">스토리 작성</a></li>
-                                    <li><a href="">리워드 설계</a></li>
-                                </ul>
-                            </li>
+							</li>
                             <li>
                                 <h4 id="fundingStatus" align="left">
-                                    <a href="">펀딩 현황</a>
+                                    <a href="fundingStatus.pro?pno=${ project.proNo }">펀딩 현황</a>
                                 </h4>
                             </li>
                             <li>
                                 <h4 id="fundingStatus" align="left">
-                                    <a href="">결제 현황</a>
+                                    <a href="payStatus.pro">결제 현황</a>
                                 </h4>
                             </li>
                             <li>
                                 <h4 id="fundingStatus" align="left">
-                                    <a href="">배송 현황</a>
+                                    <a href="deliStatus.pro">배송 현황</a>
                                 </h4>
                             </li>
                             <li>
-                                <h4><a href="" id="abled">자료 및 도움말</a><span style="margin-left:80px"></span></h4>
+                                <h4><a href="https://www.notion.so/rewardguide/a933461f78f949dc9dd11f17e7d35e36" id="abled">자료 및 도움말</a><span style="margin-left:80px"></span></h4>
                             </li>
                         </ul>
                     </div>	

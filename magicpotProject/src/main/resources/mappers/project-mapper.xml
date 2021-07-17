@@ -70,6 +70,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="mem_name" property="memName"/>
 	</resultMap>
 	
+	<resultMap id="PayStatus" type="PayStatus">
+		<id column="or_no" property="orNo"/>
+		<result column="mem_id" property="memId"/>
+		<result column="or_sum" property="orSum"/>
+		<result column="or_delivery" property="orDelivery"/>
+		<result column="reward_title" property="rewardTitle"/>
+		<result column="deliver_status" property="deliveryStatus"/>
+		<result column="delivery_no" property="deliveryNo"/>
+		<collection resultMap="Member" property="member"/>
+		<collection resultMap="ProjectReward" property="projectReward"/>
+	</resultMap>
+	
 	<select id="rankList" resultMap="Project" >
 		select *
 		  from 
@@ -834,5 +846,201 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		       open_date = #{openDate}
 		 where pro_no = #{proNo} 
 	</update>
+	
+	<!-- 펀딩 현황 프로젝트 조회 -->
+	<select id="selectFunStatus" resultMap="Project" parameterType="_int">
+		select
+			   pro_no
+			 , ca_name
+			 , pro_price
+			 , pro_fundprice
+			 , open_date
+			 , close_date
+		  from project
+		  join category using(ca_no)
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 펀딩 건수 조회 -->
+	<select id="selectOrderCount" resultType="_int" parameterType="_int">
+		select
+       	       count(*)
+	      from tb_order
+	     where reward_no in (select reward_no
+	                           from pro_reward
+	                          where pro_no = #{pno})
+	</select>
+	
+	<!-- 리뷰 수 조회  -->
+	<select id="selectReviewCount" resultType="_int" parameterType="_int">
+		select
+       		   count(*)
+		  from review
+		 where pro_no in (select pro_no
+		                    from project
+		                   where pro_no = #{pno})
+	</select>
+	
+	<!-- 서포터 응원 수 -->
+	<select id="selectSupCount" resultType="_int" parameterType="_int">
+		 select
+		        count(*)
+		   from tb_order
+		  where reward_no in (select reward_no
+		                        from pro_reward
+		                       where pro_no = 57)
+            and or_support is not null
+	</select>
+	
+	<!-- 결제 현황 조회 리스트 개수 -->
+	<select id="selectPayStatusCount" resultType="_int" parameterType="_int">
+		select
+  			   count(*)
+  		  from tb_order
+  		 where reward_no in (select
+                                    reward_no
+                               from pro_reward
+                              where pro_no = #{pno})
+         <choose>
+		 	<when test="cate == 1">
+		 		and or_delivery = '예약'
+		 	</when>
+		 	<when test="cate == 2">
+		 		and or_delivery = '결제'
+		 	</when>
+		 </choose>
+	</select>
+	
+	<!-- 결제 현황 조회 -->
+	<select id="selectPayStatusList" resultMap="PayStatus" parameterType="map">
+		select
+		       mem_id
+		     , or_sum
+		     , or_delivery
+		     , reward_title
+		  from tb_order
+		  join member using(mem_no)
+		  join pro_reward using(reward_no)
+		 where pro_no = #{pno}
+		 <choose>
+		 	<when test="cate == 1">
+		 		and or_delivery = '예약'
+		 	</when>
+		 	<when test="cate == 2">
+		 		and or_delivery = '결제'
+		 	</when>
+		 </choose>
+		 order
+		 	by or_date desc
+	</select>
+	
+	<!-- 배송 현황 조회 리스트 개수 -->
+	<select id="selectdeliStatusCount" resultType="_int" parameterType="_int">
+		select
+  			   count(*)
+  		  from tb_order
+  		 where reward_no in (select
+                                    reward_no
+                               from pro_reward
+                              where pro_no = #{pno})
+           and or_delivery = '결제'
+	</select>
+	
+	<!-- 배송 현황 조회 -->
+	<select id="selectdeliStatusList" resultMap="PayStatus" parameterType="map">
+		select
+			   or_no
+		     , mem_id
+		     , or_sum
+		     , or_delivery
+		     , reward_title
+		     , deliver_status
+		     , delivery_no
+		  from tb_order
+		  join member using(mem_no)
+		  join pro_reward using(reward_no)
+		 where pro_no = #{pno}
+		 <choose>
+		 	<when test="cate == 1">
+		 		and deliver_status = '미배송'
+		 	</when>
+		 	<when test="cate == 2">
+		 		and deliver_status = '배송중'
+		 	</when>
+		 	<when test="cate == 3">
+		 		and deliver_status = '배송완료'
+		 	</when>
+		 	<when test="cate == 4">
+		 		and deliver_status = '환불신청'
+		 	</when>
+		 	<when test="cate == 5">
+		 		and deliver_status = '환불완료'
+		 	</when>
+		 </choose>
+		 order
+		 	by or_date desc
+	</select>
+	
+	<!-- 펀딩 후원 금액 조회 -->
+	<select id="selectFunPrice" resultType="_int" parameterType="_int">
+		select
+		 	   pro_fundprice
+		  from project
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 배송완료 금액 조회 -->
+	<select id="selectFinishPrice" resultType="_int" parameterType="_int">
+		select
+	           sum(or_sum)
+	      from tb_order
+	     where reward_no in(select 
+						           reward_no 
+						      from pro_reward 
+						     where pro_no = #{pno})
+	       and deliver_status = '배송완료'
+	</select>
+	
+	<!-- 환불 금액 조회 -->
+	<select id="selectReturnPrice" resultType="_int" parameterType="_int">
+		select
+		       sum(or_sum)
+		  from tb_order
+		  where reward_no in(select 
+						           reward_no 
+						      from pro_reward 
+						     where pro_no = #{pno})
+		    and deliver_status like '%환불%'
+	</select>
+	
+	<!-- 운송장 추가 -->
+	<update id="updateDeliverNo" parameterType="PayStatus">
+		update
+		       tb_order
+		   set 
+		       deliver_status = #{deliveryStatus}
+		     , delivery_no = #{deliveryNo}
+		 where or_no = #{orNo}
+ 	</update>
+ 	
+ 	<!-- 펀딩 관리 검색 리스트 조회 -->
+ 	<select id="selectListProSearchCount" resultType="_int" parameterType="map">
+ 	  	select
+  			   count(*)
+  		  from project p
+          join creator c on(p.cre_no = c.cre_no)
+		  join member m on(c.mem_no = m.mem_no)
+  		  <choose>
+	            <when test="searchCtg == 'userId'">
+	                where mem_id like '%' || #{keyWord} || '%'
+	            </when>
+	            <when test="searchCtg == 'project'">
+	                where pro_title like '%' || #{keyWord} || '%'		
+	            </when>
+	            <when test="searchCtg == 'creator'">
+	                where cre_name like '%' || #{keyWord} || '%'		
+	            </when>
+	       </choose>
+ 	</select>
 </mapper>
 

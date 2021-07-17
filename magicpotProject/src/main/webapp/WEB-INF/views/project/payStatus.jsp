@@ -19,19 +19,31 @@
               <br><br>
               <div id="payStatus">
                   <div id="order" align="center">
-                      <p id="title">펀딩 결제 예약 금액</p>
-                      <h3 id="price">480,000 원</h3>
+                      <p id="title">펀딩 후원 금액</p>
+                      <h3 id="price">${ funPrice } 원</h3>
                   </div>
                   <div id="order" align="center">
-                      <p id="title">펀딩 결제 완료 금액</p>
-                      <h3 id="price">0 원</h3>
+                      <p id="title">펀딩 환불 금액</p>
+                      <h3 id="price">${ returnPrice } 원</h3>
                   </div>
               </div>
               <select name="orDelivery" id="orDelivery">
                   <option value="">결제 상태 : 전체</option>
-                  <option value="결제예약">결제예약</option>
-                  <option value="결제">결제</option>
+                  <option value="1">예약</option>
+                  <option value="2">결제</option>
               </select>
+              <script>
+             	$(function(){
+        			$("#orDelivery option[value=" + ${ cate } + "]").attr('selected', 'selected');
+        		});
+              
+              	$(function(){
+              		$("#orDelivery").on('change', function(){
+              			var cate = $("#orDelivery").val();
+              			location.href='payStatus.pro?cate=' + cate;
+              		})
+              	})
+              </script>
               <br><br>
               <!-- 10개씩 보이고 클릭 필요x -->
               <div id="payList">
@@ -44,80 +56,49 @@
                           <th>선택 리워드 명</th>
                         </tr>
                       </thead>
-                      <tbody align="center">
-                        <tr>
-                          <td>user01</td>
-                          <td>23,000</td>
-                          <td>결제예약</td>
-                          <td>[얼리버드] 밥그릇</td>
-                        </tr>
-                        <tr>
-                          <td>user01</td>
-                          <td>23,000</td>
-                          <td>결제예약</td>
-                          <td>[얼리버드] 밥그릇</td>
-                        </tr>
-                        <tr>
-                          <td>user01</td>
-                          <td>23,000</td>
-                          <td>결제예약</td>
-                          <td>[얼리버드] 밥그릇</td>
-                        </tr>
-                        <tr>
-                          <td>user01</td>
-                          <td>23,000</td>
-                          <td>결제예약</td>
-                          <td>[얼리버드] 밥그릇</td>
-                        </tr>
-                        <tr>
-                          <td>user01</td>
-                          <td>23,000</td>
-                          <td>결제예약</td>
-                          <td>[얼리버드] 밥그릇</td>
-                        </tr>
-                        <tr>
-                          <td>user01</td>
-                          <td>23,000</td>
-                          <td>결제예약</td>
-                          <td>[얼리버드] 밥그릇</td>
-                        </tr>
-                        <tr>
-                          <td>user01</td>
-                          <td>23,000</td>
-                          <td>결제예약</td>
-                          <td>[얼리버드] 밥그릇</td>
-                        </tr>
-                        <tr>
-                          <td>user01</td>
-                          <td>23,000</td>
-                          <td>결제예약</td>
-                          <td>[얼리버드] 밥그릇</td>
-                        </tr>
-                        <tr>
-                          <td>user01</td>
-                          <td>23,000</td>
-                          <td>결제예약</td>
-                          <td>[얼리버드] 밥그릇</td>
-                        </tr>
-                        <tr>
-                          <td>user01</td>
-                          <td>23,000</td>
-                          <td>결제예약</td>
-                          <td>[얼리버드] 밥그릇</td>
-                        </tr>
-                      </tbody>
+                      <tbody style="cursor:pointer;" align="center">
+						<c:forEach var="pay" items="${ payStatusList }">
+							<tr>
+								<td>${ pay.member.memId }</td>
+								<td>${ pay.orSum }</td>
+								<td>${ pay.orDelivery }</td>
+								<td>${ pay.projectReward.rewardTitle }</td>
+							</tr>
+						</c:forEach>
+					 </tbody>
                   </table>
               </div>
               <br>
               <div id="pagingArea" align="center">
                   <ul class="pagination">
-                      <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">4</a></li>
-                      <li class="page-item"><a class="page-link" href="#">5</a></li>
-                      <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+                      <c:choose>
+							<c:when test="${ pi.currentPage eq 1}">
+						<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+							</c:when>
+							<c:otherwise>						
+						<li class="page-item"><a class="page-link" href="payStatus.pro?currentPage=${ pi.currentPage-1 }&cate=${ cate }">&lt;</a></li>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:choose>
+								<c:when test="${ pi.currentPage eq p }">
+									<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link" href="payStatus.pro?currentPage=${ p }&cate=${ cate }">${ p }</a></li>	
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						
+						<c:choose>
+							<c:when test="${ pi.currentPage eq pi.maxPage }">
+								<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="payStatus.pro?currentPage=${ pi.currentPage+1 }&cate=${ cate }">&gt;</a></li>
+							</c:otherwise>
+						</c:choose>
                   </ul>
               </div>
               <br><br><br>

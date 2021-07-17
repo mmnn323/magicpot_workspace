@@ -7,6 +7,7 @@ import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.vo.Creator;
+import com.kh.magicpot.project.model.vo.PayStatus;
 import com.kh.magicpot.project.model.vo.ProRequire;
 import com.kh.magicpot.project.model.vo.Project;
 import com.kh.magicpot.project.model.vo.ProjectReward;
@@ -152,6 +153,46 @@ public interface ProjectService {
 
 	// 프로젝트 오픈 예약
 	int updateOpenDateRes(Project pro);
+
+	// 펀딩 현황 조회
+	Project selectFunStatus(int pno);
+
+	// 주문 건수 조회
+	int selectOrderCount(int pno);
+
+	// 리뷰 수 조회
+	int selectReviewCount(int pno);
+
+	// 서포터 수 조회
+	int selectSupCount(int pno);
+
+	// payStatus 수 조회
+	int selectPayStatusCount(int pno);
+
+	// payStatus 조회
+	ArrayList<PayStatus> selectPayStatusList(PageInfo pi, HashMap<String, Integer> map);
+
+	// deliStatus 수 조회
+	int selectdeliStatusCount(int pno);
+
+	// deliStatus 조회
+	ArrayList<PayStatus> selectdeliStatusList(PageInfo pi, HashMap<String, Integer> map);
+
+	// 후원금 조회
+	int selectFunPrice(int pno);
+
+	// 배송완료금 조회
+	int selectFinishPrice(int pno);
+
+	// 환불금 조회
+	int selectReturnPrice(int pno);
+
+	// 운송장 수정
+	int updateDeliverNo(PayStatus payStatus);
+
+	// 프로젝트 검색 리스트 개수
+	int selectListProSearchCount(HashMap<String, String> map);
+
 	
 }
 

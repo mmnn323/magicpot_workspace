@@ -120,7 +120,7 @@
             <!-- 나가기 클릭시 메인페이지로 이동 -->
             <div id="logo"><img src="resources/images/common/mainLogo.png" width="120px" height="45px;"></div>
             <div id="adminId">admin1</div>
-            <div id="logout" style="cursor:pointer;padding-right:0px;">로그아웃</div>
+            <div id="logout" style="cursor:pointer;padding-right:0px;" onclick="location.href='logout.me'">로그아웃</div>
             <div id="bar" style="cursor:pointer;padding-right:0px;">|</div>
             <div id="outPage" style="cursor:pointer; padding-left:0px;" onclick="location.href='${ pageContext.servletContext.contextPath}';">홈페이지</div>
         </div>

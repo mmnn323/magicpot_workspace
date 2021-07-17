@@ -27,7 +27,12 @@
 			                    <option value="project">프로젝트</option>
 			                    <option value="creator">크리에이터(기업)명</option>
 		                    </select> 
-						<input name="keyWord" id="keyWord" type="text" placeholder=" Search">
+		                    <script>
+			                	$(function(){
+			                		$("#searchCtg option[value=" + '${ map.searchCtg }' + "]").attr('selected', 'selected');
+			                	})
+		                    </script>
+						<input name="keyWord" id="keyWord" type="text" value="${ map.keyWord }" placeholder=" Search">
 					</form>
 				</div>
             </div>
@@ -78,7 +83,7 @@
 								<li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
 							</c:when>
 							<c:otherwise>						
-								<li class="page-item"><a class="page-link" href="fundingManage.ad?currentPage=${ pi.startPage }">&laquo;</a></li>
+								<li class="page-item"><a class="page-link" href="searchFun.ad?currentPage=${ pi.startPage }&keyWord=${ map.keyWord }">&laquo;</a></li>
 							</c:otherwise>
 						</c:choose>
 						
@@ -87,7 +92,7 @@
 						<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
 							</c:when>
 							<c:otherwise>						
-						<li class="page-item"><a class="page-link" href="fundingManage.ad?currentPage=${ pi.currentPage-1 }">&lt;</a></li>
+						<li class="page-item"><a class="page-link" href="searchFun.ad?currentPage=${ pi.currentPage-1 }&keyWord=${ map.keyWord }">&lt;</a></li>
 							</c:otherwise>
 						</c:choose>
 						
@@ -97,7 +102,7 @@
 									<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item"><a class="page-link" href="fundingManage.ad?currentPage=${ p }">${ p }</a></li>	
+									<li class="page-item"><a class="page-link" href="searchFun.ad?currentPage=${ p }&keyWord=${ map.keyWord }">${ p }</a></li>	
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -107,7 +112,7 @@
 								<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="fundingManage.ad?currentPage=${ pi.currentPage+1 }">&gt;</a></li>
+								<li class="page-item"><a class="page-link" href="searchFun.ad?currentPage=${ pi.currentPage+1 }&keyWord=${ map.keyWord }">&gt;</a></li>
 							</c:otherwise>
 						</c:choose>
 						
@@ -116,7 +121,7 @@
 								<li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="fundingManage.ad?currentPage=${ pi.maxPage }">&raquo;</a></li>
+								<li class="page-item"><a class="page-link" href="searchFun.ad?currentPage=${ pi.maxPage }&keyWord=${ map.keyWord }">&raquo;</a></li>
 							</c:otherwise>
 						</c:choose>
                     </ul>

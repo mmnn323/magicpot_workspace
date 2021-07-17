@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.magicpot.project.model.vo.ProRequire" alias="ProRequire" />
 		<typeAlias type="com.kh.magicpot.project.model.vo.ProjectReward" alias="ProjectReward" />
 		<typeAlias type="com.kh.magicpot.project.model.vo.ProjectFile" alias="ProjectFile" />
-		
+		<typeAlias type="com.kh.magicpot.project.model.vo.PayStatus" alias="PayStatus"/>
 		
 		<!-- 다인 -->
 		<typeAlias type="com.kh.magicpot.guide.model.vo.Guide" alias="Guide"/>

@@ -12,6 +12,7 @@ import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.dao.ProjectDao;
 import com.kh.magicpot.project.model.vo.Creator;
+import com.kh.magicpot.project.model.vo.PayStatus;
 import com.kh.magicpot.project.model.vo.ProRequire;
 import com.kh.magicpot.project.model.vo.Project;
 import com.kh.magicpot.project.model.vo.ProjectReward;
@@ -271,7 +272,69 @@ public class ProjectServiceImpl implements ProjectService{
 		return pDao.updateOpenDateRes(sqlSession, pro);
 	}
 
+	@Override
+	public Project selectFunStatus(int pno) {
+		return pDao.selectFunStatus(sqlSession, pno);
+	}
 
-	
+	@Override
+	public int selectOrderCount(int pno) {
+		return pDao.selectOrderCount(sqlSession, pno);
+	}
+
+	@Override
+	public int selectReviewCount(int pno) {
+		return pDao.selectReviewCount(sqlSession, pno);
+	}
+
+	@Override
+	public int selectSupCount(int pno) {
+		return pDao.selectSupCount(sqlSession, pno);
+	}
+
+	@Override
+	public int selectPayStatusCount(int pno) {
+		return pDao.selectPayStatusCount(sqlSession, pno);
+	}
+
+	@Override
+	public ArrayList<PayStatus> selectPayStatusList(PageInfo pi, HashMap<String, Integer> map) {
+		return pDao.selectPayStatusList(sqlSession, pi, map);
+	}
+
+	@Override
+	public int selectdeliStatusCount(int pno) {
+		return pDao.selectdeliStatusCount(sqlSession, pno);
+	}
+
+	@Override
+	public ArrayList<PayStatus> selectdeliStatusList(PageInfo pi, HashMap<String, Integer> map) {
+		return pDao.selectdeliStatusList(sqlSession, pi, map);
+	}
+
+	@Override
+	public int selectFunPrice(int pno) {
+		return pDao.selectFunPrice(sqlSession, pno);
+	}
+
+	@Override
+	public int selectFinishPrice(int pno) {
+		return pDao.selectFinishPrice(sqlSession, pno);
+	}
+
+	@Override
+	public int selectReturnPrice(int pno) {
+		return pDao.selectReturnPrice(sqlSession, pno);
+	}
+
+	@Override
+	public int updateDeliverNo(PayStatus payStatus) {
+		return pDao.updateDeliverNo(sqlSession, payStatus);
+	}
+
+	@Override
+	public int selectListProSearchCount(HashMap<String, String> map) {
+		return pDao.selectListProSearchCount(sqlSession, map);
+	}
 	
 }
