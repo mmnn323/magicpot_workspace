@@ -87,8 +87,7 @@
                 <input type="number" name="proPrice" min="500000" max="100000000" placeholder="ex) 5000000" value="${ project.proPrice }" required>
                 <br><br><br>
                 
-                <h5>목표 금액</h5>
-                <p id="p5">최소 50만원 ~ 최대 1억 원으로 설정하세요.</p>
+                <h5>배송비</h5>
                 <input type="number" name="proShipPrice" placeholder="금액 입력 ex) 3000" value="${ project.proShipPrice }" required>
                 <br><br><br>
 

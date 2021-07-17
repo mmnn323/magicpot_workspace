@@ -18,14 +18,35 @@
               <h5 id="summary">서포터별 결제 상태와 리워드 구성을 확인하고 발송 관리를 해주세요.</h5>
               <br><br>
               <div id="payStatus">
-                  <div id="order" align="center">
-                      <p id="title">펀딩 후원 금액</p>
-                      <h3 id="price">${ funPrice } 원</h3>
-                  </div>
-                  <div id="order" align="center">
-                      <p id="title">펀딩 배송 완료 금액</p>
-                      <h3 id="price">${ finishPrice } 원</h3>
-                  </div>
+              	  <c:choose>
+					 <c:when test="${ empty funPrice }">
+	                  	 <div id="order" align="center">
+		                      <p id="title">펀딩 후원 금액</p>
+		                      <h3 id="price">0 원</h3>
+						</div>
+                  	</c:when>
+                  	<c:otherwise>
+                  		<div id="order" align="center">
+	                      <p id="title">펀딩 후원 금액</p>
+	                      <h3 id="price">${ funPrice } 원</h3>
+	                  </div>
+                  	</c:otherwise>
+                  </c:choose>
+                 
+                  <c:choose>
+                  	<c:when test="${ empty finishPrice }">
+                  		<div id="order" align="center">
+	                      <p id="title">펀딩 배송 완료 금액</p>
+	                      <h3 id="price">0 원</h3>
+	                  </div>
+                  	</c:when>
+                  	<c:otherwise>
+                  		<div id="order" align="center">
+	                      <p id="title">펀딩 배송 완료 금액</p>
+	                      <h3 id="price">${ finishPrice } 원</h3>
+	                  </div>
+                  	</c:otherwise>
+                  </c:choose>
               </div>
               <div id="select">
                   <select name="deliveryStatus" id="deliveryStatus">

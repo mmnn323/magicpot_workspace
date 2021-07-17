@@ -956,6 +956,9 @@ public class ProjectController {
 	@RequestMapping("fundingStatus.pro")
 	public String fundingStatus(int pno, Model model, HttpSession session) {
 		session.setAttribute("pno", pno);
+		Project project = pService.selectProject2(pno);
+		session.setAttribute("project", project);
+		
 		Project pro = pService.selectFunStatus(pno);
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("orderCount", pService.selectOrderCount(pno));
@@ -1008,6 +1011,7 @@ public class ProjectController {
 	@RequestMapping("payStatus.pro")
 	public ModelAndView payStatus(@RequestParam(value="currentPage", defaultValue="1") int currentPage, @RequestParam(value="cate", defaultValue="0")int cate, HttpSession session, ModelAndView mv) {
 		int pno = (Integer)session.getAttribute("pno");
+		Project project = pService.selectProject2(pno);
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("pno", pno);
 		map.put("cate", cate);
@@ -1019,14 +1023,19 @@ public class ProjectController {
 		int funPrice1 = pService.selectFunPrice(pno);
 		int returnPrice1 = pService.selectReturnPrice(pno);
 		DecimalFormat moneyForm = new DecimalFormat("###,###");
-		String funPrice = moneyForm.format(funPrice1);
-		String returnPrice = moneyForm.format(returnPrice1);
-		
+		if(funPrice1 > 0) {
+			String funPrice = moneyForm.format(funPrice1);
+			mv.addObject("funPrice", funPrice);
+		}
+		if(returnPrice1 > 0) {
+			String returnPrice = moneyForm.format(returnPrice1);
+			mv.addObject("returnPrice", returnPrice);
+		}
 		mv.addObject("pi", pi)
 		  .addObject("payStatusList", payStatusList)
 		  .addObject("cate", cate)
-		  .addObject("funPrice", funPrice)
-		  .addObject("returnPrice", returnPrice)
+		  
+		  
 		  .setViewName("project/payStatus");
 		
 		return mv;
@@ -1047,14 +1056,18 @@ public class ProjectController {
 		int funPrice1 = pService.selectFunPrice(pno);
 		int finishPrice1 = pService.selectFinishPrice(pno);
 		DecimalFormat moneyForm = new DecimalFormat("###,###");
-		String funPrice = moneyForm.format(funPrice1);
-		String finishPrice = moneyForm.format(finishPrice1);
+		if(funPrice1 > 0) {
+			String funPrice = moneyForm.format(funPrice1);
+			mv.addObject("funPrice", funPrice);
+		}
+		if(finishPrice1 > 0) {
+			String finishPrice = moneyForm.format(finishPrice1);
+			mv.addObject("finishPrice", finishPrice);
+		}
 		
 		mv.addObject("pi", pi)
 		  .addObject("deliStatusList", deliStatusList)
 		  .addObject("cate", cate)
-		  .addObject("funPrice", funPrice)
-		  .addObject("finishPrice", finishPrice)
 		  .setViewName("project/deliveryStatus");
 		
 		return mv;

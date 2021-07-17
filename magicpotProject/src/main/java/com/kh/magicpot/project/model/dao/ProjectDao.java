@@ -300,17 +300,31 @@ public class ProjectDao {
 		return (ArrayList)sqlSession.selectList("selectdeliStatusList", map, rowBounds);
 	}
 
-
 	public int selectFunPrice(SqlSessionTemplate sqlSession, int pno) {
-		return sqlSession.selectOne("selectFunPrice", pno);
+		String result = sqlSession.selectOne("selectFunPrice", pno);
+		if(result == null) { // null인 경우 중복 x -> 0
+			return 0;
+		}else { // null이 아닌 경우 중복 -> 1
+			return Integer.parseInt(result);
+		}
 	}
 
 	public int selectFinishPrice(SqlSessionTemplate sqlSession, int pno) {
-		return sqlSession.selectOne("selectFinishPrice", pno);
+		String result = sqlSession.selectOne("selectFinishPrice", pno);
+		if(result == null) { // null인 경우 중복 x -> 0
+			return 0;
+		}else { // null이 아닌 경우 중복 -> 1
+			return Integer.parseInt(result);
+		}
 	}
 
 	public int selectReturnPrice(SqlSessionTemplate sqlSession, int pno) {
-		return sqlSession.selectOne("selectReturnPrice", pno);
+		String result = sqlSession.selectOne("selectReturnPrice", pno);
+		if(result == null) { // null인 경우 중복 x -> 0
+			return 0;
+		}else { // null이 아닌 경우 중복 -> 1
+			return Integer.parseInt(result);
+		}
 	}
 
 

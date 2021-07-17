@@ -122,19 +122,7 @@ a#MOVE_TOP_BTN {
 	                  	 </script>
 					</c:when>
 					<c:when test="${ loginUser.status eq 'C' && creator.status eq 'Y' }">
-	                 	<li id="project"><a style="cursor:pointer;">프로젝트 올리기</a></li>
-						<input type="hidden" name="proNo" id="proNo" value="57">
-						
-						<script>
-							$(function(){
-			            		$("#project").click(function(){
-			            			location.href="fundingHome2.pro?pno=" + $(this).next().val();
-			            		})
-			            	})
-						</script>
-	            	<!--
 	            		<li id="project"><a href="insert.pro">프로젝트 올리기</a></li>
-	            	-->
 	                </c:when>
 					<c:when test="${ loginUser.status ne 'C' && creator.status eq 'N'}">
 						<li><a href="" onclick="alertFn2();">프로젝트 올리기</a></li>

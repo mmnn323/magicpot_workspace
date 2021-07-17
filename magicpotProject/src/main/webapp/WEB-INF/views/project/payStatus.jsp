@@ -18,14 +18,35 @@
               <h5 id="summary">서포터의 결제 상태 및 결제 금액 확인해주세요.</h5>
               <br><br>
               <div id="payStatus">
-                  <div id="order" align="center">
-                      <p id="title">펀딩 후원 금액</p>
-                      <h3 id="price">${ funPrice } 원</h3>
-                  </div>
-                  <div id="order" align="center">
+                  <c:choose>
+					 <c:when test="${ empty funPrice }">
+	                  	 <div id="order" align="center">
+		                      <p id="title">펀딩 후원 금액</p>
+		                      <h3 id="price">0 원</h3>
+						</div>
+                  	</c:when>
+                  	<c:otherwise>
+                  		<div id="order" align="center">
+	                      <p id="title">펀딩 후원 금액</p>
+	                      <h3 id="price">${ funPrice } 원</h3>
+	                  </div>
+                  	</c:otherwise>
+                  </c:choose>
+                  
+                  <c:choose>
+					 <c:when test="${ empty returnPrice }">
+	                  	 <div id="order" align="center">
                       <p id="title">펀딩 환불 금액</p>
-                      <h3 id="price">${ returnPrice } 원</h3>
+                      <h3 id="price">0 원</h3>
                   </div>
+                  	</c:when>
+                  	<c:otherwise>
+                  		<div id="order" align="center">
+	                      <p id="title">펀딩 환불 금액</p>
+	                      <h3 id="price">${ returnPrice } 원</h3>
+	                  </div>
+                  	</c:otherwise>
+                  </c:choose>
               </div>
               <select name="orDelivery" id="orDelivery">
                   <option value="">결제 상태 : 전체</option>

@@ -814,38 +814,10 @@
 	                        	<script>
 									function alertFn1(){
 										alert("로그인이 필요합니다.");
-										// sweetalert 창 바로 닫히는 에러(timer안먹힘 차후 수정할지)
 									}		  
-									/*
-									var alert = function(){
-	                        			swal({
-    		                        		title : "Sweet Alert",
-    		                        	    icon  : "error",
-    		                        	    timer : 2000,
-    		                        	    closeOnClickOutside : false
-    		                        	}).then(function(){
-    		                        		swal('', "로그인이 필요합니다.", "error");
-    		                        	});
-	                        		}
-									
-		                        	$(function(){
-	                        			$("#fnBtn").on("click", function(){
-	                        				swal({
-	    		                        		title : "Sweet Alert",
-	    		                        	    icon  : "error",
-	    		                        	    timer : 2000,
-	    		                        	    closeOnClickOutside : false
-	    		                        	}).then(function(){
-	    		                        		swal('', "로그인이 필요합니다.", "error");
-	    		                        	});
-											
-	                        			})
-	                        		});
-									*/
 	                  	        </script>
 	                        </c:when>
 	                        <c:when test="${ loginUser.status eq 'C' && creator.status eq 'Y' }">
-	                        	<!-- 내가 만든 프로젝트로 이동 추가 필요 -->
 	                        	<a href="insert.pro" class="btn btn-success"><h3>펀딩 올리기</h3></a>
 	                        </c:when>
 	                        <c:when test="${ loginUser.status ne 'C' && creator.status eq 'N'}">

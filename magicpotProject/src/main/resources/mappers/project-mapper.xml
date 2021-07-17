@@ -738,6 +738,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		       pro_title
 		     , create_word
 			 , pro_price
+			 , pro_shippirce
 			 , pro_image
 			 , ca_name
 			 , close_date
@@ -888,7 +889,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   from tb_order
 		  where reward_no in (select reward_no
 		                        from pro_reward
-		                       where pro_no = 57)
+		                       where pro_no = #{pno})
             and or_support is not null
 	</select>
 	
@@ -982,7 +983,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 펀딩 후원 금액 조회 -->
-	<select id="selectFunPrice" resultType="_int" parameterType="_int">
+	<select id="selectFunPrice" resultType="string" parameterType="_int">
 		select
 		 	   pro_fundprice
 		  from project
@@ -990,7 +991,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 배송완료 금액 조회 -->
-	<select id="selectFinishPrice" resultType="_int" parameterType="_int">
+	<select id="selectFinishPrice" resultType="string" parameterType="_int">
 		select
 	           sum(or_sum)
 	      from tb_order
@@ -1002,7 +1003,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 환불 금액 조회 -->
-	<select id="selectReturnPrice" resultType="_int" parameterType="_int">
+	<select id="selectReturnPrice" resultType="string" parameterType="_int">
 		select
 		       sum(or_sum)
 		  from tb_order
