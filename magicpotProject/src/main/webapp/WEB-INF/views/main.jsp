@@ -865,9 +865,9 @@
             </div>
 
             
+            <!-- header.jsp에 탑버튼/문의하기 버튼 기능 추가함 -->
+            <!-- 
             <div id="customerBtn">
-                
-                
                 <a id="upBtn" href="" onclick="goTop()">
                     <img src="resources/images/common/upBtn.png" >
                 </a>
@@ -876,6 +876,7 @@
                     <img src="resources/images/common/requestBtn.png" >
                 </a>
             </div>
+             -->
             
         </div>
 
@@ -898,14 +899,14 @@
    	    	 alert("클릭됨1");
    	  		}
             
-            function goTop(){
-            	if (document.body.scrollTop!=0 || document.documentElement.scrollTop!=0){
-                    window.scrollBy(0,-50);
-                    timeOut=setTimeout('scrollToTop()',10);
-                }
-                else clearTimeout(timeOut);
-            	
-            }
+            //header.jsp에 탑버튼/문의하기 버튼 기능 추가함
+            //function goTop(){
+            	//if (document.body.scrollTop!=0 || document.documentElement.scrollTop!=0){
+                    //window.scrollBy(0,-50);
+                    //timeOut=setTimeout('scrollToTop()',10);
+                //}
+                //else clearTimeout(timeOut);
+            //}
            
             /*
             // 카카오 메세지
