@@ -75,6 +75,10 @@
     	border:1px solid lightgrey;
     	padding:8px; 
     }
+    #cmUrl {
+    	border:none;
+    	
+    }
 </style>
 </head>
 <body>
@@ -206,11 +210,11 @@
         	    		var value = "";
         	    		$.each(report, function(i, obj){
         	    			
-        	    			//obj.cmNo = Number(obj.cmNo);
+        	    			obj.cmNo = Number(obj.cmNo);
         	    			
         	    			value += "<tr>"
         	    			      +		"<td>" + obj.reportNo + "</td>"
-        	    			      +		"<td><button type='button' onClick=window.open('http://localhost:8883/magicpot/detail.cm?cmNo=" + obj.cmNo + "')>" + obj.cmcoNo + "</button></td>"
+        	    			      +		"<td><button id='cmUrl' type='button' onClick=window.open('http://localhost:8883/magicpot/detail.cm?cmNo=" + obj.cmNo + "')>" + obj.cmcoNo + "</button></td>"
         	    			      +		"<td>" + obj.reportType + "</td>"
         	    			      +		"<td>" + obj.reportDate + "</td>"
         	    				  + "</tr>";

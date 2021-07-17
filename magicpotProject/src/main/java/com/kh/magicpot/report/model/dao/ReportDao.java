@@ -49,12 +49,11 @@ public class ReportDao {
 		
 		return (ArrayList)sqlSession.selectList("reportMapper.adminReportList", null, rowBounds);
 	}
-
-	// 관리자 신고 디테일
-	public ArrayList<Report> reportDetail(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("reportMapper.adminReportList", null);
+	
+	// 관리자 신고 리스트 - 원본글 확인 버튼 
+	public int cmPage(SqlSessionTemplate sqlSession, int cmcoNo) {
+		return sqlSession.selectOne("reportMapper.cmPage", cmcoNo);
 	}
-
 
 
 }

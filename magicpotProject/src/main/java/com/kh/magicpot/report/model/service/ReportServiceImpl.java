@@ -50,11 +50,13 @@ public class ReportServiceImpl implements ReportService {
 		return rDao.adminReportList(sqlSession, pi);
 	}
 
-	// 관리자 신고 디테일
-	public ArrayList<Report> reportDetail() {
-		return rDao.reportDetail(sqlSession);
+	// 관리자 신고리스트 - 원본글 확인
+	@Override
+	public int cmPage(int cmcoNo) {
+		return rDao.cmPage(sqlSession, cmcoNo);
 	}
 
+	
 
 	
 	

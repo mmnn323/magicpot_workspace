@@ -22,6 +22,8 @@
 		<result column="report_date" property="reportDate"/>
 		<result column="report_type" property="reportType"/>
 		<result column="report_status" property="reportStatus"/>
+		
+		<result column="cm_no" property="cmNo"/>
 	</resultMap>	
 	
 	<!-- 블랙리스트 페이징 처리 -->
@@ -74,14 +76,23 @@
 				report_no
 			 ,  cmco_no
 			 ,  report_content
-			 ,  report_date
+			 ,  to_char(report_date, 'YY-MM-DD') report_date
 			 ,  report_type
 			 ,  report_status
-		  from  report	 	
+		  from  report r  	
 		 order
 		    by  report_no desc
 	</select>
 	
+	<!-- 관리자 신고리스트 - 원본글 확인 -->
+	<select id="cmPage" resultType="_int">
+		select 
+			    distinct cm.cm_no
+		  from  report r  	
+		  join  cm_comment co on (r.cmco_no = co.cmco_no)
+		  join  community cm on (co.cm_no = cm.cm_no)	
+		 where  co.cmco_no = #{cmcoNo} 
+	</select>
 
  
 </mapper>

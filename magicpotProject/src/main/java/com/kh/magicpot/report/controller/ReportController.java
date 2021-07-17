@@ -54,15 +54,13 @@ public class ReportController {
 		model.addAttribute("adminReportList", rService.adminReportList(pi));
 		return "report/adminReportList";
 	}
-	
-	// 관리자 신고 디테일
+
+	// 관리자 신고 리스트 - 원본글 확인
 	@ResponseBody
-	@RequestMapping("reportDetail.re")
-	public String reportDetail (Model model) {
+	@RequestMapping("cmPage.re")
+	public String cmPage (int cmcoNo) {
 		
-		model.addAttribute("reportDetail", rService.reportDetail());
-		
-		return "";
+		return "http://localhost:8883/magicpot/detail.cm?cmNo=" + rService.cmPage(cmcoNo);
 	}
 	
 

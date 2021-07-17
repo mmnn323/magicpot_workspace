@@ -23,9 +23,7 @@ public interface ReportService {
 	// 관리자 신고 리스트 조회
 	ArrayList<Report> adminReportList(PageInfo pi);
 
-	// 관리자 신고 디테일
-	ArrayList<Report> reportDetail();
-
-
+	// 관리자 신고리스트 - 원본글 확인
+	int cmPage(int cmcoNo);
 
 }

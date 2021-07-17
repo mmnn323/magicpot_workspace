@@ -21,5 +21,5 @@ public class Report {
 	private String reportType;
 	private String reportStatus;
 	
-	
+	private int cmNo;
 }
