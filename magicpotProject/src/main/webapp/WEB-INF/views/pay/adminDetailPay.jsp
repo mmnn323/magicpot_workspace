@@ -102,7 +102,7 @@ table, tr, th, td {
 	font-size: 12px;
 	text-align: center;
 	list-style: none;
-	width: 200px;
+	width: 280px;
 	margin-top: 5px;
 }
 
@@ -175,16 +175,14 @@ table, tr, th, td {
 			</div>
 			<div class="content1">
 				<ul>
-					<li>2</li>
-					<li>user01</li>
-					<li>김김</li>
-					<li>소창</li>
-					<li>리빙</li>
-					<li>100%</li>
-					<li>카드</li>
-					<li>3000</li>
-					<li>24000</li>
-					<li>24000</li>
+					<li>${ a.memNo }</li>
+					<li>${ a.memId }</li>
+					<li>${ a.memName }</li>
+					<li>${ a.proTitle }</li>
+					<li>${ a.payMethod }</li>
+					<li>${ a.cpPrice }</li>
+					<li>${ a.payPrice }</li>
+					<li>${ a.payPrice }</li>
 				</ul>
 				<br>
 			</div>

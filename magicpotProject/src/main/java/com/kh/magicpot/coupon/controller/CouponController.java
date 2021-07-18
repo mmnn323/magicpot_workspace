@@ -63,9 +63,33 @@ public class CouponController {
 		}
 	
 		
+	}
+	
+	@RequestMapping("mycoupon.me") 
+	public ModelAndView selectMyCoupon(ModelAndView mv) {
+		
+		ArrayList<Coupon> list = cService.selectCoupon();
+		
+
+		mv.addObject("list", list)
+		  .setViewName("coupon/myCoupon");
+		
+		return mv;
 		
 	}
 	
+	@RequestMapping("couponZone.me")
+	public String couponZone() {
+		
+		return "coupon/couponZone";
+	}
+	
+	
+	@RequestMapping("pastCoupon.me")
+	public String pastCoupon() {
+		
+		return "coupon/pastCoupon";
+	}	
 }
 	
 

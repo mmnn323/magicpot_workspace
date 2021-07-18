@@ -13,15 +13,18 @@ import lombok.ToString;
 @Setter 
 @Getter 
 @ToString
-public class DetailPay {
-	//admin
+public class ConcludePay {
+	//배송지에 들어갈 정보들
+	int memNo;
+	String adName;
+	String adPhone;
+	String adPost;
+	String adRoad;
+	String adDetail;
 	
-	private int memNo;
-	private String memId;
-	private String memName;
-	private String proTitle;
-	private String cpPrice;
-	private String payPrice;
-	private String payMethod;
-
+	//pay에 들어갈 정보들
+	int orNo;
+	String payMethod;
+	String payPrice;
+	String payDate;
 }

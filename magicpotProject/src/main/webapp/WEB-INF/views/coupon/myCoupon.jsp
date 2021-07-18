@@ -64,7 +64,7 @@ div {
 
 #content3 {
 	height: 200px;
-	width: 300px;
+	width: 370px;
 	border: 1px solid rgb(116, 152, 107);
 	border-radius: 3px;
 	margin-top: 50px;
@@ -89,11 +89,11 @@ div {
 			</div>
 			<div id="header3">
 				<h4>
-					<a id="a" href=""><h4>쿠폰존</h4></a>
+					<a id="a" href="couponZone.me"><h4>쿠폰존</h4></a>
 			</div>
 			<div id="header4">
 				<h4>
-					<a id="a" href="">지난 쿠폰 내역</a>
+					<a id="a" href="pastCoupon.me">지난 쿠폰 내역</a>
 				</h4>
 			</div>
 		</div>
@@ -106,19 +106,23 @@ div {
 
 			<div id="content2">
 				&nbsp;&nbsp;&nbsp; <a id="a" style="color: rgb(116, 152, 107);"
-					href=""> <i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;쿠폰등록하기
+					href=""> 
 				</a>
 			</div>
-
+   <c:forEach var="c" items="${ list }"> 
 			<div id="content3">
-				<h1 style="color: rgb(116, 152, 107);">&nbsp;&nbsp;3,000원</h1>
+			  <form action="mycoupon.me">
+			
+				<h1 style="color: rgb(116, 152, 107);">&nbsp;&nbsp;${ c.cpPrice }원</h1>
 				<p>
-					&nbsp;&nbsp;&nbsp; 첫 구매 쿠폰 <br>&nbsp;&nbsp;&nbsp; 유효기간
-					2021.12.12 23시59분 <br>&nbsp;&nbsp;&nbsp; 사용조건 20,000이상 펀딩 시 사용
+					&nbsp;&nbsp;&nbsp; ${ c.cpName } <br>&nbsp;&nbsp;&nbsp; 
+					유효기간 ${ c.cpLimit } <br>&nbsp;&nbsp;&nbsp; 사용조건 ${ c.cpCondition }
 					가능
 				</p>
+			
+			  </form>	
 			</div>
-
+  </c:forEach>	
 			<div id="content4">
 				<p>
 				<h3>&nbsp;&nbsp;&nbsp;펀딩 쿠폰 이용안내</h3>
