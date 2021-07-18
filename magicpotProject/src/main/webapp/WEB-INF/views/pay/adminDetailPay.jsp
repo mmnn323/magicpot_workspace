@@ -173,24 +173,24 @@ table, tr, th, td {
 					<b>총 결제 금액</b>
 				</h5>
 			</div>
-			<div class="content1">
-				<ul>
-					<li>${ a.memNo }</li>
-					<li>${ a.memId }</li>
-					<li>${ a.memName }</li>
-					<li>${ a.proTitle }</li>
-					<li>${ a.payMethod }</li>
-					<li>${ a.cpPrice }</li>
-					<li>${ a.payPrice }</li>
-					<li>${ a.payPrice }</li>
-				</ul>
-				<br>
-			</div>
-
+			
+				<div class="content1">
+					<ul>
+						<li>${ ad.memNo }</li>
+						<li>${ ad.memId }</li>
+						<li>${ ad.memName }</li>
+						<li>${ ad.proTitle }</li>
+						<li>${ ad.payMethod }</li>
+						<li>${ ad.cpPrice }</li>
+						<li>${ ad.payPrice }</li>
+						<li>${ ad.payPrice }</li>
+					</ul>
+					<br>
+				</div>
+			
 			<!-- 버튼 영역 -->
 			<div id="cm_btnArea" align="center">
 				<a href="" class="btn btn-success" id="cm_enrollBtn">결제취소</a>
-
 			</div>
 
 			<br> <br> <br> <br> <br> <br> <br>

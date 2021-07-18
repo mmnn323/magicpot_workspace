@@ -110,7 +110,7 @@ table, tr, th, td {
 	
 				<input type="hidden" value="${o.memNo }" name="memNo"/>
 				<input type="hidden" value="${o.phone }" name="adPhone"/>
-				<input type="hidden" value="${o.orNum }" name="orNum"/>
+				<input type="hidden" value="${o.orNo }" name="orNo"/>
 		<table class="wrap" align="center">
 
 			<tr>
@@ -175,7 +175,7 @@ table, tr, th, td {
 			<tr>
 				<th id="empty"></th>
 				<td><h6>연락처</h6></td>
-				<td><span id="orderPhone">${ o.phone }</span></td>
+				<td><span id="orderPhone">${ o.Phone }</span></td>
 
 				<td id="empty2"> </td>
 				<!-- 공백용-->

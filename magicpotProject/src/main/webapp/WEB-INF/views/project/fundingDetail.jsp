@@ -435,12 +435,12 @@
             <div id="reward">
             	<c:forEach var="r" items="${ list }">
 	                <div id="reward_1">
-	                	<form action="" method="post">
+	              
 		                    <a href="pay.me?rno=${r.rewardNo}">
 		                        <b>${ r.rewardPrice }원 펀딩 </b><br>
 		                        <span>${ r.rewardExplain }</span>
 		                    </a>
-	                    </form>
+	                
 	                </div><br>
 				</c:forEach>
             </div>
