@@ -23,7 +23,6 @@ public class Pay {
 	private String payPrice;
 	private String proTitle;
 
-	
 
 	
 

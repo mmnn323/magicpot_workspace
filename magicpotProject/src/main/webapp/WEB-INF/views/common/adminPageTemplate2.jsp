@@ -154,19 +154,15 @@
                             </li>
                             <li>
                                 <h4>
-                                    <a href="" id="abled">결제관리</a><span style="margin-left:110px"></span></h4>
+                                    <a href="adminPay.me" id="abled">결제관리</a><span style="margin-left:110px"></span></h4>
                                 </h4>
                             </li>
                             <li>
-                                <h4 id="user" style="cursor:pointer;">
-                                    <p id="p4" style="display:inline;">쿠폰관리</p>
-                                    <i id="btn1" class="fas fa-angle-down" style="margin-left:93px"></i>
+                                <h4>
+                                    <a href="adminCoupon.me" id="abled">쿠폰관리</a><span style="margin-left:110px"></span></h4>
                                 </h4>
-                                <ul id="subMenu">
-                                    <li><a href="coupon.me">쿠폰등록/삭제</a></li>
-                                    <li><a href="">회원별 쿠폰</a></li>
-                                </ul>
                             </li>
+                            
                             <li>
                                 <h4>
                                     <a href="fundingManage.ad" id="abled">펀딩관리</a><span style="margin-left:110px"></span></h4>
@@ -176,16 +172,6 @@
                                 <h4>
                                     <a href="adminProList.gu" id="abled">이용가이드 관리</a><span style="margin-left:80px"></span>
                                 </h4>
-                            </li>
-                            <li>
-                                <h4 id="comm" style="cursor:pointer;">
-                                    <p id="abled" style="display:inline;">커뮤니티 관리</p>
-                                    <i id="btn2" class="fas fa-angle-down" style="margin-left:53px"></i>
-                                </h4>
-                                <ul id="subMenu">
-                                    <li><a href="">커뮤니티 공지사항<br>관리</a></li>
-                                    <li><a href="">커뮤니티 글 관리</a></li>
-                                </ul>
                             </li>
                             <li>
                                 <h4 id="support" style="cursor:pointer;">

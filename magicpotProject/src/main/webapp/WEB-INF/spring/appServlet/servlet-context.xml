@@ -29,7 +29,7 @@
 	<context:component-scan base-package="com.kh.magicpot" />
 	
 	<!-- [휘경] 웹소켓 핸들러, 빈 등록 -->
-	<websocket:handlers>
+  	<websocket:handlers>
 		<websocket:mapping handler="chattingHandler" path="/chat.do"/>
 		<websocket:sockjs></websocket:sockjs>
 	</websocket:handlers>

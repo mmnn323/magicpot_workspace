@@ -16,6 +16,8 @@
 
 table, tr, th, td {
 	border: px solid lightgray;
+		margin: auto;
+	margin-top: 30px;
 }
 
 .wrap {
@@ -55,7 +57,7 @@ table, tr, th, td {
 
 		</tr>
 
-
+	
 		<tr>
 			<th id="empty"></th>
 			<th id="img"><img style="width: 200px;"
@@ -66,7 +68,7 @@ table, tr, th, td {
 				</p>
 			</td>
 		</tr>
-
+	
 		<tr>
 			<th id="empty"></th>
 			<td><h2>주문 정보</h2></td>
@@ -178,8 +180,10 @@ table, tr, th, td {
 		</tr>
 
 		<tr>
+			<th></th>
+			<th></th>
 			<th colspan="6"><br> <br>
-				<button id="pundingbtn">후원목록</button></th>
+				<button  id="pundingbtn">후원목록</button></th>
 		</tr>
 
 	</table>

@@ -21,7 +21,7 @@
 }
 
 table, th, td {
-	border: 1px solid lightgray;
+	border: px solid lightgray;
 }
 
 /*전체 table 크기 설정*/
@@ -82,12 +82,12 @@ th {
 
 		<tr>
 			<!--회원 닉네임-->
-			<th id="id"><h2>돈조매직팟님</h2>서포터·개인회원</th>
+			<th id="id"><h2>${ loginUser.memName }</h2>서포터·개인회원</th>
 			<th rowspan="6"></th>
 
 			<!--펀딩횟수-->
 			<th class="pd2" colspan="6"><h2>펀딩하기</h2> <a
-				style="font-size: 20px;" href="" id="myPageA">0회</a></th>
+				style="font-size: 20px;" href="" id="myPageA"></a></th>
 			<th id="pd" rowspan="8"></th>
 		</tr>
 		<tr>
@@ -99,18 +99,27 @@ th {
 
 			<!--메세지, 쿠폰-->
 			<tr>
-				 <th><i class="far fa-envelope fa-2x"></i> </th>
-            <td colspan="2">
-            	<!-- 다인 추가 - 로그인 한 회원 상태에 따라 다른 페이지 연결 -->
-            	<c:choose>
-	            	<c:when test="${ loginUser.status eq 'Y' }">	       
-	                	<p><a id="myPage" href="myPageMsg.me">메세지</a></p>  
-	                </c:when>   
-	                <c:when test="${ loginUser.status eq 'C' }">
-	                	<p><a id="creator" href="creatorMsg.me">메세지</a></p>  
-	                </c:when>   
-                </c:choose>           
-            </td>
+				<th><i class="far fa-envelope fa-2x"></i></th>
+				<td colspan="2">
+					<!-- 다인 추가 - 로그인 한 회원 상태에 따라 다른 페이지 연결 --> <c:choose>
+						<c:when test="${ loginUser.status eq 'Y' }">
+							<p>
+								<a id="a" href="myPageMsg.me">메세지</a>
+							</p>
+						</c:when>
+						<c:when test="${ loginUser.status eq 'C' }">
+							<p>
+								<a id="creator" href="creatorMsg.me">메세지</a>
+							</p>
+						</c:when>
+					</c:choose>
+							<th></th>
+							<!-- 공간유지용-->
+				<th><i class="fas fa-tags fa-2x"></i></th>
+				<td class="icons">
+                <p> <a href="mycoupon.me" id="a">쿠폰 </a> </p>
+            </td>         
+				
 			</tr>
 
 			<!-- 나의 활동 - 내가 만든 프로젝트, 좋아하는 프로젝트-->
@@ -125,7 +134,7 @@ th {
 							<a href="made.pr"><p>내가 만든 프로젝트</p></a>
 						</c:when>
 						<c:otherwise>
-							<a href="" onclick="creatorYn();"><p>내가 만든 프로젝트</p></a>
+							<a id="a" href="" onclick="creatorYn();"><p>내가 만든 프로젝트</p></a>
 						</c:otherwise>
 					</c:choose></td>
 
@@ -133,7 +142,7 @@ th {
 				<!--그냥 가운데 공간주는 용도-->
 
 				<th><i class="fas fa-heart fa-2x"></i></th>
-				<td><a href="like.pr"><p>좋아하는 프로젝트</p></a></td>
+				<td><a id="a" href="like.pr"><p>좋아하는 프로젝트</p></a></td>
 
 			</tr>
 
@@ -141,8 +150,8 @@ th {
 
 			<!-- 문의 내역, 정보변경 -->
 		<tr>
-			<th><i class="fas fa-question fa-2x"></i></th>
-			<td colspan="2"><a href="" id="a"><p>나의 문의 내역</p></a></td>
+			<th><i class="fas fa-file-invoice-dollar fa-2x"></i></th>
+			<td colspan="2"><a href="fundingList.me?mno=${ loginUser.memNo }" id="a"><p>주문내역</p></a></td>
 
 
 			<th></th>
@@ -161,8 +170,7 @@ th {
 			<th></th>
 			<!-- 공간유지용-->
 
-			<th><i class="fas fa-file-invoice-dollar fa-2x"></i></th>
-			<td><a href="" id="a"><p>주문목록</p></a></td>
+
 		</tr>
 
 

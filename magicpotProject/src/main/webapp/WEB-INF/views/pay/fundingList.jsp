@@ -30,9 +30,12 @@ table, tr, th, td {
 
 .wrap {
 	width: 1000px;
+	margin: auto;
+	margin-top: 30px;
 }
 
-img {
+
+#img2 {
 	width: 200px;
 	height: 150px;
 }
@@ -40,10 +43,19 @@ img {
 #empty {
 	width: 20px;
 }
+
+#a {
+	text-decoration: none;
+	color: black;
+}
+
 </style>
 </head>
 <body>
+	
+	
 	<jsp:include page="../common/header.jsp" />
+	
 
 	<table class="wrap">
 		<tr>
@@ -61,18 +73,22 @@ img {
 					<option value="결제실패">결제실패/취소</option>
 			</select></th>
 		</tr>
-
+	<c:forEach var="f" items="${ list }">
 		<tr>
 			<th id="empty"></th>
-			<th><img src="../img/sochang.jfif" alt=""></th>
+			<th><img id="img2" src="${ f.proImage }" alt=""></th>
 			<td colspan="4">
 				<p>
-					냄사나는 수건은 그만! 피부관리의 시작, 우리집엔 소창수건이 있다!!<br>
+				 <a id="a" href="fundingDetail.me?proNo=${ f.proNo }" >${ f.rewardTitle }</a><br>
 				</p>
 			</td>
 		</tr>
+	</c:forEach>
 	</table>
+	<script>
+	
+	</script>
 
-	<jsp:include page="../common/footer.jsp" />
+
 </body>
 </html>

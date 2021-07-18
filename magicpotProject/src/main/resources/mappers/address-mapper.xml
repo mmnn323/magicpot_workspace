@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="messageMapper">
+	
+	
+	<insert id="newAddress" parameterType="AddressList">
+ 		insert
+	  	  into message
+	  	  (
+	  	  	ad_no
+	  	  , mem_no
+	  	  , ad_location
+	  	  , ad_name
+	  	  , ad_phone
+	  	  , ad_post
+	  	  , ad_read,
+	  	  , ad_detail
+	  	  , ad_default
+	  	  )
+	  	  values
+	  	  (
+	  	    seq_adno.nextval
+	  	  , #{memNo}
+	  	  , 'Y'
+	  	  , #{ad_name}
+	  	  , #{ad_phone}
+	  	  , #{ad_post}
+	  	  , #{ad_road}
+	  	  , #{ad_detail}
+	  	  , 'N'
+	  	  )
+ 	</insert>
+
+</mapper>
