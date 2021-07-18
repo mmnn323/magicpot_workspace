@@ -413,6 +413,7 @@
         
         <!-- The Modal : 신고-->
         <div class="modal" id="reportModal">
+         <form action="newReport.re" method="post">
             <div class="modal-dialog">
             <div class="modal-content">
         
@@ -426,27 +427,66 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="sel1">신고 유형</label>
-                        <select class="form-control" id="sel1">
-                        <option value="광고">광고</option>
-                        <option value="분란조장">분란조장</option>
+                        <select class="form-control" id="type" name="type">
+	                        <option value="광고">광고</option>
+	                        <option value="분란조장">분란조장</option>
                         </select>
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="comment">신고 사유</label>
-                        <textarea class="form-control" rows="5" id="comment" name="reportContent" style="resize:none"></textarea>
+                        <textarea class="form-control" rows="5" id="reportContent" name="reportContent" style="resize:none"></textarea>
                     </div>
                 </div>
         
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger">신고하기</button>
+                    <button type="submit" class="btn btn-danger" id="reportBtn">신고하기</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                 </div>
         
             </div>
             </div>
+          </form>
         </div>
+        
+        <script>
+        	$(document).on("click", "#reportBtn", function(){
+        		
+        		var cmCommentNo = $(".cmComment").children().eq(0).val();
+        		var reportType = $("select[name=type]").val();
+        		var reMemId = $(".cmComment").children().eq(2).val();
+        		/*
+        		console.log(cmCommentNo);
+				console.log($("#reportContent").val());
+				console.log(reportType);
+				console.log(${ loginUser.memNo });
+				console.log(reMemId);
+				*/
+        		
+        		$.ajax({
+					url : "newReport.re",
+					data: {
+						
+    					cmcoNo:cmCommentNo,
+    					reportContent:$("#reportContent").val(),
+    					reportType:reportType,
+						memNo:"${ loginUser.memNo }",		
+						reMemId:reMemId
+						
+					}, success : function(result){
+						
+						if(result == "success"){
+							swal("Success!", "신고 접수 되었습니다. 관리자 확인 후 처리 됩니다.", "success");
+							location.reload();
+						} 
+						
+					}, error : function(){
+						console.log("ajax 통신 실패");
+					}
+        		});
+        	})
+        </script>
         
     </div>
     
