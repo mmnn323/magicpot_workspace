@@ -120,15 +120,14 @@
     }
     #cm_btnArea{
         float:right;
-        margin-top:35%;
-        margin-right:50px;    
+        margin-bottom:10px;
     }
     
     
 	/* 페이징 영역 */
 	#cm_pagingArea {
 		padding: 30px;
-		margin-top:-15px;
+		margin-top:-20px;
 	}
 	
 	.pagination>li>a {
@@ -144,6 +143,7 @@
 	}
 	
 	tr:hover{cursor: pointer;}
+
 </style>
 </head>
 <body>
@@ -166,7 +166,7 @@
                 </p>
             </div>
 
-            <img src="resources/image/guideLogo.png" id="guideLogo">
+            <img src="resources/images/common/guideLogo.png" id="guideLogo">
                                        
                 
         </div>
@@ -182,12 +182,21 @@
                     <div id="cloudContent"></div>
                     <br>
                     
-                   <c:forEach var="n" items="${ list }">
+                  
+	               <c:if test="${ !empty loginUser and loginUser.memId eq 'admin'}">
+	                    <!-- 글작성 버튼 -->
+						<div id="cm_btnArea">
+							<a href="enroll.no" class="btn btn-success" id="cm_enrollBtn">글작성</a>
+						</div>
+				   </c:if>
+				
+					
+					<c:forEach var="n" items="${ list }">
 	                    <div id="content">
 	                        <div id="content1">
 	                            <span>공지사항</span><br>
 	                            <span id="title">
-	                                <a href="notice.de">${ n.noTitle }</a>
+	                                <a href="notice.de" style="text-decoration:none; color:black;">${ n.noTitle }</a>
 	                            </span>
 	                            <br><span>${ n.noDate }</span>
 	                        </div>
@@ -311,11 +320,11 @@
 
                 <br><br>
                 <div id="etc">
-                    <a href=""><h6>공지사항</h6></a>
+                    <a href="" style="text-decoration:none; color:black;"><h6>공지사항</h6></a>
                     <br>
-                    <a href=""><h6>이용약관</h6></a>
+                    <a href="" style="text-decoration:none; color:black;"><h6>이용약관</h6></a>
                     <br>
-                    <a href=""><h6>FAQ</h6></a>
+                    <a href="" style="text-decoration:none; color:black;"><h6>FAQ</h6></a>
 
                 </div>
             </div>

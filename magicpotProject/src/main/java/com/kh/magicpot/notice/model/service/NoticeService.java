@@ -10,5 +10,5 @@ public interface NoticeService {
 	int selectListCount();
 	ArrayList<Notice> selectNotice(PageInfo pi);
 	Notice selectNoticeDetail(int noNo);
-	
+	int insertNotice(Notice n);
 }

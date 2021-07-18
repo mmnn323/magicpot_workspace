@@ -380,13 +380,10 @@
         <div id="content2">
                 <ul>
                     <li>
-                    	<a id="story">스토리</a>
+                    	<a id="story" href="#">스토리</a>
                     </li>
                     <li>
-                    	<a id="author">작가의 말</a>
-                    </li>
-                    <li>
-                    	<a id="review">체험리뷰</a>
+                    	<a id="author" href="#">작가의 말</a>
                     </li>
                 </ul>
         </div><br>

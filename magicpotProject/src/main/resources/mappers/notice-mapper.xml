@@ -45,4 +45,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 from notice
 		where no_no = #{noNo}
 	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+ 		insert
+ 		  into notice
+ 		  (
+ 		    no_no
+ 		  , no_title
+ 		  , no_content
+ 		  , org_filename
+ 		  , no_route
+ 		  )
+ 		  values
+ 		  (
+ 		    seq_nno.nextval
+ 		  , #{noTitle}
+ 		  , #{noContent}
+ 		  , #{orgFileName}
+ 		  , #{noRoute}
+ 		  )
+ 	</insert>
+	
 </mapper>

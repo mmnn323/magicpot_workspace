@@ -55,7 +55,7 @@
 	}
 	
 	/* 커뮤니티 검색+버튼 영역 */
-	#searchBtnArea div {
+	#searchArea div {
 		float: left;
 	}
 	
@@ -91,7 +91,8 @@
 	}
 	
 	.btn-primary {
-		margin-left: 21%;
+		float:left;
+		margin-left:21%;
 	}
 	
 	/* 리스트 영역  */
@@ -206,6 +207,7 @@
                                 mybatis 수업시간에 제목에 a태그 달아서 제목만 클릭 시 상세보기로 넘어갔는데 일단 그렇게 적용했어요!
                                                                         이 부분은 기능구현 부분이니 tr 클릭 시 요청하고 싶으신 분들은 그렇게 수정해주셔도 될 것 같아요~!
                             -->
+            <br>
 			<div id="cmNoticeListArea">
 				<table class="table" id="cmNoticeList" align="center" action="multiDel">
 					<thead class="thead-light">

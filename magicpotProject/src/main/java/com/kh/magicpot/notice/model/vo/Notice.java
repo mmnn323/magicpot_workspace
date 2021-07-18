@@ -23,4 +23,5 @@ public class Notice {
 	private String status;
 	private String orgFileName; 
 	private String noRoute;
+	
 }
