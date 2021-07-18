@@ -161,16 +161,6 @@
                                 </h4>
                             </li>
                             <li>
-                                <h4 id="comm" style="cursor:pointer;">
-                                    <p id="abled" style="display:inline;">커뮤니티 관리</p>
-                                    <i id="btn2" class="fas fa-angle-down" style="margin-left:53px"></i>
-                                </h4>
-                                <ul id="subMenu">
-                                    <li><a href="">커뮤니티 공지사항<br>관리</a></li>
-                                    <li><a href="">커뮤니티 글 관리</a></li>
-                                </ul>
-                            </li>
-                            <li>
                                 <h4 id="support" style="cursor:pointer;">
                                     <p id="abled" style="display:inline;">고객센터 관리</p>
                                     <i id="btn3" class="fas fa-angle-down" style="margin-left:53px"></i>
