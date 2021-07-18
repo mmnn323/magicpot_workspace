@@ -52,10 +52,10 @@
 							</h4>
 							<ul id="subMenu">
 								<li><a href="fundingHome2.pro?pno=${ project.proNo }">펀딩 준비 홈</a></li>
-								<li><a href="">기본 요건</a></li>
-								<li><a href="">기본 정보</a></li>
-								<li><a href="">스토리 작성</a></li>
-								<li><a href="">리워드 설계</a></li>
+								<li><a href="requireEnroll.pro">기본 요건</a></li>
+								<li><a href="basicEnroll.pro">기본 정보</a></li>
+								<li><a href="storyEnroll.pro">스토리 작성</a></li>
+								<li><a href="rewardEnroll.pro">리워드 설계</a></li>
 							</ul>
 						</li>
 						<li>
@@ -77,7 +77,7 @@
 							</h4>
 						</li>
 						<li>
-							<h4><a href="" id="abled">자료 및 도움말</a><span style="margin-left:80px"></span></h4>
+							<h4><a href="https://www.notion.so/rewardguide/a933461f78f949dc9dd11f17e7d35e36" id="abled">자료 및 도움말</a><span style="margin-left:80px"></span></h4>
 						</li>
 					</ul>
 				</div>	

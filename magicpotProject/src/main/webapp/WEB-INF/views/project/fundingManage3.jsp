@@ -5,86 +5,87 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>펀딩 신청 상세조회(리워드 설계)</title>
+<title>펀딩 신청 상세 조회(스토리 작성)</title>
 <!-- css -->
 <link rel="stylesheet" href="resources/css/funding/fundingManage3.css">
+<style>
+	#agreeBtn{
+	    height: 40px;
+	    padding-left: 3px;
+	    padding-bottom: 2px;
+	    border: none;
+	    border-radius: 4px;
+	    background-color: rgb(116, 152, 107);
+	    font-size: 17px;
+	    font-weight: 400;
+	    color: white;
+	    cursor: pointer;
+	}
+</style>
 </head>
 <body>
     <jsp:include page="../common/adminPageTemplate2.jsp"/>
-    <div id="content">
-        <div id="content1">
-            <div id="contentTitleArea">
-                <span id="title1">펀딩 신청 상세 조회</span>
-                <span id="title2">리워드 설계</span>
+            <div id="content">
+                <div id="content1" style="margin-left:-50px;">
+                    <div id="contentTitleArea">
+                        <span id="title1">펀딩 신청 상세 조회</span>
+                        <span id="title2">스토리 작성</span>
+                    </div>
+                    <hr style="clear: both;margin-bottom: 30px;">
+                    <br><br><br><br>
+                    <form action="" method="post">
+
+                        <h4>프로젝트 광고 심의 동의</h4>
+                        <p id="p3" style="color:rgb(116, 152, 107);">공통 표시/광고 가이드 라인</p>
+                        <button type="button" id="agreeBtn"><i class="fas fa-check"></i> 동의완료</button>
+                        <br><br><br><br>
+                        
+                        <h4>프로젝트 요약</h4>
+                        <p id="p2">프로젝트 상단에 노출됩니다.</p>
+                        <textarea name="rewardPlan" id="rewardPlan" cols="80" rows="5" maxlength="250" style="resize: none;width: 70%;">${ pro.proSummary }</textarea>
+                        <br><br><br>
+
+                        <h4>스토리 작성</h4>
+                        <!-- 스크립트로 동의 후 상단 내용 삭제 + disabled해제 -->
+                        <div id="story">
+                            <textarea id="summernote" name="editordata">${ pro.proStory }</textarea>
+                        </div>
+                        <br><br>
+                        <script>
+                            $(function(){
+                                $('#summernote').summernote({
+                                    height:400,
+                                    minHeight:400,
+                                    maxHeight:400,
+                                    lang:"ko-KR",                                    
+                                    toolbar: [
+                                            // [groupName, [list of button]]
+                                            ['fontname', ['fontname']],
+                                            ['fontsize', ['fontsize']],
+                                            ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+                                            ['color', ['forecolor','color']],
+                                            ['table', ['table']],
+                                            ['para', ['ul', 'ol', 'paragraph']],
+                                            ['height', ['height']],
+                                            ['insert',['picture','link','video']],
+                                            ['view', ['help']]
+                                        ],
+                                        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+                                        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+                                    });
+                                    $('#summernote').summernote('disable');
+                            })
+                        </script>
+                    </form>
+                    <br>
+                    <div id="btns">
+		                <!-- 이전 페이지 연결 -->
+		                <button type="button" id="beforeBtn" onclick="location.href='fundingDetail2.ad?pno=${ pno }'">이전으로</button>
+		                <!-- 다음페이지 연결 -->
+		                <button type="button" id="nextBtn" onclick="location.href='fundingDetail4.ad?pno=${ pno }'">다음으로</button>
+		            </div>
+                </div>
+                <br><br><br><br><br><br>
             </div>
-            <hr style="clear: both;margin-bottom: 30px;">
-            <br><br><br><br>
-            <div id="rewards">
-                <div id="reward">
-                    <p id="rewardPrice">23,000원</p>
-                    <p id="quantityLimit">제한 수량 300개</p>
-                    <hr>
-                    <p id="rewardTitle">[얼리버드] 밥그릇</p>
-                    <p id="rewardExplain">지구를 살리기위해 만들어진 종이 폼롤러! 이번기회에 환경 친화적 폼롤러로 피부 걱정없이 홈트하자. 롤러 사고 나무심기 기부 캠페인에 참여하여 우리 지구 함께 살려요 :)</p>
-                    <p id="rewardCate">배송비</p>
-                    <p id="shipPrice" >3,000원</p>
-                    <p id="rewardCate" style="clear:both;">리워드 발송 시작일</p>
-                    <p id="deliveryStart">2021년 07월 중순(11~20일)</p>
-                </div>
-                <div id="reward">
-                    <p id="rewardPrice">23,000원</p>
-                    <p id="quantityLimit">제한 수량 300개</p>
-                    <hr>
-                    <p id="rewardTitle">[얼리버드] 밥그릇</p>
-                    <p id="rewardExplain">지구를 살리기위해 만들어진 종이 폼롤러! 이번기회에 환경 친화적 폼롤러로 피부 걱정없이 홈트하자. 롤러 사고 나무심기 기부 캠페인에 참여하여 우리 지구 함께 살려요 :)</p>
-                    <p id="rewardCate">배송비</p>
-                    <p id="shipPrice" >3,000원</p>
-                    <p id="rewardCate" style="clear:both;">리워드 발송 시작일</p>
-                    <p id="deliveryStart">2021년 07월 중순(11~20일)</p>
-                </div>
-                <div id="reward">
-                    <p id="rewardPrice">23,000원</p>
-                    <p id="quantityLimit">제한 수량 300개</p>
-                    <hr>
-                    <p id="rewardTitle">[얼리버드] 밥그릇</p>
-                    <p id="rewardExplain">지구를 살리기위해 만들어진 종이 폼롤러! 이번기회에 환경 친화적 폼롤러로 피부 걱정없이 홈트하자. 롤러 사고 나무심기 기부 캠페인에 참여하여 우리 지구 함께 살려요 :)</p>
-                    <p id="rewardCate">배송비</p>
-                    <p id="shipPrice" >3,000원</p>
-                    <p id="rewardCate" style="clear:both;">리워드 발송 시작일</p>
-                    <p id="deliveryStart">2021년 07월 중순(11~20일)</p>
-                </div>
-                <div id="reward">
-                    <p id="rewardPrice">23,000원</p>
-                    <p id="quantityLimit">제한 수량 300개</p>
-                    <hr>
-                    <p id="rewardTitle">[얼리버드] 밥그릇</p>
-                    <p id="rewardExplain">지구를 살리기위해 만들어진 종이 폼롤러! 이번기회에 환경 친화적 폼롤러로 피부 걱정없이 홈트하자. 롤러 사고 나무심기 기부 캠페인에 참여하여 우리 지구 함께 살려요 :)</p>
-                    <p id="rewardCate">배송비</p>
-                    <p id="shipPrice" >3,000원</p>
-                    <p id="rewardCate" style="clear:both;">리워드 발송 시작일</p>
-                    <p id="deliveryStart">2021년 07월 중순(11~20일)</p>
-                </div>
-                <div id="reward">
-                    <p id="rewardPrice">23,000원</p>
-                    <p id="quantityLimit">제한 수량 300개</p>
-                    <hr>
-                    <p id="rewardTitle">[얼리버드] 밥그릇</p>
-                    <p id="rewardExplain">지구를 살리기위해 만들어진 종이 폼롤러! 이번기회에 환경 친화적 폼롤러로 피부 걱정없이 홈트하자. 롤러 사고 나무심기 기부 캠페인에 참여하여 우리 지구 함께 살려요 :)</p>
-                    <p id="rewardCate">배송비</p>
-                    <p id="shipPrice" >3,000원</p>
-                    <p id="rewardCate" style="clear:both;">리워드 발송 시작일</p>
-                    <p id="deliveryStart">2021년 07월 중순(11~20일)</p>
-                </div>
-            </div>
-            <br><br><br>
-            <div id="btns">
-                <!-- 이전 페이지 연결 -->
-                <button type="button" id="beforeBtn">이전으로</button>
-                <!-- 다음페이지 연결 -->
-                <button type="button" id="nextBtn">다음으로</button>
-            </div>
-            <br><br><br>
-        </div>
-    </div>
 </body>
 </html>

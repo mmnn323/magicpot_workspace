@@ -141,9 +141,9 @@
                     						  +		"<td>" + obj.memId + "</td>"
                     						  +		"<td>" + obj.msgContent + "</td>"
                     						  +		"<td>" + "답변대기" + "</td>"      
-                    						  +		"<td>" +   
+                    						  +		"<td> <div>" +
                     						  "<a href='' class='btn btn-success' id='me_enrollBtn' data-toggle='modal' data-target='#meAnswerBtn' style='color: white;'>" + "답변달기" + "</a>"
-                    						  + "</td>"
+                    						  + "</div> </td>"
                     						  + "</tr>";
                     				})
                     				$("#messageList tbody").html(value);
@@ -171,7 +171,7 @@
                            <tbody>
 	                           <c:forEach var="m" items="${creMsgList}">
 	                               <tr>
-	                                   <td id="messageNo">${m.msgNo}</td>
+	                                   <td>${m.msgNo}</td>
 	                                   <td>${m.msgSend}</td>
 	                                   <td>${m.memId}</td>
 	                                   <td>${m.msgContent}</td>
@@ -189,10 +189,10 @@
 	                                       <div id="me_btnArea">
 		                                       <c:choose>
 			                                       <c:when test="${m.msgStatus eq 'N'}">
-			                                           <a href="" class="btn btn-success" id="me_enrollBtn" data-toggle="modal" data-target="#meAnswerBtn" style="color: white;">답변달기</a>
+			                                           <a href="" class="btn btn-success" id="me_enrollBtn" data-toggle="modal" data-target="#meAnswerBtn" style="color: white;" value="${m.msgNo}">답변달기</a>
 			                                       </c:when>
 			                                       <c:otherwise>
-			                                       		<a href="" class="btn btn-success" id="me_enrollBtn" data-toggle="modal" data-target="#meAnswerBtn" style="color: white; width:120px; background-color:grey;">문의 내용 확인</a>
+			                                       		<a href="" class="btn btn-success" id="me_enrollBtn" data-toggle="modal" data-target="#meAnswerBtn" style="color: white; width:120px; background-color:grey;" value="${m.msgNo}">문의 내용 확인</a>
 			                                       </c:otherwise>
 		                                       </c:choose>
 	                                       </div> 
@@ -251,6 +251,7 @@
                <!-- Modal body -->
                <div class="modal-body" align="center">
 				  <form action="insertMsg.msg" method="post" >
+	                  <input type="hidden" name="mNo" id="mNo" value="">
 	                  <table id="meModal">
 	                      <tr>
 	                          <th>프로젝트명</th>
@@ -293,7 +294,7 @@
     
     <script>
 			$(document).on("click", "#me_enrollBtn", function(){
-				
+
 				var listMsgNo = $(this).parent().parent().siblings().first().text();
 	    		listMsgNo = Number(listMsgNo);
         		
@@ -308,6 +309,7 @@
         	    		$("#msgContent").val(msgModal.msgContent);
         	    		$("#msgReply").val(msgModal.msgReply);
         	    		
+        	    		$("#mNo").val(listMsgNo);
         	    		/*
         	    		if(){ // 버튼에 적힌 내용이 문의 내용 확인인 경우
         	    			//버튼 비활성화? 없애기?
@@ -323,18 +325,18 @@
         	
         	
         	$(document).on("click", "#me_answerBtn", function(){
+   
+				var messageNo = $("#mNo").val();
+				console.log(messageNo);
 				
-				var listMsgNo = $("#messageNo").text();
-				console.log(listMsgNo);
-				
-	    		listMsgNo = Number(listMsgNo);
+				messageNo = Number(messageNo);
         		
         		$.ajax({
         			url: "insertMsg.msg",
         			type: "post",
         			data: {
         				
-        				msgNo:listMsgNo, 
+        				msgNo:messageNo, 
         				msgReply:$("#msgReply").val()
         					
         			}, success : function(result){

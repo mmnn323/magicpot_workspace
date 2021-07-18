@@ -2,6 +2,8 @@ package com.kh.magicpot.project.model.vo;
 
 import java.sql.Date;
 
+import com.kh.magicpot.member.model.vo.Member;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,4 +39,6 @@ public class Project {
 	private int ranNo;				// 랜덤함수
 	private String caName;
 	private int rewardNo;
+	private Member member;
+	private String proPriceForm;    // proPrice에 format적용
 }

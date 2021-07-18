@@ -12,7 +12,7 @@
 <body>
     <jsp:include page="../common/adminPageTemplate2.jsp"/>
     <div id="content" style="font-family: 'Noto Sans KR', sans-serif;margin-left:50px;">
-        <div id="content1">
+        <div id="content1" style="margin-left:-50px;">
             <div id="contentTitleArea">
                 <span id="title1">펀딩 신청 상세 조회</span>
                 <span id="title2">기본 정보</span>
@@ -22,17 +22,12 @@
             <form action="" method="post">
                 
                 <h4>프로젝트 제목</h4>
-                <p id="p2">버려진 종이컵과 나무로 만들어진 업사이클링 감성 달력</p>
+                <p id="p2">${ pro.proTitle }</p>
                 <br><br>
                 
                 <h4>작가의 말</h4>
                 <div id="createrWord">
-                    <textarea id="summernote" name="editordata">
-                        자연의 아름다운 순간은 많지만<br><br>필라로이드의 세계관을 담아 본질적인 아름다움을,<br><br>화려함보다는 단순하고 직관적인 느낌을 담으려 노력했습니다.
-                        자연의 아름다운 순간은 많지만<br><br>필라로이드의 세계관을 담아 본질적인 아름다움을,<br><br>화려함보다는 단순하고 직관적인 느낌을 담으려 노력했습니다.
-                        자연의 아름다운 순간은 많지만<br><br>필라로이드의 세계관을 담아 본질적인 아름다움을,<br><br>화려함보다는 단순하고 직관적인 느낌을 담으려 노력했습니다.
-                        자연의 아름다운 순간은 많지만<br><br>필라로이드의 세계관을 담아 본질적인 아름다움을,<br><br>화려함보다는 단순하고 직관적인 느낌을 담으려 노력했습니다.
-                    </textarea>
+                    <textarea id="summernote" name="editordata">${ pro.createWord }</textarea>
                 </div>
                 <br><br>
                 <script>
@@ -62,29 +57,28 @@
                     })
                 </script>
                 <h4>목표 금액</h4>
-                <p id="p2">1,000,000 원</p>
+                <p id="p2">${ proPrice } 원</p>
+                <br><br><br>
+                
+                <h5>배송비</h5>
+                <p id="p2">${ pro.proShipPrice } 원</p>
                 <br><br><br>
 
                 <h4>대표 이미지</h4>
-                <img src="resources/images/funding/89734.jpg" alt="">
+                <img src="${ pro.proImage }" width="30%" height="30%">
                 <br><br><br>
 
                 <h4>카테고리</h4>
-                <select name="category" id="category" required>
-                    <option value="LIVING">LIVING</option>
-                    <option value="KITCHEN">KITCHEN</option>
-                    <option value="BATHROOM">BATHROOM</option>
-                    <option value="OFFICE">OFFICE</option>
-                    <option value="TRAVEL">TRAVEL</option>
-                </select>
+                <!-- 그냥 p태그로 하자 -->
+                <p id="p2">${ pro.category.caName }</p>
                 <br><br><br>
 
                 <h4>프로젝트 종료일</h4>
-                <p id="p2">2021-06-13</p>
+                <p id="p2">${ pro.closeDate }</p>
                 
                 <br><br>
                 <!-- 다음페이지 연결 -->
-                <button type="button" id="nextBtn">다음으로</button>
+                <button type="button" id="nextBtn" onclick="location.href='fundingDetail2.ad?pno=${ pno }'">다음으로</button>
             </form>
             <br><br><br><br><br>
         </div>

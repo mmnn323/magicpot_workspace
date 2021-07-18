@@ -96,3 +96,7 @@ border-bottom: 1px solid lightgray;
     padding:8px;
 }
 #cmOkBtn:hover{background-color: rgb(225, 212, 169);}
+
+#cm_content:focus, #cm_title:focus {
+    outline: none;
+}

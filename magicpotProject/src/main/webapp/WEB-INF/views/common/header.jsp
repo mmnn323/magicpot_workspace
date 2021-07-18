@@ -70,6 +70,24 @@
 	font-size: 13px;
 	color: rgb(116, 152, 107);
 }
+
+/* TOP버튼, 문의하기 버튼 */
+a#MOVE_TOP_BTN {
+    position: fixed;
+    right: 2%;
+    bottom: 50px;
+    display: none;
+    z-index: 999;
+}
+#MOVE_REQUEST_BTN{
+	position: fixed;
+    right: 2%;
+    bottom: 110px;
+    display: none;
+    z-index: 999;
+}
+#MOVE_REQUEST_BTN_AREA:hover{cursor:pointer;}
+
 </style>
 </head>
 <body>
@@ -80,6 +98,14 @@
 			swal("Success!", "${alertMsg}", "success");
 		</script>
 		<c:remove var="alertMsg" scope="session" />
+	</c:if>
+
+	<!-- 다인 추가 -->
+	<c:if test="${ !empty errorMsg }">
+		<script>
+			swal("error", "${errorMsg}", "error");
+		</script>
+		<c:remove var="errorMsg" scope="session" />
 	</c:if>
 
 	<!-- 로고 영역 -->
@@ -104,16 +130,7 @@
 	                  	 </script>
 					</c:when>
 					<c:when test="${ loginUser.status eq 'C' && creator.status eq 'Y' }">
-	                 	<li id="project"><a style="cursor:pointer;">프로젝트 올리기</a></li>
-						<input type="hidden" name="proNo" id="proNo" value="52">
-						
-						<script>
-							$(function(){
-			            		$("#project").click(function(){
-			            			location.href="fundingHome2.pro?pno=" + $(this).next().val();
-			            		})
-			            	})
-						</script>
+	            		<li id="project"><a href="insert.pro">프로젝트 올리기</a></li>
 	                </c:when>
 					<c:when test="${ loginUser.status ne 'C' && creator.status eq 'N'}">
 						<li><a href="" onclick="alertFn2();">프로젝트 올리기</a></li>
@@ -135,8 +152,8 @@
 		<!-- 검색 영역 -->
 		<div id="header_3">
 			<form action="search2.pr" id="search_form">
-				<div class="input-group mb-3" id="search_text">
-					<input type="text" class="form-control" name="keyword" id="search">
+				<div class="input-group mb-3" id="search_text" style="width:240px;">
+					<input type="text" style="width:240px;" class="form-control" name="keyword" id="search">
 					<div class="input-group-append">
 						<button class="btn btn-success" type="submit" id="searchBtn1" style="background-color: rgb(116, 152, 107);"disabled>
 							<i class="fas fa-search fa-sm" style="padding: 2px;"></i>
@@ -249,6 +266,43 @@
 		
 	</script>
 	
+	<!-- TOP버튼/문의하기 버튼 -->
+	<div id="MOVE_TOP_BTN_AREA" style="position:fixed; bottom:35px; right:30px; z-index:99;"> 
+		<a id="MOVE_TOP_BTN" href="#">
+		  <img src="resources/images/common/upBtn.png" style="width:60px"> 
+		</a>
+	</div>
+	<div id="MOVE_REQUEST_BTN_AREA" style="position:fixed; bottom:110px; right:30px; z-index:99;"> 
+		<a id="MOVE_REQUEST_BTN" onclick="alert('추후 채팅창 연결');">
+		  <img src="resources/images/common/requestBtn.png" style="width:60px"> 
+		</a>
+	</div>
+	
+	<!-- 스크립트 : TOP버튼/문의하기 버튼 -->
+	<script>
+	    $(function() {
+	        $(window).scroll(function() {
+	            if ($(this).scrollTop() > 500) {
+	                $('#MOVE_TOP_BTN').fadeIn();
+	            } else {
+	                $('#MOVE_TOP_BTN').fadeOut();
+	            }
+	        });
+	        $(window).scroll(function() {
+	            if ($(this).scrollTop() > 500) {
+	            	$('#MOVE_REQUEST_BTN').fadeIn();
+	            } else {
+	                $('#MOVE_REQUEST_BTN').fadeOut();
+	            }
+	        });
+	        $("#MOVE_TOP_BTN").click(function() {
+	            $('html, body').animate({
+	                scrollTop : 0
+	            }, 400);
+	            return false;
+	        });
+	    });
+	</script>
 
 
 </body>

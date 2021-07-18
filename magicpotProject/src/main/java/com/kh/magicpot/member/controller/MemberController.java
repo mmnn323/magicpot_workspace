@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -29,12 +30,15 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.common.template.Pagination;
 import com.kh.magicpot.member.model.service.MemberService;
+import com.kh.magicpot.community.model.vo.Community;
+import com.kh.magicpot.community.model.vo.CommunityNotice;
 import com.kh.magicpot.member.model.vo.Address;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.member.model.vo.NaverLoginBO;
 import com.kh.magicpot.project.model.service.ProjectService;
 import com.kh.magicpot.project.model.vo.Creator;
 import com.kh.magicpot.project.model.vo.Project;
+import com.kh.magicpot.report.model.service.ReportService;
 
 
 
@@ -58,6 +62,9 @@ public class MemberController {
 	private ProjectService pService;
 	
 	@Autowired
+	private ReportService rService;
+	
+	@Autowired
 	private JavaMailSender mailSender;
 	
 	@Autowired
@@ -70,6 +77,21 @@ public class MemberController {
 		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
 		
 		Member loginUser = mService.loginMember(m);
+		
+		// 다인 추가  - 신고 3회 이상으로 계정 정지된 회원 alert띄워주기
+		int result = rService.reLogout(loginUser.getMemNo());
+		
+		if(result > 0) {
+			// 로그아웃 안되는거 보완,,
+			session.removeAttribute("loginUser");
+			session.setAttribute("errorMsg", "신고 처리로 사이트 이용 불가능한 회원 입니다. 문의 바랍니다.");
+			//session.invalidate();
+			mv.setViewName("redirect:/");
+			
+		} else {
+			session.setAttribute("loginUser", loginUser);
+			mv.setViewName("redirect:/");
+		}
 		
 		// 로그인시 creator 조회
 		Creator creator = pService.selectCreator(loginUser);
@@ -137,7 +159,31 @@ public class MemberController {
 		
 		return "member/adminMemberDetail";
 	}
-	
+
+
+	/* 일반회원관리 검색 */
+	@RequestMapping("search.me")
+	public String adminSearchList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+			  				      String condition,
+							      String cmKeyword,
+							      HttpSession session,
+							      Model model) {
+		// HashMap에 담아서 요청
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("condition", condition);
+		map.put("cmKeyword", cmKeyword);
+		
+		ArrayList<Member> me = mService.searchAdminList(map);
+		
+		// Model 객체에 응답데이터 담기
+		model.addAttribute("me", me);
+		model.addAttribute("condition", condition);
+		model.addAttribute("cmKeyword", cmKeyword);
+
+		return "admin/adminMember";
+		
+				
+	}
 	
 	// 회원가입폼 페이지
 	@RequestMapping("enrollForm.me")
@@ -526,10 +572,41 @@ public class MemberController {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
+	/* 일반회원관리 상세 회원 탈퇴*/
+	@RequestMapping("delete.am")
+	public String deleteAdminMember(int memNo, HttpSession session, Model model) {
+		
+		int result = mService.deleteAdminMember(memNo);
+		//System.out.println(result);
+		if(result>0) {
+			session.removeAttribute("memNo");
+			session.setAttribute("alertMsg", "성공적으로 탈퇴되었습니다.");
+			return "redirect:admin.me";
+		}else {
+			model.addAttribute("errorMsg", "게시글 삭제 실패");
+			return "common/errorPage";
+		}
+
+	}
+
+	/* 일반회원관리 회원 다중선택 탈퇴 */
+ 	@ResponseBody 
+	@RequestMapping(value = "/delete.amc", method = RequestMethod.POST)
+	public int multiDeleteAdopt(HttpSession session, @RequestParam(value = "chBox[]") List<String> chArr,Member m
+			) {
+ 		
+		int result = 0;
+		int memNo = 0;
+
+		for (String i : chArr) {
+			memNo = Integer.parseInt(i);
+			m.setMemNo(memNo);
+
+			mService.multiDeleteAdopt(m);
+
+		}
+		result = 1;
+		return result;
+ 	}
+
 }

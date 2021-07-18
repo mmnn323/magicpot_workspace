@@ -45,101 +45,69 @@
                 </form>
             </div>
             
-            <!-- * 스크립트 : 공지사항 숨기기, 보완 필요(다른 페이지로 넘어가도 체크속성 유지) -->
-            
+            <!-- * 스크립트 : 공지사항 숨기기, 체크박스 쿠키값 7일 동안 저장 -->
             <script>
+            
 	            function showAndHide(){
-	                if($("#cm_noticeArea2").is(':visible')){
-	                    $("#cm_noticeArea2").hide(100);
-	                } else{
-	                    $("#cm_noticeArea2").show(100);
-	                }
+	            	noticeProcess();
+	            }
+	            
+	            // 공지사항 숨기기 체크 박스 체크 여부 확인, 쿠키 저장, 쿠키 삭제
+	            function noticeProcess(){
+	            	var isChecked = $("#customCheck").is(":checked"); // 체크박스가 체크되었는지 (true/false)
+	            	//alert(isChecked);
+	            	if(isChecked){ // 체크박스가 체크된 경우
+	            		$("#cm_noticeArea2").hide();
+	            		setCookie("Cookie_notice", isChecked, 7);
+	            	}else{
+	            		$("#cm_noticeArea2").show();
+	            		deleteCookie("Cookie_notice");
+	            	}
+	            };
+	            
+	            // 쿠키값 읽어오기
+	            $(function(){
+	            	var istrue = getCookie("Cookie_notice");
+	            	if(istrue){
+	            		$("#customCheck").attr("checked", true);
+	            		$("#cm_noticeArea2").hide();
+	            	}else{
+	            		$("#customCheck").attr("checked", false);
+	            		$("#cm_noticeArea2").show();
+	            	}
+	            });
+	            
+	            // 쿠키값 저장
+	            function setCookie(cookieName, value, exdays){
+	            	var exdate = new Date();
+	            	exdate.setDate(exdate.getDate() + exdays);
+	            	var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+	            	document.cookie = cookieName + "=" + cookieValue;
+	            }
+	            
+	            // 쿠키값 조회
+	            function getCookie(cookieName) { 
+	            	cookieName = cookieName + '='; 
+	            	var cookieData = document.cookie; 
+	            	var start = cookieData.indexOf(cookieName); 
+	            	var cookieValue = ''; 
+	            	if(start != -1){ 
+	            		start += cookieName.length; 
+	            		var end = cookieData.indexOf(';', start); 
+	            		if(end == -1)end = cookieData.length; 
+	            		cookieValue = cookieData.substring(start, end); 
+	            		} 
+	            	return unescape(cookieValue); 
+	            }
+				
+	            // 쿠키값 지우기
+	            function deleteCookie(cookieName){ 
+	            	var expireDate = new Date(); 
+	            	expireDate.setDate(expireDate.getDate() - 1); 
+	            	document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString(); 
 	            }
         	</script>
         	
-        	<!-- 
-        	<script>
-				function showAndHide(){
-				
-					if($("#cm_noticeArea2").is(':visible')){
-	                    $("#cm_noticeArea2").hide(100);
-				        $.cookie('noticeoff', 'ok', { expires: 7, path: '/' });
-				
-				    } else {
-				    	$("#cm_noticeArea2").show(100);
-				        $.cookie('noticeoff', 'ok', { expires: 0, path: '/' });
-				
-				    }
-				
-				}
-				
-				function noticeLoad()
-				{
-				
-				    if (!$.cookie('noticeoff')) {
-				
-				        noticeOff(false);
-				        $('#customCheck').attr('checked', false);
-				
-				    }
-				
-				}
-				
-				noticeLoad();
-			</script>
-			 -->
-        	
-        	<!-- requestScope의 hideNotice의 키값으로 존재하는 값이 있을 경우에 실행할 script (공지숨기기 체크했을 경우)-->
-	       <!--  
-        	<script>
-        	$(document).ready(function(){
-        		// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
-        	    var userInputId = getCookie("userInputId");
-        	    $("input[id='my_id']").val(userInputId); 
-        	     
-        	    if($("input[name='id']").val() != ""){ // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
-        	        $("#idSaveCheck").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
-        	    }
-        	     
-        	    $("#customCheck").change(function(){ // 체크박스에 변화가 있다면,
-        	        if($("#customCheck").is(":checked")){ // ID 저장하기 체크했을 때,
-        	            var userInputId = $("input[name='id']").val();
-        	            setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
-        	        }else{ // ID 저장하기 체크 해제 시,
-        	            deleteCookie("userInputId");
-        	        }
-        	    });
-        	     
-        	});
-        	 
-        	function setCookie(cookieName, value, exdays){
-        	    var exdate = new Date();
-        	    exdate.setDate(exdate.getDate() + exdays);
-        	    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
-        	    document.cookie = cookieName + "=" + cookieValue;
-        	}
-        	 
-        	function deleteCookie(cookieName){
-        	    var expireDate = new Date();
-        	    expireDate.setDate(expireDate.getDate() - 1);
-        	    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
-        	}
-        	 
-        	function getCookie(cookieName) {
-        	    cookieName = cookieName + '=';
-        	    var cookieData = document.cookie;
-        	    var start = cookieData.indexOf(cookieName);
-        	    var cookieValue = '';
-        	    if(start != -1){
-        	        start += cookieName.length;
-        	        var end = cookieData.indexOf(';', start);
-        	        if(end == -1)end = cookieData.length;
-        	        cookieValue = cookieData.substring(start, end);
-        	    }
-        	    return unescape(cookieValue);
-        	}
-        	</script>
-        	-->
 
             <div id="noticeLine"></div>
 
@@ -235,19 +203,20 @@
         
 
         <!-- 커뮤니티 리스트 보기 스타일 영역 -->
+        <!-- 
         <c:if test="${fn:length(cList) gt 0}">
 	        <div id="cm_btnArea" >
 	            <div id="listStyle">
-	                <a href=""><i class="fas fa-bars fa-2x"></i></a> 
-	                <a href=""><i class="fas fa-th-large fa-2x"></i></a>
+	                <a onclick="selectStyle(1);"><i class="fas fa-bars fa-2x"></i></a> 
+	                <a onclick="selectStyle(2);"><i class="fas fa-th-large fa-2x"></i></a>
 	            </div>
 	        </div>
         </c:if>
-
+		-->
 
         <!-- 커뮤니티 글 리스트 영역 -->
         <div id="cm_listArea">
-        
+        	
         	<c:choose>
         		<c:when test="${fn:length(cList) gt 0}">
 	        		<c:forEach var="c" items="${ cList }">
@@ -291,7 +260,19 @@
 	            	</div>
             	</c:otherwise>
         	</c:choose>
-        
+        	
+        	
+        	<script>
+        		var value = "";
+       			function selectStyle(style){
+       				if(style==1){
+       					alert("글 형식 클릭")
+       					
+       				}else{
+       					alert("썸네일 형식 클릭 ");
+       				}
+       			};
+        	</script>
 			
             
             <script>

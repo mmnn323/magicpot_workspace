@@ -70,7 +70,7 @@
                                 </h4>
                             </li>
                             <li>
-                                <h4><a href="" id="abled">자료 및 도움말</a><span style="margin-left:80px"></span></h4>
+                                <h4><a href="https://www.notion.so/rewardguide/a933461f78f949dc9dd11f17e7d35e36" id="abled">자료 및 도움말</a><span style="margin-left:80px"></span></h4>
                             </li>
                         </ul>
                     </div>	

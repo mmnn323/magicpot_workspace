@@ -83,4 +83,6 @@ div{box-sizing: border-box; }
 }
 #cmOkBtn:hover{background-color: rgb(225, 212, 169);}
 
-
+#cm_content:focus, #cm_title:focus {
+    outline: none;
+}

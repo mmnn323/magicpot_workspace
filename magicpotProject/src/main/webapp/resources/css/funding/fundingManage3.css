@@ -5,7 +5,7 @@
 }
 #content1{
     width: 80%;
-    padding-left:50px;
+    padding-left: 50px;
     margin-top: 40px;
 }
 #title1{
@@ -26,8 +26,10 @@
     color: rgb(116, 152, 107);
 }
 #nextBtn, #beforeBtn{
+    float: left;
     width: 130px;
     height: 40px;
+    margin-left: 5px;
     border: none;
     border-radius: 5px;
     font-size: 18px;
@@ -37,46 +39,41 @@
 #nextBtn{background-color: rgb(116, 152, 107)}
 #beforeBtn{background-color: #a1a0a0;}
 #btns{clear: both;}
-
-/* reward */
-#reward{
-    width: 350px;
-    height: 250px;
-    padding: 15px 10px 0px 10px;
-    border: 1px solid #8b8b8b;
+#approvalBtn, #cancelBtn{
+    width: 60px;
+    height: 30px;
+    border: none;
     border-radius: 5px;
+    color: white;
+}
+#approvalBtn{background-color: rgb(116, 152, 107);}
+#cancelBtn{background-color: #d36e6e;}
+
+/* story */
+#p2{
+    margin-top: -8px;
+    color: #a1a0a0;
     font-size: 14px;
 }
-#reward>*{margin-bottom: 10px;}
-#rewardPrice, #rewardCate{
-    float: left;
-    margin-right: 20px;
+#p3{
+    width: 80%;
+    font-size: 16px;
+    color: #7a7a7a;
 }
-#rewardPrice, #rewardTitle, #rewardCate{
-    font-size: 15px;
-    font-weight: 600;
+#rewardPlan{
+    resize: none;
+    width: 70%;
 }
-#quantityLimit,#shipPrice,#deliveryStart{
-    text-align: right;
-}
-#quantityLimit{
-    margin-left: 215px;
-    font-weight: 600;
-    color: rgb(116, 152, 107);
-}
-#rewardExplain, #shipPrice, #deliveryStart{
-    color: #8b8b8b;
-}
-#rewardExplain{
-    margin-top:-8px;
-    font-size: 13px;
-}
-#rewards{
-    width: 800px;
-    height: 100%;
-}
-#rewards #reward{
-    float: left;
-    margin-right: 50px;
-    margin-bottom: 20px;
+#story{width: 70%;}
+#agreeBtn{
+    height: 40px;
+    padding-left: 3px;
+    padding-bottom: 2px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(116, 152, 107);
+    font-size: 17px;
+    font-weight: 400;
+    color: white;
+    cursor: pointer;
 }

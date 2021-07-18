@@ -122,9 +122,7 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping("insertMsg.msg")
 	public String insertMsg(Message m) {
-		
-		//int msgNum = Integer.parseInt(msgNo);
-		
+
 		System.out.println(m.getMsgNo());
 		System.out.println(m.getMsgReply());
 		

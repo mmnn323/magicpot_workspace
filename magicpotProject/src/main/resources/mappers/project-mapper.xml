@@ -34,6 +34,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="reward_title" property="rewardTitle"/>
 		<result column="reward_price" property="rewardPrice"/>
 		<result column="reward_explain" property="rewardExplain"/>
+		<result column="option_type" property="optionType"/>
+		<result column="choice_option" property="choiceOption"/>
+		<result column="input_option" property="inputOption"/>
+		<result column="quantity_limit" property="quantityLimit"/>
+		<result column="delivery_start" property="deliveryStart"/>
+		<collection resultMap="Project" property="project"/>
 	</resultMap>
 	
 	<resultMap id="Creator" type="Creator" >
@@ -56,6 +62,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="reward_plan" property="rewardPlan"/>
 		<result column="reward_delivery" property="rewardDelivery"/>
 		<result column="reward_category" property="rewardCategory"/>
+	</resultMap>
+	
+	<resultMap id="Member" type="Member">
+		<id column="mem_no" property="memNo"/>
+		<result column="mem_id" property="memId"/>
+		<result column="mem_name" property="memName"/>
+	</resultMap>
+	
+	<resultMap id="PayStatus" type="PayStatus">
+		<id column="or_no" property="orNo"/>
+		<result column="mem_id" property="memId"/>
+		<result column="or_sum" property="orSum"/>
+		<result column="or_delivery" property="orDelivery"/>
+		<result column="reward_title" property="rewardTitle"/>
+		<result column="deliver_status" property="deliveryStatus"/>
+		<result column="delivery_no" property="deliveryNo"/>
+		<collection resultMap="Member" property="member"/>
+		<collection resultMap="ProjectReward" property="projectReward"/>
 	</resultMap>
 	
 	<select id="rankList" resultMap="Project" >
@@ -312,6 +336,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        where rownum between 1 and 6
 	</select>
 	
+	<!-- 크리에이터 등록 -->
 	<insert id="insertCreator" parameterType="Creator">
 		insert
 		  into creator
@@ -332,6 +357,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  )
 	</insert>
 	
+	<!-- 크리에이터 조회 -->
 	<select id="selectCreator" resultMap="Creator" parameterType="Member">
 		select
 		       cre_no
@@ -344,6 +370,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where mem_no = #{memNo}
 	</select>
 	
+	<!-- 프로젝트 생성 -->
 	<insert id="insertProject" parameterType="hashmap">
 		insert
 		  into project
@@ -360,13 +387,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  )
 	</insert>
 	
+	<!-- 프로젝트 랜덤번호 조회(중복 검사용) -->
 	<select id="selectRanNo" resultType="_int" parameterType="_int">
 		select
 		       ran_no
 		  from project
 		 where ran_no = #{ranNo}
 	</select>
-	
+
+	<!-- 프로젝트 랜덤번호 조회(프로젝트 조회용) -->
 	<select id="selectRanNo2" resultType="_int" parameterType="_int">
 		select
 		       ran_no
@@ -374,6 +403,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where pro_no = #{pno}
 	</select>
 
+	<!-- 프로젝트 조회(랜덤번호 이용)  -->
 	<select id="selectProject1" resultMap="Project" parameterType="_int">
 		select
 		       pro_no
@@ -395,6 +425,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where ran_no = #{ranNo}
 	</select>
 	
+	<!-- 프로젝트 조회(프로젝트번호 이용) -->
 	<select id="selectProject2" resultMap="Project" parameterType="_int">
 		select
 		       pro_no
@@ -418,6 +449,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where pro_no = #{pno}
 	</select>
 	
+	<!-- 프로젝트 단계 펀딩준비로 변경 -->
 	<update id="updateProStep1" parameterType="_int">
 		update
 		       project
@@ -426,7 +458,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where ran_no = #{ranNo}
 	</update>
 	 
-	<select id="selectRequire" resultMap="ProRequire">
+	 <!-- 기본요건 조회 -->
+	<select id="selectRequire" resultMap="ProRequire" parameterType="_int">
 		select
 		       pro_no
 		     , reward_plan
@@ -436,6 +469,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where pro_no = #{pno}
 	</select>
 	
+	<!-- 기본요건 추가 -->
 	<insert id="insertRequire" parameterType="ProRequire">
 		insert
 		  into pro_require
@@ -448,6 +482,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
+	<!-- 기본요건 수정 -->
 	<update id="updateRequire" parameterType="ProRequire">
 		update
 		       pro_require
@@ -531,13 +566,484 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  (
 		    mem_no
 		  , pro_no
+		  , liked_date
 		  )
 		  values
 		  (
 		  	#{memNo}
 		  , #{proNo}
+		  ,sysdate
 		  )
 	</insert>
 
+	<!-- 기본정보 조회 -->
+	<select id="selectBasic" resultMap="Project" parameterType="_int">
+		select
+			   pro_title
+			 , create_word
+			 , pro_price
+			 , pro_image
+			 , ca_no
+			 , close_date
+		  from project
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 기본정보 수정 -->
+	<update id="updateBasic" parameterType="Project">
+		update
+		       project
+		   set 
+		       pro_title = #{proTitle}
+		     , create_word = #{createWord}
+		     , pro_price = #{proPrice}
+		     , pro_shippirce = #{proShipPrice}
+		     , pro_image = #{proImage}
+		     , ca_no = #{caNo}
+		     , close_date = #{closeDate}
+		 where pro_no = #{proNo} 
+	</update>
+	
+	<!-- 광고 심의 동의 상태 변경 -->
+	<update id="updateProAd" parameterType="_int">
+		update
+			   project
+		   set 
+		   	   pro_ad = 'Y'
+		 where pro_no = #{pno}
+	</update>
+	
+	<!-- 스토리 수정 -->
+	<update id="updateStory" parameterType="Project">
+		update
+		 	   project
+		   set 
+		   	   pro_summary = #{proSummary}
+		   	 , pro_story = #{proStory}
+		 where pro_no = #{proNo}
+	</update>
+	
+	<!-- 리워드 조회 -->
+	<select id="selectReward2" resultMap="ProjectReward" parameterType="_int">
+		select
+		       reward_no
+		     , pro_no
+		     , reward_title
+		     , reward_price
+		     , reward_explain
+		     , option_type
+		     , choice_option
+		     , input_option
+		     , quantity_limit
+		     , delivery_start
+		     , pro_shippirce
+		     , delivery_start1
+		     , delivery_start2
+		  from pro_reward
+		  join project using(pro_no)
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 리워드 생성 -->
+	<insert id="insertReward" parameterType="ProjectReward">
+		insert
+		  into pro_reward
+		  (
+		    reward_no
+		  , pro_no
+		  , reward_title
+		  , reward_price
+		  , reward_explain
+		  , option_type
+		  , choice_option
+		  , input_option
+		  , quantity_limit
+		  , delivery_start
+		  )
+		  values
+		  (
+		    seq_rwco.nextval
+		  , #{proNo}
+		  , #{rewardTitle}
+		  , #{rewardPrice}
+		  , #{rewardExplain}
+		  , #{optionType}
+		  , #{choiceOption}
+		  , #{inputOption}
+		  , #{quantityLimit}
+		  , #{deliveryStart}
+		  )
+	</insert>
+	
+	<!-- 리워드 수정 -->
+	<update id="updateReward" parameterType="ProjectReward">
+		update
+			   pro_reward
+		   set 
+		       reward_title = #{rewardTitle}
+		     , reward_price = #{rewardPrice}
+		     , reward_explain = #{rewardExplain}
+		     , option_type = #{optionType}
+		     , choice_option = #{choiceOption}
+		     , input_option = #{inputOption}
+		     , quantity_limit = #{quantityLimit}
+		     , delivery_start = #{deliveryStart} 
+		     , delivery_start1 = #{deliveryStartDate1}
+		     , delivery_start2 = #{deliveryStartDate2}
+	 	 where reward_no = #{rewardNo}
+	</update>
+	
+	<!-- 리워드 삭제 -->
+	<delete id="deleteReward" parameterType="_int">
+		delete
+		  from pro_reward
+		 where reward_no = #{rno}
+	</delete>
+	
+	<!-- 프로젝트 단계 요건확인으로 변경 -->
+	<update id="updateProStep2" parameterType="_int">
+		update
+		       project
+		   set
+		       pro_step = '요건확인'
+		 where pro_no = #{pno}
+	</update>
+	
+		
+	<!-- 프로젝트 개수 조회 -->
+	<select id="selectListProCount" resultType="_int">
+  		select
+  			   count(*)
+  		  from project
+	</select>
+	
+	<!-- 프로젝트 리스트 조회 -->
+	<select id="selectProjectList" resultMap="Project">
+	    select
+		       pro_no
+		     , pro_title
+		     , pro_price
+		     , pro_status
+		     , ran_no
+		     , cre_name
+             , mem_id
+		  from project p
+          join creator c on(p.cre_no = c.cre_no)
+		  join member m on(c.mem_no = m.mem_no)
+		 order
+		    by pro_no desc
+	</select>
+	
+	<!-- 프로젝트 상세조회 기본 정보 -->
+	<select id="selectFunManageBasic" resultMap="Project" parameterType="_int">
+		select
+		       pro_title
+		     , create_word
+			 , pro_price
+			 , pro_shippirce
+			 , pro_image
+			 , ca_name
+			 , close_date
+		  from project
+		  join category using(ca_no)
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 프로젝트 단계 조회 -->
+	<select id="selectProStep" resultType="string" parameterType="_int">
+		select
+			   pro_step
+		  from project
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 프로젝트 단계 변경(콘텐츠 확인) -->
+	<update id="updateProStep3" parameterType="_int">
+		update
+		       project
+		   set
+		       pro_step = '콘텐츠확인'
+		 where pro_no = #{pno}
+	</update>
+	
+	<!-- 프로젝트 상세조회 스토리 작성 -->	
+	<select  id="selectFunManageStory" resultMap="Project" parameterType="_int">
+		select
+			   pro_summary
+			 , pro_story
+		  from project
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 프로젝트 단계 변경(펀딩 오픈) + 프로젝트 승인 -->
+	<update id="updateProStep4" parameterType="_int">
+		update
+		       project
+		   set
+		       pro_step = '펀딩오픈'
+		     , pro_status = '승인'
+		 where pro_no = #{pno}
+	</update>
+	
+	<!-- 프로젝트 상태 변경(미승인) -->
+	<update id="updateProCancel" parameterType="_int">
+		update
+		       project
+		   set
+		   	   pro_step = '펀딩취소'
+		     , pro_status = '미승인'
+		 where pro_no = #{pno}
+	</update>
+	
+	<!-- 프로젝트 오픈일 입력 -->
+	<update id="updateOpenDate" parameterType="Project">
+		update
+			    project
+		    set 
+		    	open_date = #{openDate}
+		  where pro_no = #{proNo}
+	</update>
+	
+	<!-- 프로젝트 검색  -->
+	<select id="selectProSearchList" resultMap="Project" parameterType="map">
+		 select 
+		         pro_no
+		       , pro_title
+		       , pro_price
+		       , pro_status
+		       , ran_no
+		       , cre_name
+               , mem_id
+		    from project p
+            join creator c on(p.cre_no = c.cre_no)
+		    join member m on(c.mem_no = m.mem_no)
+	        <choose>
+	            <when test="searchCtg == 'userId'">
+	                where mem_id like '%' || #{keyWord} || '%'
+	            </when>
+	            <when test="searchCtg == 'project'">
+	                where pro_title like '%' || #{keyWord} || '%'		
+	            </when>
+	            <when test="searchCtg == 'creator'">
+	                where cre_name like '%' || #{keyWord} || '%'		
+	            </when>
+	        </choose>
+	       order
+	          by pro_no desc
+	</select>
+	
+	<!-- 바로 오픈 -->
+	<update id="updateOpenDateDir" parameterType="_int">
+		update
+			    project
+			set
+				open_date = sysdate
+		  where pro_no = #{pno}
+	</update>
+	
+	<!-- 오픈 예약 -->
+	<update id="updateOpenDateRes" parameterType="Project">
+		update
+			   project
+		   set
+		       open_date = #{openDate}
+		 where pro_no = #{proNo} 
+	</update>
+	
+	<!-- 펀딩 현황 프로젝트 조회 -->
+	<select id="selectFunStatus" resultMap="Project" parameterType="_int">
+		select
+			   pro_no
+			 , ca_name
+			 , pro_price
+			 , pro_fundprice
+			 , open_date
+			 , close_date
+		  from project
+		  join category using(ca_no)
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 펀딩 건수 조회 -->
+	<select id="selectOrderCount" resultType="_int" parameterType="_int">
+		select
+       	       count(*)
+	      from tb_order
+	     where reward_no in (select reward_no
+	                           from pro_reward
+	                          where pro_no = #{pno})
+	</select>
+	
+	<!-- 리뷰 수 조회  -->
+	<select id="selectReviewCount" resultType="_int" parameterType="_int">
+		select
+       		   count(*)
+		  from review
+		 where pro_no in (select pro_no
+		                    from project
+		                   where pro_no = #{pno})
+	</select>
+	
+	<!-- 서포터 응원 수 -->
+	<select id="selectSupCount" resultType="_int" parameterType="_int">
+		 select
+		        count(*)
+		   from tb_order
+		  where reward_no in (select reward_no
+		                        from pro_reward
+		                       where pro_no = #{pno})
+            and or_support is not null
+	</select>
+	
+	<!-- 결제 현황 조회 리스트 개수 -->
+	<select id="selectPayStatusCount" resultType="_int" parameterType="_int">
+		select
+  			   count(*)
+  		  from tb_order
+  		 where reward_no in (select
+                                    reward_no
+                               from pro_reward
+                              where pro_no = #{pno})
+         <choose>
+		 	<when test="cate == 1">
+		 		and or_delivery = '예약'
+		 	</when>
+		 	<when test="cate == 2">
+		 		and or_delivery = '결제'
+		 	</when>
+		 </choose>
+	</select>
+	
+	<!-- 결제 현황 조회 -->
+	<select id="selectPayStatusList" resultMap="PayStatus" parameterType="map">
+		select
+		       mem_id
+		     , or_sum
+		     , or_delivery
+		     , reward_title
+		  from tb_order
+		  join member using(mem_no)
+		  join pro_reward using(reward_no)
+		 where pro_no = #{pno}
+		 <choose>
+		 	<when test="cate == 1">
+		 		and or_delivery = '예약'
+		 	</when>
+		 	<when test="cate == 2">
+		 		and or_delivery = '결제'
+		 	</when>
+		 </choose>
+		 order
+		 	by or_date desc
+	</select>
+	
+	<!-- 배송 현황 조회 리스트 개수 -->
+	<select id="selectdeliStatusCount" resultType="_int" parameterType="_int">
+		select
+  			   count(*)
+  		  from tb_order
+  		 where reward_no in (select
+                                    reward_no
+                               from pro_reward
+                              where pro_no = #{pno})
+           and or_delivery = '결제'
+	</select>
+	
+	<!-- 배송 현황 조회 -->
+	<select id="selectdeliStatusList" resultMap="PayStatus" parameterType="map">
+		select
+			   or_no
+		     , mem_id
+		     , or_sum
+		     , or_delivery
+		     , reward_title
+		     , deliver_status
+		     , delivery_no
+		  from tb_order
+		  join member using(mem_no)
+		  join pro_reward using(reward_no)
+		 where pro_no = #{pno}
+		 <choose>
+		 	<when test="cate == 1">
+		 		and deliver_status = '미배송'
+		 	</when>
+		 	<when test="cate == 2">
+		 		and deliver_status = '배송중'
+		 	</when>
+		 	<when test="cate == 3">
+		 		and deliver_status = '배송완료'
+		 	</when>
+		 	<when test="cate == 4">
+		 		and deliver_status = '환불신청'
+		 	</when>
+		 	<when test="cate == 5">
+		 		and deliver_status = '환불완료'
+		 	</when>
+		 </choose>
+		 order
+		 	by or_date desc
+	</select>
+	
+	<!-- 펀딩 후원 금액 조회 -->
+	<select id="selectFunPrice" resultType="string" parameterType="_int">
+		select
+		 	   pro_fundprice
+		  from project
+		 where pro_no = #{pno}
+	</select>
+	
+	<!-- 배송완료 금액 조회 -->
+	<select id="selectFinishPrice" resultType="string" parameterType="_int">
+		select
+	           sum(or_sum)
+	      from tb_order
+	     where reward_no in(select 
+						           reward_no 
+						      from pro_reward 
+						     where pro_no = #{pno})
+	       and deliver_status = '배송완료'
+	</select>
+	
+	<!-- 환불 금액 조회 -->
+	<select id="selectReturnPrice" resultType="string" parameterType="_int">
+		select
+		       sum(or_sum)
+		  from tb_order
+		  where reward_no in(select 
+						           reward_no 
+						      from pro_reward 
+						     where pro_no = #{pno})
+		    and deliver_status like '%환불%'
+	</select>
+	
+	<!-- 운송장 추가 -->
+	<update id="updateDeliverNo" parameterType="PayStatus">
+		update
+		       tb_order
+		   set 
+		       deliver_status = #{deliveryStatus}
+		     , delivery_no = #{deliveryNo}
+		 where or_no = #{orNo}
+ 	</update>
+ 	
+ 	<!-- 펀딩 관리 검색 리스트 조회 -->
+ 	<select id="selectListProSearchCount" resultType="_int" parameterType="map">
+ 	  	select
+  			   count(*)
+  		  from project p
+          join creator c on(p.cre_no = c.cre_no)
+		  join member m on(c.mem_no = m.mem_no)
+  		  <choose>
+	            <when test="searchCtg == 'userId'">
+	                where mem_id like '%' || #{keyWord} || '%'
+	            </when>
+	            <when test="searchCtg == 'project'">
+	                where pro_title like '%' || #{keyWord} || '%'		
+	            </when>
+	            <when test="searchCtg == 'creator'">
+	                where cre_name like '%' || #{keyWord} || '%'		
+	            </when>
+	       </choose>
+ 	</select>
 </mapper>
 

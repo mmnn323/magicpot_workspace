@@ -37,7 +37,7 @@
     }
 
     /* 리스트 영역  */
-    #blackListArea{ margin-top:50px; text-align:center;}
+    #blackListArea{ margin-top:30px; text-align:center;}
     #blackListList{width:800px;}
     #blackListList>tbody a{
         color:black;
@@ -51,7 +51,7 @@
     }
     
     /* 페이징 영역 */
-     #b_pagingArea{padding:100px;}
+     #b_pagingArea{padding:50px;}
     .pagination>li>a{color:rgb(116, 152, 107);}
     .pagination>li>a:hover{color:rgb(225, 212, 169);}
     #b_paging{
@@ -70,6 +70,14 @@
     }
     .modal-body tr {
         width:200px;
+    }
+    th, tr, td {
+    	border:1px solid lightgrey;
+    	padding:8px; 
+    }
+    #cmUrl {
+    	border:none;
+    	
     }
 </style>
 </head>
@@ -166,12 +174,6 @@
 	                            </tr>
 	                        </thead>
 	                        <tbody>
-	                            <tr>
-	                                <td>1</td>
-	                                <td>15</td>
-	                                <td>광고</td>
-	                                <td>20/03/21</td>
-	                            </tr>
 	                        </tbody>
 	                    </table>
 	                </div>
@@ -186,19 +188,44 @@
 	
 	     <script>
 	         $(function(){
-	           
 	             $("#blackListModal").click(function(){
 	                 $("#blackListBtn").modal();
 	             });
 	         })
-	
-	         /*
-	         function blackListModal(){
-	             $("#blackListBtn").modal({
-	                 
-	             });
-	         }
-	         */
+		
+	         $(document).on("click", "#blackListModal", function(){
+   
+				var blacklistNo = $(this).children().first().text();
+				console.log(blacklistNo);
+				blacklistNo = Number(blacklistNo);
+        		
+        		$.ajax({
+        			url: "modalBlacklist.re",
+        			type: "post",
+        			data: {blacklistNo : blacklistNo}, 
+        			success : function(report){
+        				
+        				console.log(report);
+        				
+        	    		var value = "";
+        	    		$.each(report, function(i, obj){
+        	    			
+        	    			obj.cmNo = Number(obj.cmNo);
+        	    			
+        	    			value += "<tr>"
+        	    			      +		"<td>" + obj.reportNo + "</td>"
+        	    			      +		"<td><button id='cmUrl' type='button' onClick=window.open('http://localhost:8883/magicpot/detail.cm?cmNo=" + obj.cmNo + "')>" + obj.cmcoNo + "</button></td>"
+        	    			      +		"<td>" + obj.reportType + "</td>"
+        	    			      +		"<td>" + obj.reportDate + "</td>"
+        	    				  + "</tr>";
+        	    		})
+        	    		$(".modal-body tbody").html(value);
+        				
+        			}, error : function(){
+        				console.log("실패");
+        			}
+        		});
+        	})
 	     </script>
 	</div>
 

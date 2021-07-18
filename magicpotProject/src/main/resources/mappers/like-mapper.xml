@@ -7,6 +7,7 @@
 	<resultMap id="likeResultSet" type="Like">
 		<id column="mem_no" property="memNo"/>
 		<result column="pro_no" property="proNo"/>
+		<result column="liked_date" property="likedDate"/>
 		<result column="pro_title" property="proTitle"/>
 		<result column="pro_price" property="proPrice"/>
 		<result column="pro_image" property="proImage"/>
@@ -36,6 +37,8 @@
 		  join project using (pro_no)
 		  join category using(ca_no)
 		where mem_no = #{memNo}
+		order
+		   by liked_date desc
 	</select>
 	
 	<!-- 좋아요 삭제 -->
@@ -45,18 +48,20 @@
 		  and pro_no = #{proNo}
 	</delete>
 	
-	<!-- 좋아요 추가 : 보완 필요 -->
+	<!-- 좋아요 추가 -->
 	<insert id="insertLike" parameterType="Like">
 		insert
 		  into tb_like
 		  (
 		    mem_no
 		  , pro_no
+		  , liked_date
 		  )
 		  values
 		  (
-		    3
-		  , 10
+		    #{memNo}
+		  , #{proNo}
+		  , sysdate
 		  )
 	</insert>
 	

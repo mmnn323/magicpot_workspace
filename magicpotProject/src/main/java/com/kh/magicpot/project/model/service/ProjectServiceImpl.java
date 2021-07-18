@@ -7,10 +7,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.dao.ProjectDao;
 import com.kh.magicpot.project.model.vo.Creator;
+import com.kh.magicpot.project.model.vo.PayStatus;
 import com.kh.magicpot.project.model.vo.ProRequire;
 import com.kh.magicpot.project.model.vo.Project;
 import com.kh.magicpot.project.model.vo.ProjectReward;
@@ -170,7 +172,169 @@ public class ProjectServiceImpl implements ProjectService{
 		return pDao.selectReward(sqlSession, proNo);
 	}
 
+	@Override
+	public Project selectBasic(int pno) {
+		return pDao.selectBasic(sqlSession, pno);
+	}	
 
+	@Override
+	public int updateBasic(Project p) {
+		return pDao.updateBasic(sqlSession, p);
+	}
+
+	@Override
+	public int updateProAd(int pno) {
+		return pDao.updateProAd(sqlSession, pno);
+	}
+
+	@Override
+	public int updateStory(Project p) {
+		return pDao.updateStory(sqlSession, p);
+	}
+
+	@Override
+	public ArrayList<ProjectReward> selectReward2(int pno) {
+		return pDao.selectReward2(sqlSession, pno);
+	}
 	
+	@Override
+	public int insertReward(ProjectReward proReward) {
+		return pDao.insertReward(sqlSession, proReward);
+	}
+
+	@Override
+	public int updateReward(ProjectReward proReward) {
+		return pDao.updateReward(sqlSession, proReward);
+	}
+	
+	@Override
+	public int deleteReward(int rno) {
+		return pDao.deleteReward(sqlSession, rno);
+	}
+
+	@Override
+	public int updateProStep2(int pno) {
+		return pDao.updateProStep2(sqlSession, pno);
+	}
+	
+	@Override
+	public ArrayList<Project> selectProjectList(PageInfo pi) {
+		return pDao.selectProjectList(sqlSession, pi);
+	}
+
+	@Override
+	public int selectListProCount() {
+		return pDao.selectListProCount(sqlSession);
+	}
+
+	@Override
+	public Project selectFunManageBasic(int pno) {
+		return pDao.selectFunManageBasic(sqlSession, pno);
+	}
+
+	@Override
+	public Project selectFunManageStroy(int pno) {
+		return pDao.selectFunManageStory(sqlSession, pno);
+	}
+
+	@Override
+	public String selectProStep(int pno) {
+		return pDao.selectProStep(sqlSession, pno);
+	}
+	
+	@Override
+	public int updateProStep3(int pno) {
+		return pDao.updateProStep3(sqlSession, pno);
+	}
+
+	@Override
+	public int updateProStep4(int pno) {
+		return pDao.updateProStep4(sqlSession, pno);
+	}
+
+	@Override
+	public int updateProCancel(int pno) {
+		return pDao.updateProCancel(sqlSession, pno);
+	}
+
+	@Override
+	public ArrayList<Project> selectSearchList(PageInfo pi, HashMap<String, String> map) {
+		return pDao.selectSearchList(sqlSession, pi, map);
+	}
+
+	@Override
+	public int updateOpenDateDir(int pno) {
+		return pDao.updateOpenDateDir(sqlSession, pno);
+	}
+
+	@Override
+	public int updateOpenDateRes(Project pro) {
+		return pDao.updateOpenDateRes(sqlSession, pro);
+	}
+
+	@Override
+	public Project selectFunStatus(int pno) {
+		return pDao.selectFunStatus(sqlSession, pno);
+	}
+
+	@Override
+	public int selectOrderCount(int pno) {
+		return pDao.selectOrderCount(sqlSession, pno);
+	}
+
+	@Override
+	public int selectReviewCount(int pno) {
+		return pDao.selectReviewCount(sqlSession, pno);
+	}
+
+	@Override
+	public int selectSupCount(int pno) {
+		return pDao.selectSupCount(sqlSession, pno);
+	}
+
+	@Override
+	public int selectPayStatusCount(int pno) {
+		return pDao.selectPayStatusCount(sqlSession, pno);
+	}
+
+	@Override
+	public ArrayList<PayStatus> selectPayStatusList(PageInfo pi, HashMap<String, Integer> map) {
+		return pDao.selectPayStatusList(sqlSession, pi, map);
+	}
+
+	@Override
+	public int selectdeliStatusCount(int pno) {
+		return pDao.selectdeliStatusCount(sqlSession, pno);
+	}
+
+	@Override
+	public ArrayList<PayStatus> selectdeliStatusList(PageInfo pi, HashMap<String, Integer> map) {
+		return pDao.selectdeliStatusList(sqlSession, pi, map);
+	}
+
+	@Override
+	public int selectFunPrice(int pno) {
+		return pDao.selectFunPrice(sqlSession, pno);
+	}
+
+	@Override
+	public int selectFinishPrice(int pno) {
+		return pDao.selectFinishPrice(sqlSession, pno);
+	}
+
+	@Override
+	public int selectReturnPrice(int pno) {
+		return pDao.selectReturnPrice(sqlSession, pno);
+	}
+
+	@Override
+	public int updateDeliverNo(PayStatus payStatus) {
+		return pDao.updateDeliverNo(sqlSession, payStatus);
+	}
+
+	@Override
+	public int selectListProSearchCount(HashMap<String, String> map) {
+		return pDao.selectListProSearchCount(sqlSession, map);
+	}
 	
 }

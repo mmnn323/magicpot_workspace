@@ -183,3 +183,7 @@ color: black;
     margin: 0 0 21px 0;
     display: block;
 } */
+
+#cm_title:focus, #cm_category:focus{
+    outline: none;
+}

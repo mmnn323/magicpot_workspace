@@ -3,12 +3,15 @@ package com.kh.magicpot.project.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.vo.Creator;
+import com.kh.magicpot.project.model.vo.PayStatus;
 import com.kh.magicpot.project.model.vo.ProRequire;
 import com.kh.magicpot.project.model.vo.Project;
 import com.kh.magicpot.project.model.vo.ProjectReward;
@@ -159,6 +162,180 @@ public class ProjectDao {
 	public int insertLike(SqlSessionTemplate sqlSession, Like l) {
 		return sqlSession.insert("projectMapper.insertLike", l);
 	}
+	
+	public Project selectBasic(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectBasic", pno);
+	}	
+
+	public int updateBasic(SqlSessionTemplate sqlSession, Project p) {
+		return sqlSession.update("updateBasic", p);
+	}
+
+
+	public int updateProAd(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("updateProAd", pno);
+	}
+
+
+	public int updateStory(SqlSessionTemplate sqlSession, Project p) {
+		return sqlSession.update("updateStory", p);
+	}
+	
+	public ArrayList<ProjectReward> selectReward2(SqlSessionTemplate sqlSession, int pno) {
+		return (ArrayList)sqlSession.selectList("selectReward2", pno);
+	}
+
+	public int insertReward(SqlSessionTemplate sqlSession, ProjectReward proReward) {
+		return sqlSession.insert("insertReward", proReward);
+	}
+
+	public int updateReward(SqlSessionTemplate sqlSession, ProjectReward proReward) {
+		return sqlSession.update("updateReward", proReward);
+	}
+
+	public int deleteReward(SqlSessionTemplate sqlSession, int rno) {
+		return sqlSession.delete("deleteReward", rno);
+	}
+
+	public int updateProStep2(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("updateProStep2", pno);
+	}
+	
+
+	public ArrayList<Project> selectProjectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("selectProjectList", null, rowBounds);
+	}
+
+	public int selectListProCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("selectListProCount");
+	}
+
+	public Project selectFunManageBasic(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectFunManageBasic", pno);
+	}
+	
+	public Project selectFunManageStory(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectFunManageStory", pno);
+	}
+	
+	public String selectProStep(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectProStep", pno);
+	}
+	
+	public int updateProStep3(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("updateProStep3", pno);
+	}
+
+	public int updateProStep4(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("updateProStep4", pno);
+	}
+
+	public int updateProCancel(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("updateProCancel", pno);
+	}
+
+	public ArrayList<Project> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi, HashMap<String, String> map) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("selectProSearchList", map, rowBounds);
+	}
+
+	public int updateOpenDateDir(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("updateOpenDateDir", pno);
+	}
+
+
+	public int updateOpenDateRes(SqlSessionTemplate sqlSession, Project pro) {
+		return sqlSession.update("updateOpenDateRes", pro);
+	}
+
+	public Project selectFunStatus(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectFunStatus", pno);
+	}
+
+	public int selectOrderCount(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectOrderCount", pno);
+	}
+
+	public int selectReviewCount(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectReviewCount", pno);
+	}
+
+	public int selectSupCount(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectSupCount", pno);
+	}
+
+	public int selectPayStatusCount(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectPayStatusCount", pno);
+	}
+	
+	public ArrayList<PayStatus> selectPayStatusList(SqlSessionTemplate sqlSession, PageInfo pi, HashMap<String, Integer> map) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("selectPayStatusList", map, rowBounds);
+	}
+
+
+	public int selectdeliStatusCount(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectdeliStatusCount", pno);
+	}
+
+
+	public ArrayList<PayStatus> selectdeliStatusList(SqlSessionTemplate sqlSession, PageInfo pi, HashMap<String, Integer> map) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("selectdeliStatusList", map, rowBounds);
+	}
+
+	public int selectFunPrice(SqlSessionTemplate sqlSession, int pno) {
+		String result = sqlSession.selectOne("selectFunPrice", pno);
+		if(result == null) { // null인 경우 중복 x -> 0
+			return 0;
+		}else { // null이 아닌 경우 중복 -> 1
+			return Integer.parseInt(result);
+		}
+	}
+
+	public int selectFinishPrice(SqlSessionTemplate sqlSession, int pno) {
+		String result = sqlSession.selectOne("selectFinishPrice", pno);
+		if(result == null) { // null인 경우 중복 x -> 0
+			return 0;
+		}else { // null이 아닌 경우 중복 -> 1
+			return Integer.parseInt(result);
+		}
+	}
+
+	public int selectReturnPrice(SqlSessionTemplate sqlSession, int pno) {
+		String result = sqlSession.selectOne("selectReturnPrice", pno);
+		if(result == null) { // null인 경우 중복 x -> 0
+			return 0;
+		}else { // null이 아닌 경우 중복 -> 1
+			return Integer.parseInt(result);
+		}
+	}
+
+
+	public int updateDeliverNo(SqlSessionTemplate sqlSession, PayStatus payStatus) {
+		return sqlSession.update("updateDeliverNo", payStatus);
+	}
+
+	public int selectListProSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("selectListProSearchCount", map);
+	}
+
 	
 }
 

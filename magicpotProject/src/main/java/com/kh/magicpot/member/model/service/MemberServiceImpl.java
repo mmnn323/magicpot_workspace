@@ -107,19 +107,6 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.selectList(sqlSession, pi);
 	}
 	
-	// 일반회원관리 검색 리스트 조회 
-	@Override
-	public int selectSearchListCount(HashMap<String, String> map) {
-		return mDao.selectSearchListCount(sqlSession, map);
-	}
-	
-	// 일반회원관리 검색 요청 페이지 보여질 회원 리스트
-	@Override
-	public ArrayList<Member> selectSearchList(HashMap<String, String> map, PageInfo pi) {
-		return mDao.selectSearchList(sqlSession, map, pi);
-	}
-	
-	
 	// 회원 상세조회
 	@Override
 	public Member selectAdminMember(int memNo) {
@@ -151,6 +138,28 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteMember(String memId) {
 		return mDao.deleteMember(sqlSession, memId);
 	}
+
+	// 일반회원관리 상세 회원 탈퇴
+	@Override
+	public int deleteAdminMember(int memNo) {
+		return mDao.deleteAdminMember(sqlSession, memNo);
+	}
+
+	// 일반회원관리 다중 선택 회원 탈퇴
+	@Override
+	public int multiDeleteAdopt(Member m) {
+		return mDao.multiDeleteAdopt(sqlSession, m);
+	}
+
+
+	// 일반회원관리 검색
+	@Override
+	public ArrayList<Member> searchAdminList(HashMap<String, Object> map) {
+		return mDao.searchAdminList(sqlSession, map);
+	}
+
+
+
 
 
 
