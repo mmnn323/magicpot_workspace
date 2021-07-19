@@ -56,7 +56,7 @@
     }
     .mainContent{
         border: 1px solid lightgray;
-        height: 1000px;
+        height: 1030px;
         width: 700px;
         margin-top: 20px;
         box-shadow: 10px 10px 5px grey;
@@ -64,7 +64,7 @@
 
     .sideContent{
         border: 1px solid lightgray;
-        height: 1000px;
+        height: 1030px;
         width: 260px;
         margin-top: 20px;
         margin-left: 30px;
@@ -103,7 +103,7 @@
     #content>div{float:left;}
     #content>hr{margin-left:-20px;}
     #title{font-size:25px;}
-    #content2>a>img{width:200px; height:150px; margin-top:10px;}
+    #content2>a>img{width:200px; height:150px; margin-top:7px;}
     #content1{margin-top:30px; width:450px;}
 
     #cloud>p{text-align:center;}
@@ -120,7 +120,6 @@
     }
     #cm_btnArea{
         float:right;
-        margin-bottom:10px;
     }
     
     
@@ -187,7 +186,7 @@
 	                    <!-- 글작성 버튼 -->
 						<div id="cm_btnArea">
 							<a href="enroll.no" class="btn btn-success" id="cm_enrollBtn">글작성</a>
-						</div>
+						</div><br><br>
 				   </c:if>
 				
 					
@@ -196,19 +195,18 @@
 	                        <div id="content1">
 	                            <span>공지사항</span><br>
 	                            <span id="title">
-	                                <a href="notice.de" style="text-decoration:none; color:black;">${ n.noTitle }</a>
+	                                <a href="notice.de?nno=${ n.noNo }" class="noticede" style="text-decoration:none; color:black;">${ n.noTitle }</a>
 	                            </span>
 	                            <br><span>${ n.noDate }</span>
 	                        </div>
 	                        
 	                        <div id="content2">
-	                            <a href="notice.de"><img src="${ n.noRoute }"></a>
+	                            <a href="notice.de?nno=${ n.noNo }" class="noticede"><img src="${ n.noRoute }"></a>
 	                        </div>
 	                        <br><br><br><br><br><br><br><hr>
 	                    </div>                    
                    </c:forEach>      
-                   
-                   
+                  
                     <!-- 페이징 영역 -->
 					<div id="cm_pagingArea" align="center">
 		

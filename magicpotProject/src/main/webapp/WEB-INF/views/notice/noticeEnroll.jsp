@@ -96,58 +96,15 @@
         margin-top: -20px;
     }
     
-		/* 써머노트 */
-        #cm_listArea{margin-left:30px;}
-        #cm_enrollTable select, #cm_title{
-            margin-bottom:5px;
-            /* border-radius: 4px; */
-            border:1px solid lightgray;
-            padding:7px;
-        }
-
-        #cm_title{width:100%}
-
-        #thumbnailUpfile{
-            margin-bottom: 5px;
-            /* border-radius: 4px; */
-            border:1px solid lightgray;
-            padding:4px;
-            color:gray;
-        }
-
-        .note-editor.note-airframe, .note-editor.note-frame {
-            border: 1px solid rgba(0,0,0,.2);
-            border-radius: 0;
-        }
-
-        /* 글 버튼 등록 영역 */
-        #cm_enrollBtn{align:center;}
-        #cm_enrollBtn a{
-            /* height: 400px; */
-            border:none;
-            width:80px;
-            margin-top: 15px;
-            padding:7px;
-            margin-left: 10px;
-            background-color: rgb(116, 152, 107);
-        }
-        #cm_enrollBtn a:hover{
-            background-color: rgb(225, 212, 169);
-        }
-
-
-        /* 공지사항 등록 모달 */
-        .modal-content{width:400px;}
-        #cmModalFooter{margin-top: 4px; margin-bottom: 25px;}
-        #cmOkBtn{width:150px; margin-right:10px; padding:8px; background-color: rgb(116, 152, 107); border:none;}
-        #cmOkBtn, #cmCancleBtn{
-            color:white;
-            width:150px;
-            margin-right:10px;
-            padding:8px;
-        }
-        #cmOkBtn:hover{background-color: rgb(225, 212, 169);}
-
+	 /*버튼영역*/
+	#buttonArea{padding-left:50%;}
+    #noButton{
+        background-color:rgb(116, 152, 107); 
+        border:none;
+        margin-left:10px;
+    }
+	#enrollForm{margin-left:15%;}
+	
 </style>
 </head>
 <body>
@@ -192,9 +149,10 @@
 						enctype="multipart/form-data">
 						<table align="center">
 							<tr>
-								<th><label for="noTitle">제목</label></th>
+								<th><label for="noTitle" style="width:60px">제목</label></th>
 								<td><input type="text" id="title" class="form-control"
-									name="noTitle" required></td>
+									name="noTitle" placeholder="제목을 입력하세요."required
+									style="width:700px"></td>
 							</tr>
 							<tr>
 								<th><label for="memId">작성자</label></th>
@@ -212,14 +170,14 @@
 							<tr>
 								<th colspan="2"><textarea class="form-control" required
 										name="noContent" id="content" rows="10"
-										style="resize: none;"></textarea></th>
+										style="resize: none; height:500px;" placeholder="내용을 입력하세요."></textarea></th>
 							</tr>
 						</table>
 						<br>
 
-						<div align="center">
-							<button type="submit" class="btn btn-primary">등록하기</button>
-							<button type="reset" class="btn btn-danger">취소하기</button>
+						<div id="buttonArea">
+							<button type="submit" class="btn btn-primary" id="noButton">등록하기</button>
+							<button type="reset" onClick="history.back()" class="btn btn-danger" id="noButton">취소하기</button>
 						</div>
 					</form>
 

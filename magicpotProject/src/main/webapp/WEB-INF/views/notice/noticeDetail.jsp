@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MyPage_like</title>
+<title>notice_detail</title>
 <!-- 글씨체 -->
 <link rel="preconnect" href="https://fonts.gstatic.com/%22%3E">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -35,7 +35,7 @@
     .wrap>div{width:100%}
     .content_1{height: 240px; background-color: rgb(225, 212, 169);}
     .content_2{
-        height: 1000px;
+        height:1000px;
     }
 
     #textArea{
@@ -137,13 +137,17 @@
     }
     #cm_btnArea{
         float:right;
-        margin-top:35%;
-        margin-right:50px;    
+        margin-top:5%;
+        margin-right:30px;  
+        padding-bottom:30px;  
     }
 
 </style>
 </head>
 <body>
+    
+	<!-- 헤더 포함 -->
+	<jsp:include page="../common/header.jsp"/>
     
 
     <div class="wrap">
@@ -159,7 +163,7 @@
                 </p>
             </div>
 
-            <img src="resources/image/guideLogo.png" id="guideLogo">
+            <img src="resources/images/common/guideLogo.png" id="guideLogo">
                                        
                 
         </div>
@@ -176,22 +180,23 @@
                     <div id="cloudContent">
                         <br>
                         <span id="title">
-                            가벼운 여름 캠핑 필수템만 시원하게 모았어요! <한여름의 쿨 캠핑> 기획전
+                           	${ n.noTitle }
                         </span>
-                        <p>2021-03-12</p>
+                        <p>${ n.noDate }</p>
                     </div>
 
                     <br><br>
-                    <img src="../common/notice/공지9.jpg" id="image">
+                    <img src="${ n.noRoute }" id="image">
 
                     <br><br>
-                    <p>공지사항 내용입니다.</p>
+                    <p>${ n.noContent }</p>
+	
+	                <!-- 버튼 영역 -->
+	                <div id="cm_btnArea">
+	                    <a onClick="history.back()" class="btn btn-success" id="cm_enrollBtn"
+	                       style="color:white">목록</a>                
+	                </div>
                 </div>
-
-                <!-- 버튼 영역 -->
-                <div id="cm_btnArea">
-                    <a href="" class="btn btn-success" id="cm_enrollBtn">목록</a>                
-                </div> 
                 
             </div>
 
@@ -214,7 +219,7 @@
                 <br><br>
                 <div id="customer">
                     <div id="customerTitle">
-                        <a href=""><h6>펀딩 참여자</h6></a>
+                        <a href="" style="text-decoration:none; color:black;"><h6>펀딩 참여자</h6></a>
                     </div>
                     <div id="customerContent">
                         <br>
@@ -228,7 +233,7 @@
                 <br><br>
                 <div id="creator">
                     <div id="creatorTitle">
-                        <a href=""><h6>펀딩 개설자</h6></a>
+                        <a href=""style="text-decoration:none; color:black;"><h6>펀딩 개설자</h6></a>
                     </div>
                     <div id="creatorContent">
                         <br>
@@ -243,19 +248,21 @@
 
                 <br><br>
                 <div id="etc">
-                    <a href=""><h6>공지사항</h6></a>
+                    <a href=""style="text-decoration:none; color:black;"><h6>공지사항</h6></a>
                     <br>
-                    <a href=""><h6>이용약관</h6></a>
+                    <a href=""style="text-decoration:none; color:black;"><h6>이용약관</h6></a>
                     <br>
-                    <a href=""><h6>FAQ</h6></a>
+                    <a href=""style="text-decoration:none; color:black;"><h6>FAQ</h6></a>
 
                 </div>
                 
 
             </div>
         </div>
-
-
     </div>
+    
+    
+    <!-- 푸터 포함 -->
+    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

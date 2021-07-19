@@ -43,11 +43,11 @@ public class NoticeController {
 	
 	/* 공지사항 디테일 */
 	@RequestMapping("notice.de")
-	public String selectNoticeDetail(int noNo, Model model) {
+	public String selectNoticeDetail(int nno, Model model) {
 		
-		Notice n = nService.selectNoticeDetail(noNo);
+		Notice n = nService.selectNoticeDetail(nno);
 		model.addAttribute("n", n);
-		System.out.println(n);
+		//System.out.println(n);
 		return "notice/noticeDetail";
 	}
 	
