@@ -162,8 +162,6 @@
                                 </h4>
                                 <ul id="subMenu">
                                     <li><a href="">공지사항 관리</a></li>
-                                    <li><a href="">FAQ 관리</a></li>
-                                    <li><a href="">1:1 상담관리</a></li>
                                     <li><a href="adminReportList.re">신고 관리</a></li>
                                     <li><a href="adminBlacklist.re">블랙리스트 관리</a></li>
                                 </ul>
