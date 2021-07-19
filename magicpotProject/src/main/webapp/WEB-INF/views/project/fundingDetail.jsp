@@ -27,7 +27,7 @@
 
 <!-- 다인 추가 - 페이스북 공유용 코드 -->
 <meta property="og:type"          content="website" />
-<meta property="og:url"           content="http://172.30.1.48:8883/magicpot/detail.fd" />
+<meta property="og:url"           content="http://172.30.1.48:8883/magicpot/detail.fd?proNo=" />
 <meta property="og:title"         content="Magicpot 제로웨이스트" />
 <meta property="og:description"   content="제로웨이스트의 시작, Magicpot과 환경을 지켜나가요." />
 <meta property="og:image"         content="resources/images/common/shareImage.jpg" />
@@ -239,9 +239,10 @@
         		});
         	});
         	
+        	var proNo = ${p.proNo}
         	
         	function shareFacebook(){	// 페이스북 공유
-        		var url = 'http://172.30.1.48:8883/magicpot/detail.fd';
+        		var url = 'http://172.30.1.48:8883/magicpot/detail.fd?proNo=' + proNo;
         		var encodeUrl = encodeURIComponent(url);
         		var facebook = 'http://www.facebook.com/sharer/sharer.php?u=';
         		var link = facebook + encodeUrl;
@@ -256,7 +257,7 @@
    
         	function shareTwitter(){	// 트위터 공유
         		var sendText ="magicpot 제로웨이스트"; 	// 공유시 전달할 text
-        		var sendUrl ="http://localhost:8883/magicpot/detail.fd"; // 공유할 url 주소
+        		var sendUrl ="http://localhost:8883/magicpot/detail.fd?proNo=" + proNo; // 공유할 url 주소
         		window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
         	}
         	
@@ -278,23 +279,23 @@
     			        imageUrl:
     			          'http://k.kakaocdn.net/dn/TcTlF/btq8ytBsVeI/UfCtLRGF9NqYZk6WSHhfPK/kakaolink40_original.jpg',
     			        link: {
-    			          mobileWebUrl: 'http://localhost:8883/magicpot/detail.fd',
-    			          webUrl: 'http://localhost:8883/magicpot/detail.fd',
+    			          mobileWebUrl: 'http://localhost:8883/magicpot/detail.fd?proNo=' + proNo,
+    			          webUrl: 'http://localhost:8883/magicpot/detail.fd?proNo=' + proNo,
     			        },
     			      },
     			      buttons: [
     			        {
     			          title: '웹으로 보기',
     			          link: {
-    			            mobileWebUrl: 'http://localhost:8883/magicpot/detail.fd',
-    			            webUrl: 'http://localhost:8883/magicpot/detail.fd',
+    			            mobileWebUrl: 'http://localhost:8883/magicpot/detail.fd?proNo='+ proNo,
+    			            webUrl: 'http://localhost:8883/magicpot/detail.fd?proNo=' + proNo,
     			          },
     			        },
     			        {
     			          title: '앱으로 보기',
     			          link: {
-    			            mobileWebUrl: 'http://localhost:8883/magicpot/detail.fd',
-    			            webUrl: 'http://localhost:8883/magicpot/detail.fd',
+    			            mobileWebUrl: 'http://localhost:8883/magicpot/detail.fd?proNo='+ proNo,
+    			            webUrl: 'http://localhost:8883/magicpot/detail.fd?proNo=' + proNo,
     			          },
     			        },
     			      ],
