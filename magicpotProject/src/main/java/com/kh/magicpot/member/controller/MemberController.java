@@ -82,16 +82,12 @@ public class MemberController {
 		int result = rService.reLogout(loginUser.getMemNo());
 		
 		if(result > 0) {
-			// 로그아웃 안되는거 보완,,
-			session.removeAttribute("loginUser");
 			session.setAttribute("errorMsg", "신고 처리로 사이트 이용 불가능한 회원 입니다. 문의 바랍니다.");
+			session.removeAttribute("loginUser");
 			//session.invalidate();
-			mv.setViewName("redirect:/");
+			//mv.setViewName("common/errorPage");
 			
-		} else {
-			session.setAttribute("loginUser", loginUser);
-			mv.setViewName("redirect:/");
-		}
+		} 
 		
 		// 로그인시 creator 조회
 		Creator creator = pService.selectCreator(loginUser);
