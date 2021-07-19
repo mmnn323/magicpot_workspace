@@ -227,7 +227,7 @@
                     </table>
                     <br>
                     <div class="btns" align="center">
-                        <button type="button" id="cancel" class="btn btn-success" data-toggle="modal" data-target="#deleteModal">획원탈퇴</button>
+                        <button type="button" id="cancel" class="btn btn-success" data-toggle="modal" data-target="#deleteModal">회원탈퇴</button>
                         <button type="submit" id="check" class="btn btn-success"> 확인</button>
                     </div>
 					

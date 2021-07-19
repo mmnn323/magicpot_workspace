@@ -138,14 +138,14 @@ public class ProjectController {
 	}
 	
 	// 추천 프로젝트
-	
 	@ResponseBody
 	@RequestMapping(value="reAjax.pj", produces="application/json; charset=utf-8")
 	public String AjaxMethod2() {
 		
-		
+		// ArrayList를 이용하여 메인슬라이드에 담을 리스트들 list2에 담는다
 		ArrayList<Project> list2 = pService.reList();
 		
+		// Collection 구문을 이용하여 난수를 발생시켜 랜덤으로 list2에 담긴 리스트들을 섞는다
 		Collections.shuffle(list2);
 		
 		return new Gson().toJson(list2);
@@ -153,30 +153,36 @@ public class ProjectController {
 	
 	
 	// 메인 슬라이드
-	
 	@ResponseBody
 	@RequestMapping(value="slideAjax.pj", produces="application/json; charset=utf-8")
 	public String AjaxMethod3() {
 		
+		// ArrayList를 이용하여 메인슬라이드에 담을 리스트들 list3에 담는다
 		ArrayList<Project> list3 = pService.slide();
 		
-		return new Gson().toJson(list3);
+		return new Gson().toJson(list3); // Gson을 통해 ajax로 리턴
 	}
 	
 	// 신규 프로젝트
 	@ResponseBody
 	@RequestMapping(value="newAjax.pj", produces="application/json; charset=utf-8")
 	public String AjaxMethod4() {
+		
+		// 신규프로젝트 조회
 		ArrayList<Project> list4 = pService.newList();
 		
-		// 남은 일 계산		
+		/* 남은 일 계산 */ 		
 		int[] arr = new int[list4.size()];
 			
 		for(int i=0; i<list4.size(); i++) {
-			Date date1=list4.get(i).getCloseDate();
+			
+			// Date 변수에 각각 마감일과 오늘날짜를 담는다.
+			Date date1 = list4.get(i).getCloseDate();	
 			Date date2 = new Date(System.currentTimeMillis());
 			 
 			long calDateDays = 0;
+			
+			// SimpleDateFormat으로 원하는 형식의 데이트 지정
 			SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
 			Date FirstDate = date1;
 			Date SecondDate = date2;
@@ -193,7 +199,7 @@ public class ProjectController {
 				
 		}
 		
-		
+		// 해쉬맵을 통하여 조회된 신규프로젝트와, 해당 프로젝트에 대한 해당일 수를 담는다
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("pr", list4);
 		map.put("arr", arr);

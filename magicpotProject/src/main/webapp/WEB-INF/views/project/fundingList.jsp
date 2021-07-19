@@ -430,21 +430,28 @@
             
 	            <div class="dropdown" >
 	                <button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-	                       ${ empty ccc ? '인기순' : ccc }
+	                
+	                	   <!-- 삼항연산자를 이용해서 컨트롤러에서 지정한 ccc가 비어있을 경우 인기순 목록박스에 보여지게 -->
+	                       ${ empty ccc ? '인기순' : ccc } 
 	                </button>
 	                <div class="dropdown-menu">
 	                	<c:choose>
-	                		<c:when test="${empty keyword }">
+	                	
+	                		<!-- 아무것도 검색하지 않을 경우  -->
+	                		<c:when test="${empty keyword }"> 
 			                   <button id="popular" class="dropdown-item" onclick="location.href='fund.li?ctg=${ctg}'" >인기순</button>
 			                   <button id="popular" class="dropdown-item" onclick="location.href='fund.li?ctg=${ctg}&ctg2=1'" >마감순</button>
 			                   <button id="recent" class="dropdown-item" onclick="location.href='fund.li?ctg=${ctg}&ctg2=2'">최신순</button>
-	                		
 	                		</c:when>
+	                		
+	                		<!-- 제목으로 검색했을 경우 -->
 	                		<c:when test="${condition == 'title' }">
 	                			<button id="popular" class="dropdown-item" onclick="location.href='search.pr?condition=title&keyword=${keyword }&ctg=${ctg}'" >인기순</button>
 			                   	<button id="popular" class="dropdown-item" onclick="location.href='search.pr?condition=title&keyword=${keyword }&ctg=${ctg}&ctg2=1'">마감순</button>
 			                   	<button id="recent" class="dropdown-item" onclick="location.href='search.pr?condition=title&keyword=${keyword }&ctg=${ctg}&ctg2=2'">최신순</button>
 	                		</c:when>
+	                		
+	                		<!-- 크리에이터 이름으로 검색했을 경우 -->
 	                		<c:when test="${condition == 'writer' }">
 	                			<button id="popular" class="dropdown-item" onclick="location.href='search.pr?condition=writer&keyword=${keyword }&ctg=${ctg}'" >인기순</button>
 			                   	<button id="popular" class="dropdown-item" onclick="location.href='search.pr?condition=writer&keyword=${keyword }&ctg=${ctg}&ctg2=1'">마감순</button>
@@ -455,6 +462,7 @@
 	          	    </div>
 		                   
 	            </div>
+	            
 	            <form id="searchForm" action="search.pr" method="Get" align="center">
 	            	<div class="select" >
 	                    <select class="custom-select" name="condition">

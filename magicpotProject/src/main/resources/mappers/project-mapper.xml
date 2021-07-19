@@ -198,7 +198,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	                 join creator using(cre_no)
 			        order by 
 			        	<choose>
-			        		<when test='ctg2 == 2'>
+			        		<when test='ctg2 == 2'> 
 				        		open_date desc)
 				        	</when>
 				        	<when test='ctg2 == 1'>
@@ -219,7 +219,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					   		and cre_name
 					  </if>
 					   		like '%' || #{keyword} || '%'
-          	
 	</select>
 	
 	<!-- 메뉴바에서 검색 -->

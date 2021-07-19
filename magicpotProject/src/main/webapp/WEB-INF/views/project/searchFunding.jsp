@@ -236,6 +236,8 @@
     <jsp:include page="../common/footer.jsp"/>
     
     <script>
+    
+
    	$(function(){
    		switch(${ctg}){
    		case 0:

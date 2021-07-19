@@ -510,7 +510,7 @@
 								$(".reTitle" + i).text(list[i-1].proTitle);
 								$(".reImg" + i).attr("src",list[i-1].proImage);
 								$(".detailUrl"+i).attr("href", "detail.fd?proNo=" + list[i-1].proNo);
-								$(".percent1"+i).text(Math.round(list[i-1].proFundPrice / list[i-1].proPrice  *100) +"% 달성");
+								$(".percent1"+i).text(Math.round(list[i-1].proFundPrice / list[i-1].proPrice  *100) +"% 달성"); // 퍼센트를 내는 공식 작성후 Math.round를 통해 소수점부터는 반올리처리
 								$(".projectCtg1" + i).text(list[i-1].category.caName);
 								$(".pre"+i).text(list[i-1].proSummary);
 							}
@@ -754,7 +754,7 @@
 
             <div id="btnArea"> 
                 <a href="fund.li?ctg=0&ctg2=2" class="btn btn-success">신규 펀딩 더보기</a>
-                 <!--  <input type="button" onClick="sendLinkCustom();" value="Custom"/>-->
+                
             </div>
         </div>
         <br><br>
@@ -907,15 +907,15 @@
             	
             }
            
-            /*
+            
             // 카카오 메세지
             function sendLinkCustom() {
                 Kakao.init("9c1dec44297aec7ae7dbd863f963dc54");
                 Kakao.Link.sendCustom({
-                    templateId: [templete id]
+                    templateId: 56681 
                 });
             }   
-            */
+            
         </script>
 
       

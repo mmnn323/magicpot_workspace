@@ -147,16 +147,18 @@ public class MemberController {
 	
 
 	// 회원가입 이메일 인증 ajax 
-	
 	@ResponseBody
 	@RequestMapping(value="mailCheck", produces="application/json; charset=utf-8")
     public String mailCheckGET(String email) throws Exception{
         
+		// 인증번호 난수생성
 		Random random = new Random();
+		
+		// 변수를 선언하여 이메일 전송에 필요로한 데이터 할당
 		int checkNum = random.nextInt(888888) + 111111;
 		
-		String setFrom = "cloudmoney1112@gmail.com";
-        String toMail = email;
+		String setFrom = "cloudmoney1112@gmail.com"; // root-context.xml에 삽입한 자신의 이메일 계정의 이메일 주소
+        String toMail = email;						 // 수신받을 이메일
         String title = "회원가입 인증 이메일 입니다.";
         String content = 
                 "홈페이지를 방문해주셔서 감사합니다." +
@@ -166,7 +168,7 @@ public class MemberController {
                 "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
        
         try {
-            
+            // mailSender를 통한 이메일전송 코드
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
             helper.setFrom(setFrom);
@@ -179,8 +181,8 @@ public class MemberController {
             e.printStackTrace();
         }
         
+        // String 타입 변수 num 선언하고 인증번호(checkNum)를 String으로 형변환
         String num = Integer.toString(checkNum);     
-                
         return num;
     }
 	
@@ -197,18 +199,9 @@ public class MemberController {
 	// 회원가입
 	@RequestMapping("insert.me")
 	public String insertMember(Member m, HttpSession session, Model model) {
-		
-		
-	
-		
 		// 암호화 작업
 		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
-		
-		
 		m.setMemPwd(encPwd); // 암호문으로  변경하기
-		
-		System.out.println(encPwd);
-		
 		int result = mService.insertMember(m);
 		
 		if(result>0) { // 성공 => 알람창 출력할 문고 담아서 => 메인페이지 (url재요청)
@@ -218,8 +211,6 @@ public class MemberController {
 			model.addAttribute("errorMsg", "회원가입 실패");
 			return "common/errorPage";
 		}
-		
-		
 	}
 	
 	// 마이페이지 프로필 폼 이동

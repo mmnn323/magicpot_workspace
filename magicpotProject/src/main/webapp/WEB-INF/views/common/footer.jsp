@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/dd18300701.js" crossorigin="anonymous"></script>
+<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
 
@@ -36,7 +37,7 @@
         </div>
         <div id="footer_2">
             <a href="${ pageContext.servletContext.contextPath }"><img src="resources/images/common/mainLogo.png" alt=""></a>
-        	<span id="magicpotChat"><a href="#" target="_blank" onclick="openChat();"><i class="fas fa-headset fa-lg"></i>&nbsp&nbsp매직팟에 문의하기</a></span>
+        	<span id="magicpotChat"><a href="" target="_blank" onClick="sendLinkCustom();"><i class="far fa-comment fa-lg"></i>&nbsp&nbsp친구에게 추천하기</a></span>
         </div>
         <div id="footer_3">
 
@@ -62,6 +63,13 @@
 	    	var popup = window.open('startChat.do', 'MagicPot 실시간 상담', 'width=400px,height=600px,status=no,location=no,resizable=no');
 	    }
     
+		 // 카카오 메세지
+        function sendLinkCustom() {
+            Kakao.init("9c1dec44297aec7ae7dbd863f963dc54");
+            Kakao.Link.sendCustom({
+                templateId: 56681 
+            });
+        }   
     </script>
     
 </body>
