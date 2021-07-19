@@ -58,14 +58,23 @@
                 </div>
             </div>
             
-            <!-- 로그인 && 로그인 유저=글쓴이인 경우 보이는 수정/삭제 버튼 -->
-            <c:if test="${ !empty loginUser and loginUser.memId eq cm.memId }">
+            <!-- 로그인 && 로그인 유저=글쓴이인 경우 보이는 수정/삭제 버튼, 로그인 && 로그인 유저 = 관리자일 경우 삭제 버튼 -->
+            <c:if test="${ !empty loginUser}">
+            	<c:if test="${ loginUser.memId eq cm.memId }">
 		        <div id="WriterBtnArea" align="center">
 		                <span id="WriterBtnArea2" style="margin-left: 800px;">
 		                    <a class="btn btn-success" onclick="postFormSubmit(1);">수정</a>
 		                    <a class="btn btn-success" data-toggle="modal" data-target="#cmDeleteBtn">삭제</a>
 		                </span>
 		         </div>
+		         </c:if>
+		         <c:if test="${ loginUser.memId ne cm.memId and loginUser.memId == 'admin' }">
+		        <div id="WriterBtnArea" align="center">
+		                <span id="WriterBtnArea2" style="margin-left: 800px;">
+		                    <a class="btn btn-success" data-toggle="modal" data-target="#cmDeleteBtn">삭제</a>
+		                </span>
+		         </div>
+		         </c:if>
 	         </c:if>
 	         
 	         <form id="postForm" action="" method="post">
@@ -223,7 +232,7 @@
 	             					value  += 	"><input type='hidden' value=" + obj.cmCommentNo + ">"							// hidden : 댓글번호
 	             						   + 	"<input type='hidden' value=" + obj.cmCommentDepth + ">"						// hidden : 댓글깊이
 	             						   + 	"<input type='hidden' value=" + obj.memId + ">" 								// hidden : 댓글작성자 아이디 (위치 탐색해서 쓰면 되는데 탐색 못하겠음,,)
-	             						   + 	"<input type='hidden' value='" + obj.cmCommentContent + "'>" 						// hidden : 댓글내용 (위치 탐색해서 쓰면 되는데 탐색 못하겠음,,)
+	             						   + 	"<input type='hidden' value='" + obj.cmCommentContent + "'>" 					// hidden : 댓글내용 (위치 탐색해서 쓰면 되는데 탐색 못하겠음,,)
 	             					       +	"<div id='commentArea' style='margin-left:" + obj.cmCommentDepth*20 +"px;'>"	// 대댓글일 경우 div위치 조정
 	             					       +		"<div id='commentArea1'>";
 	             					
@@ -246,9 +255,12 @@
 									          +   		"<a class='reComment'> 댓글</a>";
 	             						if('${loginUser.memId}' != obj.memId){	// 내가 쓴 댓글이 아닐 경우 : 신고 버튼 노출
 	             							value += 	" / <a href='' data-toggle='modal' data-target='#reportModal'> 신고</a>"
-	             						}else if('${loginUser.memId}' == obj.memId){  // 내가 쓴 댓글일 경우 : 수정/삭제 버튼 노출
+	             						}
+	             						if('${loginUser.memId}' == obj.memId){  // 내가 쓴 댓글일 경우 : 수정/삭제 버튼 노출
 	             							value += 	" / <a class='updateCommentForm'> 수정</a>"
-	             								   + 	" / <a class='deleteComment'> 삭제</a>";
+	             								   + 	" / <a class='deleteComment'> 삭제</a>"
+	             						}else if('${loginUser.memId}' == 'admin'){
+	             							value += 	" / <a class='deleteComment'> 삭제</a>"
 	             						}
 	             						value += 	"</div>";
 	             					}
@@ -323,7 +335,7 @@
 				    				swal("Success!", "댓글이 삭제되었습니다.", "success");
 				    				selectCmCommentList();
 			    				}else if(status ="hasComment")
-			    					swal("", "댓글이 달려있는 댓글은 삭제할 수 없습니다", "warning");
+			    					swal("", "답글이 있는 댓글은 삭제할 수 없습니다", "warning");
 			    			},error:function(){
 			    				console.log("댓글 삭제용 ajax 통신 실패");
 			    			}

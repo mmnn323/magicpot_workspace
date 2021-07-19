@@ -360,7 +360,7 @@ public class CommunityController {
 		// 2. Community 객체에 담긴 정보를 가지고 update요청
 		//System.out.println(cm);
 		int result = cService.updateCommunity(cm);
-		System.out.println(result);
+		//System.out.println(result);
 		if(result > 0) {
 			session.setAttribute("alertMsg", "커뮤니티 글이 수정되었습니다.");
 			return "redirect:detail.cm?cmNo=" + cm.getCmNo();
