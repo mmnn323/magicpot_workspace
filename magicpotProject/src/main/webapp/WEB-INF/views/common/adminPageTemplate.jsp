@@ -120,7 +120,7 @@
             <!-- 나가기 클릭시 메인페이지로 이동 -->
             <div id="logo"><img src="resources/images/common/mainLogo.png" width="120px" height="45px;"></div>
             <div id="adminId">admin1</div>
-            <div id="logout" style="cursor:pointer;padding-right:0px;">로그아웃</div>
+            <div id="logout" style="cursor:pointer;padding-right:0px;" onclick="location.href='logout.me'">로그아웃</div>
             <div id="bar" style="cursor:pointer;padding-right:0px;">|</div>
             <div id="outPage" style="cursor:pointer; padding-left:0px;" onclick="location.href='${ pageContext.servletContext.contextPath}';">홈페이지</div>
         </div>
@@ -145,30 +145,15 @@
                                     <a href="adminPay.me" id="abled">결제관리</a><span style="margin-left:110px"></span></h4>
                                 </h4>
                             </li>
-                            <li>
-                                <h4 id="user" style="cursor:pointer;">
-                                    <p id="p4" style="display:inline;">쿠폰관리</p>
-                                    <i id="btn1" class="fas fa-angle-down" style="margin-left:93px"></i>
+                               <li>
+                                <h4>
+                                    <a href="adminCoupon.me" id="abled">쿠폰관리</a><span style="margin-left:110px"></span></h4>
                                 </h4>
-                                <ul id="subMenu">
-                                    <li><a href="adminCoupon.me">쿠폰등록/삭제</a></li>
-                                    <li><a href="">회원별 쿠폰</a></li>
-                                </ul>
                             </li>
                             <li>
                                 <h4>
                                     <a href="fundingManage.ad" id="abled">펀딩관리</a><span style="margin-left:110px"></span></h4>
                                 </h4>
-                            </li>
-                            <li>
-                                <h4 id="comm" style="cursor:pointer;">
-                                    <p id="abled" style="display:inline;">커뮤니티 관리</p>
-                                    <i id="btn2" class="fas fa-angle-down" style="margin-left:53px"></i>
-                                </h4>
-                                <ul id="subMenu">
-                                    <li><a href="">커뮤니티 공지사항<br>관리</a></li>
-                                    <li><a href="">커뮤니티 글 관리</a></li>
-                                </ul>
                             </li>
                             <li>
                                 <h4 id="support" style="cursor:pointer;">

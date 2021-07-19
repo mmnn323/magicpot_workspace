@@ -61,3 +61,20 @@ div{box-sizing: border-box; }
     color:  rgb(225, 212, 169);
     transform: rotateY( 180deg );
 }
+
+/* TOP버튼, 문의하기 버튼 */
+a#MOVE_TOP_BTN {
+    position: fixed;
+    right: 2%;
+    bottom: 50px;
+    display: none;
+    z-index: 999;
+}
+#MOVE_REQUEST_BTN{
+	position: fixed;
+    right: 2%;
+    bottom: 110px;
+    display: none;
+    z-index: 999;
+}
+#MOVE_REQUEST_BTN_AREA:hover{cursor:pointer;}

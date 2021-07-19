@@ -20,6 +20,12 @@ public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private ReportDao rDao;
 
+	// 활동 중지된 회원 조회 - 로그아웃
+	@Override
+	public int reLogout(int memNo) {
+		return rDao.reLogout(sqlSession, memNo);
+	}
+
 	// 블랙리스트 페이징 처리
 	@Override
 	public int selectListCount() {
@@ -30,6 +36,12 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public ArrayList<Blacklist> adminBlacklist(PageInfo pi) {
 		return rDao.adminBlacklist(sqlSession, pi);
+	}
+
+	// 블랙리스트 모달 조회
+	@Override
+	public ArrayList<Report> modalBlacklist(int blacklistNo) {
+		return rDao.modalBlacklist(sqlSession, blacklistNo);
 	}
 	
 	// 관리자 신고 리스트 페이징 처리
@@ -43,6 +55,16 @@ public class ReportServiceImpl implements ReportService {
 	public ArrayList<Report> adminReportList(PageInfo pi) {
 		return rDao.adminReportList(sqlSession, pi);
 	}
+
+	// 관리자 신고리스트 - 원본글 확인
+	@Override
+	public int cmPage(int cmcoNo) {
+		return rDao.cmPage(sqlSession, cmcoNo);
+	}
+
+
+	
+
 	
 	
 	

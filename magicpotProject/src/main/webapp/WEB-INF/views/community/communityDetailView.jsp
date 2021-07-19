@@ -216,9 +216,9 @@
 	             					status = obj.status;			// * 임시 (참조된 댓글일 경우 삭제 시 : '삭제된 댓글입니다'로 표현하고 싶음)
 	             					value += "<div class='cmComment'";
 	             					
-	             					//if('${loginUser.memId}' == obj.memId){ // 내가 쓴 댓글일 경우 css 적용
-	             						//value += "style='background-color:rgba(238, 238, 238, 0.349); border-radius:5px;'"
-	             					//}
+	             					if('${loginUser.memId}' == obj.memId){ // 내가 쓴 댓글일 경우 css 적용
+	             						value += "style='background-color:rgba(238, 238, 238, 0.349); border-radius:5px;'"
+	             					}
 	             					
 	             					value  += 	"><input type='hidden' value=" + obj.cmCommentNo + ">"							// hidden : 댓글번호
 	             						   + 	"<input type='hidden' value=" + obj.cmCommentDepth + ">"						// hidden : 댓글깊이
@@ -280,10 +280,10 @@
 						cmMemId 		= $(this).parents(".cmComment").children().eq(2).val();
 						
 	         			var reCommentVar = "";
-						reCommentVar += "<div id='reComment' align='center' style='margin-top:10px;'>"
+						reCommentVar += "<div id='reComment' align='center' style='margin-top:10px; background-color:white;'>"
 					                  + 	"<div style='color:rgb(83, 83, 83);'>" + "${loginUser.memId}" + "</div>"
-					                  + 	"<textarea class='reCoContent' cols='90' rows='3' placeholder='댓글을 남겨보세요' >"+ " @" + cmMemId + "&nbsp;" + "</textarea>"
-					                  + 	"<a class='btn btn-success btn-sm reCommentClose' style='margin-left:670px;' >취소</a>"
+					                  + 	"<textarea class='reCoContent' style='width:90%;' rows='3' placeholder='댓글을 남겨보세요' >"+ " @" + cmMemId + "&nbsp;" + "</textarea>"
+					                  + 	"<a class='btn btn-success btn-sm reCommentClose' style='margin-left:80%;' >취소</a>"
 					                  + 	"<a class='btn btn-success btn-sm addComment2' style='margin-left:5px;' >등록</a> </div>";
 					                  + "</div>";      
 					                  
@@ -347,7 +347,11 @@
 							                + "</div>";
 						//$('#rid' + rid).replaceWith(htmls);
 						$(this).parents(".cmComment").replaceWith(reCommentUpdateVar);
+						//$('.reCoContent2').focus(); // => *보완필요 : 커서 끝으로 이동시키고 싶음
+	             	
+						var len = $(this).parents(".cmComment").children().eq(3).val().length;
 						$('.reCoContent2').focus(); // => *보완필요 : 커서 끝으로 이동시키고 싶음
+						$('.reCoContent2')[0].setSelectionRange(len, len);
 	             	})
 	             	
 	             	// 댓글 수정 취소
@@ -400,7 +404,7 @@
             </c:if>
             <span id="btnArea2" style="margin-left: 700px;">
                 <a href="list.cm" class="btn btn-success">목록</a>
-                <a href="#cm_titleArea"" class="btn btn-success"><i class="fas fa-caret-up"></i> TOP</a>
+                <a href="#cm_contentArea"" class="btn btn-success"><i class="fas fa-caret-up"></i> TOP</a>
             </span>
         </div>
 	
@@ -409,6 +413,7 @@
         
         <!-- The Modal : 신고-->
         <div class="modal" id="reportModal">
+         <form action="newReport.re" method="post">
             <div class="modal-dialog">
             <div class="modal-content">
         
@@ -422,27 +427,66 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="sel1">신고 유형</label>
-                        <select class="form-control" id="sel1">
-                        <option value="광고">광고</option>
-                        <option value="분란조장">분란조장</option>
+                        <select class="form-control" id="type" name="type">
+	                        <option value="광고">광고</option>
+	                        <option value="분란조장">분란조장</option>
                         </select>
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="comment">신고 사유</label>
-                        <textarea class="form-control" rows="5" id="comment" name="reportContent" style="resize:none"></textarea>
+                        <textarea class="form-control" rows="5" id="reportContent" name="reportContent" style="resize:none"></textarea>
                     </div>
                 </div>
         
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger">신고하기</button>
+                    <button type="submit" class="btn btn-danger" id="reportBtn">신고하기</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                 </div>
         
             </div>
             </div>
+          </form>
         </div>
+        
+        <script>
+        	$(document).on("click", "#reportBtn", function(){
+        		
+        		var cmCommentNo = $(".cmComment").children().eq(0).val();
+        		var reportType = $("select[name=type]").val();
+        		var reMemId = $(".cmComment").children().eq(2).val();
+        		/*
+        		console.log(cmCommentNo);
+				console.log($("#reportContent").val());
+				console.log(reportType);
+				console.log(${ loginUser.memNo });
+				console.log(reMemId);
+				*/
+        		
+        		$.ajax({
+					url : "newReport.re",
+					data: {
+						
+    					cmcoNo:cmCommentNo,
+    					reportContent:$("#reportContent").val(),
+    					reportType:reportType,
+						memNo:"${ loginUser.memNo }",		
+						reMemId:reMemId
+						
+					}, success : function(result){
+						
+						if(result == "success"){
+							swal("Success!", "신고 접수 되었습니다. 관리자 확인 후 처리 됩니다.", "success");
+							location.reload();
+						} 
+						
+					}, error : function(){
+						console.log("ajax 통신 실패");
+					}
+        		});
+        	})
+        </script>
         
     </div>
     

@@ -50,7 +50,11 @@
         border:none;
         width:100px;
         padding:7px;
-        margin-right: 10px;
+        margin-right:10px;
+    }
+    #re_modalbtnArea{
+    	margin-bottom: 20px;
+		padding-left: 200px;
     }
     #re_reportBtn{
         background-color: rgb(252, 99, 99);
@@ -58,10 +62,10 @@
     #re_reportBtn:hover{
         background-color: rgb(216, 66, 66);
     }
-    #re_answerBtn{
+    #re_cmPageBtn{
         background-color: rgb(116, 152, 107);
     }
-    #re_answerBtn:hover{
+    #re_cmPageBtn:hover{
         background-color: rgb(93, 121, 86);
     }
 
@@ -163,6 +167,7 @@
                         <tbody>
 	                        <c:forEach var="r" items="${adminReportList}">
 	                          <tr class="reDetailList">
+	                          	<input type="hidden" name="cmcoNo" value="${r.cmcoNo}">
 	                            <td><input type="checkbox" name="chk"></td>
 	                            <td>${r.reportNo}</td>
 	                            <td>${r.reportDate}</td>
@@ -171,7 +176,7 @@
 	                            <td>
 	                                <div id="re_btnArea">
 	                                    <button href="" class="btn btn-danger" id="re_reportBtn" style="color:white;" data-toggle="modal" data-target="#reportModal">신고처리</button>
-	                                    <button href="" class="btn btn-danger" id="re_answerBtn" style="color:white;" onclick="reportDetail()">답변달기</button>
+	                                    <button id="re_cmPageBtn" class="btn btn-danger" style="color:white;">원본글 확인</button>
 	                                </div>
 	                            </td>
 	                          </tr>
@@ -194,83 +199,28 @@
                            }
                        })
                    })
+                   
+                  $(document).on("click", "#re_cmPageBtn", function(){
+                	  
+                	var cmcoNo = $(this).parent().parent().siblings("input[name=cmcoNo]").val();
+      				console.log(cmcoNo);
+      				cmcoNo = Number(cmcoNo);
+      				
+      				$.ajax({
+            			url: "cmPage.re",
+            			type: "post",
+            			data: {cmcoNo : cmcoNo}, 
+            			success : function(url){
+            				
+            				console.log(url);
+            				window.open(url);
+            				
+            			}, error : function(){
+            				console.log("실패");
+            			}
+            		});
+                 })
                 </script>    
-
-                <!-- 신고 내용 상세 -->
-                <div class="detailList">
-                    <table>
-                        <tr>
-                            <th>신고번호</th>
-                            <td style="padding-left:80px;"></td>
-                            <th>커뮤니티 댓글 번호</th>
-                            <td></td>
-                            <th>신고일</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>신고 유형</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>신고 사유</th>
-                            <td colspan="4">
-                                <textarea id="reason" cols="80" rows="3" style="resize:none" readonly></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                           <th>답변 작성</th>
-                           <td colspan="4">
-                                <textarea cols="80" rows="5" style="resize:none" placeholder="답변 내용을 작성해주세요." required></textarea>
-                           </td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">
-                                <div id="re_btnArea" style="text-align:center;">
-                                    <button class="btn btn-danger" id="re_reportBtn" data-toggle="modal" data-target="#reportModal">신고처리</button>
-                                    <button class="btn btn-danger" id="re_answerBtn" data-toggle="modal" data-target="#answerModal">답변달기</button>
-                                    <button type="reset" class="btn btn-secondary" id="reCancleBtn">취소</button>
-                                    
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <script>
-
-                    /* 신고 내용 답변 달기 */
-                    $(function(){
-
-                        /* 답변하기 버튼 클릭시 => 신고 내용 상세 페이지 */
-
-                        $("#re_answerBtn").click(function(){
-
-                            $(".detailList").slideToggle();
-                            //reportDetail();    
-
-                        })
-
-                        $(".detailList").hide();
-
-                    });
-
-
-                    /* 신고 내용 상세 부분에 데이터 받아오기
-                    function reportDetail(){
-
-                        $.ajax({
-                            url:"detail.re",
-                            data:{commentNo},
-                            success:function(){
-                                $(".detailList").show();
-
-                            }, error:function(){
-                                console.log("ajax 통신실패");
-                            }
-                        });
-                    }
-                    */
-                </script>
 
             
                 <!-- ajax로 신고 완료되면 신고 처리 버튼 '신고 완료'로 바꿔주기 -->
@@ -326,25 +276,6 @@
                 </div>
             </div>
 
-              <!-- 답변 등록 모달 -->
-              <div class="modal fade" id="answerModal" align="center">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content" >
-
-                        <!-- Modal body -->
-                        <br>
-                        <div class="modal-body">
-                            	답변을 등록 하시겠습니까?
-                        </div>
-                        
-                        <!-- Modal footer -->
-                        <div id="reModalFooter">
-                            <button id="re_answerBtn" class="btn btn-warning" style="color:white;">답변 등록</button>
-                            <button id="reCancleBtn" data-dismiss="modal" class="btn btn-secondary">취소</button>
-                        </div>
-                    </div>
-                </div>
-              </div>
         </div>
 
 </body>

@@ -16,6 +16,7 @@ public class Like { // 좋아요 vo클래스
 
 	private int memNo;			// 회원번호
 	private int proNo;			// 프로젝트 번호
+	private String likedDate;	// 좋아요한날짜
 	
     private String proTitle; 	// 프로젝트 제목
     private int proPrice;		// 목표금액

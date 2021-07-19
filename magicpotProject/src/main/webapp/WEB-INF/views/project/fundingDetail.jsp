@@ -166,7 +166,7 @@
                     <span style="font-size:25px;">${ p.proFundPrice }</span>원 펀딩
                 </div><br><br>
 
-                <a href="pay.me" type="button" class="btn btn-success" id="btn-success1">펀딩하기</a>
+                <a href="" type="button" class="btn btn-success" id="btn-success1">펀딩하기</a>
                 <br><br>
                 
                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#messageModal"><i class="far fa-envelope fa-2x" style="float: left; margin-left:7px; margin-top:2px;"></i><p>문의</p></button>&nbsp;&nbsp;&nbsp;
@@ -380,13 +380,10 @@
         <div id="content2">
                 <ul>
                     <li>
-                    	<a id="story">스토리</a>
+                    	<a id="story" href="#">스토리</a>
                     </li>
                     <li>
-                    	<a id="author">작가의 말</a>
-                    </li>
-                    <li>
-                    	<a id="review">체험리뷰</a>
+                    	<a id="author" href="#">작가의 말</a>
                     </li>
                 </ul>
         </div><br>
@@ -435,10 +432,12 @@
             <div id="reward">
             	<c:forEach var="r" items="${ list }">
 	                <div id="reward_1">
-	                    <a href="">
-	                        <b>${ r.rewardPrice }원 펀딩</b><br>
-	                        <span>${ r.rewardExplain }</span>
-	                    </a>
+	              
+		                    <a href="pay.me?rno=${r.rewardNo}">
+		                        <b>${ r.rewardPrice }원 펀딩 </b><br>
+		                        <span>${ r.rewardExplain }</span>
+		                    </a>
+	                
 	                </div><br>
 				</c:forEach>
             </div>

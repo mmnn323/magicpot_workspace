@@ -796,9 +796,7 @@
          </script>
         
 
-        
-
-        <div id="content_4">
+         <div id="content_4">
             <br>
             <div id="background">
                 <div id="baContent">
@@ -814,38 +812,10 @@
 	                        	<script>
 									function alertFn1(){
 										alert("로그인이 필요합니다.");
-										// sweetalert 창 바로 닫히는 에러(timer안먹힘 차후 수정할지)
 									}		  
-									/*
-									var alert = function(){
-	                        			swal({
-    		                        		title : "Sweet Alert",
-    		                        	    icon  : "error",
-    		                        	    timer : 2000,
-    		                        	    closeOnClickOutside : false
-    		                        	}).then(function(){
-    		                        		swal('', "로그인이 필요합니다.", "error");
-    		                        	});
-	                        		}
-									
-		                        	$(function(){
-	                        			$("#fnBtn").on("click", function(){
-	                        				swal({
-	    		                        		title : "Sweet Alert",
-	    		                        	    icon  : "error",
-	    		                        	    timer : 2000,
-	    		                        	    closeOnClickOutside : false
-	    		                        	}).then(function(){
-	    		                        		swal('', "로그인이 필요합니다.", "error");
-	    		                        	});
-											
-	                        			})
-	                        		});
-									*/
 	                  	        </script>
 	                        </c:when>
 	                        <c:when test="${ loginUser.status eq 'C' && creator.status eq 'Y' }">
-	                        	<!-- 내가 만든 프로젝트로 이동 추가 필요 -->
 	                        	<a href="insert.pro" class="btn btn-success"><h3>펀딩 올리기</h3></a>
 	                        </c:when>
 	                        <c:when test="${ loginUser.status ne 'C' && creator.status eq 'N'}">
@@ -865,9 +835,9 @@
             </div>
 
             
+            <!-- header.jsp에 탑버튼/문의하기 버튼 기능 추가함 -->
+            <!-- 
             <div id="customerBtn">
-                
-                
                 <a id="upBtn" href="" onclick="goTop()">
                     <img src="resources/images/common/upBtn.png" >
                 </a>
@@ -876,6 +846,7 @@
                     <img src="resources/images/common/requestBtn.png" >
                 </a>
             </div>
+             -->
             
         </div>
 
@@ -898,14 +869,14 @@
    	    	 alert("클릭됨1");
    	  		}
             
-            function goTop(){
-            	if (document.body.scrollTop!=0 || document.documentElement.scrollTop!=0){
-                    window.scrollBy(0,-50);
-                    timeOut=setTimeout('scrollToTop()',10);
-                }
-                else clearTimeout(timeOut);
-            	
-            }
+            //header.jsp에 탑버튼/문의하기 버튼 기능 추가함
+            //function goTop(){
+            	//if (document.body.scrollTop!=0 || document.documentElement.scrollTop!=0){
+                    //window.scrollBy(0,-50);
+                    //timeOut=setTimeout('scrollToTop()',10);
+                //}
+                //else clearTimeout(timeOut);
+            //}
            
             
             // 카카오 메세지

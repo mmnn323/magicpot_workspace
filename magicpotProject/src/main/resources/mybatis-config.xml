@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.magicpot.project.model.vo.ProRequire" alias="ProRequire" />
 		<typeAlias type="com.kh.magicpot.project.model.vo.ProjectReward" alias="ProjectReward" />
 		<typeAlias type="com.kh.magicpot.project.model.vo.ProjectFile" alias="ProjectFile" />
-		
+		<typeAlias type="com.kh.magicpot.project.model.vo.PayStatus" alias="PayStatus"/>
 		
 		<!-- 다인 -->
 		<typeAlias type="com.kh.magicpot.guide.model.vo.Guide" alias="Guide"/>
@@ -53,6 +53,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.magicpot.coupon.model.vo.Coupon" alias="Coupon"/>
 		<typeAlias type="com.kh.magicpot.pay.model.vo.Pay" alias="Pay"/>
 		<typeAlias type="com.kh.magicpot.pay.model.vo.DetailPay" alias="DetailPay"/>
+		<typeAlias type="com.kh.magicpot.pay.model.vo.FundingList" alias="FundingList"/>
+		<typeAlias type="com.kh.magicpot.pay.model.vo.FundingDetail" alias="FundingDetail"/>
 		
 	</typeAliases>
 	
@@ -78,7 +80,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		
 		<!-- 희나 -->
 		<mapper resource="/mappers/coupon-mapper.xml"/>
-		<mapper resource="/mappers/Pay-mapper.xml"/>		
+		<mapper resource="/mappers/pay-mapper.xml"/>
+				
 	</mappers>
 	
 </configuration>

@@ -10,10 +10,11 @@ import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
+@Setter 
+@Getter 
 @ToString
 public class DetailPay {
+	//admin
 	
 	private int memNo;
 	private String memId;

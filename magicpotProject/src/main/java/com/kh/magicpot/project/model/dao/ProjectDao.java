@@ -11,6 +11,7 @@ import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.like.model.vo.Like;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.vo.Creator;
+import com.kh.magicpot.project.model.vo.PayStatus;
 import com.kh.magicpot.project.model.vo.ProRequire;
 import com.kh.magicpot.project.model.vo.Project;
 import com.kh.magicpot.project.model.vo.ProjectReward;
@@ -254,5 +255,87 @@ public class ProjectDao {
 	public int updateOpenDateRes(SqlSessionTemplate sqlSession, Project pro) {
 		return sqlSession.update("updateOpenDateRes", pro);
 	}
+
+	public Project selectFunStatus(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectFunStatus", pno);
+	}
+
+	public int selectOrderCount(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectOrderCount", pno);
+	}
+
+	public int selectReviewCount(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectReviewCount", pno);
+	}
+
+	public int selectSupCount(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectSupCount", pno);
+	}
+
+	public int selectPayStatusCount(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectPayStatusCount", pno);
+	}
+	
+	public ArrayList<PayStatus> selectPayStatusList(SqlSessionTemplate sqlSession, PageInfo pi, HashMap<String, Integer> map) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("selectPayStatusList", map, rowBounds);
+	}
+
+
+	public int selectdeliStatusCount(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("selectdeliStatusCount", pno);
+	}
+
+
+	public ArrayList<PayStatus> selectdeliStatusList(SqlSessionTemplate sqlSession, PageInfo pi, HashMap<String, Integer> map) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("selectdeliStatusList", map, rowBounds);
+	}
+
+	public int selectFunPrice(SqlSessionTemplate sqlSession, int pno) {
+		String result = sqlSession.selectOne("selectFunPrice", pno);
+		if(result == null) { // null인 경우 중복 x -> 0
+			return 0;
+		}else { // null이 아닌 경우 중복 -> 1
+			return Integer.parseInt(result);
+		}
+	}
+
+	public int selectFinishPrice(SqlSessionTemplate sqlSession, int pno) {
+		String result = sqlSession.selectOne("selectFinishPrice", pno);
+		if(result == null) { // null인 경우 중복 x -> 0
+			return 0;
+		}else { // null이 아닌 경우 중복 -> 1
+			return Integer.parseInt(result);
+		}
+	}
+
+	public int selectReturnPrice(SqlSessionTemplate sqlSession, int pno) {
+		String result = sqlSession.selectOne("selectReturnPrice", pno);
+		if(result == null) { // null인 경우 중복 x -> 0
+			return 0;
+		}else { // null이 아닌 경우 중복 -> 1
+			return Integer.parseInt(result);
+		}
+	}
+
+
+	public int updateDeliverNo(SqlSessionTemplate sqlSession, PayStatus payStatus) {
+		return sqlSession.update("updateDeliverNo", payStatus);
+	}
+
+	public int selectListProSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("selectListProSearchCount", map);
+	}
+
+	
 }
 

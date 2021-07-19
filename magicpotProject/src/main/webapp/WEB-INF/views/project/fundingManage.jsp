@@ -54,7 +54,7 @@
 							<td>${ p.member.memId }</td>
 							<td>${ p.proTitle }</td>
 							<td>${ p.creator.creName }</td>
-							<td>${ p.proPrice }</td>
+							<td>${ p.proPriceForm }</td>
 							<td>${ p.proStatus }</td>
 						</tr>
 						</c:forEach>

@@ -40,4 +40,5 @@ public class Project {
 	private String caName;
 	private int rewardNo;
 	private Member member;
+	private String proPriceForm;    // proPrice에 format적용
 }

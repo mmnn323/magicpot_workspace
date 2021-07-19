@@ -4,7 +4,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="noticeMapper">
 
-
-
-
+	<resultMap id="notice" type="Notice">
+		<id column="no_no" property="noNo"/>
+		<result column="no_title" property="noTitle"/>
+		<result column="no_content" property="noContent"/>
+		<result column="no_date" property="noDate"/>
+		<result column="count" property="count"/>
+		<result column="status" property="status"/>
+		<result column="org_filename" property="orgFileName"/>
+		<result column="no_route" property="noRoute"/>
+	</resultMap>
+	
+	
+	<select id="selectListCount" resultType="_int">
+  		select
+  		       count(*)
+  		  from notice
+  		 where status = 'Y'
+  	</select>
+	
+	<select id="selectNotice" resultMap="notice">
+		select
+		       no_no
+		     , no_title
+		     , no_route
+		     , no_date
+		 from notice
+	    where status = 'Y'
+	    order
+	       by no_no desc
+	</select>
+	
+	<select id="selectNoticeDetail" resultMap="notice" parameterType="_int">
+		select
+		        no_no
+		      , no_title
+		      , no_date
+		      , no_route
+		      , no_content
+		 from notice
+		where no_no = #{noNo}
+	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+ 		insert
+ 		  into notice
+ 		  (
+ 		    no_no
+ 		  , no_title
+ 		  , no_content
+ 		  , org_filename
+ 		  , no_route
+ 		  )
+ 		  values
+ 		  (
+ 		    seq_nno.nextval
+ 		  , #{noTitle}
+ 		  , #{noContent}
+ 		  , #{orgFileName}
+ 		  , #{noRoute}
+ 		  )
+ 	</insert>
+	
 </mapper>
