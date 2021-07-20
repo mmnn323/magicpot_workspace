@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.magicpot.common.model.vo.PageInfo;
 import com.kh.magicpot.community.model.vo.Community;
+import com.kh.magicpot.community.model.vo.CommunityNotice;
 import com.kh.magicpot.member.model.vo.Address;
 
 import com.kh.magicpot.member.model.vo.Member;
@@ -122,10 +123,23 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.multiDeleteAdopt", m);
 	}
 	
-	// 일반회원관리 검색
-	public ArrayList<Member> searchAdminList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
-		return (ArrayList)sqlSession.selectList("memberMapper.searchAdminList", map);
+	// 1일반회원관리 검색
+	public ArrayList<Member> searchAdminList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("memberMapper.searchAdminList");
+	}
+
+	public int selectSearchListCount(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.selectOne("memberMapper.selectSearchListCount", map);
+	}
+
+	public ArrayList<Member> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi, HashMap<String, Object> map){
 		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.selectSearchList", map, rowBounds);
 	}
 	
 }

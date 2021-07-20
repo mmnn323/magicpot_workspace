@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.kh.magicpot.common.model.vo.PageInfo;
+import com.kh.magicpot.community.model.vo.Community;
 import com.kh.magicpot.member.model.vo.Address;
 import com.kh.magicpot.member.model.vo.Member;
 import com.kh.magicpot.project.model.vo.Creator;
@@ -50,8 +51,10 @@ public interface MemberService {
 	// 요청한 페이지에 보여질 회원 리스트
 	ArrayList<Member> selectList(PageInfo pi);
 	
-	// 일반회원관리 검색 조회
-	ArrayList<Member> searchAdminList(HashMap<String, Object> map);
+	// 1일반회원관리 검색 리스트 조회
+	ArrayList<Member> searchAdminList();
+	int selectSearchListCount(HashMap<String, Object> map);
+	ArrayList<Member> selectSearchList(PageInfo pi,HashMap<String, Object> map);
 
 	// 일반회원관리 회원 상세조회
 	Member selectAdminMember(int memNo);

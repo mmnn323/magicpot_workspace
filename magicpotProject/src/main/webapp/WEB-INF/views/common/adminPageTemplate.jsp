@@ -135,7 +135,7 @@
                                     <i id="btn1" class="fas fa-angle-down" style="margin-left:93px"></i>
                                 </h4>
                                 <ul id="subMenu">
-                                    <li><a href="">일반회원 관리</a></li>
+                                    <li><a href="admin.me">일반회원 관리</a></li>
                                     <li><a href="">크리에이터 관리</a></li>
                                     <li><a href="">크리에이터 전환 관리</a></li>
                                 </ul>

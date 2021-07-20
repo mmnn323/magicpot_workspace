@@ -163,20 +163,34 @@ public class MemberController {
 			  				      String condition,
 							      String cmKeyword,
 							      HttpSession session,
-							      Model model) {
+							      Model model,
+							      HashMap<String, Object> map) {
 		// HashMap에 담아서 요청
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		//HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("condition", condition);
 		map.put("cmKeyword", cmKeyword);
 		
-		ArrayList<Member> me = mService.searchAdminList(map);
+		//System.out.println(condition);
+		//System.out.println(cmKeyword);
+		ArrayList<Member> meList = mService.searchAdminList();
 		
+		int searchCount = mService.selectSearchListCount(map);
+		
+		//System.out.println(searchCount);
+		
+		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, 10, 5);
+		ArrayList<Member> list = mService.selectSearchList(pi, map);
+		
+		//System.out.println(mList);
+		//System.out.println(pi);
 		// Model 객체에 응답데이터 담기
-		model.addAttribute("me", me);
+		model.addAttribute("meList", meList);
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
 		model.addAttribute("condition", condition);
 		model.addAttribute("cmKeyword", cmKeyword);
 
-		return "admin/adminMember";
+		return "member/adminMember";
 		
 				
 	}

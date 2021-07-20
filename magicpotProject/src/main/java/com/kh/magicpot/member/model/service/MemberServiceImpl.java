@@ -151,13 +151,23 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.multiDeleteAdopt(sqlSession, m);
 	}
 
-
-	// 일반회원관리 검색
+	// 1일반회원관리 검색 
 	@Override
-	public ArrayList<Member> searchAdminList(HashMap<String, Object> map) {
-		return mDao.searchAdminList(sqlSession, map);
+	public ArrayList<Member> searchAdminList() {
+		return mDao.searchAdminList(sqlSession);
 	}
 
+
+	@Override
+	public int selectSearchListCount(HashMap<String, Object> map) {
+		return mDao.selectSearchListCount(sqlSession, map);
+	}
+
+
+	@Override
+	public ArrayList<Member> selectSearchList(PageInfo pi, HashMap<String, Object> map) {
+		return mDao.selectSearchList(sqlSession, pi, map);
+	}
 
 
 

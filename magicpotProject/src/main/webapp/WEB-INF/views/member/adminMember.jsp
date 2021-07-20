@@ -157,14 +157,14 @@
 								<option value="memName">이름</option>
 								<option value="email">이메일</option>
 							</select> 
-						<input type="text" id="cm_keyword" name="cmKeyword" placeholder=" Search">
+						<input type="text" id="cm_keyword" name="cmKeyword" value="${ cmKeyword }" placeholder=" Search">
 					</form>
 				</div>
 				
 				<c:if test="${ !empty condition }" >
 		        	<script>
 		        	$(function(){
-		        		$("#SearchArea option[value=${condition}]").attr("selected", true);
+		        		$("#cm_searchArea option[value=${condition}]").attr("selected", true);
 		        	})
 		        	</script>
 				</c:if>
@@ -298,17 +298,31 @@
 							<c:when test="${ pi.currentPage eq 1}">
 								<li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
 							</c:when>
-							<c:otherwise>						
-								<li class="page-item"><a class="page-link" href="admin.me?currentPage=1">&laquo;</a></li>
+							<c:otherwise>			
+								<c:choose>	
+									<c:when test="${ empty condition }">
+										<li class="page-item"><a class="page-link" href="admin.me?currentPage=1">&laquo;</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="search.me?currentPage=1&condition=${condition}&cmKeyword=${cmKeyword}">&laquo;</a></li>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 						
 						<c:choose>
 							<c:when test="${ pi.currentPage eq 1}">
-						<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+								<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
 							</c:when>
-							<c:otherwise>						
-						<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ pi.currentPage-1 }">&lt;</a></li>
+							<c:otherwise>		
+								<c:choose>	
+									<c:when test="${ empty condition }">			
+										<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ pi.currentPage-1 }">&lt;</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="search.me?currentPage=${ pi.currentPage-1 }&condition=${condition}&cmKeyword=${cmKeyword}">&lt;</a></li>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 						
@@ -319,7 +333,14 @@
 									<li class="page-item disabled"><a class="page-link" href="#">${ p }</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ p }">${ p }</a></li>	
+									<c:choose>
+										<c:when test="${ empty condition }">
+											<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ p }">${ p }</a></li>	
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link" href="search.me?currentPage=${ p }&condition=${condition}&cmKeyword=${cmKeyword}">${ p }</a></li>	
+										</c:otherwise>
+									</c:choose>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -329,7 +350,14 @@
 								<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ pi.currentPage+1 }">&gt;</a></li>
+								<c:choose>
+									<c:when test="${ empty condition }">
+										<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ pi.currentPage+1 }">&gt;</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="search.me?currentPage=${ pi.currentPage+1 }&condition=${condition}&cmKeyword=${cmKeyword}">&gt;</a></li>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 						
@@ -338,7 +366,14 @@
 								<li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ pi.maxPage }">&raquo;</a></li>
+								<c:choose>
+										<c:when test="${ empty condition }">
+											<li class="page-item"><a class="page-link" href="admin.me?currentPage=${ pi.maxPage }">&raquo;</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link" href="search.me?currentPage=${ pi.maxPage }&condition=${condition}&cmKeyword=${cmKeyword}">&raquo;</a></li>
+										</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 						

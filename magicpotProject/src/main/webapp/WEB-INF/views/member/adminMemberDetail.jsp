@@ -169,7 +169,7 @@
 
 			<!-- 버튼 영역 -->
 			<div id="cm_btnArea" align="center">
-				<a href="" class="btn btn-success" id="cm_enrollBtn">이전</a>
+				<a class="btn btn-success" id="cm_enrollBtn" onClick="history.back()" style="color:white">이전</a>
 				<button type="button" id="delete" class="btn btn-primary"
 					data-toggle="modal" data-target="#myModal" onclick="postFormSubmit">회원탈퇴</button>
 			</div>
