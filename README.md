@@ -1,7 +1,7 @@
 # MagicPot
 
 <p align="center">
-<img align="center" style="margin:0 auto; height:10px;" src="https://user-images.githubusercontent.com/82758086/127101389-e4e997da-0f90-4c5e-8b3b-4ef236f6902c.png">
+<img align="center" style="margin:0 auto; height:10px;" src="https://user-images.githubusercontent.com/82758086/127101965-4583e037-78b9-437b-9a13-a5380cfe1b71.png">
 
 </p>
 
