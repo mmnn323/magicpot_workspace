@@ -1,7 +1,7 @@
 # MagicPot
 
 <p align="center">
-<img align="center" style="margin:0 auto;" src="https://github.com/hyeye1/happyProject/blob/main/happyProject/WebContent/resources/images/logoo.png">
+<img align="center" style="margin:0 auto;" src="https://user-images.githubusercontent.com/82758086/127101389-e4e997da-0f90-4c5e-8b3b-4ef236f6902c.png">
 
 </p>
 
