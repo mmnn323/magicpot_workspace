@@ -22,5 +22,8 @@
 - IDE : Eclipse, STS3, Visual Studio Code, sqldeveloper
 - Modeling Tool : StarUML, erdcloud, 카카오오븐
 - 형상 관리 : Github
-- 사용API : Daum map, summernote, naver login, kakao sendLink,
-                     im'port
+- 사용API : Daum map, summernote, naver login, kakao sendLink, im'port
+
+## 📅 개발 기간
+![프로젝트일정](https://user-images.githubusercontent.com/82758086/127102833-f3e5d1bd-0e7b-4ac6-8c19-a7c9e0e3702b.png)
+
