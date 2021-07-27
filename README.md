@@ -1,4 +1,4 @@
-# 해피북스데이
+# MagicPot
 
 <p align="center">
 <img align="center" style="margin:0 auto;" src="https://github.com/hyeye1/happyProject/blob/main/happyProject/WebContent/resources/images/logoo.png">
