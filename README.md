@@ -27,3 +27,10 @@
 ## 📅 개발 기간
 ![프로젝트일정](https://user-images.githubusercontent.com/82758086/127102833-f3e5d1bd-0e7b-4ac6-8c19-a7c9e0e3702b.png)
 
+## 📊 E-R Diagram
+![E-R Diagram](https://user-images.githubusercontent.com/82758086/127104113-4cb6163d-05f0-4fbd-bf79-ded8ca55a9ee.png)
+
+## 💻 개발자
+
+| <img src="https://avatars.githubusercontent.com/u/73784921?v=4" width="55" height="55"><br>[정혜](https://github.com/hyeye1) | <img src="https://avatars.githubusercontent.com/u/81137837?v=4" width="55" height="55"><br>[김유진](https://github.com/yoo-jean) | <img src="https://avatars.githubusercontent.com/u/82758086?v=4" width="55" height="55"><br>[류길상](https://github.com/mmnn323) | <img src="https://avatars.githubusercontent.com/u/82366810?v=4" width="55" height="55"><br>[안소은](https://github.com/anseoun) | <img src="https://avatars.githubusercontent.com/u/82578902?v=4" width="55" height="55"><br>[오수민](https://github.com/smoooo) | <img src="https://avatars.githubusercontent.com/u/82797570?v=4" width="55" height="55"><br>[정예빈](https://github.com/yebinJeong) |
+| --- | --- | --- | --- | --- | --- |
